@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frost Chiller — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 200; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay;
+    }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-cart { position: relative; background: none; border: none; color: var(--mist); transition: color 0.2s; padding: 0.4rem; }
+    .nav-cart:hover { color: var(--snow); }
+    .cart-badge { position: absolute; top: 0; right: 0; width: 1rem; height: 1rem; background: var(--ice); color: var(--void); border-radius: 50%; font-size: 0.55rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
+    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* Product Hero */
+    .product-hero {
+      min-height: 100vh; position: relative;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; overflow: hidden;
+      background: var(--void); padding-top: 6rem;
+    }
+    .product-hero-atmosphere {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 70% 50%, rgba(91,200,245,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 10% 80%, rgba(18,60,120,0.15) 0%, transparent 50%),
+        linear-gradient(165deg, #071525 0%, #020B15 50%, #030F1E 100%);
+    }
+    .product-hero-left { position: relative; z-index: 10; padding: 4rem 3rem 4rem 5rem; }
+    .product-breadcrumb { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .product-breadcrumb a { color: var(--fog); transition: color 0.2s; }
+    .product-breadcrumb a:hover { color: var(--mist); }
+    .product-breadcrumb span { opacity: 0.4; }
+    .product-badge-chip { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.28rem 0.85rem; border-radius: 999px; margin-bottom: 1.75rem; }
+    .product-badge-chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--void); opacity: 0.5; }
+    .product-hero-name { font-family: var(--display); font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 300; line-height: 0.92; letter-spacing: -0.02em; color: var(--snow); margin-bottom: 1.5rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--ease-out) 0.3s forwards; }
+    .product-hero-tagline { font-size: 1rem; line-height: 1.7; color: var(--mist); max-width: 40ch; margin-bottom: 2.5rem; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s var(--ease-out) 0.5s forwards; }
+    .product-price-block { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.65s forwards; }
+    .price-cur { font-family: var(--body); font-size: 0.9rem; color: var(--mist); font-weight: 400; }
+    .price-amount { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 300; color: var(--snow); letter-spacing: -0.02em; }
+    .price-note { font-size: 0.75rem; color: var(--fog); }
+    .product-hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s var(--ease-out) 0.8s forwards; }
+    .product-highlights { display: flex; flex-direction: column; gap: 0.6rem; opacity: 0; animation: fadeIn 0.7s var(--ease-out) 1s forwards; }
+    .highlight-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.82rem; color: var(--mist); }
+    .highlight-item::before { content: ''; width: 18px; height: 1px; background: var(--ice); flex-shrink: 0; }
+    .product-hero-right { position: relative; z-index: 5; height: 100%; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 4rem 3rem; }
+    .product-hero-img-wrap {
+      width: 100%; max-width: 520px;
+      aspect-ratio: 1;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: none;
+      background: radial-gradient(ellipse 100% 90% at 50% 40%, #0A1E35 0%, #060F1E 55%, #020B15 100%);
+      position: relative;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1s var(--ease-out) 0.4s forwards;
+      box-shadow:
+        0 0 0 1px rgba(91,200,245,0.15),
+        0 0 0 6px rgba(91,200,245,0.04),
+        0 50px 100px rgba(2,11,21,0.7);
+    }
+    .product-hero-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 2.5rem; }
+    .product-hero-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% 100%, rgba(91,200,245,0.16), transparent 60%),
+        linear-gradient(to bottom, rgba(2,11,21,0.4) 0%, transparent 30%);
+      pointer-events: none;
+    }
+
+    /* Sections */
+    .features-section { padding: 7rem 2.5rem; background: var(--void); }
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; }
+    .section-heading { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 3.75rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--snow); margin-bottom: 1rem; }
+    .section-heading em { font-style: italic; color: var(--ice); }
+    .section-sub { font-size: 0.95rem; line-height: 1.7; color: var(--mist); max-width: 52ch; margin-bottom: 3rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 1.25rem; overflow: hidden; }
+    .feature-card { background: var(--deep); padding: 2.75rem 2rem; transition: background 0.3s; }
+    .feature-card:hover { background: var(--surface); }
+    .feature-icon { width: 3rem; height: 3rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--ice); margin-bottom: 1.5rem; transition: background 0.3s, border-color 0.3s; }
+    .feature-card:hover .feature-icon { background: var(--elevated); border-color: var(--border-hi); }
+    .feature-title { font-family: var(--display); font-size: 1.35rem; font-weight: 400; color: var(--snow); margin-bottom: 0.75rem; line-height: 1.2; }
+    .feature-desc { font-size: 0.85rem; line-height: 1.72; color: var(--mist); }
+
+    .specs-section { padding: 7rem 2.5rem; background: var(--deep); }
+    .specs-inner { max-width: 1200px; margin: 0 auto; }
+    .specs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .specs-visual { position: relative; aspect-ratio: 4/3; background: var(--surface); border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--border); }
+    .specs-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .specs-content { padding-top: 0.5rem; }
+    .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 1rem; overflow: hidden; margin-top: 2.5rem; }
+    .spec-item { background: var(--surface); padding: 1.75rem 1.5rem; transition: background 0.2s; }
+    .spec-item:hover { background: var(--elevated); }
+    .spec-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ice); margin-bottom: 0.5rem; }
+    .spec-value { font-family: var(--display); font-size: 1.75rem; font-weight: 300; color: var(--snow); line-height: 1.1; }
+    .spec-note { font-size: 0.78rem; color: var(--mist); margin-top: 0.25rem; }
+
+    .compat-section { padding: 7rem 2.5rem; background: var(--void); }
+    .compat-inner { max-width: 1200px; margin: 0 auto; }
+    .compat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .compat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 2.25rem 2rem; transition: border-color 0.3s, background 0.3s; }
+    .compat-card:hover { border-color: var(--border-hi); background: var(--elevated); }
+    .compat-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--ice); margin-bottom: 1.25rem; }
+    .compat-title { font-family: var(--display); font-size: 1.2rem; font-weight: 400; color: var(--snow); margin-bottom: 0.6rem; }
+    .compat-desc { font-size: 0.85rem; line-height: 1.7; color: var(--mist); }
+
+    .testimonial-section { padding: 6rem 2.5rem; background: var(--deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .testimonial-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .testimonial-stars { display: flex; justify-content: center; gap: 0.3rem; margin-bottom: 2rem; color: var(--ice); }
+    .testimonial-quote { font-family: var(--display); font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--snow); margin-bottom: 2.5rem; }
+    .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .testimonial-avatar { width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--elevated); border: 1px solid var(--border); overflow: hidden; }
+    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-name { font-size: 0.9rem; font-weight: 500; color: var(--snow); }
+    .testimonial-role { font-size: 0.78rem; color: var(--mist); }
+
+    .order-cta { padding: 8rem 2.5rem; background: linear-gradient(135deg, var(--deep) 0%, var(--surface) 100%); border-top: 1px solid var(--border); text-align: center; position: relative; overflow: hidden; }
+    .order-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(91,200,245,0.07), transparent 60%); }
+    .order-cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .order-cta-label { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); margin-bottom: 0.5rem; }
+    .order-cta-price { font-family: var(--display); font-size: clamp(3.5rem, 6vw, 5rem); font-weight: 300; color: var(--snow); letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .order-cta-heading { font-family: var(--display); font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 300; color: var(--snow); margin-bottom: 1rem; }
+    .order-cta-sub { font-size: 0.9rem; line-height: 1.7; color: var(--mist); margin-bottom: 2.5rem; }
+    .order-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .order-trust { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em; }
+    .trust-item svg { color: var(--ice); }
+
+    .related-section { padding: 7rem 2.5rem; background: var(--void); }
+    .related-inner { max-width: 1200px; margin: 0 auto; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.25rem; overflow: hidden; display: grid; grid-template-columns: 1fr 1.5fr; transition: border-color 0.3s, transform 0.3s var(--ease-spring); }
+    .related-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+    .related-img { background: var(--elevated); aspect-ratio: 1; overflow: hidden; }
+    .related-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .related-card:hover .related-img img { transform: scale(1.05); }
+    .related-body { padding: 2rem 1.75rem; display: flex; flex-direction: column; justify-content: space-between; }
+    .related-name { font-family: var(--display); font-size: 1.5rem; font-weight: 300; color: var(--snow); margin-bottom: 0.5rem; }
+    .related-desc { font-size: 0.82rem; line-height: 1.6; color: var(--mist); margin-bottom: 1.5rem; }
+    .related-footer { display: flex; align-items: center; justify-content: space-between; }
+    .related-price { font-family: var(--display); font-size: 1.4rem; font-weight: 300; color: var(--snow); }
+    .related-price .cur { font-family: var(--body); font-size: 0.78rem; color: var(--mist); }
+    .btn-sm { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ice); border: 1px solid var(--border-hi); background: transparent; padding: 0.55rem 1.1rem; border-radius: 999px; transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .btn-sm:hover { color: var(--void); background: var(--ice); border-color: var(--ice); }
+
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    @media (max-width: 1100px) {
+      .product-hero { grid-template-columns: 1fr; min-height: auto; }
+      .product-hero-left { padding: 2rem 2.5rem 2rem; }
+      .product-hero-right { min-height: auto; padding: 2rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .specs-layout { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .btn-shop { display: none; }
+      .nav-hamburger { display: flex; }
+      .product-hero-left { padding: 1rem 1.5rem 2rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .compat-grid { grid-template-columns: 1fr; }
+      .related-card { grid-template-columns: 1fr; }
+      .related-img { aspect-ratio: 16/9; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html#products" onclick="closeMobile()">Products</a>
+    <a href="../benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="../about-us.html" onclick="closeMobile()">About</a>
+    <a href="../contact.html" onclick="closeMobile()">Contact</a>
+    <a href="../index.html#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="../index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#products" class="active">Products</a></li>
+      <li><a href="../benefits.html">Benefits</a></li>
+      <li><a href="../about-us.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <a href="../index.html#products" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Product Hero -->
+  <section class="product-hero">
+    <div class="product-hero-atmosphere"></div>
+    <div class="product-hero-left">
+      <p class="product-breadcrumb">
+        <a href="../index.html">Home</a><span>/</span>
+        <a href="../index.html#products">Products</a><span>/</span>
+        Frost Chiller
+      </p>
+      <span class="product-badge-chip">New Arrival</span>
+      <h1 class="product-hero-name">Frost<br>Chiller</h1>
+      <p class="product-hero-tagline">Precision water chiller with digital temperature control — cools any tub to 4°C in under 45 minutes. Compatible with any setup.</p>
+      <div class="product-price-block">
+        <span class="price-cur">NZ$</span>
+        <span class="price-amount">899</span>
+        <span class="price-note">incl. GST · Free shipping NZ</span>
+      </div>
+      <div class="product-hero-actions">
+        <a href="#order" class="btn-primary">
+          Order Now
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#specs" class="btn-ghost">View Specs</a>
+      </div>
+      <ul class="product-highlights">
+        <li class="highlight-item">Cools to 4°C in 45 minutes</li>
+        <li class="highlight-item">Digital display with ±0.5°C precision</li>
+        <li class="highlight-item">Compatible with any tub or bath</li>
+        <li class="highlight-item">Built-in filtration and circulation</li>
+        <li class="highlight-item">2-year manufacturer's warranty</li>
+      </ul>
+    </div>
+    <div class="product-hero-right">
+      <div class="product-hero-img-wrap">
+        <img src="https://placehold.co/800x800/0D2A48/5BC8F5?text=Frost+Chiller" alt="Frost Chiller Unit">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="features-inner">
+      <p class="section-label reveal">Why Frost Chiller</p>
+      <h2 class="section-heading reveal reveal-d1">Cold, <em>precisely.</em></h2>
+      <p class="section-sub reveal reveal-d2">Purpose-built for serious cold therapy. The Frost Chiller pairs with your existing tub — or add it to any setup — and delivers exact, consistent temperatures without the hassle of ice.</p>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3 class="feature-title">45-Min Cool-Down</h3>
+          <p class="feature-desc">From ambient to 4°C in under 45 minutes. No more waiting hours for ice to do its job — the Frost Chiller gets you in the water faster.</p>
+        </div>
+        <div class="feature-card reveal reveal-d1">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3 class="feature-title">Digital Precision</h3>
+          <p class="feature-desc">Set any temperature from 2°C to 35°C on the digital display. The system maintains ±0.5°C accuracy — therapeutic cold, controlled exactly.</p>
+        </div>
+        <div class="feature-card reveal reveal-d2">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+          </div>
+          <h3 class="feature-title">Any Tub, Any Setup</h3>
+          <p class="feature-desc">Universal connectivity — works with stock baths, inflatable pods, barrels, or timber tubs. If it holds water, the Frost Chiller cools it.</p>
+        </div>
+        <div class="feature-card reveal reveal-d3">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3 class="feature-title">Built-In Filtration</h3>
+          <p class="feature-desc">Integrated UV filtration keeps water clean between sessions — change water weekly instead of daily. Less waste, more plunges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="specs-section" id="specs">
+    <div class="specs-inner">
+      <div class="specs-layout">
+        <div class="specs-visual reveal">
+          <img src="https://placehold.co/800x600/0C1E35/5BC8F5?text=Frost+Chiller+Detail" alt="Frost Chiller detail">
+        </div>
+        <div class="specs-content">
+          <p class="section-label reveal">Technical Specifications</p>
+          <h2 class="section-heading reveal reveal-d1">Every detail<br><em>considered.</em></h2>
+          <p class="section-sub reveal reveal-d2">Commercial compressor technology in a compact unit designed for home and professional use.</p>
+          <div class="specs-grid reveal reveal-d2">
+            <div class="spec-item">
+              <p class="spec-label">Cool-Down</p>
+              <p class="spec-value">45min</p>
+              <p class="spec-note">Ambient to 4°C</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Temp Range</p>
+              <p class="spec-value">2–35°C</p>
+              <p class="spec-note">Precision ±0.5°C</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Power</p>
+              <p class="spec-value">650W</p>
+              <p class="spec-note">Energy-efficient compressor</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Flow Rate</p>
+              <p class="spec-value">50L/h</p>
+              <p class="spec-note">Continuous circulation</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Max Volume</p>
+              <p class="spec-value">600L</p>
+              <p class="spec-note">Compatible tub size</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Warranty</p>
+              <p class="spec-value">2 Yrs</p>
+              <p class="spec-note">Full manufacturer cover</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compatibility -->
+  <section class="compat-section">
+    <div class="compat-inner">
+      <p class="section-label reveal">Works With</p>
+      <h2 class="section-heading reveal reveal-d1">Your tub.<br><em>Our chiller.</em></h2>
+      <p class="section-sub reveal reveal-d2">The Frost Chiller connects to virtually any vessel that holds water — upgrade your existing setup without replacing it.</p>
+      <div class="compat-grid">
+        <div class="compat-card reveal">
+          <div class="compat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="20" height="14" rx="2"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>
+          </div>
+          <h3 class="compat-title">Standard Baths</h3>
+          <p class="compat-desc">Drop the inlet and outlet hoses into any standard household bath. No modifications needed — plug in and set your temperature.</p>
+        </div>
+        <div class="compat-card reveal reveal-d1">
+          <div class="compat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3 class="compat-title">Barrels & Timber</h3>
+          <p class="compat-desc">Works with wooden barrels, stock tanks, and custom timber builds. Universal hose connectors fit most standard fitting sizes.</p>
+        </div>
+        <div class="compat-card reveal reveal-d2">
+          <div class="compat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h3 class="compat-title">Inflatable Pods</h3>
+          <p class="compat-desc">Compatible with most inflatable cold plunge pods. Pair with our Portable Pod for a complete travel-ready cold therapy system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="testimonial-section">
+    <div class="testimonial-inner">
+      <div class="testimonial-stars">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="testimonial-quote">"Fast delivery, incredible quality, and the Frost Chiller makes maintaining the perfect temperature effortless. Worth every cent — brilliant customer service too."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">
+          <img src="https://placehold.co/80x80/122645/5BC8F5?text=TR" alt="Tom R.">
+        </div>
+        <div>
+          <p class="testimonial-name">Tom R.</p>
+          <p class="testimonial-role">Entrepreneur & Triathlete, Wellington</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order CTA -->
+  <section class="order-cta" id="order">
+    <div class="order-cta-inner">
+      <p class="order-cta-label">Chiller</p>
+      <p class="order-cta-price">NZ$899</p>
+      <h2 class="order-cta-heading">Upgrade your<br>cold ritual.</h2>
+      <p class="order-cta-sub">Free delivery across New Zealand. Compatible with any tub. 2-year warranty from date of purchase.</p>
+      <div class="order-actions">
+        <a href="#" class="btn-primary">
+          Add to Cart
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="../contact.html" class="btn-ghost">Ask a Question</a>
+      </div>
+      <div class="order-trust">
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          2-Year Warranty
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Free NZ Shipping
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          Secure Checkout
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="related-section">
+    <div class="related-inner">
+      <p class="section-label reveal">Complete Your Setup</p>
+      <h2 class="section-heading reveal reveal-d1">You might also<br><em>need these.</em></h2>
+      <div class="related-grid">
+        <a href="ice-bath-nz.html" class="related-card reveal">
+          <div class="related-img">
+            <img src="brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Arctic Steel Pro" style="object-fit:contain; background:#0a1e35; padding:1rem;">
+          </div>
+          <div class="related-body">
+            <div>
+              <p class="related-name">Ice Bath NZ</p>
+              <p class="related-desc">Complete system with integrated Frost Chiller. The flagship — built to outlast decades.</p>
+            </div>
+            <div class="related-footer">
+              <span class="related-price"><span class="cur">NZ$</span>1,299</span>
+              <span class="btn-sm">View →</span>
+            </div>
+          </div>
+        </a>
+        <a href="barrel-sauna.html" class="related-card reveal reveal-d1">
+          <div class="related-img">
+            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Portable+Pod" alt="Portable Pod">
+          </div>
+          <div class="related-body">
+            <div>
+              <p class="related-name">Sauna</p>
+              <p class="related-desc">Full-body immersion anywhere. Pairs perfectly with the Frost Chiller for a portable cold system.</p>
+            </div>
+            <div class="related-footer">
+              <span class="related-price"><span class="cur">NZ$</span>449</span>
+              <span class="btn-sm">View →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="TikTok"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="ice-bath-nz.html">Ice Bath NZ</a></li>
+            <li><a href="ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="barrel-sauna.html">Sauna</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Bundles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about-us.html">About Us</a></li>
+            <li><a href="../benefits.html">The Science</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Ambassadors</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="https://www.theicebathnz.co.nz/privacy-policy">Privacy Policy</a>
+          <a href="https://www.theicebathnz.co.nz/terms-of-service">Terms of Service</a>
+          <a href="https://www.theicebathnz.co.nz/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

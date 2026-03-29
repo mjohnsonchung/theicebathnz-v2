@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+
+    /* ── Navigation ─────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-cart { position: relative; background: none; border: none; color: var(--mist); transition: color 0.2s; padding: 0.4rem; }
+    .nav-cart:hover { color: var(--snow); }
+    .cart-badge { position: absolute; top: 0; right: 0; width: 1rem; height: 1rem; background: var(--ice); color: var(--void); border-radius: 50%; font-size: 0.55rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    /* ── Buttons ─────────────────────────────────────── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; cursor: pointer; }
+    .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
+    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+
+    /* ── Reveal ──────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ── FAQ Hero ────────────────────────────────────── */
+    .faq-hero {
+      position: relative;
+      padding: 12rem 5rem 7rem;
+      overflow: hidden;
+    }
+    .faq-hero-atmo {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 80% 30%, rgba(91,200,245,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 60% at 5% 75%, rgba(18,60,120,0.09) 0%, transparent 50%),
+        linear-gradient(160deg, #071525 0%, #020B15 50%, #030F1E 100%);
+    }
+    .faq-hero-deco {
+      position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: clamp(10rem, 18vw, 20rem);
+      font-weight: 300; font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(91,200,245,0.06);
+      line-height: 1; letter-spacing: -0.04em;
+      user-select: none; pointer-events: none;
+    }
+    .faq-hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto;
+    }
+    .faq-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 2rem;
+    }
+    .faq-eyebrow::before {
+      content: ''; display: block;
+      width: 2rem; height: 1px; background: var(--ice); opacity: 0.6;
+    }
+    .faq-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 6.5rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: -0.03em; color: var(--snow);
+      margin-bottom: 1.5rem;
+    }
+    .faq-hero h1 em { font-style: italic; color: var(--ice); }
+    .faq-hero-sub {
+      font-size: 1.05rem; line-height: 1.72; color: var(--mist);
+      max-width: 48ch; margin-bottom: 3rem;
+    }
+
+    /* Category filter pills */
+    .faq-filters {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .faq-filter {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.55rem 1.25rem;
+      border-radius: 999px; border: 1px solid var(--border);
+      background: transparent; color: var(--mist);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .faq-filter:hover { color: var(--snow); border-color: var(--border-hi); }
+    .faq-filter.active {
+      color: var(--void); background: var(--ice); border-color: var(--ice);
+    }
+
+    /* ── FAQ Content ─────────────────────────────────── */
+    .faq-content {
+      padding: 6rem 5rem 10rem;
+      max-width: 1440px; margin: 0 auto;
+    }
+    .faq-layout { display: grid; grid-template-columns: 1fr 2.5fr; gap: 6rem; align-items: start; }
+
+    /* Sidebar nav */
+    .faq-sidebar { position: sticky; top: 6rem; }
+    .faq-sidebar-title {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--mist); margin-bottom: 1.25rem;
+    }
+    .faq-sidebar-links { display: flex; flex-direction: column; gap: 0.1rem; list-style: none; }
+    .faq-sidebar-links a {
+      display: block; padding: 0.65rem 1rem;
+      font-size: 0.85rem; color: var(--mist);
+      border-left: 2px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .faq-sidebar-links a:hover { color: var(--snow); border-left-color: var(--border-hi); }
+    .faq-sidebar-links a.active { color: var(--snow); border-left-color: var(--ice); }
+
+    /* FAQ categories */
+    .faq-categories { display: flex; flex-direction: column; gap: 4rem; }
+    .faq-category { scroll-margin-top: 6rem; }
+    .faq-cat-header { margin-bottom: 2rem; }
+    .faq-cat-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--ice); margin-bottom: 0.6rem;
+    }
+    .faq-cat-title {
+      font-family: var(--display); font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+      font-weight: 300; letter-spacing: -0.02em; color: var(--snow);
+    }
+    .faq-cat-title em { font-style: italic; }
+
+    /* Accordion */
+    .faq-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 1.5rem 0; gap: 2rem;
+      background: none; border: none;
+      font-family: var(--body); font-size: 0.97rem; font-weight: 400;
+      color: var(--snow); text-align: left;
+      transition: color 0.2s; cursor: pointer;
+    }
+    .faq-q:hover { color: var(--ice); }
+    .faq-item.open .faq-q { color: var(--ice); }
+    .faq-chevron {
+      flex-shrink: 0; width: 1.5rem; height: 1.5rem;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mist); transition: transform 0.35s var(--ease-out), border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: var(--ice); color: var(--ice); background: rgba(91,200,245,0.08);
+    }
+    .faq-a-wrap {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s var(--ease-out);
+    }
+    .faq-item.open .faq-a-wrap { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; }
+    .faq-a {
+      padding: 0 2rem 1.75rem 0;
+      font-size: 0.92rem; line-height: 1.78; color: var(--mist);
+    }
+    .faq-a p + p { margin-top: 0.85rem; }
+    .faq-a a { color: var(--ice); transition: color 0.2s; }
+    .faq-a a:hover { color: var(--frost); }
+
+    /* ── CTA Section ─────────────────────────────────── */
+    .faq-cta {
+      background: var(--deep); border-top: 1px solid var(--border);
+      padding: 8rem 5rem;
+    }
+    .faq-cta-inner {
+      max-width: 1440px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .faq-cta-text {}
+    .faq-cta-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; display: block;
+    }
+    .faq-cta-heading {
+      font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--snow); margin-bottom: 1.25rem;
+    }
+    .faq-cta-heading em { font-style: italic; color: var(--ice); }
+    .faq-cta-body { font-size: 0.95rem; line-height: 1.75; color: var(--mist); }
+    .faq-cta-actions { display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { display: inline-flex; margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-sidebar { position: static; display: none; }
+      .faq-cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-cta { padding: 6rem 2.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .btn-shop { display: none; }
+      .nav-hamburger { display: flex; }
+      .faq-hero { padding: 9rem 1.5rem 4rem; }
+      .faq-content { padding: 5rem 1.5rem 7rem; }
+      .faq-cta { padding: 6rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#products" onclick="closeMobile()">Products</a>
+    <a href="benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="about-us.html" onclick="closeMobile()">About</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="index.html#products" class="btn-primary" style="font-family:var(--body);margin-top:0.5rem" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html#products">Products</a></li>
+      <li><a href="benefits.html">Benefits</a></li>
+      <li><a href="about-us.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <a href="index.html#products" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="faq-hero">
+    <div class="faq-hero-atmo"></div>
+    <div class="faq-hero-deco" aria-hidden="true">?</div>
+    <div class="faq-hero-inner">
+      <div class="faq-eyebrow reveal">Help Centre</div>
+      <h1 class="reveal reveal-d1">
+        Questions<br>
+        <em>answered.</em>
+      </h1>
+      <p class="faq-hero-sub reveal reveal-d2">Everything you need to know about our products, cold therapy, shipping, and warranty — all in one place.</p>
+      <div class="faq-filters reveal reveal-d3">
+        <button class="faq-filter active" onclick="filterTo('all', this)">All</button>
+        <button class="faq-filter" onclick="filterTo('products', this)">Products</button>
+        <button class="faq-filter" onclick="filterTo('cold-therapy', this)">Cold Therapy</button>
+        <button class="faq-filter" onclick="filterTo('shipping', this)">Shipping</button>
+        <button class="faq-filter" onclick="filterTo('warranty', this)">Warranty</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Content -->
+  <section class="faq-content">
+    <div class="faq-layout">
+
+      <!-- Sidebar -->
+      <aside class="faq-sidebar reveal">
+        <p class="faq-sidebar-title">Jump to</p>
+        <ul class="faq-sidebar-links">
+          <li><a href="#products" class="active">Products & Equipment</a></li>
+          <li><a href="#cold-therapy">Cold Therapy & Science</a></li>
+          <li><a href="#shipping">Shipping & Delivery</a></li>
+          <li><a href="#warranty">Warranty & Support</a></li>
+        </ul>
+      </aside>
+
+      <!-- Questions -->
+      <div class="faq-categories">
+
+        <!-- Products -->
+        <div class="faq-category reveal" id="products" data-category="products">
+          <div class="faq-cat-header">
+            <p class="faq-cat-label">01</p>
+            <h2 class="faq-cat-title">Products &amp; <em>Equipment</em></h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What products do you offer?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>We currently offer three products: the <a href="product-page/ice-bath-nz.html">Ice Bath NZ</a> (NZ$1,299), our flagship full-body stainless steel ice bath with integrated chilling system; the <a href="product-page/ice-bath-chiller.html">Chiller</a> (NZ$899), a standalone chilling unit compatible with most tubs; and the <a href="product-page/barrel-sauna.html">Sauna</a> (NZ$449), our insulated entry-level option for those starting their cold journey.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What temperature range can I achieve?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>The Arctic Steel Pro and Frost Chiller can achieve temperatures from 2°C to 35°C, with precision held to ±0.5°C. This covers the full therapeutic range used by elite athletes (2–4°C) through to contrast therapy protocols (up to 35°C).</p>
+                <p>The Portable Pod relies on ice or cold water to achieve temperature — it doesn't have an active chilling system, but with adequate ice can reach 6–8°C in most conditions.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How much water does the Arctic Steel Pro hold?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>The Arctic Steel Pro holds 450 litres, designed for full-body immersion up to shoulder depth for users up to 200cm tall. The Portable Pod holds 220 litres — suitable for most users up to 185cm with legs drawn in.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Do I need a plumber or electrician to install it?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>No plumbing is required for any of our products. The Arctic Steel Pro is a self-contained system — fill it with a standard hose, connect the chilling unit to a standard 240V power outlet, and you're ready. The built-in filtration, circulation, and drainage systems are all self-contained.</p>
+                <p>A standard waterproof outdoor power outlet (GPO) near your installation point is all you need. We recommend a weatherproof outlet for outdoor setups.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Can the Arctic Steel Pro be used outdoors?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Yes — all our products are designed for outdoor use and tested for New Zealand weather conditions including UV exposure, rain, and humidity. The 304-grade stainless steel is fully weatherproof. The chilling unit should be positioned under cover or with a weatherproof cover in prolonged heavy rain.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How long does the Arctic Steel Pro hold temperature without power?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>The triple-wall insulation on the Arctic Steel Pro holds temperature for up to 72 hours without active chilling, depending on ambient temperature. In typical NZ conditions (15–20°C ambient), you'll see temperature rise of approximately 1–2°C per day when the chiller is off.</p>
+              </div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cold Therapy -->
+        <div class="faq-category reveal" id="cold-therapy" data-category="cold-therapy">
+          <div class="faq-cat-header">
+            <p class="faq-cat-label">02</p>
+            <h2 class="faq-cat-title">Cold Therapy &amp; <em>Science</em></h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How long should I stay in the ice bath?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Research suggests 2–4 minutes at 10–15°C, or 1–2 minutes at 4–8°C, is sufficient to trigger the primary physiological responses. Total weekly cold exposure of 11–15 minutes across 3–5 sessions appears to be the threshold for meaningful adaptation.</p>
+                <p>Beginners should start with 30–60 seconds at a comfortable temperature (12–15°C) and build gradually. More time isn't always better — quality and consistency of exposure matters more than duration. See our <a href="benefits.html">Benefits page</a> for full protocol guidance.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What temperature should I aim for?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>For recovery and inflammation reduction: 10–15°C. For mental resilience and norepinephrine release: 4–10°C. For elite athletic recovery protocols: 2–4°C.</p>
+                <p>The key is to find a temperature that is challenging but manageable — research by Dr. Andrew Huberman and Dr. Susanna Søberg suggests that "uncomfortably cold but safe" is the sweet spot for hormonal response. We recommend starting at 15°C and reducing by 1–2°C per week as you adapt.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                When is the best time of day to take an ice bath?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Morning cold immersion (within 2 hours of waking) maximises the cortisol and adrenaline response, which can enhance alertness and mood throughout the day. It also aligns with your body's natural cortisol peak.</p>
+                <p>If your primary goal is post-training recovery, immerse within 30–60 minutes of a high-intensity training session. Avoid cold immersion immediately after strength training if hypertrophy is your primary goal — it may blunt the anabolic response.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Are there any risks or contraindications?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Cold immersion is contraindicated for individuals with certain cardiovascular conditions, Raynaud's syndrome, cold urticaria, or uncontrolled hypertension. Consult your physician before starting if you have any cardiovascular, respiratory, or immune conditions.</p>
+                <p>General safety guidelines: never immerse alone, avoid alcohol before immersion, enter slowly to allow your body to adjust, and always warm up gradually after (no hot showers immediately — gentle movement first). If you feel chest pain, difficulty breathing, or extreme numbness, exit immediately.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Does cold immersion affect muscle growth?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Some research suggests that cold immersion immediately after resistance training may attenuate the acute inflammatory response needed for muscle protein synthesis. If your primary goal is muscle hypertrophy, wait 4–6 hours after strength training before immersing, or use cold therapy on non-training days.</p>
+                <p>For endurance athletes, recovery-focused athletes, and those prioritising metabolic health or mental resilience, this tradeoff is generally not a concern. The overall benefits of consistent cold exposure far outweigh this modest effect for most people.</p>
+              </div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping -->
+        <div class="faq-category reveal" id="shipping" data-category="shipping">
+          <div class="faq-cat-header">
+            <p class="faq-cat-label">03</p>
+            <h2 class="faq-cat-title">Shipping &amp; <em>Delivery</em></h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Where do you deliver?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>We deliver nationwide across New Zealand, including the South Island and rural areas. For the Portable Pod, we also offer delivery to Australia — contact us for a quote.</p>
+                <p>Large items (Arctic Steel Pro, Frost Chiller) are delivered by freight carrier with a two-person tail-lift delivery to your kerb. Please ensure clear vehicle access to your property on delivery day.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How long does delivery take?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Most North Island metro orders (Auckland, Wellington, Hamilton) are delivered within 2–4 business days. South Island and rural areas are typically 4–7 business days.</p>
+                <p>Orders are dispatched within 1–2 business days of payment confirmation. You'll receive tracking details by email once dispatched.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What does shipping cost?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Free shipping is included on all orders to New Zealand metro addresses. Rural delivery surcharges apply to some remote areas — these are calculated at checkout and are typically NZ$40–80 depending on location.</p>
+                <p>All prices shown on our website are inclusive of GST.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What is your returns policy?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>We accept returns within 14 days of delivery for unused, undamaged products in original packaging. Return freight costs are the responsibility of the customer unless the product is faulty.</p>
+                <p>If your product arrives damaged or faulty, please contact us within 48 hours of delivery with photos and we will arrange a free replacement or full refund. We're subject to New Zealand Consumer Guarantees Act requirements and take our obligations seriously.</p>
+              </div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warranty -->
+        <div class="faq-category reveal" id="warranty" data-category="warranty">
+          <div class="faq-cat-header">
+            <p class="faq-cat-label">04</p>
+            <h2 class="faq-cat-title">Warranty &amp; <em>Support</em></h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What does the warranty cover?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>The Arctic Steel Pro and Frost Chiller come with a 2-year manufacturer's warranty covering all defects in materials and workmanship under normal use conditions. The Portable Pod carries a 1-year warranty.</p>
+                <p>Warranty covers: stainless steel tub and weld integrity, chilling unit components, insulation performance, drainage system, and all electrical components. It does not cover damage from misuse, accidental damage, or cosmetic wear.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How do I make a warranty claim?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Email us at <a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a> with your order number and a description of the issue, including photos or video if possible. We'll assess your claim within 2 business days and arrange repair, replacement, or refund as appropriate.</p>
+                <p>We keep replacement parts and units in stock in Auckland for fast turnaround — most warranty replacements are resolved within 5–7 business days.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How do I clean and maintain my ice bath?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>The built-in filtration and UV sanitation system on the Arctic Steel Pro keeps water clean for 4–6 weeks with regular use. We recommend a full drain and clean every 4–6 weeks using a mild pH-neutral cleaner — avoid bleach or harsh acids on stainless steel.</p>
+                <p>For daily maintenance: skim debris from the surface, check the filter cartridge monthly, and run the circulation pump for at least 15 minutes after each use to turn over the water volume. Full maintenance guide is included with your product and available on request.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Do you offer installation support or advice?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Yes — every order includes a setup call with our team (by phone or video) to walk you through installation, first fill, and first use. Most customers are up and running within a couple of hours of delivery.</p>
+                <p>For Auckland-based customers, we offer in-home installation assistance for large orders. <a href="contact.html">Contact us</a> when you place your order to arrange this.</p>
+              </div></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="faq-cta">
+    <div class="faq-cta-inner">
+      <div class="faq-cta-text reveal">
+        <span class="faq-cta-label">Still have questions?</span>
+        <h2 class="faq-cta-heading">We're here to<br><em>help.</em></h2>
+        <p class="faq-cta-body">Can't find what you're looking for? Our team typically responds within 24 hours on business days — and we actually know our products inside out.</p>
+      </div>
+      <div class="faq-cta-actions reveal reveal-d1">
+        <a href="contact.html" class="btn-primary">
+          Contact Us
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="mailto:hello@theicebathnz.co.nz" class="btn-ghost">hello@theicebathnz.co.nz</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="product-page/ice-bath-nz.html">Ice Bath NZ</a></li>
+            <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="product-page/barrel-sauna.html">Sauna</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Bundles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="benefits.html">The Science</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Ambassadors</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="https://www.theicebathnz.co.nz/privacy-policy">Privacy Policy</a>
+          <a href="https://www.theicebathnz.co.nz/terms-of-service">Terms of Service</a>
+          <a href="https://www.theicebathnz.co.nz/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // close all open items in the same list
+      btn.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    function filterTo(cat, btn) {
+      document.querySelectorAll('.faq-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.faq-category').forEach(section => {
+        if (cat === 'all' || section.dataset.category === cat) {
+          section.style.display = '';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+
+    // Sidebar active state on scroll
+    const sections = document.querySelectorAll('.faq-category');
+    const sideLinks = document.querySelectorAll('.faq-sidebar-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      sideLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

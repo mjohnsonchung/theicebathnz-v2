@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Science — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-cart { position: relative; background: none; border: none; color: var(--mist); transition: color 0.2s; padding: 0.4rem; }
+    .nav-cart:hover { color: var(--snow); }
+    .cart-badge { position: absolute; top: 0; right: 0; width: 1rem; height: 1rem; background: var(--ice); color: var(--void); border-radius: 50%; font-size: 0.55rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
+    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* ── Science Hero ──────────────────────────────────── */
+    .science-hero {
+      min-height: 80vh;
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: var(--void);
+      padding-top: 8rem;
+      padding-bottom: 6rem;
+    }
+    .science-hero-atmosphere {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 20%, rgba(91,200,245,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 80% at 10% 90%, rgba(18,60,120,0.12) 0%, transparent 50%),
+        linear-gradient(165deg, #071525 0%, #020B15 50%, #030F1E 100%);
+    }
+    /* Decorative large number */
+    .science-hero-deco {
+      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: clamp(12rem, 20vw, 22rem);
+      font-weight: 300; line-height: 1;
+      color: rgba(91,200,245,0.04);
+      letter-spacing: -0.05em;
+      pointer-events: none; user-select: none;
+    }
+    .science-hero-content {
+      position: relative; z-index: 10;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .science-breadcrumb { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog); margin-bottom: 2rem; }
+    .science-breadcrumb a { color: var(--fog); transition: color 0.2s; }
+    .science-breadcrumb a:hover { color: var(--mist); }
+    .science-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.5rem; display: block; opacity: 0; animation: fadeIn 0.7s var(--ease-out) 0.2s forwards; }
+    .science-hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 300; line-height: 0.92;
+      letter-spacing: -0.03em; color: var(--snow);
+      max-width: 14ch;
+      margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp 0.9s var(--ease-out) 0.3s forwards;
+    }
+    .science-hero-h1 em { font-style: italic; color: var(--ice); }
+    .science-hero-sub {
+      font-size: 1.05rem; line-height: 1.75;
+      color: var(--mist); max-width: 55ch;
+      margin-bottom: 3.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease-out) 0.5s forwards;
+    }
+    .science-hero-stats {
+      display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+      padding-top: 3rem; border-top: 1px solid var(--border);
+      opacity: 0; animation: fadeIn 0.7s var(--ease-out) 0.8s forwards;
+    }
+    .hero-stat-val {
+      font-family: var(--display);
+      font-size: 2.75rem; font-weight: 300;
+      color: var(--snow); line-height: 1;
+    }
+    .hero-stat-val span { color: var(--ice); }
+    .hero-stat-label { font-size: 0.78rem; color: var(--mist); margin-top: 0.25rem; }
+
+    /* ── How It Works ──────────────────────────────────── */
+    .mechanism-section { padding: 8rem 2.5rem; background: var(--deep); }
+    .mechanism-inner { max-width: 1200px; margin: 0 auto; }
+    .mechanism-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4.5rem; align-items: center;
+    }
+    .mechanism-visual {
+      position: relative;
+    }
+    .mechanism-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 1.5rem; padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .mechanism-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--ice), transparent);
+    }
+    .mechanism-big-num {
+      font-family: var(--display); font-size: 6rem; font-weight: 300;
+      color: var(--ice); opacity: 0.12; line-height: 1;
+      position: absolute; top: 1.5rem; right: 2rem;
+    }
+    .mechanism-stat-row { display: flex; flex-direction: column; gap: 2rem; }
+    .mechanism-stat { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+    .mechanism-stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .m-stat-val { font-family: var(--display); font-size: 2.5rem; font-weight: 300; color: var(--snow); line-height: 1; margin-bottom: 0.3rem; }
+    .m-stat-val em { font-style: normal; color: var(--ice); }
+    .m-stat-label { font-size: 0.82rem; color: var(--mist); line-height: 1.5; }
+    .mechanism-content { }
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; display: block; }
+    .section-heading { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 3.75rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--snow); margin-bottom: 1.5rem; }
+    .section-heading em { font-style: italic; color: var(--ice); }
+    .mechanism-body { font-size: 0.95rem; line-height: 1.8; color: var(--mist); }
+    .mechanism-body p { margin-bottom: 1.25rem; }
+    .mechanism-body p:last-child { margin-bottom: 0; }
+
+    /* ── Benefits Deep Dive ────────────────────────────── */
+    .benefits-section { padding: 8rem 2.5rem; background: var(--void); }
+    .benefits-inner { max-width: 1200px; margin: 0 auto; }
+    .benefits-header { margin-bottom: 3.5rem; }
+    .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .benefit-card {
+      background: var(--deep); border: 1px solid var(--border);
+      border-radius: 1.25rem; padding: 3rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .benefit-card:hover { border-color: var(--border-hi); background: var(--surface); }
+    .benefit-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 0% 0%, rgba(91,200,245,0.04), transparent 60%);
+    }
+    .benefit-num {
+      font-family: var(--display); font-size: 0.95rem; font-weight: 400;
+      color: var(--ice); letter-spacing: 0.1em;
+      margin-bottom: 1.5rem; display: block;
+    }
+    .benefit-title {
+      font-family: var(--display); font-size: 2rem; font-weight: 300;
+      color: var(--snow); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .benefit-title em { font-style: italic; color: var(--ice); }
+    .benefit-desc { font-size: 0.9rem; line-height: 1.78; color: var(--mist); margin-bottom: 2rem; }
+    .benefit-stat {
+      display: inline-flex; align-items: baseline; gap: 0.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 0.75rem 1.25rem;
+    }
+    .benefit-card:hover .benefit-stat { background: var(--elevated); }
+    .b-stat-val { font-family: var(--display); font-size: 1.75rem; font-weight: 300; color: var(--ice); }
+    .b-stat-label { font-size: 0.75rem; color: var(--mist); }
+
+    /* ── Protocol Section ──────────────────────────────── */
+    .protocol-section { padding: 8rem 2.5rem; background: var(--deep); }
+    .protocol-inner { max-width: 1200px; margin: 0 auto; }
+    .protocol-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 4.5rem; align-items: start; }
+    .protocol-steps { }
+    .protocol-step {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 1.5rem; align-items: start;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .protocol-step:first-of-type { padding-top: 0; }
+    .protocol-step:last-of-type { border-bottom: none; }
+    .protocol-step:hover { border-color: var(--border-hi); }
+    .step-num-circle {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 1rem;
+      color: var(--ice); flex-shrink: 0;
+      margin-top: 0.25rem;
+    }
+    .step-content { }
+    .step-title { font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--snow); margin-bottom: 0.5rem; line-height: 1.2; }
+    .step-desc { font-size: 0.87rem; line-height: 1.72; color: var(--mist); }
+    .protocol-aside { }
+    .protocol-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 1.25rem; padding: 2.5rem; position: sticky; top: 8rem;
+    }
+    .protocol-card-title { font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--snow); margin-bottom: 1.5rem; line-height: 1.2; }
+    .protocol-rules { display: flex; flex-direction: column; gap: 1.25rem; }
+    .protocol-rule { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.85rem; line-height: 1.6; color: var(--mist); }
+    .rule-icon { width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--elevated); border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center; color: var(--ice); flex-shrink: 0; margin-top: 0.1rem; }
+    .protocol-warning { margin-top: 2rem; padding: 1.25rem; background: rgba(91,200,245,0.06); border: 1px solid rgba(91,200,245,0.15); border-radius: 0.75rem; font-size: 0.8rem; line-height: 1.6; color: var(--mist); }
+    .protocol-warning strong { color: var(--snow); }
+
+    /* ── Research / Citations ──────────────────────────── */
+    .research-section { padding: 7rem 2.5rem; background: var(--void); }
+    .research-inner { max-width: 1200px; margin: 0 auto; }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+    .research-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 2rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .research-card:hover { border-color: var(--border-hi); background: var(--elevated); }
+    .research-journal { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ice); margin-bottom: 0.75rem; }
+    .research-finding { font-family: var(--display); font-size: 1.2rem; font-weight: 400; color: var(--snow); line-height: 1.3; margin-bottom: 0.75rem; }
+    .research-detail { font-size: 0.82rem; line-height: 1.65; color: var(--mist); }
+
+    /* ── CTA ───────────────────────────────────────────── */
+    .science-cta {
+      padding: 9rem 2.5rem;
+      background: linear-gradient(135deg, var(--deep) 0%, var(--surface) 100%);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .science-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(91,200,245,0.07), transparent 60%);
+    }
+    .science-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .science-cta h2 { font-family: var(--display); font-size: clamp(2.5rem, 4.5vw, 4rem); font-weight: 300; color: var(--snow); letter-spacing: -0.02em; margin-bottom: 1.25rem; line-height: 1.1; }
+    .science-cta h2 em { font-style: italic; color: var(--ice); }
+    .science-cta p { font-size: 0.95rem; line-height: 1.75; color: var(--mist); margin-bottom: 2.5rem; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    @media (max-width: 1100px) {
+      .mechanism-layout { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .protocol-layout { grid-template-columns: 1fr; }
+      .protocol-card { position: static; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .btn-shop { display: none; }
+      .nav-hamburger { display: flex; }
+      .science-hero-stats { gap: 2rem; }
+      .research-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#products" onclick="closeMobile()">Products</a>
+    <a href="benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="about-us.html" onclick="closeMobile()">About</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="index.html#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html#products">Products</a></li>
+      <li><a href="benefits.html" class="active">Benefits</a></li>
+      <li><a href="about-us.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <a href="index.html#products" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="science-hero">
+    <div class="science-hero-atmosphere"></div>
+    <div class="science-hero-deco">4°</div>
+    <div class="science-hero-content">
+      <p class="science-breadcrumb"><a href="index.html">Home</a> / The Science</p>
+      <span class="science-label">Cold Therapy Research</span>
+      <h1 class="science-hero-h1">Why cold <em>changes everything.</em></h1>
+      <p class="science-hero-sub">Cold water immersion has been studied for decades. The results are consistent and compelling — from inflammation reduction to neurochemical shifts that last well beyond the plunge itself. This is the science behind the ritual.</p>
+      <div class="science-hero-stats">
+        <div>
+          <p class="hero-stat-val">300<span>%</span></p>
+          <p class="hero-stat-label">Norepinephrine increase post-immersion</p>
+        </div>
+        <div>
+          <p class="hero-stat-val">50<span>%</span></p>
+          <p class="hero-stat-label">Reduction in muscle soreness (DOMS)</p>
+        </div>
+        <div>
+          <p class="hero-stat-val">11<span>min</span></p>
+          <p class="hero-stat-label">Weekly minimum for measurable benefit</p>
+        </div>
+        <div>
+          <p class="hero-stat-val">4<span>°C</span></p>
+          <p class="hero-stat-label">Optimal temperature for peak response</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works in the Body -->
+  <section class="mechanism-section">
+    <div class="mechanism-inner">
+      <div class="mechanism-layout">
+        <div class="mechanism-visual reveal">
+          <div class="mechanism-card">
+            <span class="mechanism-big-num">4°</span>
+            <div class="mechanism-stat-row">
+              <div class="mechanism-stat">
+                <p class="m-stat-val">2–<em>3min</em></p>
+                <p class="m-stat-label">Minimum effective immersion time per session to trigger acute hormonal response</p>
+              </div>
+              <div class="mechanism-stat">
+                <p class="m-stat-val"><em>↑</em>300%</p>
+                <p class="m-stat-label">Increase in norepinephrine — a neurotransmitter linked to focus, mood elevation, and sustained energy</p>
+              </div>
+              <div class="mechanism-stat">
+                <p class="m-stat-val">72<em>hr</em></p>
+                <p class="m-stat-label">Duration of anti-inflammatory effects following a single cold immersion session at 4–6°C</p>
+              </div>
+              <div class="mechanism-stat">
+                <p class="m-stat-val"><em>↑</em>350%</p>
+                <p class="m-stat-label">Increase in dopamine that can occur during prolonged cold exposure — sustained for hours post-session</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mechanism-content reveal reveal-d1">
+          <span class="section-label">The Mechanism</span>
+          <h2 class="section-heading">What happens<br><em>in the body.</em></h2>
+          <div class="mechanism-body">
+            <p>When your body is submerged in cold water, it triggers a cascade of physiological responses. Blood vessels constrict, redirecting circulation to protect your core organs. This vasoconstriction reduces localised inflammation and flushes metabolic waste from muscle tissue faster than passive recovery.</p>
+            <p>Simultaneously, your sympathetic nervous system activates — releasing a surge of norepinephrine and adrenaline. This isn't just a stress response. These neurochemicals produce heightened focus, elevated mood, and a sustained energy state that can last 3–6 hours post-immersion.</p>
+            <p>Regular cold exposure also upregulates your cold-shock proteins, improves mitochondrial density in brown adipose tissue, and trains your nervous system's stress-response pathways — making you more resilient to discomfort in every area of life.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Deep Dive -->
+  <section class="benefits-section">
+    <div class="benefits-inner">
+      <div class="benefits-header">
+        <span class="section-label reveal">The Benefits</span>
+        <h2 class="section-heading reveal reveal-d1">Four reasons<br><em>it works.</em></h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <span class="benefit-num">01</span>
+          <h3 class="benefit-title">Accelerated <em>Recovery</em></h3>
+          <p class="benefit-desc">Cold immersion reduces delayed onset muscle soreness (DOMS) by constricting blood vessels and flushing inflammatory mediators from muscle tissue. Elite athletes report 30–50% faster return-to-training times. The mechanism is well understood: vasoconstriction limits oedema, while the rewarming phase drives fresh, oxygenated blood back into damaged tissue at an accelerated rate.</p>
+          <div class="benefit-stat">
+            <span class="b-stat-val">50%</span>
+            <span class="b-stat-label">reduction in DOMS reported by trained athletes</span>
+          </div>
+        </div>
+        <div class="benefit-card reveal reveal-d1">
+          <span class="benefit-num">02</span>
+          <h3 class="benefit-title">Mental <em>Resilience</em></h3>
+          <p class="benefit-desc">Voluntarily entering cold water is one of the most reliable methods for building stress tolerance and psychological hardness. Each time you override the urge to exit, you're strengthening the neural pathways that govern deliberate discomfort — the same pathways that govern performance under pressure, focus under fatigue, and composure in high-stakes situations.</p>
+          <div class="benefit-stat">
+            <span class="b-stat-val">300%</span>
+            <span class="b-stat-label">norepinephrine increase — linked to sustained focus and alertness</span>
+          </div>
+        </div>
+        <div class="benefit-card reveal reveal-d2">
+          <span class="benefit-num">03</span>
+          <h3 class="benefit-title">Mood & <em>Energy</em></h3>
+          <p class="benefit-desc">A single cold immersion session can elevate dopamine levels by up to 350% — a rise that sustained far longer than the session itself. Combined with elevated norepinephrine and endorphins, this produces a distinct post-plunge clarity: reduced anxiety, improved emotional regulation, and a sharpness of mind that no amount of coffee can replicate. This is increasingly studied in the context of clinical depression treatment.</p>
+          <div class="benefit-stat">
+            <span class="b-stat-val">350%</span>
+            <span class="b-stat-label">dopamine increase — sustained for hours post-session</span>
+          </div>
+        </div>
+        <div class="benefit-card reveal reveal-d3">
+          <span class="benefit-num">04</span>
+          <h3 class="benefit-title">Metabolic <em>Activation</em></h3>
+          <p class="benefit-desc">Cold exposure activates brown adipose tissue — a thermogenic fat that burns calories to generate heat. Regular activation increases mitochondrial density, improves insulin sensitivity, and contributes to healthy weight management over time. Studies show consistent cold exposure leads to measurable improvements in metabolic markers within 2–4 weeks of daily practice.</p>
+          <div class="benefit-stat">
+            <span class="b-stat-val">2–4wk</span>
+            <span class="b-stat-label">to measurable improvements in metabolic markers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Protocol Section -->
+  <section class="protocol-section">
+    <div class="protocol-inner">
+      <div class="protocol-layout">
+        <div class="protocol-steps reveal">
+          <span class="section-label">The Protocol</span>
+          <h2 class="section-heading">How to<br><em>do it right.</em></h2>
+
+          <div class="protocol-step">
+            <div class="step-num-circle">01</div>
+            <div class="step-content">
+              <h3 class="step-title">Start with temperature</h3>
+              <p class="step-desc">Begin at 12–15°C if you're new to cold immersion. This still triggers the key hormonal responses while making the experience more manageable. Work toward 4–8°C over 2–4 weeks as your body adapts. The exact temperature matters less than consistency.</p>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">02</div>
+            <div class="step-content">
+              <h3 class="step-title">Time your sessions</h3>
+              <p class="step-desc">Start with 2–3 minutes per session. Current research by Dr Andrew Huberman suggests 11 minutes per week total as the minimum threshold for measurable psychological and physiological benefit. Distribute across 3–5 sessions for best results.</p>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">03</div>
+            <div class="step-content">
+              <h3 class="step-title">Control your breath</h3>
+              <p class="step-desc">The urge to gasp and hyperventilate upon entry is the shock response — not danger. Slow, deliberate nasal breathing through the first 30 seconds resets your nervous system response. This skill of breathing through discomfort transfers directly to performance under pressure.</p>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">04</div>
+            <div class="step-content">
+              <h3 class="step-title">Warm naturally afterwards</h3>
+              <p class="step-desc">Allow your body to warm itself after immersion — this activates the thermogenic rewarming process that drives much of the metabolic benefit. Shiver comfortably for 5–10 minutes before using external heat. Movement (walking, light exercise) accelerates this phase.</p>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-num-circle">05</div>
+            <div class="step-content">
+              <h3 class="step-title">Make it daily</h3>
+              <p class="step-desc">The psychological and physiological adaptations from cold immersion compound over time. Daily practice — even short sessions — produces greater resilience, hormetic adaptation, and habitual mental clarity than sporadic longer sessions. Consistency beats intensity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="protocol-aside reveal reveal-d1">
+          <div class="protocol-card">
+            <h3 class="protocol-card-title">Quick Reference Guide</h3>
+            <div class="protocol-rules">
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span><strong style="color:var(--snow)">Beginner:</strong> 12–15°C, 2 min, 3x/week</span>
+              </div>
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span><strong style="color:var(--snow)">Intermediate:</strong> 8–12°C, 3–5 min, daily</span>
+              </div>
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span><strong style="color:var(--snow)">Advanced:</strong> 4–8°C, 5–10 min, daily</span>
+              </div>
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span>Morning sessions maximise alertness benefit</span>
+              </div>
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span>Post-exercise sessions maximise recovery benefit</span>
+              </div>
+              <div class="protocol-rule">
+                <div class="rule-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span>Avoid within 4hr of bedtime — stimulating effect</span>
+              </div>
+            </div>
+            <div class="protocol-warning">
+              <strong>Medical note:</strong> Cold water immersion is not recommended for individuals with cardiovascular disease, Raynaud's syndrome, or during pregnancy without prior medical consultation.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section class="research-section">
+    <div class="research-inner">
+      <span class="section-label reveal">Supporting Research</span>
+      <h2 class="section-heading reveal reveal-d1">The evidence<br><em>is clear.</em></h2>
+      <div class="research-grid">
+        <div class="research-card reveal">
+          <p class="research-journal">Journal of Physiology</p>
+          <p class="research-finding">"Cold water immersion significantly reduces post-exercise muscle soreness and accelerates recovery of muscle function."</p>
+          <p class="research-detail">Meta-analysis of 17 randomised controlled trials examining DOMS and functional recovery in trained athletes following CWI protocols at 10–15°C.</p>
+        </div>
+        <div class="research-card reveal reveal-d1">
+          <p class="research-journal">Neuroscience Research</p>
+          <p class="research-finding">"Acute cold exposure produces a sustained 200–300% elevation in norepinephrine, lasting several hours post-immersion."</p>
+          <p class="research-detail">Dr Andrew Huberman's research on cold exposure protocols and neurochemical responses — foundational to current understanding of cold's mental health benefits.</p>
+        </div>
+        <div class="research-card reveal reveal-d2">
+          <p class="research-journal">Medical Hypotheses</p>
+          <p class="research-finding">"Cold showers as a potential treatment for depression: A case report and literature review."</p>
+          <p class="research-detail">Cold exposure as a low-cost adjunct therapy for depression via activation of monoaminergic systems — dopamine, norepinephrine, and serotonin pathways simultaneously stimulated.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="science-cta">
+    <div class="science-cta-inner">
+      <h2>Ready to<br><em>experience it?</em></h2>
+      <p>The science is compelling. The experience is transformative. Cold therapy is one of the few practices where the research and the results align completely — every time, for almost everyone who commits to it.</p>
+      <div class="cta-actions">
+        <a href="product-page/ice-bath-nz.html" class="btn-primary">
+          Shop the Collection
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="index.html" class="btn-ghost">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" aria-label="TikTok"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="product-page/ice-bath-nz.html">Ice Bath NZ</a></li>
+            <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="product-page/barrel-sauna.html">Sauna</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Bundles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="benefits.html">The Science</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Ambassadors</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="https://www.theicebathnz.co.nz/privacy-policy">Privacy Policy</a>
+          <a href="https://www.theicebathnz.co.nz/terms-of-service">Terms of Service</a>
+          <a href="https://www.theicebathnz.co.nz/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
