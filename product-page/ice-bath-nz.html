@@ -738,6 +738,65 @@
     }
     .size-option.active .size-price-hint { color: var(--frost); }
 
+    /* ── Chiller Selector ───────────────────────────────── */
+    .chiller-selector {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.7s var(--ease-out) 0.7s forwards;
+    }
+    .chiller-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 0.75rem;
+    }
+    .chiller-options {
+      display: flex; gap: 0.6rem;
+    }
+    .chiller-option {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 0.9rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition:
+        border-color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .chiller-option:hover {
+      border-color: var(--border-hi);
+      background: var(--elevated);
+      transform: translateY(-1px);
+    }
+    .chiller-option:active { transform: translateY(0); }
+    .chiller-option.active {
+      border-color: var(--ice);
+      background: rgba(91, 200, 245, 0.06);
+    }
+    .chiller-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+    .chiller-name {
+      font-family: var(--display);
+      font-size: 1rem; font-weight: 400;
+      color: var(--snow); line-height: 1;
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .chiller-option.active .chiller-name { color: var(--ice); }
+    .chiller-sub {
+      font-size: 0.66rem; color: var(--fog);
+      margin-bottom: 0.45rem;
+      line-height: 1.3; font-family: var(--body);
+    }
+    .chiller-price-hint {
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--fog); font-family: var(--body);
+      transition: color 0.2s;
+    }
+    .chiller-option.active .chiller-price-hint { color: var(--frost); }
+
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -830,6 +889,28 @@
             <span class="size-name">5ft</span>
             <span class="size-dim">1500 × 600 × 600mm</span>
             <span class="size-price-hint">NZ$888</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chiller Selector -->
+      <div class="chiller-selector">
+        <p class="chiller-selector-label">Choose Setup</p>
+        <div class="chiller-options">
+          <button class="chiller-option active" data-chiller="none" onclick="selectChiller('none')">
+            <span class="chiller-name">No Chiller</span>
+            <span class="chiller-sub">Ice bath only</span>
+            <span class="chiller-price-hint" id="chHintNone">NZ$784</span>
+          </button>
+          <button class="chiller-option" data-chiller="chiller" onclick="selectChiller('chiller')">
+            <span class="chiller-name">+ Chiller</span>
+            <span class="chiller-sub">Cools to 4°C · 45 min</span>
+            <span class="chiller-price-hint" id="chHintChiller">NZ$3,479</span>
+          </button>
+          <button class="chiller-option" data-chiller="premium" onclick="selectChiller('premium')">
+            <span class="chiller-name">+ Premium</span>
+            <span class="chiller-sub">Advanced temp control</span>
+            <span class="chiller-price-hint" id="chHintPremium">NZ$4,379</span>
           </button>
         </div>
       </div>
@@ -1047,7 +1128,7 @@
               <p class="related-desc">Standalone precision chiller — pairs with any tub. Cools to 4°C in 45 minutes.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>899</span>
+              <span class="related-price"><span class="cur">NZ$</span>2,712</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
@@ -1062,7 +1143,7 @@
               <p class="related-desc">The perfect contrast therapy pairing. Heat up, then get cold — the classic recovery combo.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>449</span>
+              <span class="related-price"><span class="cur">NZ$</span>9,899</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
@@ -1152,37 +1233,60 @@
     }
 
     const sizeData = {
-      '4ft': {
-        price: '784', ctaLabel: 'Ice Bath NZ — 4ft', ctaPrice: 'NZ$784',
-        capacity: '~350L', length: '1200mm',
-        hlCapacity: '~350L capacity — full-body immersion',
-      },
-      '5ft': {
-        price: '888', ctaLabel: 'Ice Bath NZ — 5ft', ctaPrice: 'NZ$888',
-        capacity: '~450L', length: '1500mm',
-        hlCapacity: '~450L capacity — full-body immersion',
-      }
+      '4ft': { ctaLabel: 'Ice Bath NZ — 4ft', capacity: '~350L', length: '1200mm', hlCapacity: '~350L capacity — full-body immersion' },
+      '5ft': { ctaLabel: 'Ice Bath NZ — 5ft', capacity: '~450L', length: '1500mm', hlCapacity: '~450L capacity — full-body immersion' }
     };
+    const priceMatrix = {
+      '4ft': { none: 784,  chiller: 3479, premium: 4379 },
+      '5ft': { none: 888,  chiller: 3609, premium: 4509 }
+    };
+    const chillerSuffix = { none: '', chiller: ' + Chiller', premium: ' + Premium Chiller' };
+    let currentSize = '4ft';
+    let currentChiller = 'none';
 
-    function selectSize(size) {
-      const d = sizeData[size];
-      document.querySelectorAll('.size-option').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.size === size);
-      });
+    function updatePrice() {
+      const total = priceMatrix[currentSize][currentChiller];
       const pa = document.getElementById('priceAmount');
+      const pn = document.getElementById('priceNote');
       pa.style.opacity = '0';
       pa.style.transform = 'translateY(6px)';
       setTimeout(() => {
-        pa.textContent = d.price;
+        pa.textContent = total.toLocaleString('en-NZ');
         pa.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
         pa.style.opacity = '1';
         pa.style.transform = 'translateY(0)';
       }, 120);
-      document.getElementById('specCapacity').textContent = d.capacity;
-      document.getElementById('specLength').textContent = d.length;
-      document.getElementById('ctaPrice').textContent = d.ctaPrice;
-      document.getElementById('ctaSizeLabel').textContent = d.ctaLabel;
-      document.getElementById('hlCapacity').textContent = d.hlCapacity;
+      const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
+      document.getElementById('ctaPrice').textContent = 'NZ$' + total.toLocaleString('en-NZ');
+      document.getElementById('ctaSizeLabel').textContent = ctaLabel;
+      // Update all chiller option price hints for current size
+      document.getElementById('chHintNone').textContent    = 'NZ$' + priceMatrix[currentSize].none.toLocaleString('en-NZ');
+      document.getElementById('chHintChiller').textContent = 'NZ$' + priceMatrix[currentSize].chiller.toLocaleString('en-NZ');
+      document.getElementById('chHintPremium').textContent = 'NZ$' + priceMatrix[currentSize].premium.toLocaleString('en-NZ');
+      if (currentChiller !== 'none') {
+        pn.innerHTML = 'incl. GST · Free shipping &nbsp;<span style="color:var(--ice);font-size:0.7rem;letter-spacing:0.06em">Bundle price</span>';
+      } else {
+        pn.textContent = 'incl. GST · Free shipping NZ';
+      }
+    }
+
+    function selectSize(size) {
+      currentSize = size;
+      document.querySelectorAll('.size-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.size === size);
+      });
+      document.getElementById('specCapacity').textContent = sizeData[size].capacity;
+      document.getElementById('specLength').textContent = sizeData[size].length;
+      document.getElementById('hlCapacity').textContent = sizeData[size].hlCapacity;
+      updatePrice();
+    }
+
+    function selectChiller(chiller) {
+      currentChiller = chiller;
+      document.querySelectorAll('.chiller-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.chiller === chiller);
+      });
+      updatePrice();
     }
 
     const observer = new IntersectionObserver((entries) => {

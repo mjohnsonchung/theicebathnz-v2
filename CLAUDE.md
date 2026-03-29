@@ -46,6 +46,14 @@
 - **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
 - **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
 
+## Save Progress
+- When the user says **"save progress"**, update `progress.md` with:
+  - Any new key decisions made this session
+  - Updated "Completed" / "Pending" task lists
+  - Any new files created or renamed
+  - Any price or spec changes
+- Do not rewrite the whole file — edit only what has changed.
+
 ## Hard Rules
 - Do not add sections, features, or content not in the reference
 - Do not "improve" a reference design — match it
