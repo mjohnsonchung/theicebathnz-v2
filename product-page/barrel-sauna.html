@@ -3,213 +3,746 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portable Pod — The Ice Bath NZ</title>
+  <title>Barrel Sauna — The Ice Bath NZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ── Design Tokens ─────────────────────────────────── */
     :root {
       --void:      #020B15;
       --deep:      #071525;
       --surface:   #0C1E35;
       --elevated:  #122645;
       --lift:      #183360;
+
       --ice:       #5BC8F5;
       --ice-glow:  rgba(91, 200, 245, 0.18);
       --frost:     #B8E8FF;
       --arctic:    #E4F4FF;
+
+      --ember:     #E8832A;
+      --ember-dim: rgba(232, 131, 42, 0.12);
+      --ember-glow:rgba(232, 131, 42, 0.25);
+      --wood:      #C4854A;
+
       --snow:      #EEF5FA;
       --mist:      #7A9BB5;
       --fog:       #3A5A7A;
       --border:    rgba(91, 200, 245, 0.1);
       --border-hi: rgba(91, 200, 245, 0.25);
+
       --display: 'Cormorant Garamond', Georgia, serif;
       --body:    'Jost', sans-serif;
+
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
       --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body {
+      background: var(--void);
+      color: var(--snow);
+      font-family: var(--body);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
     button { font-family: var(--body); cursor: pointer; }
 
-    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+    /* ── Grain overlay ─────────────────────────────────── */
+    .grain {
+      position: fixed; inset: 0; z-index: 200;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 250px 250px;
+      opacity: 0.032;
+      mix-blend-mode: overlay;
+    }
 
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
-    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
-    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
-    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    /* ── Navigation ────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      transition:
+        background 0.5s var(--ease-smooth),
+        backdrop-filter 0.5s var(--ease-smooth),
+        padding 0.4s var(--ease-smooth),
+        border-color 0.4s var(--ease-smooth);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(2, 11, 21, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 1rem 2.5rem;
+      border-bottom-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.15rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--snow);
+      display: flex; align-items: baseline; gap: 0.2rem;
+    }
+    .nav-logo sup {
+      font-family: var(--body); font-size: 0.5rem; font-weight: 600;
+      letter-spacing: 0.25em; color: var(--ice); vertical-align: super;
+    }
     .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-links a {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mist);
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .nav-links a:hover { color: var(--snow); }
+    .nav-links a.active { color: var(--snow); }
     .nav-right { display: flex; align-items: center; gap: 1.25rem; }
-    .nav-cart { position: relative; background: none; border: none; color: var(--mist); transition: color 0.2s; padding: 0.4rem; }
+    .nav-cart {
+      position: relative; background: none; border: none;
+      color: var(--mist);
+      transition: color 0.2s var(--ease-smooth);
+      padding: 0.4rem;
+    }
     .nav-cart:hover { color: var(--snow); }
-    .cart-badge { position: absolute; top: 0; right: 0; width: 1rem; height: 1rem; background: var(--ice); color: var(--void); border-radius: 50%; font-size: 0.55rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
-    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
-    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .cart-badge {
+      position: absolute; top: 0; right: 0;
+      width: 1rem; height: 1rem;
+      background: var(--ice); color: var(--void);
+      border-radius: 50%;
+      font-size: 0.55rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-shop {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--void); background: var(--ice);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px; border: none;
+      transition:
+        background 0.2s var(--ease-smooth),
+        transform 0.25s var(--ease-spring),
+        box-shadow 0.25s var(--ease-smooth);
+    }
+    .btn-shop:hover {
+      background: var(--frost);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(91, 200, 245, 0.3);
+    }
+    .btn-shop:active { transform: translateY(0); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 0.4rem; cursor: pointer;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1px; background: var(--snow);
+      transition: transform 0.3s var(--ease-smooth), opacity 0.2s;
+    }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(2, 11, 21, 0.97);
+      backdrop-filter: blur(20px);
+      z-index: 90;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.25rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
     .mobile-menu.open { opacity: 1; pointer-events: auto; }
-    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a {
+      font-family: var(--body);
+      font-size: 0.8rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mist); padding: 0.9rem 2rem;
+      transition: color 0.2s var(--ease-smooth);
+    }
     .mobile-menu a:hover { color: var(--snow); }
+    .mobile-menu .btn-primary {
+      margin-top: 1.5rem; font-size: 0.75rem; padding: 0.85rem 2.25rem;
+    }
 
-    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
-    .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
-    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+    /* ── Shared Buttons ────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--void); background: var(--ember);
+      padding: 0.9rem 2rem; border-radius: 999px; border: none;
+      transition:
+        background 0.2s var(--ease-smooth),
+        transform 0.25s var(--ease-spring),
+        box-shadow 0.25s var(--ease-smooth);
+    }
+    .btn-primary:hover {
+      background: var(--wood);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(232, 131, 42, 0.35);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mist); background: transparent;
+      padding: 0.9rem 2rem; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition:
+        color 0.2s var(--ease-smooth),
+        border-color 0.2s var(--ease-smooth),
+        transform 0.25s var(--ease-spring);
+    }
+    .btn-ghost:hover {
+      color: var(--snow); border-color: var(--border-hi);
+      transform: translateY(-1px);
+    }
+    .btn-ice {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--void); background: var(--ice);
+      padding: 0.9rem 2rem; border-radius: 999px; border: none;
+      transition:
+        background 0.2s var(--ease-smooth),
+        transform 0.25s var(--ease-spring),
+        box-shadow 0.25s var(--ease-smooth);
+    }
+    .btn-ice:hover {
+      background: var(--frost);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(91, 200, 245, 0.35);
+    }
+    .btn-ice:active { transform: translateY(0); }
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    /* ── Scroll Reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition:
+        opacity 0.85s var(--ease-out),
+        transform 0.85s var(--ease-out);
+    }
     .reveal.in { opacity: 1; transform: translateY(0); }
     .reveal-d1 { transition-delay: 0.1s; }
     .reveal-d2 { transition-delay: 0.2s; }
     .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
 
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeUp  { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn  { to { opacity: 1; } }
 
-    /* Product Hero */
-    .product-hero { min-height: 100vh; position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden; background: var(--void); padding-top: 6rem; }
-    .product-hero-atmosphere { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 70% 50%, rgba(91,200,245,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 10% 80%, rgba(18,60,120,0.15) 0%, transparent 50%), linear-gradient(165deg, #071525 0%, #020B15 50%, #030F1E 100%); }
-    .product-hero-left { position: relative; z-index: 10; padding: 4rem 3rem 4rem 5rem; }
-    .product-breadcrumb { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
+    /* ── Product Hero ──────────────────────────────────── */
+    .product-hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      overflow: hidden;
+      background: var(--void);
+      padding-top: 6rem;
+    }
+    .product-hero-atmosphere {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 70% 50%, rgba(232, 131, 42, 0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 80% at 10% 80%, rgba(18, 60, 120, 0.15) 0%, transparent 50%),
+        linear-gradient(165deg, #071525 0%, #020B15 50%, #030F1E 100%);
+    }
+    .product-hero-left {
+      position: relative; z-index: 10;
+      padding: 4rem 3rem 4rem 5rem;
+    }
+    .product-breadcrumb {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
     .product-breadcrumb a { color: var(--fog); transition: color 0.2s; }
     .product-breadcrumb a:hover { color: var(--mist); }
     .product-breadcrumb span { opacity: 0.4; }
-    .product-badge-chip { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.28rem 0.85rem; border-radius: 999px; margin-bottom: 1.75rem; }
-    .product-badge-chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--void); opacity: 0.5; }
-    .product-hero-name { font-family: var(--display); font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 300; line-height: 0.92; letter-spacing: -0.02em; color: var(--snow); margin-bottom: 1.5rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--ease-out) 0.3s forwards; }
-    .product-hero-tagline { font-size: 1rem; line-height: 1.7; color: var(--mist); max-width: 40ch; margin-bottom: 2.5rem; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s var(--ease-out) 0.5s forwards; }
-    .product-price-block { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.65s forwards; }
-    .price-cur { font-family: var(--body); font-size: 0.9rem; color: var(--mist); font-weight: 400; }
-    .price-amount { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 300; color: var(--snow); letter-spacing: -0.02em; }
-    .price-note { font-size: 0.75rem; color: var(--fog); }
-    .product-hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s var(--ease-out) 0.8s forwards; }
-    .product-highlights { display: flex; flex-direction: column; gap: 0.6rem; opacity: 0; animation: fadeIn 0.7s var(--ease-out) 1s forwards; }
-    .highlight-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.82rem; color: var(--mist); }
-    .highlight-item::before { content: ''; width: 18px; height: 1px; background: var(--ice); flex-shrink: 0; }
-    .product-hero-right { position: relative; z-index: 5; height: 100%; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 4rem 3rem; }
-    .product-hero-img-wrap { width: 100%; max-width: 520px; aspect-ratio: 1; border-radius: 2rem; overflow: hidden; border: none; background: radial-gradient(ellipse 100% 90% at 50% 40%, #0A1E35 0%, #060F1E 55%, #020B15 100%); position: relative; opacity: 0; transform: translateY(30px); animation: fadeUp 1s var(--ease-out) 0.4s forwards; box-shadow: 0 0 0 1px rgba(91,200,245,0.15), 0 0 0 6px rgba(91,200,245,0.04), 0 50px 100px rgba(2,11,21,0.7); }
-    .product-hero-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 2.5rem; }
-    .product-hero-img-wrap::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 90% 55% at 50% 100%, rgba(91,200,245,0.16), transparent 60%), linear-gradient(to bottom, rgba(2,11,21,0.4) 0%, transparent 30%); pointer-events: none; }
+    .product-badge-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--void); background: var(--ember);
+      padding: 0.28rem 0.85rem; border-radius: 999px;
+      margin-bottom: 1.75rem;
+    }
+    .product-badge-chip::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--void); opacity: 0.5;
+    }
+    .product-hero-name {
+      font-family: var(--display);
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--snow);
+      margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+    }
+    .product-hero-name em { font-style: italic; color: var(--ember); }
+    .product-hero-tagline {
+      font-size: 1rem; line-height: 1.7;
+      color: var(--mist);
+      max-width: 40ch;
+      margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease-out) 0.5s forwards;
+    }
+    .product-price-block {
+      display: flex; align-items: baseline; gap: 0.5rem;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.65s forwards;
+    }
+    .price-cur {
+      font-family: var(--body); font-size: 0.9rem;
+      color: var(--mist); font-weight: 400;
+    }
+    .price-amount {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 300; color: var(--snow);
+      letter-spacing: -0.02em;
+    }
+    .price-note {
+      font-size: 0.75rem; color: var(--fog);
+    }
+    .product-hero-actions {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 3rem;
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp 0.6s var(--ease-out) 0.8s forwards;
+    }
+    .product-highlights {
+      display: flex; flex-direction: column; gap: 0.6rem;
+      opacity: 0; animation: fadeIn 0.7s var(--ease-out) 1s forwards;
+    }
+    .highlight-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.82rem; color: var(--mist);
+    }
+    .highlight-item::before {
+      content: '';
+      width: 18px; height: 1px;
+      background: var(--ember); flex-shrink: 0;
+    }
+    .product-hero-right {
+      position: relative; z-index: 5;
+      height: 100%;
+      min-height: 80vh;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 2rem 3rem 0 0;
+    }
+    .product-hero-img {
+      width: 100%; max-width: 680px;
+      object-fit: contain;
+      object-position: bottom center;
+      filter:
+        drop-shadow(0 0 80px rgba(232, 131, 42, 0.1))
+        drop-shadow(0 40px 100px rgba(2,11,21,0.7));
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s var(--ease-out) 0.4s forwards;
+    }
 
-    /* Sections */
-    .features-section { padding: 7rem 2.5rem; background: var(--void); }
+    /* ── Features Section ──────────────────────────────── */
+    .features-section {
+      padding: 7rem 2.5rem;
+      background: var(--void);
+    }
     .features-inner { max-width: 1200px; margin: 0 auto; }
-    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; }
-    .section-heading { font-family: var(--display); font-size: clamp(2.5rem, 4vw, 3.75rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--snow); margin-bottom: 1rem; }
-    .section-heading em { font-style: italic; color: var(--ice); }
-    .section-sub { font-size: 0.95rem; line-height: 1.7; color: var(--mist); max-width: 52ch; margin-bottom: 3rem; }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 1.25rem; overflow: hidden; }
-    .feature-card { background: var(--deep); padding: 2.75rem 2rem; transition: background 0.3s; }
+    .section-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--ember); margin-bottom: 1.25rem;
+    }
+    .section-heading {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--snow);
+      margin-bottom: 1rem;
+    }
+    .section-heading em { font-style: italic; color: var(--ember); }
+    .section-sub {
+      font-size: 0.95rem; line-height: 1.7;
+      color: var(--mist); max-width: 52ch;
+      margin-bottom: 3rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      overflow: hidden;
+    }
+    .feature-card {
+      background: var(--deep);
+      padding: 2.75rem 2rem;
+      transition: background 0.3s var(--ease-smooth);
+    }
     .feature-card:hover { background: var(--surface); }
-    .feature-icon { width: 3rem; height: 3rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--ice); margin-bottom: 1.5rem; transition: background 0.3s, border-color 0.3s; }
-    .feature-card:hover .feature-icon { background: var(--elevated); border-color: var(--border-hi); }
-    .feature-title { font-family: var(--display); font-size: 1.35rem; font-weight: 400; color: var(--snow); margin-bottom: 0.75rem; line-height: 1.2; }
-    .feature-desc { font-size: 0.85rem; line-height: 1.72; color: var(--mist); }
+    .feature-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ember);
+      margin-bottom: 1.5rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .feature-card:hover .feature-icon { background: var(--elevated); border-color: rgba(232, 131, 42, 0.3); }
+    .feature-title {
+      font-family: var(--display);
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--snow); margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .feature-desc {
+      font-size: 0.85rem; line-height: 1.72;
+      color: var(--mist);
+    }
 
-    .specs-section { padding: 7rem 2.5rem; background: var(--deep); }
+    /* ── Specs Section ─────────────────────────────────── */
+    .specs-section {
+      padding: 7rem 2.5rem;
+      background: var(--deep);
+    }
     .specs-inner { max-width: 1200px; margin: 0 auto; }
-    .specs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .specs-visual { position: relative; aspect-ratio: 4/3; background: var(--surface); border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--border); }
-    .specs-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .specs-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .specs-visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--surface);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .specs-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .specs-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(232, 131, 42, 0.08), transparent 70%);
+    }
     .specs-content { padding-top: 0.5rem; }
-    .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 1rem; overflow: hidden; margin-top: 2.5rem; }
-    .spec-item { background: var(--surface); padding: 1.75rem 1.5rem; transition: background 0.2s; }
+    .specs-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 1rem; overflow: hidden;
+      margin-top: 2.5rem;
+    }
+    .spec-item {
+      background: var(--surface);
+      padding: 1.75rem 1.5rem;
+      transition: background 0.2s;
+    }
     .spec-item:hover { background: var(--elevated); }
-    .spec-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ice); margin-bottom: 0.5rem; }
-    .spec-value { font-family: var(--display); font-size: 1.75rem; font-weight: 300; color: var(--snow); line-height: 1.1; }
-    .spec-note { font-size: 0.78rem; color: var(--mist); margin-top: 0.25rem; }
+    .spec-label {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ember); margin-bottom: 0.5rem;
+    }
+    .spec-value {
+      font-family: var(--display);
+      font-size: 1.75rem; font-weight: 300;
+      color: var(--snow); line-height: 1.1;
+    }
+    .spec-note {
+      font-size: 0.78rem; color: var(--mist);
+      margin-top: 0.25rem;
+    }
 
-    .use-section { padding: 7rem 2.5rem; background: var(--void); }
-    .use-inner { max-width: 1200px; margin: 0 auto; }
-    .use-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .use-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 2.25rem 2rem; transition: border-color 0.3s, background 0.3s; }
-    .use-card:hover { border-color: var(--border-hi); background: var(--elevated); }
-    .use-num { font-family: var(--display); font-size: 2.5rem; font-weight: 300; color: var(--ice); opacity: 0.4; line-height: 1; margin-bottom: 1rem; }
-    .use-title { font-family: var(--display); font-size: 1.2rem; font-weight: 400; color: var(--snow); margin-bottom: 0.6rem; }
-    .use-desc { font-size: 0.85rem; line-height: 1.7; color: var(--mist); }
+    /* ── Includes Section ──────────────────────────────── */
+    .includes-section {
+      padding: 7rem 2.5rem;
+      background: var(--void);
+    }
+    .includes-inner { max-width: 1200px; margin: 0 auto; }
+    .includes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .include-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2.25rem 2rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .include-card:hover { border-color: rgba(232, 131, 42, 0.3); background: var(--elevated); }
+    .include-num {
+      font-family: var(--display);
+      font-size: 2.5rem; font-weight: 300;
+      color: var(--ember); opacity: 0.4; line-height: 1;
+    }
+    .include-title {
+      font-family: var(--display);
+      font-size: 1.25rem; font-weight: 400;
+      color: var(--snow);
+    }
+    .include-desc {
+      font-size: 0.85rem; line-height: 1.7;
+      color: var(--mist);
+    }
 
-    .testimonial-section { padding: 6rem 2.5rem; background: var(--deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .testimonial-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .testimonial-stars { display: flex; justify-content: center; gap: 0.3rem; margin-bottom: 2rem; color: var(--ice); }
-    .testimonial-quote { font-family: var(--display); font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--snow); margin-bottom: 2.5rem; }
-    .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
-    .testimonial-avatar { width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--elevated); border: 1px solid var(--border); overflow: hidden; }
+    /* ── Contrast CTA Banner ───────────────────────────── */
+    .contrast-banner {
+      padding: 4rem 2.5rem;
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .contrast-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .contrast-text h3 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 300; color: var(--snow);
+      margin-bottom: 0.5rem;
+    }
+    .contrast-text h3 em { font-style: italic; color: var(--ice); }
+    .contrast-text p {
+      font-size: 0.9rem; line-height: 1.6; color: var(--mist);
+      max-width: 50ch;
+    }
+    .contrast-action { flex-shrink: 0; }
+
+    /* ── Testimonial ───────────────────────────────────── */
+    .testimonial-section {
+      padding: 6rem 2.5rem;
+      background: var(--void);
+    }
+    .testimonial-inner {
+      max-width: 800px; margin: 0 auto; text-align: center;
+    }
+    .testimonial-stars {
+      display: flex; justify-content: center; gap: 0.3rem;
+      margin-bottom: 2rem; color: var(--ember);
+    }
+    .testimonial-quote {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.4; color: var(--snow);
+      margin-bottom: 2.5rem;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%;
+      background: var(--elevated); border: 1px solid var(--border);
+      overflow: hidden;
+    }
     .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .testimonial-name { font-size: 0.9rem; font-weight: 500; color: var(--snow); }
-    .testimonial-role { font-size: 0.78rem; color: var(--mist); }
+    .testimonial-name {
+      font-size: 0.9rem; font-weight: 500; color: var(--snow);
+    }
+    .testimonial-role {
+      font-size: 0.78rem; color: var(--mist);
+    }
 
-    .order-cta { padding: 8rem 2.5rem; background: linear-gradient(135deg, var(--deep) 0%, var(--surface) 100%); border-top: 1px solid var(--border); text-align: center; position: relative; overflow: hidden; }
-    .order-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(91,200,245,0.07), transparent 60%); }
-    .order-cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-    .order-cta-label { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); margin-bottom: 0.5rem; }
-    .order-cta-price { font-family: var(--display); font-size: clamp(3.5rem, 6vw, 5rem); font-weight: 300; color: var(--snow); letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-    .order-cta-heading { font-family: var(--display); font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 300; color: var(--snow); margin-bottom: 1rem; }
-    .order-cta-sub { font-size: 0.9rem; line-height: 1.7; color: var(--mist); margin-bottom: 2.5rem; }
-    .order-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .order-trust { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em; }
-    .trust-item svg { color: var(--ice); }
-
-    .related-section { padding: 7rem 2.5rem; background: var(--void); }
+    /* ── Related Products ──────────────────────────────── */
+    .related-section {
+      padding: 7rem 2.5rem;
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+    }
     .related-inner { max-width: 1200px; margin: 0 auto; }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
-    .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.25rem; overflow: hidden; display: grid; grid-template-columns: 1fr 1.5fr; transition: border-color 0.3s, transform 0.3s var(--ease-spring); }
+    .related-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .related-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1.5fr;
+      transition: border-color 0.3s var(--ease-smooth), transform 0.3s var(--ease-spring);
+    }
     .related-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
-    .related-img { background: var(--elevated); aspect-ratio: 1; overflow: hidden; }
-    .related-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .related-img {
+      background: var(--elevated);
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+    .related-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s var(--ease-smooth);
+    }
     .related-card:hover .related-img img { transform: scale(1.05); }
-    .related-body { padding: 2rem 1.75rem; display: flex; flex-direction: column; justify-content: space-between; }
-    .related-name { font-family: var(--display); font-size: 1.5rem; font-weight: 300; color: var(--snow); margin-bottom: 0.5rem; }
-    .related-desc { font-size: 0.82rem; line-height: 1.6; color: var(--mist); margin-bottom: 1.5rem; }
-    .related-footer { display: flex; align-items: center; justify-content: space-between; }
-    .related-price { font-family: var(--display); font-size: 1.4rem; font-weight: 300; color: var(--snow); }
+    .related-body {
+      padding: 2rem 1.75rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .related-name {
+      font-family: var(--display);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--snow); margin-bottom: 0.5rem;
+    }
+    .related-desc {
+      font-size: 0.82rem; line-height: 1.6; color: var(--mist);
+      margin-bottom: 1.5rem;
+    }
+    .related-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .related-price {
+      font-family: var(--display);
+      font-size: 1.4rem; font-weight: 300; color: var(--snow);
+    }
     .related-price .cur { font-family: var(--body); font-size: 0.78rem; color: var(--mist); }
-    .btn-sm { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ice); border: 1px solid var(--border-hi); background: transparent; padding: 0.55rem 1.1rem; border-radius: 999px; transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .btn-sm {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ice); border: 1px solid var(--border-hi);
+      background: transparent; padding: 0.55rem 1.1rem; border-radius: 999px;
+      transition:
+        color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        border-color 0.2s var(--ease-smooth);
+    }
     .btn-sm:hover { color: var(--void); background: var(--ice); border-color: var(--ice); }
 
-    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    /* ── Order CTA ─────────────────────────────────────── */
+    .order-cta {
+      padding: 8rem 2.5rem;
+      background: linear-gradient(135deg, var(--deep) 0%, var(--surface) 100%);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .order-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(232, 131, 42, 0.07), transparent 60%);
+    }
+    .order-cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .order-cta-price {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 6vw, 5rem);
+      font-weight: 300; color: var(--snow);
+      letter-spacing: -0.03em; margin-bottom: 0.5rem;
+    }
+    .order-cta-label {
+      font-size: 0.78rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--mist);
+      margin-bottom: 0.75rem;
+    }
+    .order-cta-heading {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 300; color: var(--snow);
+      margin-bottom: 1rem;
+    }
+    .order-cta-sub {
+      font-size: 0.9rem; line-height: 1.7;
+      color: var(--mist); margin-bottom: 2.5rem;
+    }
+    .order-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .order-trust {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em;
+    }
+    .trust-item svg { color: var(--ember); }
+
+    /* ── Footer ────────────────────────────────────────── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      padding: 6rem 2.5rem 3rem;
+    }
     .footer-inner { max-width: 1440px; margin: 0 auto; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem; margin-bottom: 5rem;
+    }
     .footer-brand .nav-logo { margin-bottom: 1.25rem; }
     .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
     .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
-    .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .social-btn {
+      width: 2.25rem; height: 2.25rem; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mist);
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
     .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
-    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col h4 {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--snow); margin-bottom: 1.5rem;
+    }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
     .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
     .footer-col a:hover { color: var(--snow); }
-    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 2.5rem; border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 1rem;
+    }
     .footer-copy { font-size: 0.78rem; color: var(--fog); }
     .footer-legal { display: flex; gap: 2rem; }
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
+    /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
       .product-hero-left { padding: 2rem 2.5rem 2rem; }
-      .product-hero-right { min-height: auto; padding: 2rem; }
+      .product-hero-right { min-height: 55vw; padding: 0 2rem; }
       .features-grid { grid-template-columns: 1fr 1fr; }
       .specs-layout { grid-template-columns: 1fr; }
+      .specs-visual { max-width: 500px; }
       .related-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .contrast-inner { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
       .product-hero-left { padding: 1rem 1.5rem 2rem; }
+      .product-hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
       .features-grid { grid-template-columns: 1fr; }
-      .use-grid { grid-template-columns: 1fr; }
+      .includes-grid { grid-template-columns: 1fr; }
       .related-card { grid-template-columns: 1fr; }
       .related-img { aspect-ratio: 16/9; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
@@ -221,6 +754,7 @@
 
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="../index.html#products" onclick="closeMobile()">Products</a>
     <a href="../benefits.html" onclick="closeMobile()">Benefits</a>
@@ -229,6 +763,7 @@
     <a href="../index.html#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
   </div>
 
+  <!-- Nav -->
   <nav class="nav" id="nav">
     <a href="../index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
     <ul class="nav-links">
@@ -254,20 +789,28 @@
   <!-- Product Hero -->
   <section class="product-hero">
     <div class="product-hero-atmosphere"></div>
+
     <div class="product-hero-left">
       <p class="product-breadcrumb">
-        <a href="../index.html">Home</a><span>/</span>
-        <a href="../index.html#products">Products</a><span>/</span>
-        Portable Pod
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#products">Products</a>
+        <span>/</span>
+        Barrel Sauna
       </p>
-      <span class="product-badge-chip">Best Value</span>
-      <h1 class="product-hero-name">Portable<br>Pod</h1>
-      <p class="product-hero-tagline">Full-body cold immersion, wherever you are. Lightweight, packable insulated lining — sets up in under 3 minutes. Cold therapy with no compromises.</p>
+
+      <span class="product-badge-chip">Premium</span>
+
+      <h1 class="product-hero-name">Cedar<br>Barrel<br><em>Sauna</em></h1>
+
+      <p class="product-hero-tagline">Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. The perfect heat ritual — alone or paired with cold immersion.</p>
+
       <div class="product-price-block">
         <span class="price-cur">NZ$</span>
-        <span class="price-amount">449</span>
-        <span class="price-note">incl. GST · Free shipping NZ</span>
+        <span class="price-amount">9,899</span>
+        <span class="price-note">incl. GST · Free delivery NZ</span>
       </div>
+
       <div class="product-hero-actions">
         <a href="#order" class="btn-primary">
           Order Now
@@ -275,55 +818,58 @@
         </a>
         <a href="#specs" class="btn-ghost">View Specs</a>
       </div>
+
       <ul class="product-highlights">
-        <li class="highlight-item">Full-body immersion — fits any adult</li>
-        <li class="highlight-item">Sets up in under 3 minutes</li>
-        <li class="highlight-item">Insulated lining holds temperature longer</li>
-        <li class="highlight-item">Folds flat — gym bag, suitcase, travel</li>
-        <li class="highlight-item">Compatible with Frost Chiller for precision</li>
+        <li class="highlight-item">Handcrafted rustic cedar construction</li>
+        <li class="highlight-item">6kW Traditional Finnish Heater + natural stones</li>
+        <li class="highlight-item">Available in 2, 4 & 6-person configurations</li>
+        <li class="highlight-item">Dry or steamy — switch with a ladle of water</li>
+        <li class="highlight-item">2-year manufacturer's warranty</li>
       </ul>
     </div>
+
     <div class="product-hero-right">
-      <div class="product-hero-img-wrap">
-        <img src="https://placehold.co/800x800/0D2A48/5BC8F5?text=Portable+Pod" alt="Portable Cold Immersion Pod">
-      </div>
+      <img class="product-hero-img"
+        src="https://placehold.co/680x680/0D2A48/C4854A?text=Barrel+Sauna"
+        alt="Cedar Barrel Sauna">
     </div>
   </section>
 
   <!-- Features -->
   <section class="features-section">
     <div class="features-inner">
-      <p class="section-label reveal">Why Portable Pod</p>
-      <h2 class="section-heading reveal reveal-d1">Cold therapy,<br><em>anywhere.</em></h2>
-      <p class="section-sub reveal reveal-d2">Designed for athletes and travellers who refuse to let a busy schedule or location compromise their recovery. The Portable Pod goes wherever you go.</p>
+      <p class="section-label reveal">Why Barrel Sauna</p>
+      <h2 class="section-heading reveal reveal-d1">Built for<br><em>deep heat.</em></h2>
+      <p class="section-sub reveal reveal-d2">Every detail — from the grain of the cedar to the placement of the heater — is designed to deliver an authentic Finnish sauna experience in your own backyard.</p>
+
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>
           </div>
-          <h3 class="feature-title">3-Min Setup</h3>
-          <p class="feature-desc">Unroll, unfold, fill. The Portable Pod goes from packed to plunge-ready in under three minutes — no tools, no plumbing, no fuss.</p>
+          <h3 class="feature-title">Finnish Heating</h3>
+          <p class="feature-desc">A 6kW traditional Finnish heater loaded with natural volcanic stones. Reaches temperature in under 45 minutes — authentic sauna heat, not a pale imitation.</p>
         </div>
         <div class="feature-card reveal reveal-d1">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8C8 10 5.9 16.17 3.82 19.54A1 1 0 004.7 21 7 7 0 0012 18a7 7 0 006.88-8.23A7 7 0 0017 8z"/></svg>
           </div>
-          <h3 class="feature-title">Insulated Shell</h3>
-          <p class="feature-desc">Multi-layer insulated lining slows heat gain — reducing the amount of ice or chiller power needed to maintain your target temperature.</p>
+          <h3 class="feature-title">Cedar Construction</h3>
+          <p class="feature-desc">Handcrafted from rustic cedar — naturally aromatic, rot-resistant, and built for NZ's outdoor conditions. Ages beautifully with every session.</p>
         </div>
         <div class="feature-card reveal reveal-d2">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
           </div>
-          <h3 class="feature-title">Full Immersion</h3>
-          <p class="feature-desc">Deep enough for complete shoulder-to-toe immersion. Designed to maximise surface area contact for faster thermal response.</p>
+          <h3 class="feature-title">Dual Climate</h3>
+          <p class="feature-desc">Use it dry for intense penetrating heat, or add water to the stones for a humid steam session. One sauna, two completely different experiences.</p>
         </div>
         <div class="feature-card reveal reveal-d3">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <h3 class="feature-title">Travel-Ready</h3>
-          <p class="feature-desc">Folds flat to roughly the size of a sleeping bag. Includes a carry bag with compression straps — fits in the boot of most cars.</p>
+          <h3 class="feature-title">Multi-Person</h3>
+          <p class="feature-desc">Available in 2, 4, or 6-person configurations — choose the size that fits your space and lifestyle. Contact us for pricing on each configuration.</p>
         </div>
       </div>
     </div>
@@ -334,41 +880,41 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="https://placehold.co/800x600/0C1E35/5BC8F5?text=Pod+Detail" alt="Portable Pod detail">
+          <img src="https://placehold.co/600x450/0D2A48/C4854A?text=Cedar+Detail" alt="Cedar Barrel Sauna interior">
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
-          <h2 class="section-heading reveal reveal-d1">Everything that<br><em>matters.</em></h2>
-          <p class="section-sub reveal reveal-d2">Purpose-built for portability without compromising on the immersion experience that drives real recovery results.</p>
+          <h2 class="section-heading reveal reveal-d1">Crafted to<br>last <em>generations.</em></h2>
+          <p class="section-sub reveal reveal-d2">Specifications that reflect serious craftsmanship — not flat-pack shortcuts. This is a permanent fixture for your wellness routine.</p>
           <div class="specs-grid reveal reveal-d2">
             <div class="spec-item">
-              <p class="spec-label">Volume</p>
-              <p class="spec-value">380L</p>
-              <p class="spec-note">Full-body capacity</p>
+              <p class="spec-label">Heater</p>
+              <p class="spec-value">6kW</p>
+              <p class="spec-note">Traditional Finnish</p>
             </div>
             <div class="spec-item">
-              <p class="spec-label">Setup</p>
-              <p class="spec-value">&lt;3min</p>
-              <p class="spec-note">No tools required</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Packed Size</p>
-              <p class="spec-value">45×30cm</p>
-              <p class="spec-note">With carry bag</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Weight</p>
-              <p class="spec-value">4.2kg</p>
-              <p class="spec-note">Including carry bag</p>
+              <p class="spec-label">Capacity</p>
+              <p class="spec-value">2–6 pax</p>
+              <p class="spec-note">3 configurations</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Material</p>
-              <p class="spec-value">TPU</p>
-              <p class="spec-note">Multi-layer insulated</p>
+              <p class="spec-value">Cedar</p>
+              <p class="spec-note">Rustic cedar wood</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Max Temp</p>
+              <p class="spec-value">~90°C</p>
+              <p class="spec-note">Authentic sauna heat</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Heat-Up</p>
+              <p class="spec-value">~45min</p>
+              <p class="spec-note">To full temperature</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Warranty</p>
-              <p class="spec-value">1 Yr</p>
+              <p class="spec-value">2 Yrs</p>
               <p class="spec-note">Full manufacturer cover</p>
             </div>
           </div>
@@ -377,28 +923,43 @@
     </div>
   </section>
 
-  <!-- Use Cases -->
-  <section class="use-section">
-    <div class="use-inner">
-      <p class="section-label reveal">Where It Goes</p>
-      <h2 class="section-heading reveal reveal-d1">Built for<br><em>everywhere.</em></h2>
-      <p class="section-sub reveal reveal-d2">The Portable Pod removes every excuse. Wherever your performance takes you, your recovery comes too.</p>
-      <div class="use-grid">
-        <div class="use-card reveal">
-          <p class="use-num">01</p>
-          <h3 class="use-title">At Home</h3>
-          <p class="use-desc">Set up in the bathroom, backyard, or garage. Fill, add ice or connect the Frost Chiller, and you're in. Store it in a cupboard between sessions.</p>
+  <!-- What's Included -->
+  <section class="includes-section">
+    <div class="includes-inner">
+      <p class="section-label reveal">In the Box</p>
+      <h2 class="section-heading reveal reveal-d1">Everything you<br><em>need, nothing you don't.</em></h2>
+      <div class="includes-grid">
+        <div class="include-card reveal">
+          <span class="include-num">01</span>
+          <h3 class="include-title">Cedar Barrel Unit</h3>
+          <p class="include-desc">Handcrafted cedar barrel in your chosen configuration (2, 4, or 6 person), fully assembled and ready for placement.</p>
         </div>
-        <div class="use-card reveal reveal-d1">
-          <p class="use-num">02</p>
-          <h3 class="use-title">At the Gym</h3>
-          <p class="use-desc">Take it to training sessions or competitions. Fits in a sports bag — set up poolside, on the field, or in the changing room within minutes.</p>
+        <div class="include-card reveal reveal-d1">
+          <span class="include-num">02</span>
+          <h3 class="include-title">6kW Finnish Heater</h3>
+          <p class="include-desc">Traditional Finnish heater pre-loaded with natural volcanic sauna stones. Ready to heat on day one.</p>
         </div>
-        <div class="use-card reveal reveal-d2">
-          <p class="use-num">03</p>
-          <h3 class="use-title">On the Road</h3>
-          <p class="use-desc">Hotels, Airbnbs, campsites. Anywhere with a tap and a drain works. The pod holds its shape and temperature — your ritual doesn't stop because you're travelling.</p>
+        <div class="include-card reveal reveal-d2">
+          <span class="include-num">03</span>
+          <h3 class="include-title">Accessories & Guide</h3>
+          <p class="include-desc">Sauna ladle, bucket, and thermometer included. Full setup guide and care instructions for your cedar sauna.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contrast CTA Banner -->
+  <section class="contrast-banner">
+    <div class="contrast-inner reveal">
+      <div class="contrast-text">
+        <h3>Complete the contrast.<br>Heat up, then <em>get cold.</em></h3>
+        <p>Contrast therapy — alternating between sauna heat and cold immersion — is one of the most powerful recovery protocols available. Pair your Barrel Sauna with an Ice Bath NZ for the full ritual.</p>
+      </div>
+      <div class="contrast-action">
+        <a href="ice-bath-nz.html" class="btn-ice">
+          View Ice Bath
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -413,14 +974,14 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       </div>
-      <p class="testimonial-quote">"I was sceptical at first. Now it's non-negotiable. The mental clarity and energy after a cold plunge is unlike anything I've ever tried."</p>
+      <p class="testimonial-quote">"We use the sauna and ice bath back-to-back every morning. The cedar quality is beautiful and the Finnish heater gets it to temperature faster than I expected. Completely transformed our home wellness routine."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">
-          <img src="https://placehold.co/80x80/122645/5BC8F5?text=SM" alt="Sarah M.">
+          <img src="https://placehold.co/80x80/122645/E8832A?text=SR" alt="Sarah R.">
         </div>
         <div>
-          <p class="testimonial-name">Sarah M.</p>
-          <p class="testimonial-role">Wellness Coach, Auckland</p>
+          <p class="testimonial-name">Sarah R.</p>
+          <p class="testimonial-role">CrossFit Coach, Wellington</p>
         </div>
       </div>
     </div>
@@ -429,13 +990,13 @@
   <!-- Order CTA -->
   <section class="order-cta" id="order">
     <div class="order-cta-inner">
-      <p class="order-cta-label">Sauna</p>
-      <p class="order-cta-price">NZ$449</p>
-      <h2 class="order-cta-heading">Your ritual,<br>everywhere.</h2>
-      <p class="order-cta-sub">Free delivery across New Zealand. Ready to use from day one. 1-year warranty from date of purchase.</p>
+      <p class="order-cta-label">Cedar Barrel Sauna</p>
+      <p class="order-cta-price">NZ$9,899</p>
+      <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
+      <p class="order-cta-sub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
       <div class="order-actions">
         <a href="#" class="btn-primary">
-          Add to Cart
+          Order Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="../contact.html" class="btn-ghost">Ask a Question</a>
@@ -443,11 +1004,11 @@
       <div class="order-trust">
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          1-Year Warranty
+          2-Year Warranty
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Free NZ Shipping
+          Free NZ Delivery
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
@@ -457,38 +1018,38 @@
     </div>
   </section>
 
-  <!-- Related -->
+  <!-- Related Products -->
   <section class="related-section">
     <div class="related-inner">
       <p class="section-label reveal">Complete Your Setup</p>
       <h2 class="section-heading reveal reveal-d1">You might also<br><em>need these.</em></h2>
       <div class="related-grid">
-        <a href="ice-bath-chiller.html" class="related-card reveal">
+        <a href="ice-bath-nz.html" class="related-card reveal">
           <div class="related-img">
-            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Frost+Chiller" alt="Frost Chiller">
-          </div>
-          <div class="related-body">
-            <div>
-              <p class="related-name">Chiller</p>
-              <p class="related-desc">Pair the Pod with our precision chiller for accurate, consistent temperatures without ice.</p>
-            </div>
-            <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>899</span>
-              <span class="btn-sm">View →</span>
-            </div>
-          </div>
-        </a>
-        <a href="ice-bath-nz.html" class="related-card reveal reveal-d1">
-          <div class="related-img">
-            <img src="brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Arctic Steel Pro" style="object-fit:contain; background:#0a1e35; padding:1rem;">
+            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Ice+Bath+NZ" alt="Ice Bath NZ">
           </div>
           <div class="related-body">
             <div>
               <p class="related-name">Ice Bath NZ</p>
-              <p class="related-desc">The permanent, premium setup — 304-grade steel tub with integrated Frost Chiller.</p>
+              <p class="related-desc">Galvanised steel ice bath in 4ft or 5ft. The cold half of your contrast therapy routine.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>1,299</span>
+              <span class="related-price"><span class="cur">from NZ$</span>784</span>
+              <span class="btn-sm">View →</span>
+            </div>
+          </div>
+        </a>
+        <a href="ice-bath-chiller.html" class="related-card reveal reveal-d1">
+          <div class="related-img">
+            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Chiller+Unit" alt="Ice Bath Chiller">
+          </div>
+          <div class="related-body">
+            <div>
+              <p class="related-name">Chiller</p>
+              <p class="related-desc">Precision temperature control for your ice bath. Set it to 4°C and forget about ice runs forever.</p>
+            </div>
+            <div class="related-footer">
+              <span class="related-price"><span class="cur">NZ$</span>899</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
@@ -505,9 +1066,15 @@
           <a href="../index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
           <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
           <div class="footer-social">
-            <a href="#" class="social-btn" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#" class="social-btn" aria-label="TikTok"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
-            <a href="#" class="social-btn" aria-label="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
           </div>
         </div>
         <div class="footer-col">
@@ -554,7 +1121,10 @@
 
   <script>
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
@@ -567,8 +1137,11 @@
       mobileMenu.classList.remove('open');
       setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
     }
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+      });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>

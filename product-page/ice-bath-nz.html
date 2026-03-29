@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arctic Steel Pro — The Ice Bath NZ</title>
+  <title>Ice Bath NZ — The Ice Bath NZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -677,6 +677,67 @@
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
+    /* ── Size Selector ─────────────────────────────────── */
+    .size-selector {
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.55s forwards;
+    }
+    .size-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 0.75rem;
+    }
+    .size-options {
+      display: flex; gap: 0.75rem;
+    }
+    .size-option {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition:
+        border-color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .size-option:hover {
+      border-color: var(--border-hi);
+      background: var(--elevated);
+      transform: translateY(-1px);
+    }
+    .size-option:active { transform: translateY(0); }
+    .size-option.active {
+      border-color: var(--ice);
+      background: rgba(91, 200, 245, 0.06);
+    }
+    .size-option:focus-visible {
+      outline: 2px solid var(--ice);
+      outline-offset: 2px;
+    }
+    .size-name {
+      font-family: var(--display);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--snow); line-height: 1;
+      margin-bottom: 0.25rem;
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .size-option.active .size-name { color: var(--ice); }
+    .size-dim {
+      font-size: 0.72rem; color: var(--mist);
+      font-family: var(--body);
+    }
+    .size-price-hint {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--fog); margin-top: 0.4rem;
+      font-family: var(--body);
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .size-option.active .size-price-hint { color: var(--frost); }
+
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -748,19 +809,35 @@
         <span>/</span>
         <a href="../index.html#products">Products</a>
         <span>/</span>
-        Arctic Steel Pro
+        Ice Bath NZ
       </p>
 
       <span class="product-badge-chip">Bestseller</span>
 
-      <h1 class="product-hero-name">Arctic<br>Steel Pro</h1>
+      <h1 class="product-hero-name">Ice Bath<br><em>NZ</em></h1>
 
-      <p class="product-hero-tagline">The flagship cold immersion system — all-steel construction, integrated Frost Chiller, built to outlast decades of daily use.</p>
+      <p class="product-hero-tagline">All-steel construction built for the New Zealand climate. Choose your size, fill it, and get in — no plumbing, no fuss.</p>
+
+      <div class="size-selector">
+        <p class="size-selector-label">Choose Size</p>
+        <div class="size-options">
+          <button class="size-option active" data-size="4ft" onclick="selectSize('4ft')">
+            <span class="size-name">4ft</span>
+            <span class="size-dim">1200 × 600 × 600mm</span>
+            <span class="size-price-hint">NZ$784</span>
+          </button>
+          <button class="size-option" data-size="5ft" onclick="selectSize('5ft')">
+            <span class="size-name">5ft</span>
+            <span class="size-dim">1500 × 600 × 600mm</span>
+            <span class="size-price-hint">NZ$888</span>
+          </button>
+        </div>
+      </div>
 
       <div class="product-price-block">
         <span class="price-cur">NZ$</span>
-        <span class="price-amount">1,299</span>
-        <span class="price-note">incl. GST · Free shipping NZ</span>
+        <span class="price-amount" id="priceAmount">784</span>
+        <span class="price-note" id="priceNote">incl. GST · Free shipping NZ</span>
       </div>
 
       <div class="product-hero-actions">
@@ -771,50 +848,50 @@
         <a href="#specs" class="btn-ghost">View Specs</a>
       </div>
 
-      <ul class="product-highlights">
-        <li class="highlight-item">450L capacity — full-body immersion</li>
-        <li class="highlight-item">Holds 4°C for 72+ hours without power</li>
-        <li class="highlight-item">Integrated Frost Chiller, cools in 45 min</li>
-        <li class="highlight-item">304-grade stainless — no rust, no flex</li>
+      <ul class="product-highlights" id="highlightsList">
+        <li class="highlight-item" id="hlCapacity">~350L capacity — full-body immersion</li>
+        <li class="highlight-item">Galvanised steel — built for NZ outdoors</li>
+        <li class="highlight-item">20mm side drain plug for easy empty</li>
+        <li class="highlight-item">Compatible with our Chiller unit</li>
         <li class="highlight-item">2-year manufacturer's warranty</li>
       </ul>
     </div>
 
     <div class="product-hero-right">
       <img class="product-hero-img"
-        src="brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png"
-        alt="Arctic Steel Pro tub with integrated Frost Chiller">
+        src="../brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png"
+        alt="Ice Bath NZ tub">
     </div>
   </section>
 
   <!-- Features -->
   <section class="features-section">
     <div class="features-inner">
-      <p class="section-label reveal">Why Arctic Steel Pro</p>
+      <p class="section-label reveal">Why Ice Bath NZ</p>
       <h2 class="section-heading reveal reveal-d1">Engineered for<br><em>serious cold.</em></h2>
-      <p class="section-sub reveal reveal-d2">Every detail — from the gauge of the steel to the insulation thickness — is optimised for athletes and coaches who treat cold immersion as a non-negotiable daily ritual.</p>
+      <p class="section-sub reveal reveal-d2">Every detail — from the gauge of the steel to the drain placement — is built for New Zealand conditions. Get in, get cold, recover faster.</p>
 
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>
           </div>
-          <h3 class="feature-title">Precise Temperature</h3>
-          <p class="feature-desc">The integrated Frost Chiller maintains any target from 2°C to 35°C. Set it once — the system handles the rest, 24/7.</p>
+          <h3 class="feature-title">Chiller-Ready</h3>
+          <p class="feature-desc">Designed to pair directly with our Chiller unit — achieve and hold any target temperature from 2°C to 35°C without ice runs.</p>
         </div>
         <div class="feature-card reveal reveal-d1">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
           </div>
-          <h3 class="feature-title">72-Hour Hold</h3>
-          <p class="feature-desc">Triple-wall insulation retains temperature for up to 72 hours without power — ideal for remote use, off-grid properties, and travel.</p>
+          <h3 class="feature-title">Outdoor-Ready</h3>
+          <p class="feature-desc">Galvanised steel construction handles NZ's weather year-round — leave it on the deck, in the shed, or by the pool without a second thought.</p>
         </div>
         <div class="feature-card reveal reveal-d2">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
           </div>
-          <h3 class="feature-title">304-Grade Steel</h3>
-          <p class="feature-desc">Commercial-grade stainless steel — the same used in medical and hospitality environments. No rust, no flexing, no chemical liners.</p>
+          <h3 class="feature-title">Steel Construction</h3>
+          <p class="feature-desc">Galvanised steel built for durability — no flex, no soft spots, no plastic liners. Cleans easily and holds its shape session after session.</p>
         </div>
         <div class="feature-card reveal reveal-d3">
           <div class="feature-icon">
@@ -832,7 +909,7 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Arctic Steel Pro detail">
+          <img src="../brand%20assets/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Arctic Steel Pro detail">
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -840,29 +917,29 @@
           <p class="section-sub reveal reveal-d2">Every specification is chosen for durability and performance — not cost-cutting. This is infrastructure for your daily ritual.</p>
           <div class="specs-grid reveal reveal-d2">
             <div class="spec-item">
+              <p class="spec-label">Length</p>
+              <p class="spec-value" id="specLength">1200mm</p>
+              <p class="spec-note">Interior dimension</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Width</p>
+              <p class="spec-value">600mm</p>
+              <p class="spec-note">Interior dimension</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Height</p>
+              <p class="spec-value">600mm</p>
+              <p class="spec-note">Interior dimension</p>
+            </div>
+            <div class="spec-item">
               <p class="spec-label">Capacity</p>
-              <p class="spec-value">450L</p>
+              <p class="spec-value" id="specCapacity">~350L</p>
               <p class="spec-note">Full-body immersion</p>
             </div>
             <div class="spec-item">
-              <p class="spec-label">Temp Range</p>
-              <p class="spec-value">2–35°C</p>
-              <p class="spec-note">Precision ±0.5°C</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Insulation</p>
-              <p class="spec-value">72hr</p>
-              <p class="spec-note">Triple-wall hold</p>
-            </div>
-            <div class="spec-item">
               <p class="spec-label">Material</p>
-              <p class="spec-value">304SS</p>
-              <p class="spec-note">Grade stainless steel</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Chiller Power</p>
-              <p class="spec-value">650W</p>
-              <p class="spec-note">Energy-efficient compressor</p>
+              <p class="spec-value">GalvSteel</p>
+              <p class="spec-note">Galvanised for outdoors</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Warranty</p>
@@ -883,18 +960,18 @@
       <div class="includes-grid">
         <div class="include-card reveal">
           <span class="include-num">01</span>
-          <h3 class="include-title">Arctic Steel Pro Tub</h3>
-          <p class="include-desc">450L 304-grade stainless steel tub with triple-wall insulation. Pre-assembled, ready to fill.</p>
+          <h3 class="include-title">Ice Bath Tub</h3>
+          <p class="include-desc">Galvanised steel tub in your chosen size (4ft or 5ft), pre-assembled and ready to fill straight from the box.</p>
         </div>
         <div class="include-card reveal reveal-d1">
           <span class="include-num">02</span>
-          <h3 class="include-title">Frost Chiller Unit</h3>
-          <p class="include-desc">Integrated precision chiller with digital display and app connectivity. Pre-connected to the tub.</p>
+          <h3 class="include-title">Drain Plug</h3>
+          <p class="include-desc">20mm thread drain plug fitted to the side of the tub for easy draining — no tools, no mess, no fuss.</p>
         </div>
         <div class="include-card reveal reveal-d2">
           <span class="include-num">03</span>
-          <h3 class="include-title">Cover & Accessories</h3>
-          <p class="include-desc">Insulated cover to maintain temperature between sessions, plus installation guide and welcome pack.</p>
+          <h3 class="include-title">Setup Guide</h3>
+          <p class="include-desc">Quick-start guide with placement tips, care instructions, and how to pair with our Chiller for temperature control.</p>
         </div>
       </div>
     </div>
@@ -910,7 +987,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       </div>
-      <p class="testimonial-quote">"The Arctic Steel Pro completely transformed my training. Recovery that used to take two days now takes hours. Every serious athlete in NZ needs one of these."</p>
+      <p class="testimonial-quote">"The Ice Bath NZ completely transformed my training. Recovery that used to take two days now takes hours. Every serious athlete in NZ needs one of these."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">
           <img src="https://placehold.co/80x80/122645/5BC8F5?text=JK" alt="James K.">
@@ -926,8 +1003,8 @@
   <!-- Order CTA -->
   <section class="order-cta" id="order">
     <div class="order-cta-inner">
-      <p class="order-cta-label">Ice Bath NZ</p>
-      <p class="order-cta-price">NZ$1,299</p>
+      <p class="order-cta-label" id="ctaSizeLabel">Ice Bath NZ — 4ft</p>
+      <p class="order-cta-price" id="ctaPrice">NZ$784</p>
       <h2 class="order-cta-heading">Ready to commit<br>to the cold?</h2>
       <p class="order-cta-sub">Free delivery across New Zealand. Installation support included. 2-year warranty from date of purchase.</p>
       <div class="order-actions">
@@ -962,7 +1039,7 @@
       <div class="related-grid">
         <a href="ice-bath-chiller.html" class="related-card reveal">
           <div class="related-img">
-            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Frost+Chiller" alt="Frost Chiller">
+            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Chiller+Unit" alt="Chiller Unit">
           </div>
           <div class="related-body">
             <div>
@@ -977,12 +1054,12 @@
         </a>
         <a href="barrel-sauna.html" class="related-card reveal reveal-d1">
           <div class="related-img">
-            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Portable+Pod" alt="Portable Pod">
+            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Sauna" alt="Sauna">
           </div>
           <div class="related-body">
             <div>
               <p class="related-name">Sauna</p>
-              <p class="related-desc">Full-body immersion anywhere. Sets up in under 3 minutes — travel, gym, anywhere.</p>
+              <p class="related-desc">The perfect contrast therapy pairing. Heat up, then get cold — the classic recovery combo.</p>
             </div>
             <div class="related-footer">
               <span class="related-price"><span class="cur">NZ$</span>449</span>
@@ -1072,6 +1149,40 @@
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
       setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+
+    const sizeData = {
+      '4ft': {
+        price: '784', ctaLabel: 'Ice Bath NZ — 4ft', ctaPrice: 'NZ$784',
+        capacity: '~350L', length: '1200mm',
+        hlCapacity: '~350L capacity — full-body immersion',
+      },
+      '5ft': {
+        price: '888', ctaLabel: 'Ice Bath NZ — 5ft', ctaPrice: 'NZ$888',
+        capacity: '~450L', length: '1500mm',
+        hlCapacity: '~450L capacity — full-body immersion',
+      }
+    };
+
+    function selectSize(size) {
+      const d = sizeData[size];
+      document.querySelectorAll('.size-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.size === size);
+      });
+      const pa = document.getElementById('priceAmount');
+      pa.style.opacity = '0';
+      pa.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        pa.textContent = d.price;
+        pa.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        pa.style.opacity = '1';
+        pa.style.transform = 'translateY(0)';
+      }, 120);
+      document.getElementById('specCapacity').textContent = d.capacity;
+      document.getElementById('specLength').textContent = d.length;
+      document.getElementById('ctaPrice').textContent = d.ctaPrice;
+      document.getElementById('ctaSizeLabel').textContent = d.ctaLabel;
+      document.getElementById('hlCapacity').textContent = d.hlCapacity;
     }
 
     const observer = new IntersectionObserver((entries) => {
