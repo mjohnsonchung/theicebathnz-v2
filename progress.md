@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-03-30
+Last updated: 2026-03-31
 
 ---
 
@@ -13,8 +13,8 @@ Last updated: 2026-03-30
 - All old product slugs redirect to new canonical slugs via `vercel.json` redirects
 
 ### Products (3 only)
-- **Ice Bath NZ** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector
-- **Chiller** → `product-page/ice-bath-chiller.html`
+- **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
+- **Chiller / Premium Chiller** → `product-page/ice-bath-chiller.html` — model selector with live price switching
 - **Barrel Sauna** → `product-page/barrel-sauna.html` — $9,899, 6kW Finnish heater, cedar construction
 
 ### Design System
@@ -41,14 +41,15 @@ Last updated: 2026-03-30
 ├── contact.html
 ├── faq.html
 ├── vercel.json             — Redirects + clean URLs
+├── sitemap.xml             — XML sitemap (all 8 pages)
 ├── .gitignore
 ├── serve.mjs               — Local dev server (port 3000)
 ├── screenshot.mjs          — Puppeteer screenshot tool
 ├── brand assets/           — Logo, product images
 │   └── bath tub & chiller no bg.png
 └── product-page/
-    ├── ice-bath-nz.html    — Ice bath (4ft / 5ft size selector)
-    ├── ice-bath-chiller.html
+    ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
+    ├── ice-bath-chiller.html — Chiller / Premium Chiller model selector
     └── barrel-sauna.html
 ```
 
@@ -68,10 +69,17 @@ Last updated: 2026-03-30
 - [x] Updated all homepage product card prices (Ice Bath from NZ$784, Chiller NZ$2,712, Sauna NZ$9,899)
 - [x] Updated chiller page standalone price ($899 → $2,712)
 - [x] Updated chiller related card on ice bath page ($899 → $2,712)
+- [x] Renamed product "Ice Bath NZ" → "Ice Bath" across all instances on ice-bath-nz.html
+- [x] Added Chiller / Premium Chiller model selector to ice-bath-chiller.html (NZ$2,712 / NZ$3,612)
+- [x] Fixed sauna page chiller related card price ($899 → $2,712)
+- [x] Removed team section from about-us.html; added border-top to CTA for visual separation
+- [x] Updated copyright year © 2026 → © 2021 across all 8 pages
+- [x] Generated sitemap.xml with all 8 URLs
+- [x] Fixed infinite redirect loop on barrel-sauna Vercel URL (self-referencing vercel.json rule removed)
+- [x] Removed stale "Portable Pod" references from ice-bath-chiller.html related cards
 
 ### Pending
 - [ ] Replace placeholder images on chiller and sauna pages with real photography
-- [ ] Commit + push latest changes
 
 ---
 
