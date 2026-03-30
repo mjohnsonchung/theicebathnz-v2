@@ -319,46 +319,11 @@
       text-transform: uppercase; color: var(--mist);
     }
 
-    /* ── Team Section ────────────────────────────────── */
-    .team-section {
-      padding: 8rem 2.5rem;
-      background: var(--deep); border-top: 1px solid var(--border);
-    }
-    .team-inner { max-width: 1440px; margin: 0 auto; }
-    .team-header { margin-bottom: 4.5rem; }
-    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .team-card {
-      padding: 2.75rem 2rem; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 4px;
-      transition: background 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
-    }
-    .team-card:hover {
-      background: var(--elevated); transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    }
-    .team-avatar {
-      width: 4rem; height: 4rem; border-radius: 50%;
-      background: var(--elevated); border: 1px solid var(--border);
-      margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;
-    }
-    .team-avatar-initials {
-      font-family: var(--display); font-size: 1.25rem;
-      color: var(--mist); font-style: italic;
-    }
-    .team-name {
-      font-family: var(--display); font-size: 1.4rem; font-weight: 400;
-      color: var(--snow); margin-bottom: 0.4rem;
-    }
-    .team-role {
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--ice); margin-bottom: 1.1rem;
-    }
-    .team-bio { font-size: 0.87rem; line-height: 1.68; color: var(--mist); }
-
     /* ── CTA Section ─────────────────────────────────── */
     .about-cta {
       padding: 11rem 2.5rem; text-align: center;
       position: relative; overflow: hidden;
+      border-top: 1px solid var(--border);
     }
     .about-cta-atmo {
       position: absolute; inset: 0;
@@ -407,14 +372,12 @@
       .story-row.reverse .story-text { order: 1; }
       .story-row.reverse .story-visual { order: 2; }
       .story-body { max-width: 100%; }
-      .team-grid { grid-template-columns: 1fr 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
       .about-hero-left { padding: 8rem 1.5rem 4rem; }
-      .team-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
@@ -593,43 +556,6 @@
     </div>
   </section>
 
-  <!-- Team -->
-  <section class="team-section">
-    <div class="team-inner">
-      <div class="team-header">
-        <span class="section-label reveal">The team</span>
-        <h2 class="section-heading reveal reveal-d1">Small team.<br><em>Big standards.</em></h2>
-        <p class="section-sub reveal reveal-d2">A tight-knit crew based in Auckland. Everyone on the team uses an ice bath daily — that's not a coincidence, it's a hiring requirement.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card reveal">
-          <div class="team-avatar"><span class="team-avatar-initials">JM</span></div>
-          <p class="team-name">James Mitchell</p>
-          <p class="team-role">Co-Founder & CEO</p>
-          <p class="team-bio">Former competitive swimmer. Built the first prototype in his garage in Ponsonby. Still tests every batch personally.</p>
-        </div>
-        <div class="team-card reveal reveal-d1">
-          <div class="team-avatar"><span class="team-avatar-initials">SR</span></div>
-          <p class="team-name">Sarah Rowe</p>
-          <p class="team-role">Co-Founder & Product</p>
-          <p class="team-bio">Materials engineer by training, cold therapy advocate by choice. Responsible for the triple-wall insulation specification.</p>
-        </div>
-        <div class="team-card reveal reveal-d2">
-          <div class="team-avatar"><span class="team-avatar-initials">TK</span></div>
-          <p class="team-name">Tom Keane</p>
-          <p class="team-role">Head of Operations</p>
-          <p class="team-bio">Runs fulfilment, logistics, and support. CrossFit athlete and daily cold immersion practitioner. If your delivery is early, it's Tom.</p>
-        </div>
-        <div class="team-card reveal reveal-d3">
-          <div class="team-avatar"><span class="team-avatar-initials">AP</span></div>
-          <p class="team-name">Aroha Parata</p>
-          <p class="team-role">Customer Success</p>
-          <p class="team-bio">Former physio, now our go-to for cold therapy protocols and questions. Knows more about recovery science than most researchers.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="about-cta">
     <div class="about-cta-atmo"></div>
@@ -698,7 +624,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
         <div class="footer-legal">
           <a href="https://www.theicebathnz.co.nz/privacy-policy">Privacy Policy</a>
           <a href="https://www.theicebathnz.co.nz/terms-of-service">Terms of Service</a>
