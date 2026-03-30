@@ -257,6 +257,52 @@
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Variant Selector ───────────────────────────────── */
+    .variant-selector {
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.55s forwards;
+    }
+    .variant-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 0.75rem;
+    }
+    .variant-options { display: flex; gap: 0.75rem; }
+    .variant-option {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition:
+        border-color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .variant-option:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
+    .variant-option:active { transform: translateY(0); }
+    .variant-option.active { border-color: var(--ice); background: rgba(91,200,245,0.06); }
+    .variant-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+    .variant-name {
+      font-family: var(--display);
+      font-size: 1.25rem; font-weight: 300;
+      color: var(--snow); line-height: 1;
+      margin-bottom: 0.25rem;
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .variant-option.active .variant-name { color: var(--ice); }
+    .variant-sub { font-size: 0.72rem; color: var(--mist); font-family: var(--body); }
+    .variant-price-hint {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--fog); margin-top: 0.4rem;
+      font-family: var(--body);
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .variant-option.active .variant-price-hint { color: var(--frost); }
   </style>
 </head>
 <body>
@@ -305,9 +351,26 @@
       <span class="product-badge-chip">New Arrival</span>
       <h1 class="product-hero-name">Frost<br>Chiller</h1>
       <p class="product-hero-tagline">Precision water chiller with digital temperature control — cools any tub to 4°C in under 45 minutes. Compatible with any setup.</p>
+
+      <div class="variant-selector">
+        <p class="variant-selector-label">Choose Model</p>
+        <div class="variant-options">
+          <button class="variant-option active" data-variant="chiller" onclick="selectVariant('chiller')">
+            <span class="variant-name">Chiller</span>
+            <span class="variant-sub">Standard model</span>
+            <span class="variant-price-hint">NZ$2,712</span>
+          </button>
+          <button class="variant-option" data-variant="premium" onclick="selectVariant('premium')">
+            <span class="variant-name">Premium</span>
+            <span class="variant-sub">Enhanced performance</span>
+            <span class="variant-price-hint">NZ$3,612</span>
+          </button>
+        </div>
+      </div>
+
       <div class="product-price-block">
         <span class="price-cur">NZ$</span>
-        <span class="price-amount">2,712</span>
+        <span class="price-amount" id="heroPrice">2,712</span>
         <span class="price-note">incl. GST · Free shipping NZ</span>
       </div>
       <div class="product-hero-actions">
@@ -477,8 +540,8 @@
   <!-- Order CTA -->
   <section class="order-cta" id="order">
     <div class="order-cta-inner">
-      <p class="order-cta-label">Chiller</p>
-      <p class="order-cta-price">NZ$2,712</p>
+      <p class="order-cta-label" id="ctaLabel">Chiller</p>
+      <p class="order-cta-price" id="ctaPrice">NZ$2,712</p>
       <h2 class="order-cta-heading">Upgrade your<br>cold ritual.</h2>
       <p class="order-cta-sub">Free delivery across New Zealand. Compatible with any tub. 2-year warranty from date of purchase.</p>
       <div class="order-actions">
@@ -619,6 +682,23 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const variantData = {
+      'chiller':  { label: 'Chiller',          price: '2,712' },
+      'premium':  { label: 'Premium Chiller',   price: '3,612' }
+    };
+    let currentVariant = 'chiller';
+
+    function selectVariant(v) {
+      currentVariant = v;
+      document.querySelectorAll('.variant-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.variant === v);
+      });
+      const d = variantData[v];
+      document.getElementById('heroPrice').textContent = d.price;
+      document.getElementById('ctaLabel').textContent = d.label;
+      document.getElementById('ctaPrice').textContent = 'NZ$' + d.price;
+    }
   </script>
 </body>
 </html>
