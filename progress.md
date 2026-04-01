@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-03-30
+Last updated: 2026-04-01 (session 2)
 
 ---
 
@@ -87,8 +87,19 @@ Last updated: 2026-03-30
 - [x] Square Sauna photos wired up from brand assets/Square Sauna/
 - [x] Fixed broken ice bath image paths — images are in brand assets/Ice Bath/ subfolder; updated across index.html, ice-bath-nz.html, ice-bath-chiller.html
 
+- [x] Replaced hello@theicebathnz.co.nz → info@theicebathnz.co.nz across all 8 files (10 occurrences)
+- [x] Updated phone number to +64 212103737 on contact page
+- [x] Wired up Formspree contact form (ID: xaqlbwrz, endpoint: formspree.io/f/xaqlbwrz) using @formspree/ajax CDN — field-level errors, aria-invalid styling, success state
+- [x] Homepage heading: "serious cold" now has the italic/blue em styling (was "Ice Bath")
+- [x] Homepage body copy updated: G90 galvanised steel, 4ft/5ft sizes, 3°C chiller spec (replaced 304-grade stainless)
+- [x] Homepage spec tiles updated: Capacity 350–500L, Cools To 3°C, Motor 1HP, Steel G90 Galv.
+- [x] ice-bath-nz.html: 5ft capacity corrected ~450L → ~500L (JS data + highlight text)
+- [x] ice-bath-nz.html: chiller feature card temp updated "from 2°C to 35°C" → "down to 3°C"
+- [x] ice-bath-chiller.html (standard): tagline, highlights, feature cards, and spec tiles all updated to match official spec sheet — 3°C min, 1HP motor, UV + particle filtration, -10°C outdoor rated, self-priming pump
+
 ### Pending
 - [ ] Mobile polish pass for each page
+
 ---
 
 ## Prices
