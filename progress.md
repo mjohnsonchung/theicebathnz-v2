@@ -86,6 +86,7 @@ Last updated: 2026-04-01 (session 2)
 - [x] Real barrel sauna photos wired up (IMG_5375.jpg hero, IMG_5378.JPG specs)
 - [x] Square Sauna photos wired up from brand assets/Square Sauna/
 - [x] Fixed broken ice bath image paths — images are in brand assets/Ice Bath/ subfolder; updated across index.html, ice-bath-nz.html, ice-bath-chiller.html
+- [x] Wired Stripe Payment Links into all 3 product pages — direct to checkout (no cart): 6 combos on ice-bath-nz (size × chiller), 2 variants on chiller page, 2 variants on sauna page
 
 - [x] Replaced hello@theicebathnz.co.nz → info@theicebathnz.co.nz across all 8 files (10 occurrences)
 - [x] Updated phone number to +64 212103737 on contact page
@@ -105,7 +106,6 @@ Last updated: 2026-04-01 (session 2)
 ### Pending
 - [ ] Mobile polish pass for each page
 - [ ] photos throughout entire website
-- [ ] product buy button wireup with stripe (direct to checkout — no cart)
 
 ---
 

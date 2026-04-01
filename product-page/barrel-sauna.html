@@ -1049,7 +1049,7 @@
       <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
       <p class="order-cta-sub" id="ctaSub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
       <div class="order-actions">
-        <a href="#" class="btn-primary">
+        <a id="buyBtn" href="https://buy.stripe.com/eVq28t7eVbiR3Bs4PF2oE08" class="btn-primary" target="_blank" rel="noopener">
           Order Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1258,7 +1258,8 @@
         ],
         ctaLabel: 'Cedar Barrel Sauna',
         ctaPrice: 'NZ$9,899',
-        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.'
+        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.',
+        stripeUrl: 'https://buy.stripe.com/eVq28t7eVbiR3Bs4PF2oE08'
       },
       square: {
         title:         'Square Sauna — The Ice Bath NZ',
@@ -1307,7 +1308,8 @@
         ],
         ctaLabel: 'Square Sauna',
         ctaPrice: 'NZ$9,999',
-        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase.'
+        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase.',
+        stripeUrl: 'https://buy.stripe.com/fZu5kF7eV9aJ4Fw2Hx2oE09'
       }
     };
 
@@ -1385,6 +1387,7 @@
       document.getElementById('ctaLabel').textContent = d.ctaLabel;
       document.getElementById('ctaPrice').textContent = d.ctaPrice;
       document.getElementById('ctaSub').textContent = d.ctaSub;
+      document.getElementById('buyBtn').href = d.stripeUrl;
     }
   </script>
 </body>
