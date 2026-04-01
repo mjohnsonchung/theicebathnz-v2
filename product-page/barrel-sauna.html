@@ -724,6 +724,49 @@
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
+    /* ── Variant Selector ──────────────────────────────── */
+    .variant-selector {
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.25s forwards;
+    }
+    .variant-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 0.85rem;
+    }
+    .variant-options { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .variant-option {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      padding: 0.85rem 1.25rem;
+      text-align: left; cursor: pointer;
+      transition:
+        border-color 0.25s var(--ease-smooth),
+        background 0.25s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+    }
+    .variant-option:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
+    .variant-option:active { transform: translateY(0); }
+    .variant-option.active { border-color: var(--ember); background: rgba(232,131,42,0.06); }
+    .variant-option:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+    .variant-name {
+      display: block;
+      font-family: var(--display);
+      font-size: 1rem; font-weight: 400;
+      color: var(--snow); letter-spacing: -0.01em;
+      margin-bottom: 0.2rem;
+    }
+    .variant-option.active .variant-name { color: var(--ember); }
+    .variant-sub { font-size: 0.72rem; color: var(--mist); font-family: var(--body); display: block; }
+    .variant-price-hint {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--fog); margin-top: 0.4rem;
+    }
+    .variant-option.active .variant-price-hint { color: var(--wood); }
+
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -796,19 +839,36 @@
         <span>/</span>
         <a href="../index.html#products">Products</a>
         <span>/</span>
-        Barrel Sauna
+        <span id="breadcrumbProduct">Cedar Barrel Sauna</span>
       </p>
 
-      <span class="product-badge-chip">Premium</span>
+      <!-- Variant Selector -->
+      <div class="variant-selector">
+        <p class="variant-selector-label">Choose Model</p>
+        <div class="variant-options">
+          <button class="variant-option active" data-variant="barrel" onclick="selectVariant('barrel')">
+            <span class="variant-name">Barrel Sauna</span>
+            <span class="variant-sub">Cedar · Round</span>
+            <span class="variant-price-hint">NZ$9,899</span>
+          </button>
+          <button class="variant-option" data-variant="square" onclick="selectVariant('square')">
+            <span class="variant-name">Square Sauna</span>
+            <span class="variant-sub">Hemlock · Stadium seating</span>
+            <span class="variant-price-hint">NZ$9,999</span>
+          </button>
+        </div>
+      </div>
 
-      <h1 class="product-hero-name">Cedar<br>Barrel<br><em>Sauna</em></h1>
+      <span class="product-badge-chip" id="heroBadge">Premium</span>
 
-      <p class="product-hero-tagline">Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. The perfect heat ritual — alone or paired with cold immersion.</p>
+      <h1 class="product-hero-name" id="heroName">Cedar<br>Barrel<br><em>Sauna</em></h1>
+
+      <p class="product-hero-tagline" id="heroTagline">Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. The perfect heat ritual — alone or paired with cold immersion.</p>
 
       <div class="product-price-block">
-        <span class="price-cur">NZ$</span>
-        <span class="price-amount">9,899</span>
-        <span class="price-note">incl. GST · Free delivery NZ</span>
+        <span class="price-cur" id="heroPriceCur">NZ$</span>
+        <span class="price-amount" id="heroPrice">9,899</span>
+        <span class="price-note" id="heroPriceNote">incl. GST · Free delivery NZ</span>
       </div>
 
       <div class="product-hero-actions">
@@ -819,7 +879,7 @@
         <a href="#specs" class="btn-ghost">View Specs</a>
       </div>
 
-      <ul class="product-highlights">
+      <ul class="product-highlights" id="heroHighlights">
         <li class="highlight-item">Handcrafted rustic cedar construction</li>
         <li class="highlight-item">6kW Traditional Finnish Heater + natural stones</li>
         <li class="highlight-item">Available in 2, 4 & 6-person configurations</li>
@@ -829,8 +889,8 @@
     </div>
 
     <div class="product-hero-right">
-      <img class="product-hero-img"
-        src="https://placehold.co/680x680/0D2A48/C4854A?text=Barrel+Sauna"
+      <img class="product-hero-img" id="heroImg"
+        src="../brand assets/Barrel Sauna/IMG_5375.jpg"
         alt="Cedar Barrel Sauna">
     </div>
   </section>
@@ -838,11 +898,11 @@
   <!-- Features -->
   <section class="features-section">
     <div class="features-inner">
-      <p class="section-label reveal">Why Barrel Sauna</p>
-      <h2 class="section-heading reveal reveal-d1">Built for<br><em>deep heat.</em></h2>
-      <p class="section-sub reveal reveal-d2">Every detail — from the grain of the cedar to the placement of the heater — is designed to deliver an authentic Finnish sauna experience in your own backyard.</p>
+      <p class="section-label reveal" id="featuresLabel">Why Barrel Sauna</p>
+      <h2 class="section-heading reveal reveal-d1" id="featuresHeading">Built for<br><em>deep heat.</em></h2>
+      <p class="section-sub reveal reveal-d2" id="featuresSub">Every detail — from the grain of the cedar to the placement of the heater — is designed to deliver an authentic Finnish sauna experience in your own backyard.</p>
 
-      <div class="features-grid">
+      <div class="features-grid" id="featuresGrid">
         <div class="feature-card reveal">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>
@@ -880,13 +940,13 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="https://placehold.co/600x450/0D2A48/C4854A?text=Cedar+Detail" alt="Cedar Barrel Sauna interior">
+          <img id="specsImg" src="../brand assets/Barrel Sauna/IMG_5378.JPG" alt="Cedar Barrel Sauna interior">
         </div>
         <div class="specs-content">
-          <p class="section-label reveal">Technical Specifications</p>
-          <h2 class="section-heading reveal reveal-d1">Crafted to<br>last <em>generations.</em></h2>
-          <p class="section-sub reveal reveal-d2">Specifications that reflect serious craftsmanship — not flat-pack shortcuts. This is a permanent fixture for your wellness routine.</p>
-          <div class="specs-grid reveal reveal-d2">
+          <p class="section-label reveal" id="specsLabel">Technical Specifications</p>
+          <h2 class="section-heading reveal reveal-d1" id="specsHeading">Crafted to<br>last <em>generations.</em></h2>
+          <p class="section-sub reveal reveal-d2" id="specsSub">Specifications that reflect serious craftsmanship — not flat-pack shortcuts. This is a permanent fixture for your wellness routine.</p>
+          <div class="specs-grid reveal reveal-d2" id="specsGrid">
             <div class="spec-item">
               <p class="spec-label">Heater</p>
               <p class="spec-value">6kW</p>
@@ -928,7 +988,7 @@
     <div class="includes-inner">
       <p class="section-label reveal">In the Box</p>
       <h2 class="section-heading reveal reveal-d1">Everything you<br><em>need, nothing you don't.</em></h2>
-      <div class="includes-grid">
+      <div class="includes-grid" id="includesGrid">
         <div class="include-card reveal">
           <span class="include-num">01</span>
           <h3 class="include-title">Cedar Barrel Unit</h3>
@@ -990,10 +1050,10 @@
   <!-- Order CTA -->
   <section class="order-cta" id="order">
     <div class="order-cta-inner">
-      <p class="order-cta-label">Cedar Barrel Sauna</p>
-      <p class="order-cta-price">NZ$9,899</p>
+      <p class="order-cta-label" id="ctaLabel">Cedar Barrel Sauna</p>
+      <p class="order-cta-price" id="ctaPrice">NZ$9,899</p>
       <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
-      <p class="order-cta-sub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
+      <p class="order-cta-sub" id="ctaSub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
       <div class="order-actions">
         <a href="#" class="btn-primary">
           Order Now
@@ -1144,6 +1204,194 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Variant Data ─────────────────────────────────── */
+    const FEAT_ICONS = {
+      sun:     `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>`,
+      cedar:   `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8C8 10 5.9 16.17 3.82 19.54A1 1 0 004.7 21 7 7 0 0012 18a7 7 0 006.88-8.23A7 7 0 0017 8z"/></svg>`,
+      droplet: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>`,
+      people:  `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>`,
+      layers:  `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+      bolt:    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+      light:   `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/></svg>`
+    };
+
+    const variantData = {
+      barrel: {
+        title:         'Cedar Barrel Sauna — The Ice Bath NZ',
+        breadcrumb:    'Cedar Barrel Sauna',
+        badge:         'Premium',
+        name:          'Cedar<br>Barrel<br><em>Sauna</em>',
+        tagline:       'Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. The perfect heat ritual — alone or paired with cold immersion.',
+        price:         '9,899',
+        priceCur:      'NZ$',
+        priceNote:     'incl. GST · Free delivery NZ',
+        highlights: [
+          'Handcrafted rustic cedar construction',
+          '6kW Traditional Finnish Heater + natural stones',
+          'Available in 2, 4 & 6-person configurations',
+          'Dry or steamy — switch with a ladle of water',
+          '2-year manufacturer\'s warranty'
+        ],
+        imgSrc:        '../brand assets/Barrel Sauna/IMG_5375.jpg',
+        imgAlt:        'Cedar Barrel Sauna',
+        featuresLabel: 'Why Barrel Sauna',
+        featuresHeading: 'Built for<br><em>deep heat.</em>',
+        featuresSub:   'Every detail — from the grain of the cedar to the placement of the heater — is designed to deliver an authentic Finnish sauna experience in your own backyard.',
+        features: [
+          { icon: 'sun',     title: 'Finnish Heating',    desc: 'A 6kW traditional Finnish heater loaded with natural volcanic stones. Reaches temperature in under 45 minutes — authentic sauna heat, not a pale imitation.' },
+          { icon: 'cedar',   title: 'Cedar Construction', desc: 'Handcrafted from rustic cedar — naturally aromatic, rot-resistant, and built for NZ\'s outdoor conditions. Ages beautifully with every session.' },
+          { icon: 'droplet', title: 'Dual Climate',       desc: 'Use it dry for intense penetrating heat, or add water to the stones for a humid steam session. One sauna, two completely different experiences.' },
+          { icon: 'people',  title: 'Multi-Person',       desc: 'Available in 2, 4, or 6-person configurations — choose the size that fits your space and lifestyle. Contact us for pricing on each configuration.' }
+        ],
+        specsImgSrc:   '../brand assets/Barrel Sauna/IMG_5378.JPG',
+        specsImgAlt:   'Cedar Barrel Sauna interior',
+        specsLabel:    'Technical Specifications',
+        specsHeading:  'Crafted to<br>last <em>generations.</em>',
+        specsSub:      'Specifications that reflect serious craftsmanship — not flat-pack shortcuts. This is a permanent fixture for your wellness routine.',
+        specs: [
+          { label: 'Heater',   value: '6kW',    note: 'Traditional Finnish' },
+          { label: 'Capacity', value: '2–6 pax', note: '3 configurations' },
+          { label: 'Material', value: 'Cedar',   note: 'Rustic cedar wood' },
+          { label: 'Max Temp', value: '~90°C',   note: 'Authentic sauna heat' },
+          { label: 'Heat-Up',  value: '~45min',  note: 'To full temperature' },
+          { label: 'Warranty', value: '2 Yrs',   note: 'Full manufacturer cover' }
+        ],
+        includes: [
+          { num: '01', title: 'Cedar Barrel Unit',  desc: 'Handcrafted cedar barrel in your chosen configuration (2, 4, or 6 person), fully assembled and ready for placement.' },
+          { num: '02', title: '6kW Finnish Heater', desc: 'Traditional Finnish heater pre-loaded with natural volcanic sauna stones. Ready to heat on day one.' },
+          { num: '03', title: 'Accessories & Guide', desc: 'Sauna ladle, bucket, and thermometer included. Full setup guide and care instructions for your cedar sauna.' }
+        ],
+        ctaLabel: 'Cedar Barrel Sauna',
+        ctaPrice: 'NZ$9,899',
+        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.'
+      },
+      square: {
+        title:         'Square Sauna — The Ice Bath NZ',
+        breadcrumb:    'Square Sauna',
+        badge:         'New',
+        name:          'Square<br><em>Sauna</em>',
+        tagline:       'Two-tier stadium seating for up to five adults. Top tier for intense heat, bottom tier to ease off — the full sauna ritual in a premium Thermo Hemlock design.',
+        price:         '9,999',
+        priceCur:      'NZ$',
+        priceNote:     'incl. GST · Free delivery NZ',
+        highlights: [
+          'Two-tier stadium seating — up to 5 adults',
+          'Powerful 8kW heater for rapid, even heat',
+          'Crafted from premium Thermo Hemlock',
+          'Built-in LED lighting for ambiance',
+          'Durable bitumen roof for NZ conditions'
+        ],
+        imgSrc:        '../brand assets/Square Sauna/PHOTO-2024-11-06-14-12-09.jpg',
+        imgAlt:        'Square Sauna',
+        featuresLabel: 'Why Square Sauna',
+        featuresHeading: 'Designed for<br><em>shared heat.</em>',
+        featuresSub:   'The Square Sauna is built for those who want more space, more people, and more versatility — without ever sacrificing the quality of the heat.',
+        features: [
+          { icon: 'layers', title: 'Stadium Seating', desc: 'Double-tier bench design comfortably seats up to five adults. The upper tier delivers intense, efficient heat while the lower provides a gentler option — stay longer, go deeper.' },
+          { icon: 'cedar',  title: 'Thermo Hemlock',  desc: 'Crafted from thermally-modified Hemlock — engineered for superior moisture resistance, dimensional stability, and longevity. A premium timber built to last decades outdoors.' },
+          { icon: 'bolt',   title: '8kW Power',       desc: 'A robust 8kW heater rapidly brings the Square Sauna up to full temperature. More power means faster sessions and consistent heat, even in colder months.' },
+          { icon: 'light',  title: 'LED Ambiance',    desc: 'Integrated LED lighting sets the mood for every session. Create the right atmosphere — from bright clarity to a warm, immersive glow.' }
+        ],
+        specsImgSrc:   '../brand assets/Square Sauna/PHOTO-2024-11-06-14-12-09 (1).jpg',
+        specsImgAlt:   'Square Sauna interior',
+        specsLabel:    'Technical Specifications',
+        specsHeading:  'Space for<br><em>more of everything.</em>',
+        specsSub:      'Generous dimensions, powerful heating, and premium materials — the Square Sauna is built to the same exacting standard as every product in our range.',
+        specs: [
+          { label: 'Dimensions', value: '2×1.5m',  note: '2000 × 1500 × 2000mm' },
+          { label: 'Heater',     value: '8kW',     note: 'Rapid heat-up' },
+          { label: 'Capacity',   value: '4–5 pax', note: 'Two-tier seating' },
+          { label: 'Material',   value: 'Hemlock', note: 'Thermo-modified timber' },
+          { label: 'Lighting',   value: 'LED',     note: 'Integrated ambient' },
+          { label: 'Roofing',    value: 'Bitumen', note: 'Durable weather protection' }
+        ],
+        includes: [
+          { num: '01', title: 'Square Sauna Unit',       desc: 'Fully assembled Thermo Hemlock sauna with two-tier stadium seating, integrated LED lighting, and durable bitumen roof — ready for placement.' },
+          { num: '02', title: '8kW Heater + Sauna Stones', desc: 'Powerful 8kW heater with natural sauna stones included. Everything you need to get up to temperature from day one.' },
+          { num: '03', title: 'Accessories Kit',         desc: '4L bucket & ladle and hygrometer & temperature gauge included. Monitor your session and control humidity with ease.' }
+        ],
+        ctaLabel: 'Square Sauna',
+        ctaPrice: 'NZ$9,999',
+        ctaSub:   'Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase.'
+      }
+    };
+
+    function buildFeatureCard(f) {
+      return `<div class="feature-card">
+        <div class="feature-icon">${FEAT_ICONS[f.icon] || ''}</div>
+        <h3 class="feature-title">${f.title}</h3>
+        <p class="feature-desc">${f.desc}</p>
+      </div>`;
+    }
+
+    function buildSpecItem(s) {
+      return `<div class="spec-item">
+        <p class="spec-label">${s.label}</p>
+        <p class="spec-value">${s.value}</p>
+        <p class="spec-note">${s.note}</p>
+      </div>`;
+    }
+
+    function buildIncludeCard(item, i) {
+      return `<div class="include-card">
+        <span class="include-num">${item.num}</span>
+        <h3 class="include-title">${item.title}</h3>
+        <p class="include-desc">${item.desc}</p>
+      </div>`;
+    }
+
+    function selectVariant(v) {
+      const d = variantData[v];
+
+      // Variant button active state
+      document.querySelectorAll('.variant-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.variant === v);
+      });
+
+      // Page title
+      document.title = d.title;
+
+      // Breadcrumb
+      document.getElementById('breadcrumbProduct').textContent = d.breadcrumb;
+
+      // Hero content
+      document.getElementById('heroBadge').textContent = d.badge;
+      document.getElementById('heroName').innerHTML = d.name;
+      document.getElementById('heroTagline').textContent = d.tagline;
+      document.getElementById('heroPriceCur').textContent = d.priceCur;
+      document.getElementById('heroPrice').textContent = d.price;
+      document.getElementById('heroPriceNote').textContent = d.priceNote;
+      document.getElementById('heroHighlights').innerHTML = d.highlights.map(h => `<li class="highlight-item">${h}</li>`).join('');
+
+      // Hero image
+      const img = document.getElementById('heroImg');
+      img.src = d.imgSrc;
+      img.alt = d.imgAlt;
+
+      // Features section
+      document.getElementById('featuresLabel').textContent = d.featuresLabel;
+      document.getElementById('featuresHeading').innerHTML = d.featuresHeading;
+      document.getElementById('featuresSub').textContent = d.featuresSub;
+      document.getElementById('featuresGrid').innerHTML = d.features.map(buildFeatureCard).join('');
+
+      // Specs section
+      const specsImg = document.getElementById('specsImg');
+      specsImg.src = d.specsImgSrc;
+      specsImg.alt = d.specsImgAlt;
+      document.getElementById('specsLabel').textContent = d.specsLabel;
+      document.getElementById('specsHeading').innerHTML = d.specsHeading;
+      document.getElementById('specsSub').textContent = d.specsSub;
+      document.getElementById('specsGrid').innerHTML = d.specs.map(buildSpecItem).join('');
+
+      // Includes section
+      document.getElementById('includesGrid').innerHTML = d.includes.map(buildIncludeCard).join('');
+
+      // Order CTA
+      document.getElementById('ctaLabel').textContent = d.ctaLabel;
+      document.getElementById('ctaPrice').textContent = d.ctaPrice;
+      document.getElementById('ctaSub').textContent = d.ctaSub;
+    }
   </script>
 </body>
 </html>

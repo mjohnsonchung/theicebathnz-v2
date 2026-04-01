@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-03-31
+Last updated: 2026-03-30
 
 ---
 
@@ -14,8 +14,8 @@ Last updated: 2026-03-31
 
 ### Products (3 only)
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
-- **Chiller / Premium Chiller** → `product-page/ice-bath-chiller.html` — model selector with live price switching
-- **Barrel Sauna** → `product-page/barrel-sauna.html` — $9,899, 6kW Finnish heater, cedar construction
+- **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs)
+- **Barrel Sauna / Square Sauna** → `product-page/barrel-sauna.html` — variant toggle; Barrel ($9,899, cedar, 6kW) and Square ($9,999, Thermo Hemlock, 8kW, LED, stadium seating)
 
 ### Design System
 - Typography: **Cormorant Garamond** (display/serif) + **Jost** (body/sans)
@@ -46,7 +46,7 @@ Last updated: 2026-03-31
 ├── serve.mjs               — Local dev server (port 3000)
 ├── screenshot.mjs          — Puppeteer screenshot tool
 ├── brand assets/           — Logo, product images
-│   └── bath tub & chiller no bg.png
+│   └── Ice Bath/           — Reorganised; bath tub & chiller images moved here
 └── product-page/
     ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
     ├── ice-bath-chiller.html — Chiller / Premium Chiller model selector
@@ -69,7 +69,6 @@ Last updated: 2026-03-31
 - [x] Updated all homepage product card prices (Ice Bath from NZ$784, Chiller NZ$2,712, Sauna NZ$9,899)
 - [x] Updated chiller page standalone price ($899 → $2,712)
 - [x] Updated chiller related card on ice bath page ($899 → $2,712)
-- [x] Renamed product "Ice Bath NZ" → "Ice Bath" across all instances on ice-bath-nz.html
 - [x] Added Chiller / Premium Chiller model selector to ice-bath-chiller.html (NZ$2,712 / NZ$3,612)
 - [x] Fixed sauna page chiller related card price ($899 → $2,712)
 - [x] Removed team section from about-us.html; added border-top to CTA for visual separation
@@ -77,10 +76,19 @@ Last updated: 2026-03-31
 - [x] Generated sitemap.xml with all 8 URLs
 - [x] Fixed infinite redirect loop on barrel-sauna Vercel URL (self-referencing vercel.json rule removed)
 - [x] Removed stale "Portable Pod" references from ice-bath-chiller.html related cards
+- [x] Renamed all product-facing "Ice Bath NZ" → "Ice Bath" across homepage and chiller page (brand logo/footer retains "The Ice Bath NZ")
+- [x] Chiller homepage card updated to show "from NZ$2,712"
+- [x] Removed all "Frost Chiller" references from ice-bath-chiller.html — now consistently "Ice Bath Chiller"
+- [x] Premium variant toggle now switches full page content: product name, tagline, price (NZ$3,299 sale / NZ$4,999 orig), highlights, features section, and specs grid
+- [x] Premium Ice Bath Chiller content added: WiFi app control, 3–40°C range, 7" LCD, complete kit details, 1-year warranty
+- [x] Square Sauna variant toggle added to barrel-sauna.html (Cedar Barrel / Square Sauna selector)
+- [x] Square Sauna content: 8kW heater, Thermo Hemlock, two-tier stadium seating, LED lighting, bitumen roof, NZ$9,999
+- [x] Real barrel sauna photos wired up (IMG_5375.jpg hero, IMG_5378.JPG specs)
+- [x] Square Sauna photos wired up from brand assets/Square Sauna/
+- [x] Fixed broken ice bath image paths — images are in brand assets/Ice Bath/ subfolder; updated across index.html, ice-bath-nz.html, ice-bath-chiller.html
 
 ### Pending
-- [ ] Replace placeholder images on chiller and sauna pages with real photography
-
+- [ ] Mobile polish pass for each page
 ---
 
 ## Prices
@@ -89,9 +97,11 @@ Last updated: 2026-03-31
 | Ice Bath 4ft               | NZ$784    |
 | Ice Bath 5ft               | NZ$888    |
 | Chiller (standalone)       | NZ$2,712  |
-| Premium Chiller (standalone)| NZ$3,612 |
+| Premium Ice Bath Chiller (sale) | NZ$3,299 |
+| Premium Ice Bath Chiller (orig) | NZ$4,999 |
 | 4ft + Chiller bundle       | NZ$3,479  |
 | 5ft + Chiller bundle       | NZ$3,609  |
 | 4ft + Premium Chiller      | NZ$4,379  |
 | 5ft + Premium Chiller      | NZ$4,509  |
 | Barrel Sauna               | NZ$9,899  |
+| Square Sauna               | NZ$9,999  |
