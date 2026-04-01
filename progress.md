@@ -96,9 +96,16 @@ Last updated: 2026-04-01 (session 2)
 - [x] ice-bath-nz.html: 5ft capacity corrected ~450L → ~500L (JS data + highlight text)
 - [x] ice-bath-nz.html: chiller feature card temp updated "from 2°C to 35°C" → "down to 3°C"
 - [x] ice-bath-chiller.html (standard): tagline, highlights, feature cards, and spec tiles all updated to match official spec sheet — 3°C min, 1HP motor, UV + particle filtration, -10°C outdoor rated, self-priming pump
+- [x] about-us.html: all "304-grade stainless" references replaced with G90 galvanised steel (Purity value, story copy, story stat visual)
+- [x] about-us.html CTA: removed stale "Arctic Steel Pro / Portable Pod" product names
+- [x] ice-bath-nz.html: James K testimonial updated to real quote
+- [x] index.html: homepage testimonials updated — real customer photos (James K, Gem R, Tom S from Customer Photos/), real review copy
+- [x] Cart icon removed from nav on all 8 pages; no-cart decision confirmed — buy buttons will go direct to Stripe checkout
 
 ### Pending
 - [ ] Mobile polish pass for each page
+- [ ] photos throughout entire website
+- [ ] product buy button wireup with stripe (direct to checkout — no cart)
 
 ---
 
