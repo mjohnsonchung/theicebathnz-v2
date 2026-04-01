@@ -161,6 +161,12 @@
     }
     .form-field select option { background: var(--deep); color: var(--snow); }
     .form-field textarea { resize: vertical; min-height: 9rem; line-height: 1.6; }
+    .form-field input[aria-invalid="true"],
+    .form-field select[aria-invalid="true"],
+    .form-field textarea[aria-invalid="true"] {
+      border-color: rgba(224,90,90,0.6);
+      background: rgba(224,90,90,0.04);
+    }
     .form-submit {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
       padding-top: 0.5rem;
@@ -316,24 +322,28 @@
     <div class="contact-grid">
 
       <!-- Form -->
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" id="contact-form">
+        <div data-fs-error style="display:none; padding:0.75rem 1rem; background:rgba(224,90,90,0.08); border:1px solid rgba(224,90,90,0.25); border-radius:6px; font-size:0.87rem; color:#e05a5a; margin-bottom:0.5rem;"></div>
         <div class="form-row">
           <div class="form-field reveal">
             <label for="fname">First name</label>
-            <input type="text" id="fname" name="fname" placeholder="James" autocomplete="given-name">
+            <input type="text" id="fname" name="fname" placeholder="James" autocomplete="given-name" data-fs-field>
+            <span data-fs-error="fname" style="font-size:0.8rem; color:#e05a5a; margin-top:0.35rem; display:block;"></span>
           </div>
           <div class="form-field reveal reveal-d1">
             <label for="lname">Last name</label>
-            <input type="text" id="lname" name="lname" placeholder="Mitchell" autocomplete="family-name">
+            <input type="text" id="lname" name="lname" placeholder="Mitchell" autocomplete="family-name" data-fs-field>
+            <span data-fs-error="lname" style="font-size:0.8rem; color:#e05a5a; margin-top:0.35rem; display:block;"></span>
           </div>
         </div>
         <div class="form-field reveal reveal-d1">
           <label for="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="james@example.com" autocomplete="email">
+          <input type="email" id="email" name="email" placeholder="james@example.com" autocomplete="email" data-fs-field>
+          <span data-fs-error="email" style="font-size:0.8rem; color:#e05a5a; margin-top:0.35rem; display:block;"></span>
         </div>
         <div class="form-field reveal reveal-d2">
           <label for="subject">Subject</label>
-          <select id="subject" name="subject">
+          <select id="subject" name="subject" data-fs-field>
             <option value="">Select a topic…</option>
             <option>General Inquiry</option>
             <option>Product Question</option>
@@ -342,19 +352,21 @@
             <option>Wholesale & Trade</option>
             <option>Press & Media</option>
           </select>
+          <span data-fs-error="subject" style="font-size:0.8rem; color:#e05a5a; margin-top:0.35rem; display:block;"></span>
         </div>
         <div class="form-field reveal reveal-d2">
           <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help…"></textarea>
+          <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help…" data-fs-field></textarea>
+          <span data-fs-error="message" style="font-size:0.8rem; color:#e05a5a; margin-top:0.35rem; display:block;"></span>
         </div>
         <div class="form-submit reveal reveal-d3">
-          <button type="submit" class="btn-primary">
+          <button type="submit" class="btn-primary" data-fs-submit-btn>
             Send Message
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <p class="form-note">We aim to respond within 24 hours on business days.</p>
         </div>
-        <div id="form-success" style="display:none; padding:1.25rem 1.5rem; background:rgba(91,200,245,0.08); border:1px solid rgba(91,200,245,0.2); border-radius:6px;">
+        <div data-fs-success style="display:none; padding:1.25rem 1.5rem; background:rgba(91,200,245,0.08); border:1px solid rgba(91,200,245,0.2); border-radius:6px;">
           <p style="font-size:0.92rem; color:var(--ice); font-weight:500;">Message sent — we'll be in touch shortly.</p>
         </div>
       </form>
@@ -370,7 +382,7 @@
               </div>
               <div class="info-item-text">
                 <p class="info-item-label">Email</p>
-                <p class="info-item-value"><a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a></p>
+                <p class="info-item-value"><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></p>
               </div>
             </div>
             <div class="info-item">
@@ -397,7 +409,7 @@
               </div>
               <div class="info-item-text">
                 <p class="info-item-label">Phone</p>
-                <p class="info-item-value"><a href="tel:+6491234567">+64 9 123 4567</a></p>
+                <p class="info-item-value"><a href="tel:+64212103737">+64 212103737</a></p>
               </div>
             </div>
           </div>
@@ -478,7 +490,7 @@
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="#">Shipping & Returns</a></li>
             <li><a href="#">Warranty</a></li>
-            <li><a href="mailto:hello@theicebathnz.co.nz">hello@theicebathnz.co.nz</a></li>
+            <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
           </ul>
         </div>
       </div>
@@ -512,11 +524,8 @@
       setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
     }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-success').style.display = 'block';
-      e.target.querySelector('.form-submit').style.display = 'none';
-    }
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contact-form', formId: 'xaqlbwrz' });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -525,5 +534,6 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
