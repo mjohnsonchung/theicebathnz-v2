@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+
+    /* ── Navigation ─────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .btn-shop:active { transform: translateY(0); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s var(--ease-smooth), opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    /* ── Buttons ─────────────────────────────────────── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; cursor: pointer; }
+    .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
+    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+
+    /* ── Reveal ──────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ── Page Hero ───────────────────────────────────── */
+    .page-hero {
+      position: relative; overflow: hidden;
+      padding: 11rem 2.5rem 7rem;
+      background: var(--void);
+    }
+    .page-hero-atmo {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 60% 40%, rgba(91, 200, 245, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(18, 38, 69, 0.5) 0%, transparent 50%),
+        linear-gradient(180deg, var(--deep) 0%, var(--void) 100%);
+    }
+    .page-hero-rings {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      pointer-events: none; overflow: hidden;
+    }
+    .page-hero-ring {
+      position: absolute; right: -8vw; top: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(91, 200, 245, 0.07);
+      transform: translateY(-50%);
+    }
+    .page-hero-ring:nth-child(1) { width: 28vw; height: 28vw; }
+    .page-hero-ring:nth-child(2) { width: 44vw; height: 44vw; border-color: rgba(91, 200, 245, 0.045); }
+    .page-hero-ring:nth-child(3) { width: 62vw; height: 62vw; border-color: rgba(91, 200, 245, 0.025); }
+    .page-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto;
+    }
+    .page-hero-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 1.25rem;
+    }
+    .page-hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.02em; color: var(--snow);
+      margin-bottom: 1.5rem;
+    }
+    .page-hero-h1 em { font-style: italic; color: var(--ice); }
+    .page-hero-sub {
+      font-size: 0.95rem; line-height: 1.75; color: var(--mist);
+      max-width: 46ch;
+    }
+
+    /* ── Section shared ─────────────────────────────── */
+    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; }
+    .section-heading { font-family: var(--display); font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.015em; color: var(--snow); }
+    .section-heading em { font-style: italic; color: var(--ice); }
+
+    /* ── Products ────────────────────────────────────── */
+    .products-section {
+      background: var(--deep);
+      padding: 7rem 2.5rem 9rem;
+    }
+    .products-inner { max-width: 1440px; margin: 0 auto; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem; overflow: hidden;
+      display: block; position: relative;
+      transition:
+        transform 0.35s var(--ease-spring),
+        border-color 0.3s var(--ease-smooth),
+        box-shadow 0.3s var(--ease-smooth);
+    }
+    .product-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: 1.25rem;
+      background: radial-gradient(ellipse at 50% -10%, rgba(91, 200, 245, 0.1) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-smooth);
+      pointer-events: none; z-index: 1;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(91, 200, 245, 0.22);
+      box-shadow:
+        0 24px 64px rgba(0,0,0,0.45),
+        0 8px 24px rgba(0,0,0,0.3),
+        0 0 80px rgba(91, 200, 245, 0.04);
+    }
+    .product-card:hover::after { opacity: 1; }
+    .product-card:active { transform: translateY(-4px); }
+    .product-img-frame {
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+      background: var(--elevated);
+    }
+    .product-img-frame img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s var(--ease-smooth);
+    }
+    .product-card:hover .product-img-frame img { transform: scale(1.05); }
+    .product-img-frame::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(12, 30, 53, 0.8) 100%);
+    }
+    .product-chip {
+      position: absolute; top: 1rem; left: 1rem; z-index: 2;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--void); background: var(--ice);
+      padding: 0.28rem 0.75rem; border-radius: 999px;
+    }
+    .product-body { padding: 1.75rem 1.75rem 1.5rem; position: relative; z-index: 2; }
+    .product-name {
+      font-family: var(--display);
+      font-size: 1.7rem; font-weight: 300;
+      color: var(--snow);
+      letter-spacing: -0.01em; line-height: 1.1;
+      margin-bottom: 0.65rem;
+    }
+    .product-tagline { font-size: 0.82rem; line-height: 1.6; color: var(--mist); margin-bottom: 1.5rem; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--snow); }
+    .product-price .cur { font-size: 0.82rem; color: var(--mist); vertical-align: super; }
+    .btn-card {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ice);
+      background: transparent;
+      border: 1px solid var(--border-hi);
+      padding: 0.55rem 1.25rem; border-radius: 999px;
+      transition:
+        color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        border-color 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+    }
+    .btn-card:hover {
+      color: var(--void); background: var(--ice); border-color: var(--ice);
+      transform: scale(1.03);
+    }
+    .btn-card:active { transform: scale(0.97); }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { display: inline-flex; margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .btn-shop { display: none; }
+      .nav-hamburger { display: flex; }
+      .products-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .page-hero { padding: 9rem 1.5rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="buy-now.html" onclick="closeMobile()">Products</a>
+    <a href="benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="about-us.html" onclick="closeMobile()">About</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="buy-now.html" class="btn-primary" style="font-family:var(--body);margin-top:0.5rem" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="buy-now.html" class="active">Products</a></li>
+      <li><a href="benefits.html">Benefits</a></li>
+      <li><a href="about-us.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="buy-now.html" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-atmo"></div>
+    <div class="page-hero-rings" aria-hidden="true">
+      <div class="page-hero-ring"></div>
+      <div class="page-hero-ring"></div>
+      <div class="page-hero-ring"></div>
+    </div>
+    <div class="page-hero-content">
+      <p class="page-hero-label reveal">The Collection</p>
+      <h1 class="page-hero-h1 reveal reveal-d1">Shop <em>all products.</em></h1>
+      <p class="page-hero-sub reveal reveal-d2">Premium cold therapy and sauna equipment, built for New Zealand's athletes and everyday high-performers. Choose your setup below.</p>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products-section" id="products">
+    <div class="products-inner">
+      <div class="products-grid">
+
+        <!-- Ice Bath -->
+        <a href="product-page/ice-bath-nz.html" class="product-card reveal">
+          <div class="product-img-frame">
+            <img src="brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Ice Bath" style="object-fit:contain; background:#0a1e35;">
+            <span class="product-chip">Bestseller</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Ice Bath</h3>
+            <p class="product-tagline">Galv steel freestanding tub with integrated chiller. Holds 4°C with reliable cooling performance. Built for long-term durability.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>784</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Chiller -->
+        <a href="product-page/ice-bath-chiller.html" class="product-card reveal reveal-d1">
+          <div class="product-img-frame">
+            <img src="brand%20assets/Standard%20Chiller/IMG_6627_edited.jpg" alt="Ice Bath Chiller">
+            <span class="product-chip">New Arrival</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Chiller</h3>
+            <p class="product-tagline">High-performance water chiller designed for dependable cooling. Reaches 4°C in approximately 1.5 hours in summer conditions. Compatible with a variety of tubs.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>2,712</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sauna -->
+        <a href="product-page/barrel-sauna.html" class="product-card reveal reveal-d2">
+          <div class="product-img-frame">
+            <img src="brand%20assets/Barrel%20Sauna/IMG_5375.jpg" alt="Barrel Sauna">
+            <span class="product-chip">Best Value</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Sauna</h3>
+            <p class="product-tagline">Saunas built for lasting comfort, performance, and everyday use. Designed to bring heat, recovery, and relaxation into your routine with a premium finish and dependable craftsmanship.</p>
+            <div class="product-footer">
+              <span class="product-price"><span class="cur">NZ$</span>9,899</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="product-page/ice-bath-nz.html">Ice Bath</a></li>
+            <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="product-page/barrel-sauna.html">Sauna</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Bundles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="benefits.html">The Science</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Ambassadors</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="https://www.theicebathnz.co.nz/privacy-policy">Privacy Policy</a>
+          <a href="https://www.theicebathnz.co.nz/terms-of-service">Terms of Service</a>
+          <a href="https://www.theicebathnz.co.nz/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
