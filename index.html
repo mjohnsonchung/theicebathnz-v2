@@ -1051,7 +1051,7 @@
             <p class="product-tagline">All-steel freestanding tub with integrated Chiller. Holds 4°C for 72+ hours. Built to outlast decades — no rust, no flex, no compromise.</p>
             <div class="product-footer">
               <span class="product-price">from <span class="cur">NZ$</span>784</span>
-              <button class="btn-card">Add to Cart</button>
+              <button class="btn-card">Buy Now</button>
             </div>
           </div>
         </a>
@@ -1067,7 +1067,7 @@
             <p class="product-tagline">Precision water chiller with digital temp control. Cools to 4°C in 45 minutes. Compatible with any tub.</p>
             <div class="product-footer">
               <span class="product-price">from <span class="cur">NZ$</span>2,712</span>
-              <button class="btn-card">Add to Cart</button>
+              <button class="btn-card">Buy Now</button>
             </div>
           </div>
         </a>
@@ -1083,7 +1083,7 @@
             <p class="product-tagline">Full-body immersion anywhere. Lightweight, packable, insulated lining. Sets up in under 3 minutes. Perfect for travel.</p>
             <div class="product-footer">
               <span class="product-price"><span class="cur">NZ$</span>9,899</span>
-              <button class="btn-card">Add to Cart</button>
+              <button class="btn-card">Buy Now</button>
             </div>
           </div>
         </a>
@@ -1453,26 +1453,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Cart count (demo)
-    let cart = 0;
-    const badge = document.querySelector('.cart-badge');
-    document.querySelectorAll('.btn-card').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        cart++;
-        badge.textContent = cart;
-        btn.textContent = 'Added ✓';
-        btn.style.color = 'var(--void)';
-        btn.style.background = 'var(--ice)';
-        btn.style.borderColor = 'var(--ice)';
-        setTimeout(() => {
-          btn.textContent = 'Add to Cart';
-          btn.style.color = '';
-          btn.style.background = '';
-          btn.style.borderColor = '';
-        }, 2000);
-      });
-    });
   </script>
 </body>
 </html>
