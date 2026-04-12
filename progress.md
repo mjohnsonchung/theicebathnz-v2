@@ -113,6 +113,9 @@ Last updated: 2026-04-13 (session 6)
 - [x] ice-bath-chiller.html: both variants cool only to 3°C (no heating on either); all heating/40°C/warm references removed from premium variant — variant sub, tagline, highlights, featuresSub, feature card, spec
 - [x] about-us.html: Founded year corrected 2024 → 2023; Precision value pill updated to "Cools to 3°C"; Origin story copy updated (removed "triple-wall insulation" line)
 
+- [x] faq.html: replaced all placeholder FAQ content with real copy from old site; restructured into 2 tab groups — "Ice Bath & Chiller" (11 questions) and "Sauna" (6 questions); removed sidebar nav; tab switcher in hero
+- [x] Pushed to GitHub (session 7)
+
 ### Pending
 - [ ] Mobile polish pass for each page
 - [ ] photos throughout entire website

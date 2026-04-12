@@ -125,29 +125,28 @@
       max-width: 48ch; margin-bottom: 3rem;
     }
 
-    /* Category filter pills */
-    .faq-filters {
-      display: flex; gap: 0.6rem; flex-wrap: wrap;
+    /* Tab switcher */
+    .faq-tabs {
+      display: inline-flex; border: 1px solid var(--border-hi); border-radius: 6px; overflow: hidden;
     }
-    .faq-filter {
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 0.55rem 1.25rem;
-      border-radius: 999px; border: 1px solid var(--border);
-      background: transparent; color: var(--mist);
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-      cursor: pointer;
+    .faq-tab {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 0.75rem 2.25rem;
+      border: none; background: transparent; color: var(--mist);
+      cursor: pointer; transition: color 0.2s, background 0.2s;
     }
-    .faq-filter:hover { color: var(--snow); border-color: var(--border-hi); }
-    .faq-filter.active {
-      color: var(--void); background: var(--ice); border-color: var(--ice);
-    }
+    .faq-tab:not(:last-child) { border-right: 1px solid var(--border); }
+    .faq-tab:hover { color: var(--snow); background: rgba(255,255,255,0.04); }
+    .faq-tab.active { color: var(--void); background: var(--ice); }
+    .faq-panel { display: none; }
+    .faq-panel.active { display: block; }
 
     /* ── FAQ Content ─────────────────────────────────── */
     .faq-content {
       padding: 6rem 5rem 10rem;
       max-width: 1440px; margin: 0 auto;
     }
-    .faq-layout { display: grid; grid-template-columns: 1fr 2.5fr; gap: 6rem; align-items: start; }
+    .faq-layout { display: block; max-width: 860px; }
 
     /* Sidebar nav */
     .faq-sidebar { position: sticky; top: 6rem; }
@@ -317,13 +316,10 @@
         Questions<br>
         <em>answered.</em>
       </h1>
-      <p class="faq-hero-sub reveal reveal-d2">Everything you need to know about our products, cold therapy, shipping, and warranty — all in one place.</p>
-      <div class="faq-filters reveal reveal-d3">
-        <button class="faq-filter active" onclick="filterTo('all', this)">All</button>
-        <button class="faq-filter" onclick="filterTo('products', this)">Products</button>
-        <button class="faq-filter" onclick="filterTo('cold-therapy', this)">Cold Therapy</button>
-        <button class="faq-filter" onclick="filterTo('shipping', this)">Shipping</button>
-        <button class="faq-filter" onclick="filterTo('warranty', this)">Warranty</button>
+      <p class="faq-hero-sub reveal reveal-d2">Everything you need to know about our ice baths, chillers, and saunas — all in one place.</p>
+      <div class="faq-tabs reveal reveal-d3">
+        <button class="faq-tab active" data-tab="ice-bath" onclick="switchTab('ice-bath', this)">Ice Bath &amp; Chiller</button>
+        <button class="faq-tab" data-tab="sauna" onclick="switchTab('sauna', this)">Sauna</button>
       </div>
     </div>
   </section>
@@ -332,247 +328,177 @@
   <section class="faq-content">
     <div class="faq-layout">
 
-      <!-- Sidebar -->
-      <aside class="faq-sidebar reveal">
-        <p class="faq-sidebar-title">Jump to</p>
-        <ul class="faq-sidebar-links">
-          <li><a href="#products" class="active">Products & Equipment</a></li>
-          <li><a href="#cold-therapy">Cold Therapy & Science</a></li>
-          <li><a href="#shipping">Shipping & Delivery</a></li>
-          <li><a href="#warranty">Warranty & Support</a></li>
-        </ul>
-      </aside>
-
       <!-- Questions -->
-      <div class="faq-categories">
 
-        <!-- Products -->
-        <div class="faq-category reveal" id="products" data-category="products">
-          <div class="faq-cat-header">
-            <p class="faq-cat-label">01</p>
-            <h2 class="faq-cat-title">Products &amp; <em>Equipment</em></h2>
-          </div>
+        <!-- Panel 1: Ice Bath & Chiller -->
+        <div class="faq-panel active reveal" id="panel-ice-bath">
           <div class="faq-list">
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                What products do you offer?
+                Can I leave my Ice Bath outside?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>We currently offer three products: the <a href="product-page/ice-bath-nz.html">Ice Bath NZ</a> (NZ$1,299), our flagship full-body stainless steel ice bath with integrated chilling system; the <a href="product-page/ice-bath-chiller.html">Chiller</a> (NZ$899), a standalone chilling unit compatible with most tubs; and the <a href="product-page/barrel-sauna.html">Sauna</a> (NZ$449), our insulated entry-level option for those starting their cold journey.</p>
+                <p>Certainly! These tubs are made from galvanized steel, known for its durability and rust-resistant properties, making them ideal for outdoor use in harsh weather conditions.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                What temperature range can I achieve?
+                What different size Ice Baths do you offer?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>The Arctic Steel Pro and Frost Chiller can achieve temperatures from 2°C to 35°C, with precision held to ±0.5°C. This covers the full therapeutic range used by elite athletes (2–4°C) through to contrast therapy protocols (up to 35°C).</p>
-                <p>The Portable Pod relies on ice or cold water to achieve temperature — it doesn't have an active chilling system, but with adequate ice can reach 6–8°C in most conditions.</p>
+                <p>We offer two sizes:</p>
+                <p><strong style="color:var(--snow)">4-foot Ice Bath</strong> — 1200mm L × 600mm W × 600mm H, 19kg<br>
+                <strong style="color:var(--snow)">5-foot Ice Bath</strong> — 1500mm L × 600mm W × 600mm H, 24kg</p>
+                <p>Our ice baths are packaged in groups of three for shipping to New Zealand, which may result in slight variations in dimensions depending on the size you order. This is entirely intentional and ensures efficient, cost-effective shipping while maintaining the quality of our products.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                How much water does the Arctic Steel Pro hold?
+                Can I fit into a 4-foot Ice Bath?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>The Arctic Steel Pro holds 450 litres, designed for full-body immersion up to shoulder depth for users up to 200cm tall. The Portable Pod holds 220 litres — suitable for most users up to 185cm with legs drawn in.</p>
+                <p>The 4-foot Ice Tub holds up to 386 litres of water, while the 5-foot Tub boasts a fill capacity of nearly 550 litres. If you opt for the 5-foot tub, you'll need more water and more bags of ice to achieve that chilly temperature.</p>
+                <p>Some people prefer to compress with arms folded and knees bent, while others love to stretch out fully. If you're 6 feet tall or taller, you may find your sprawling abilities slightly limited in the 4-footer — but both options allow full immersion and all the benefits an ice bath has to offer. We recommend the 5-footer for anyone taller than 6'5".</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                Do I need a plumber or electrician to install it?
+                How do I empty my Ice Bath?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>No plumbing is required for any of our products. The Arctic Steel Pro is a self-contained system — fill it with a standard hose, connect the chilling unit to a standard 240V power outlet, and you're ready. The built-in filtration, circulation, and drainage systems are all self-contained.</p>
-                <p>A standard waterproof outdoor power outlet (GPO) near your installation point is all you need. We recommend a weatherproof outlet for outdoor setups.</p>
+                <p>Each Ice Tub comes equipped with a convenient 20mm screw plug positioned on the lower side wall. To drain, simply remove the plug and let gravity do the rest. Alternatively, you can use an expandable washing machine/dishwasher drain hose (available at stores like Bunnings) to direct the water towards your garden or preferred location.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                Can the Arctic Steel Pro be used outdoors?
+                How many bags of ice will I need?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Yes — all our products are designed for outdoor use and tested for New Zealand weather conditions including UV exposure, rain, and humidity. The 304-grade stainless steel is fully weatherproof. The chilling unit should be positioned under cover or with a weatherproof cover in prolonged heavy rain.</p>
+                <p>As a helpful starting point, begin by filling your Ice Tub with water and using just one bag of ice, especially if you're new to this routine. As you get used to the sensation and adapt over time, gradually increase the number of bags. Keep in mind that the point of discomfort varies for each individual, so you'll need to find your own starting point.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                How long does the Arctic Steel Pro hold temperature without power?
+                How loud are the chiller motors?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>The triple-wall insulation on the Arctic Steel Pro holds temperature for up to 72 hours without active chilling, depending on ambient temperature. In typical NZ conditions (15–20°C ambient), you'll see temperature rise of approximately 1–2°C per day when the chiller is off.</p>
+                <p>Our chiller motors make about as much noise as a small household fan. Once the water reaches its selected temperature, the fan will turn off automatically.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How do I clean my Ice Bath?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>We recommend using non-chlorine-based cleaning products. One product that has worked really well for many customers is Colloidal Silver.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How long does shipping take?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p><strong style="color:var(--snow)">Ice Baths:</strong> From the moment you purchase, estimated delivery is 5 working days for Auckland, 10–12 business days for the rest of the North Island, and 12 working days for the South Island.</p>
+                <p><strong style="color:var(--snow)">Ice Baths + Chillers:</strong> We place orders for chillers on a monthly basis to maintain stock. If current stock sells out, there may be a wait time of approximately 35–45 days for the next shipment. This accounts for manufacturing, shipping, and processing — we recommend placing your order early to avoid delays. Feel free to reach out with any questions.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How does your delivery work?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>We have a fixed rate delivery of $80 to all of the North Island. Extra shipping costs apply to the South Island. Please email <a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a> for more info.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Is GST included in the price?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Yes, GST is included in the price.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Do you offer finance?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Currently we do not offer finance options. Please <a href="mailto:info@theicebathnz.co.nz">email our team</a> if you have any queries.</p>
               </div></div></div>
             </div>
           </div>
         </div>
 
-        <!-- Cold Therapy -->
-        <div class="faq-category reveal" id="cold-therapy" data-category="cold-therapy">
-          <div class="faq-cat-header">
-            <p class="faq-cat-label">02</p>
-            <h2 class="faq-cat-title">Cold Therapy &amp; <em>Science</em></h2>
-          </div>
+        <!-- Panel 2: Sauna -->
+        <div class="faq-panel reveal" id="panel-sauna">
           <div class="faq-list">
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                How long should I stay in the ice bath?
+                What are the benefits of your sauna?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Research suggests 2–4 minutes at 10–15°C, or 1–2 minutes at 4–8°C, is sufficient to trigger the primary physiological responses. Total weekly cold exposure of 11–15 minutes across 3–5 sessions appears to be the threshold for meaningful adaptation.</p>
-                <p>Beginners should start with 30–60 seconds at a comfortable temperature (12–15°C) and build gradually. More time isn't always better — quality and consistency of exposure matters more than duration. See our <a href="benefits.html">Benefits page</a> for full protocol guidance.</p>
+                <p>Saunas not only offer a beautiful wooden aesthetic but are also excellent for full-body detoxification through sweating, which aids in expelling impurities from both the skin and the body. This process can boost overall wellness by improving blood flow, potentially reducing joint stiffness and alleviating issues linked to poor circulation. Saunas are well-regarded for their ability to ease stress and tension, and can rejuvenate skin cells — leaving you feeling deeply relaxed and revitalised.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                What temperature should I aim for?
+                Can I assemble this sauna myself?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>For recovery and inflammation reduction: 10–15°C. For mental resilience and norepinephrine release: 4–10°C. For elite athletic recovery protocols: 2–4°C.</p>
-                <p>The key is to find a temperature that is challenging but manageable — research by Dr. Andrew Huberman and Dr. Susanna Søberg suggests that "uncomfortably cold but safe" is the sweet spot for hormonal response. We recommend starting at 15°C and reducing by 1–2°C per week as you adapt.</p>
+                <p>Yep, we've got you covered with easy-to-follow manuals and a bunch of videos to walk you through the setup step-by-step. That said, we'd suggest getting a builder or a handy friend to help out, since it can be a pretty big job if you're not super into DIY.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                When is the best time of day to take an ice bath?
+                How hot will my sauna get?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Morning cold immersion (within 2 hours of waking) maximises the cortisol and adrenaline response, which can enhance alertness and mood throughout the day. It also aligns with your body's natural cortisol peak.</p>
-                <p>If your primary goal is post-training recovery, immerse within 30–60 minutes of a high-intensity training session. Avoid cold immersion immediately after strength training if hypertrophy is your primary goal — it may blunt the anabolic response.</p>
+                <p>One key feature of a traditional sauna is its ability to reach higher temperatures, typically between 80–90°C. This intense heat helps promote deep sweating, relaxation, and various health benefits. The high heat levels are ideal for those looking to experience the full sauna effect, enhancing detoxification and improving circulation.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                Are there any risks or contraindications?
+                What are the running costs of the sauna?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Cold immersion is contraindicated for individuals with certain cardiovascular conditions, Raynaud's syndrome, cold urticaria, or uncontrolled hypertension. Consult your physician before starting if you have any cardiovascular, respiratory, or immune conditions.</p>
-                <p>General safety guidelines: never immerse alone, avoid alcohol before immersion, enter slowly to allow your body to adjust, and always warm up gradually after (no hot showers immediately — gentle movement first). If you feel chest pain, difficulty breathing, or extreme numbness, exit immediately.</p>
+                <p>Our traditional saunas are equipped with powerful heaters to reach high temperatures efficiently. For example, our Barrel Sauna uses a 6kW heater, which provides the intense heat typically associated with traditional dry saunas.</p>
               </div></div></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">
-                Does cold immersion affect muscle growth?
+                When will my sauna arrive?
                 <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </button>
               <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Some research suggests that cold immersion immediately after resistance training may attenuate the acute inflammatory response needed for muscle protein synthesis. If your primary goal is muscle hypertrophy, wait 4–6 hours after strength training before immersing, or use cold therapy on non-training days.</p>
-                <p>For endurance athletes, recovery-focused athletes, and those prioritising metabolic health or mental resilience, this tradeoff is generally not a concern. The overall benefits of consistent cold exposure far outweigh this modest effect for most people.</p>
+                <p>Our lead time from when you place your order is 45–55 days depending on where you are located in New Zealand. Please get in touch with us if you have any questions about shipping and delivery.</p>
+              </div></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Do you offer finance?
+                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+                <p>Currently we do not offer finance options. Please <a href="mailto:info@theicebathnz.co.nz">email our team</a> if you have any queries.</p>
               </div></div></div>
             </div>
           </div>
         </div>
-
-        <!-- Shipping -->
-        <div class="faq-category reveal" id="shipping" data-category="shipping">
-          <div class="faq-cat-header">
-            <p class="faq-cat-label">03</p>
-            <h2 class="faq-cat-title">Shipping &amp; <em>Delivery</em></h2>
-          </div>
-          <div class="faq-list">
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                Where do you deliver?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>We deliver nationwide across New Zealand, including the South Island and rural areas. For the Portable Pod, we also offer delivery to Australia — contact us for a quote.</p>
-                <p>Large items (Arctic Steel Pro, Frost Chiller) are delivered by freight carrier with a two-person tail-lift delivery to your kerb. Please ensure clear vehicle access to your property on delivery day.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                How long does delivery take?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Most North Island metro orders (Auckland, Wellington, Hamilton) are delivered within 2–4 business days. South Island and rural areas are typically 4–7 business days.</p>
-                <p>Orders are dispatched within 1–2 business days of payment confirmation. You'll receive tracking details by email once dispatched.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                What does shipping cost?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Free shipping is included on all orders to New Zealand metro addresses. Rural delivery surcharges apply to some remote areas — these are calculated at checkout and are typically NZ$40–80 depending on location.</p>
-                <p>All prices shown on our website are inclusive of GST.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                What is your returns policy?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>We accept returns within 14 days of delivery for unused, undamaged products in original packaging. Return freight costs are the responsibility of the customer unless the product is faulty.</p>
-                <p>If your product arrives damaged or faulty, please contact us within 48 hours of delivery with photos and we will arrange a free replacement or full refund. We're subject to New Zealand Consumer Guarantees Act requirements and take our obligations seriously.</p>
-              </div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Warranty -->
-        <div class="faq-category reveal" id="warranty" data-category="warranty">
-          <div class="faq-cat-header">
-            <p class="faq-cat-label">04</p>
-            <h2 class="faq-cat-title">Warranty &amp; <em>Support</em></h2>
-          </div>
-          <div class="faq-list">
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                What does the warranty cover?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>The Arctic Steel Pro and Frost Chiller come with a 2-year manufacturer's warranty covering all defects in materials and workmanship under normal use conditions. The Portable Pod carries a 1-year warranty.</p>
-                <p>Warranty covers: stainless steel tub and weld integrity, chilling unit components, insulation performance, drainage system, and all electrical components. It does not cover damage from misuse, accidental damage, or cosmetic wear.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                How do I make a warranty claim?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Email us at <a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a> with your order number and a description of the issue, including photos or video if possible. We'll assess your claim within 2 business days and arrange repair, replacement, or refund as appropriate.</p>
-                <p>We keep replacement parts and units in stock in Auckland for fast turnaround — most warranty replacements are resolved within 5–7 business days.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                How do I clean and maintain my ice bath?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>The built-in filtration and UV sanitation system on the Arctic Steel Pro keeps water clean for 4–6 weeks with regular use. We recommend a full drain and clean every 4–6 weeks using a mild pH-neutral cleaner — avoid bleach or harsh acids on stainless steel.</p>
-                <p>For daily maintenance: skim debris from the surface, check the filter cartridge monthly, and run the circulation pump for at least 15 minutes after each use to turn over the water volume. Full maintenance guide is included with your product and available on request.</p>
-              </div></div></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                Do you offer installation support or advice?
-                <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
-                <p>Yes — every order includes a setup call with our team (by phone or video) to walk you through installation, first fill, and first use. Most customers are up and running within a couple of hours of delivery.</p>
-                <p>For Auckland-based customers, we offer in-home installation assistance for large orders. <a href="contact.html">Contact us</a> when you place your order to arrange this.</p>
-              </div></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -682,30 +608,13 @@
       if (!isOpen) item.classList.add('open');
     }
 
-    function filterTo(cat, btn) {
-      document.querySelectorAll('.faq-filter').forEach(b => b.classList.remove('active'));
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.faq-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.faq-category').forEach(section => {
-        if (cat === 'all' || section.dataset.category === cat) {
-          section.style.display = '';
-        } else {
-          section.style.display = 'none';
-        }
+      document.querySelectorAll('.faq-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + tab);
       });
     }
-
-    // Sidebar active state on scroll
-    const sections = document.querySelectorAll('.faq-category');
-    const sideLinks = document.querySelectorAll('.faq-sidebar-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.id;
-      });
-      sideLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-      });
-    }, { passive: true });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
