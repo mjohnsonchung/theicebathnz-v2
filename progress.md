@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-01 (session 2)
+Last updated: 2026-04-13 (session 4)
 
 ---
 
@@ -102,11 +102,12 @@ Last updated: 2026-04-01 (session 2)
 - [x] ice-bath-nz.html: James K testimonial updated to real quote
 - [x] index.html: homepage testimonials updated — real customer photos (James K, Gem R, Tom S from Customer Photos/), real review copy
 - [x] Cart icon removed from nav on all 8 pages; no-cart decision confirmed — buy buttons will go direct to Stripe checkout
+- [x] Homepage product card buttons changed from "Add to Cart" → "Buy Now"; stale cart JS (e.preventDefault) removed so card links navigate to product pages
 
 ### Pending
 - [ ] Mobile polish pass for each page
 - [ ] photos throughout entire website
-
+- [ ] Favicon for website
 ---
 
 ## Prices
