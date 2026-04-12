@@ -108,6 +108,9 @@ Last updated: 2026-04-13 (session 5)
 - [x] ice-bath-nz.html: chiller info panel added — selecting +Chiller or +Premium reveals inline summary (key specs + "View full chiller specs →" link); hides on "No Chiller"
 - [x] ice-bath-nz.html: all "free shipping" removed (price note, JS, order CTA sub, trust row → "NZ Delivery")
 - [x] ice-bath-nz.html: warranty updated to 1-year throughout (highlights bullet, specs grid, trust row, order CTA sub)
+- [x] ice-bath-chiller.html: all "free shipping" removed (price note, JS data for both variants, order CTA sub, trust row → "NZ Delivery")
+- [x] ice-bath-chiller.html (standard): warranty updated to 1-year throughout (highlights bullet, static spec grid, trust row, order CTA sub, JS data)
+- [x] ice-bath-chiller.html: both variants cool only to 3°C (no heating on either); all heating/40°C/warm references removed from premium variant — variant sub, tagline, highlights, featuresSub, feature card, spec
 
 ### Pending
 - [ ] Mobile polish pass for each page
