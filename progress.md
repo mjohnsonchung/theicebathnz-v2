@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-13 (session 4)
+Last updated: 2026-04-13 (session 5)
 
 ---
 
@@ -103,6 +103,11 @@ Last updated: 2026-04-13 (session 4)
 - [x] index.html: homepage testimonials updated — real customer photos (James K, Gem R, Tom S from Customer Photos/), real review copy
 - [x] Cart icon removed from nav on all 8 pages; no-cart decision confirmed — buy buttons will go direct to Stripe checkout
 - [x] Homepage product card buttons changed from "Add to Cart" → "Buy Now"; stale cart JS (e.preventDefault) removed so card links navigate to product pages
+- [x] Homepage copy updates: banner "Free Delivery NZ" → "Delivery Nation Wide", "2-Year Warranty" → "1–2-Year Warranty" (both instances); Best Seller tagline updated to Galv steel / reliable cooling copy; How It Works step 01 removes "portable pods" reference; step 03 removes app reference; CTA section delivery line updated; trust row labels updated to match
+- [x] Homepage product card taglines updated: Ice Bath trimmed (removed "strong, stable, made to perform"), Chiller updated to 1.5hr/summer copy, Sauna updated to sauna-specific copy (removed portable pod copy)
+- [x] ice-bath-nz.html: chiller info panel added — selecting +Chiller or +Premium reveals inline summary (key specs + "View full chiller specs →" link); hides on "No Chiller"
+- [x] ice-bath-nz.html: all "free shipping" removed (price note, JS, order CTA sub, trust row → "NZ Delivery")
+- [x] ice-bath-nz.html: warranty updated to 1-year throughout (highlights bullet, specs grid, trust row, order CTA sub)
 
 ### Pending
 - [ ] Mobile polish pass for each page

@@ -797,6 +797,41 @@
     }
     .chiller-option.active .chiller-price-hint { color: var(--frost); }
 
+    /* ── Chiller Info Panel ──────────────────────────────── */
+    .chiller-info-panel {
+      margin-bottom: 1.5rem;
+      background: var(--elevated);
+      border: 1px solid var(--border-hi);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      animation: fadeIn 0.3s var(--ease-out) forwards;
+    }
+    .chiller-info-title {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 0.55rem;
+    }
+    .chiller-info-list {
+      list-style: none; padding: 0; margin: 0 0 0.6rem;
+      display: flex; flex-direction: column; gap: 0.28rem;
+    }
+    .chiller-info-list li {
+      font-size: 0.77rem; color: var(--mist);
+      padding-left: 1rem; position: relative; line-height: 1.4;
+    }
+    .chiller-info-list li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--ice); font-size: 0.65rem; top: 0.05em;
+    }
+    .chiller-info-link {
+      display: inline-block;
+      font-size: 0.67rem; color: var(--ice); letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase;
+      font-weight: 500; opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .chiller-info-link:hover { opacity: 1; }
+
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -898,7 +933,7 @@
           </button>
           <button class="chiller-option" data-chiller="chiller" onclick="selectChiller('chiller')">
             <span class="chiller-name">+ Chiller</span>
-            <span class="chiller-sub">Cools to 4°C · 45 min</span>
+            <span class="chiller-sub">Cools to 4°C · ~1.5hrs</span>
             <span class="chiller-price-hint" id="chHintChiller">NZ$3,479</span>
           </button>
           <button class="chiller-option" data-chiller="premium" onclick="selectChiller('premium')">
@@ -909,10 +944,15 @@
         </div>
       </div>
 
+      <!-- Chiller Info Panel -->
+      <div class="chiller-info-panel" id="chillerInfoPanel" style="display:none">
+        <div id="chillerInfoInner"></div>
+      </div>
+
       <div class="product-price-block">
         <span class="price-cur">NZ$</span>
         <span class="price-amount" id="priceAmount">784</span>
-        <span class="price-note" id="priceNote">incl. GST · Free shipping NZ</span>
+        <span class="price-note" id="priceNote">incl. GST</span>
       </div>
 
       <div class="product-hero-actions">
@@ -928,7 +968,7 @@
         <li class="highlight-item">Galvanised steel — built for NZ outdoors</li>
         <li class="highlight-item">20mm side drain plug for easy empty</li>
         <li class="highlight-item">Compatible with our Chiller unit</li>
-        <li class="highlight-item">2-year manufacturer's warranty</li>
+        <li class="highlight-item">1-year manufacturer's warranty</li>
       </ul>
     </div>
 
@@ -1018,8 +1058,8 @@
             </div>
             <div class="spec-item">
               <p class="spec-label">Warranty</p>
-              <p class="spec-value">2 Yrs</p>
-              <p class="spec-note">Full manufacturer cover</p>
+              <p class="spec-value">1 Yr</p>
+              <p class="spec-note">Manufacturer's warranty</p>
             </div>
           </div>
         </div>
@@ -1081,7 +1121,7 @@
       <p class="order-cta-label" id="ctaSizeLabel">Ice Bath — 4ft</p>
       <p class="order-cta-price" id="ctaPrice">NZ$784</p>
       <h2 class="order-cta-heading">Ready to commit<br>to the cold?</h2>
-      <p class="order-cta-sub">Free delivery across New Zealand. Installation support included. 2-year warranty from date of purchase.</p>
+      <p class="order-cta-sub">NZ delivery. Installation support included. 1-year manufacturer's warranty.</p>
       <div class="order-actions">
         <a id="buyBtn" href="https://buy.stripe.com/28E7sNfLrcmV4Fwa9Z2oE00" class="btn-primary" target="_blank" rel="noopener">
           Order Now
@@ -1092,11 +1132,11 @@
       <div class="order-trust">
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          2-Year Warranty
+          1-Year Warranty
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Free NZ Shipping
+          NZ Delivery
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
@@ -1263,9 +1303,9 @@
       document.getElementById('chHintChiller').textContent = 'NZ$' + priceMatrix[currentSize].chiller.toLocaleString('en-NZ');
       document.getElementById('chHintPremium').textContent = 'NZ$' + priceMatrix[currentSize].premium.toLocaleString('en-NZ');
       if (currentChiller !== 'none') {
-        pn.innerHTML = 'incl. GST · Free shipping &nbsp;<span style="color:var(--ice);font-size:0.7rem;letter-spacing:0.06em">Bundle price</span>';
+        pn.innerHTML = 'incl. GST &nbsp;<span style="color:var(--ice);font-size:0.7rem;letter-spacing:0.06em">Bundle price</span>';
       } else {
-        pn.textContent = 'incl. GST · Free shipping NZ';
+        pn.textContent = 'incl. GST';
       }
     }
 
@@ -1280,12 +1320,51 @@
       updatePrice();
     }
 
+    const chillerInfoData = {
+      chiller: {
+        title: 'Ice Bath Chiller — Included',
+        items: [
+          'Cools to ~4°C for optimal cold therapy',
+          'Reaches 4°C in approx. 1.5 hours (summer conditions)',
+          '1HP motor with UV + particle filtration',
+          'Self-priming pump — low maintenance',
+          'Compatible with 4ft &amp; 5ft tubs'
+        ],
+        link: '../product-page/ice-bath-chiller.html',
+        linkLabel: 'View full chiller specs →'
+      },
+      premium: {
+        title: 'Premium Ice Bath Chiller — Included',
+        items: [
+          'Cools to 3°C with precise digital temperature control',
+          'WiFi app control + 7&quot; LCD display',
+          'Reaches target temp in approx. 1.5 hours',
+          'Advanced filtration system included',
+          'Compatible with 4ft &amp; 5ft tubs'
+        ],
+        link: '../product-page/ice-bath-chiller.html',
+        linkLabel: 'View full chiller specs →'
+      }
+    };
+
+    function updateChillerInfo(chiller) {
+      const panel = document.getElementById('chillerInfoPanel');
+      if (chiller === 'none') { panel.style.display = 'none'; return; }
+      const d = chillerInfoData[chiller];
+      document.getElementById('chillerInfoInner').innerHTML =
+        '<p class="chiller-info-title">' + d.title + '</p>' +
+        '<ul class="chiller-info-list">' + d.items.map(i => '<li>' + i + '</li>').join('') + '</ul>' +
+        '<a href="' + d.link + '" class="chiller-info-link">' + d.linkLabel + '</a>';
+      panel.style.display = 'block';
+    }
+
     function selectChiller(chiller) {
       currentChiller = chiller;
       document.querySelectorAll('.chiller-option').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.chiller === chiller);
       });
       updatePrice();
+      updateChillerInfo(chiller);
     }
 
     const observer = new IntersectionObserver((entries) => {
