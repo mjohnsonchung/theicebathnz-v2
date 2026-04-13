@@ -319,10 +319,37 @@
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
-      .science-hero-stats { gap: 2rem; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: 0.85rem 1.25rem; }
+
+      .science-hero { padding-top: 7rem; padding-bottom: 4rem; }
+      .science-hero-content { padding: 0 1.5rem; }
+      .science-hero-deco { display: none; }
+      .science-hero-h1 { font-size: clamp(2.75rem, 9vw, 4rem); }
+      .science-hero-sub { font-size: 0.95rem; margin-bottom: 2.5rem; }
+      .science-hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .science-hero-stats > div { min-width: calc(50% - 0.75rem); }
+
+      .mechanism-section { padding: 5rem 1.5rem; }
+      .mechanism-card { padding: 2rem 1.5rem; }
+
+      .benefits-section { padding: 5rem 1.5rem; }
+      .benefit-card { padding: 2rem 1.5rem; }
+
+      .protocol-section { padding: 5rem 1.5rem; }
+      .protocol-card { padding: 1.75rem 1.5rem; }
+
+      .research-section { padding: 5rem 1.5rem; }
       .research-grid { grid-template-columns: 1fr; }
+      .research-card { padding: 1.5rem; }
+
+      .science-cta { padding: 5rem 1.5rem; }
+      .cta-actions { flex-direction: column; align-items: stretch; }
+      .cta-actions .btn-primary, .cta-actions .btn-ghost { justify-content: center; }
+
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -331,23 +358,23 @@
   <div class="grain" aria-hidden="true"></div>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#products" onclick="closeMobile()">Products</a>
+    <a href="buy-now.html" onclick="closeMobile()">Products</a>
     <a href="benefits.html" onclick="closeMobile()">Benefits</a>
     <a href="about-us.html" onclick="closeMobile()">About</a>
     <a href="contact.html" onclick="closeMobile()">Contact</a>
-    <a href="index.html#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
+    <a href="buy-now.html" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
   </div>
 
   <nav class="nav" id="nav">
     <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
     <ul class="nav-links">
-      <li><a href="index.html#products">Products</a></li>
+      <li><a href="buy-now.html">Products</a></li>
       <li><a href="benefits.html" class="active">Benefits</a></li>
       <li><a href="about-us.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <a href="index.html#products" class="btn-shop">Shop Now</a>
+      <a href="buy-now.html" class="btn-shop">Shop Now</a>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -598,7 +625,7 @@
       <h2>Ready to<br><em>experience it?</em></h2>
       <p>The science is compelling. The experience is transformative. Cold therapy is one of the few practices where the research and the results align completely — every time, for almost everyone who commits to it.</p>
       <div class="cta-actions">
-        <a href="product-page/ice-bath-nz.html" class="btn-primary">
+        <a href="buy-now.html" class="btn-primary">
           Shop the Collection
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>

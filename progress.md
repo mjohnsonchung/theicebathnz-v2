@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-13 (session 6)
+Last updated: 2026-04-13 (session 9)
 
 ---
 
@@ -36,15 +36,17 @@ Last updated: 2026-04-13 (session 6)
 ```
 /
 ├── index.html              — Homepage
+├── buy-now.html            — Product catalog (/buy-now) — 3 product cards → product pages
 ├── benefits.html           — Science/benefits page (was science.html)
 ├── about-us.html
 ├── contact.html
 ├── faq.html
 ├── vercel.json             — Redirects + clean URLs
-├── sitemap.xml             — XML sitemap (all 8 pages)
+├── sitemap.xml             — XML sitemap (all 9 pages, domain: theicebathnz.co.nz)
 ├── .gitignore
-├── serve.mjs               — Local dev server (port 3000)
-├── screenshot.mjs          — Puppeteer screenshot tool
+├── serve.mjs               — Local dev server (port 3000, clean URL fallback added)
+├── screenshot.mjs          — Puppeteer screenshot tool (1440×900)
+├── mobile-screenshot.mjs   — Puppeteer mobile screenshot (390×844, iPhone viewport)
 ├── brand assets/           — Logo, product images
 │   └── Ice Bath/           — Reorganised; bath tub & chiller images moved here
 └── product-page/
@@ -116,9 +118,26 @@ Last updated: 2026-04-13 (session 6)
 - [x] faq.html: replaced all placeholder FAQ content with real copy from old site; restructured into 2 tab groups — "Ice Bath & Chiller" (11 questions) and "Sauna" (6 questions); removed sidebar nav; tab switcher in hero
 - [x] Pushed to GitHub (session 7)
 
+- [x] buy-now.html: product catalog page built at `/buy-now` — slim page hero, 3 product cards (Ice Bath, Chiller, Sauna) each linking to their product page; real photos used for all 3 cards
+- [x] Homepage "View All Products" button updated from dead `href="#"` → `buy-now.html`
+- [x] vercel.json: removed stale `/buy-now → /` redirect (was overriding the new page); redirected `/category/all-products` → `/buy-now`
+- [x] Pushed to GitHub (session 8)
+
+- [x] Mobile polish pass — all 9 pages (session 9)
+  - Reduced section padding to mobile-appropriate values (5rem / 4rem)
+  - Nav padding: 2.5rem → 1.25rem on all pages
+  - Footer legal links: flex-wrap added so they wrap on small screens
+  - Fixed all `index.html#products` links → `buy-now.html` (mobile menus + CTAs)
+  - benefits.html: hero stats flex-wrap, card paddings reduced, CTA stacks vertically
+  - faq.html: tab buttons flex: 1 so they fill full width and don't clip
+  - contact.html: submit button full-width on mobile
+  - ice-bath-nz.html: chiller selector flex-wrap (2+1 layout at 390px)
+  - serve.mjs: added clean URL fallback (tries path.html and path/index.html)
+  - Created mobile-screenshot.mjs (390×844 iPhone viewport)
+- [x] sitemap.xml updated: domain → theicebathnz.co.nz, added /buy-now, added lastmod dates (session 9)
+
 ### Pending
-- [ ] Mobile polish pass for each page
-- [ ] photos throughout entire website
+- [ ] Real product photos throughout entire website
 - [ ] Favicon for website
 ---
 

@@ -903,28 +903,45 @@
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: 0.85rem 1.25rem; }
+
+      .hero { align-items: flex-start; min-height: 100svh; }
+      .hero-content { padding: 7rem 1.5rem 3rem; }
+      .hero-img-wrap { opacity: 0.5; top: 40%; }
+      .hero-img-wrap img { object-position: center bottom; transform: translateY(0); }
+      .hero-img-wrap::before { background: none; }
+      .hero-scroll { display: none; }
+
+      .products-header { flex-direction: column; align-items: flex-start; }
       .products-grid { grid-template-columns: 1fr; }
+      .products-section { padding: 5rem 1.5rem 6rem; }
+      .product-body { padding: 1.5rem; }
+
       .stats-rail { grid-template-columns: 1fr; }
       .stats-rail .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
       .stats-rail .stat-cell:last-child { border-bottom: none; }
+
+      .benefits-section { padding: 5rem 0; }
+      .benefits-inner { padding: 0 1.5rem; }
+
+      .feature-inner { padding: 5rem 1.5rem; }
+
+      .process-section { padding: 5rem 1.5rem; }
       .process-grid { grid-template-columns: 1fr; }
+
+      .testimonials-section { padding: 5rem 1.5rem; }
       .testimonials-grid { grid-template-columns: 1fr; }
+
+      .nl-section { padding: 4rem 1.5rem; }
       .nl-form { flex-direction: column; }
+      .nl-form .btn-primary { width: 100%; justify-content: center; }
+
+      .cta-section { padding: 7rem 1.5rem; }
+
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .hero { align-items: flex-start; min-height: 100svh; }
-      .hero-content { padding: 7rem 1.5rem 3rem; }
-      .hero-img-wrap {
-        opacity: 0.5;
-        top: 40%;
-      }
-      .hero-img-wrap img {
-        object-position: center bottom;
-        transform: translateY(0);
-      }
-      .hero-img-wrap::before { background: none; }
-      .hero-scroll { display: none; }
-      .products-header { flex-direction: column; align-items: flex-start; }
+      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -935,11 +952,11 @@
 
   <!-- ─── Mobile Menu ──────────────────────────────── -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#products" onclick="closeMobile()">Products</a>
+    <a href="buy-now.html" onclick="closeMobile()">Products</a>
     <a href="benefits.html" onclick="closeMobile()">Benefits</a>
     <a href="about-us.html" onclick="closeMobile()">About</a>
     <a href="contact.html" onclick="closeMobile()">Contact</a>
-    <a href="#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
+    <a href="buy-now.html" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
   </div>
 
   <!-- ─── Nav ──────────────────────────────────────── -->

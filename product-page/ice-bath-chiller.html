@@ -249,6 +249,9 @@
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: 0.85rem 1.25rem; }
+
       .product-hero-left { padding: 1rem 1.5rem 2rem; }
       .features-grid { grid-template-columns: 1fr; }
       .compat-grid { grid-template-columns: 1fr; }
@@ -256,6 +259,7 @@
       .related-img { aspect-ratio: 16/9; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
 
     /* ── Variant Selector ───────────────────────────────── */
@@ -310,23 +314,23 @@
   <div class="grain" aria-hidden="true"></div>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="../index.html#products" onclick="closeMobile()">Products</a>
+    <a href="../buy-now.html" onclick="closeMobile()">Products</a>
     <a href="../benefits.html" onclick="closeMobile()">Benefits</a>
     <a href="../about-us.html" onclick="closeMobile()">About</a>
     <a href="../contact.html" onclick="closeMobile()">Contact</a>
-    <a href="../index.html#products" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
+    <a href="../buy-now.html" class="btn-primary" style="font-family:var(--body)" onclick="closeMobile()">Shop Now</a>
   </div>
 
   <nav class="nav" id="nav">
     <a href="../index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
     <ul class="nav-links">
-      <li><a href="../index.html#products" class="active">Products</a></li>
+      <li><a href="../buy-now.html" class="active">Products</a></li>
       <li><a href="../benefits.html">Benefits</a></li>
       <li><a href="../about-us.html">About</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <a href="../index.html#products" class="btn-shop">Shop Now</a>
+      <a href="../buy-now.html" class="btn-shop">Shop Now</a>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -339,7 +343,7 @@
     <div class="product-hero-left">
       <p class="product-breadcrumb">
         <a href="../index.html">Home</a><span>/</span>
-        <a href="../index.html#products">Products</a><span>/</span>
+        <a href="../buy-now.html">Products</a><span>/</span>
         Ice Bath Chiller
       </p>
       <span class="product-badge-chip" id="heroBadge">New Arrival</span>

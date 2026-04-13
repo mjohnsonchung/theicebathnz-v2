@@ -27,11 +27,25 @@ const server = createServer(async (req, res) => {
   const filePath = join(__dirname, url === '/' ? 'index.html' : url);
   const ext = extname(filePath).toLowerCase();
 
-  try {
-    const data = await readFile(filePath);
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'text/plain' });
-    res.end(data);
-  } catch {
+  // Try candidates: exact path, path + .html, path/index.html
+  const candidates = [filePath];
+  if (!extname(filePath)) {
+    candidates.push(filePath + '.html');
+    candidates.push(join(filePath, 'index.html'));
+  }
+
+  let served = false;
+  for (const candidate of candidates) {
+    try {
+      const data = await readFile(candidate);
+      const mime = MIME[extname(candidate).toLowerCase()] || 'text/plain';
+      res.writeHead(200, { 'Content-Type': mime });
+      res.end(data);
+      served = true;
+      break;
+    } catch { /* try next */ }
+  }
+  if (!served) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('404 Not Found');
   }
