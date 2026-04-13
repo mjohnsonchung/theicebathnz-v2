@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../brand%20assets/Site%20Favicon/Minimalistic%20ice%20cube%20in%20blue.png">
   <title>Ice Bath Chiller — The Ice Bath NZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -390,7 +391,7 @@
     </div>
     <div class="product-hero-right">
       <div class="product-hero-img-wrap">
-        <img id="heroImg" src="https://placehold.co/800x800/0D2A48/5BC8F5?text=Ice+Bath+Chiller" alt="Ice Bath Chiller Unit">
+        <img id="heroImg" src="../brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.png" alt="Ice Bath Chiller Unit" style="object-fit:contain;">
       </div>
     </div>
   </section>
@@ -439,7 +440,7 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="https://placehold.co/800x600/0C1E35/5BC8F5?text=Ice+Bath+Chiller+Detail" alt="Ice Bath Chiller detail">
+          <img id="specsImg" src="../brand%20assets/Standard%20Chiller/Unnedited/IMG_6627_edited.jpg" alt="Ice Bath Chiller detail" style="object-fit:cover;">
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -581,7 +582,7 @@
         </a>
         <a href="barrel-sauna.html" class="related-card reveal reveal-d1">
           <div class="related-img">
-            <img src="https://placehold.co/400x400/0D2A48/5BC8F5?text=Sauna" alt="Sauna">
+            <img src="../brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.png" alt="Barrel Sauna" style="object-fit:contain; background:#0a1e35;">
           </div>
           <div class="related-body">
             <div>
@@ -702,8 +703,9 @@
           'Indoor and outdoor use (down to -10°C)',
           '1-year manufacturer\'s warranty'
         ],
-        imgSrc: 'https://placehold.co/800x800/0D2A48/5BC8F5?text=Ice+Bath+Chiller',
+        imgSrc: '../brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.png',
         imgAlt: 'Ice Bath Chiller Unit',
+        specsImgSrc: '../brand%20assets/Standard%20Chiller/Unnedited/IMG_6627_edited.jpg',
         featuresLabel: 'Why the Ice Bath Chiller',
         featuresHeading: 'Cold, <em>precisely.</em>',
         featuresSub: 'Purpose-built for serious cold therapy. The Ice Bath Chiller pairs with your existing tub — or add it to any setup — and delivers exact, consistent temperatures without the hassle of ice.',
@@ -738,8 +740,9 @@
           'Portable with 2x lockable wheels',
           '1-year manufacturer\'s warranty'
         ],
-        imgSrc: 'https://placehold.co/800x800/0D2A48/5BC8F5?text=Premium+Ice+Bath+Chiller',
+        imgSrc: '../brand%20assets/Premium%20Chiller/premium%20chiller%20%28front%20no%20bg%29.png',
         imgAlt: 'Premium Ice Bath Chiller Unit',
+        specsImgSrc: '../brand%20assets/Premium%20Chiller/Unedited/Ice%20Bath%20NZ%20Chiller%20%28side%29.JPG',
         featuresLabel: 'Why the Premium Ice Bath Chiller',
         featuresHeading: 'Cold, <em>connected.</em>',
         featuresSub: 'The Premium Ice Bath Chiller delivers precise cold therapy with intelligent WiFi connectivity — so your bath is at exactly the right temperature when you need it.',
@@ -808,6 +811,10 @@
       const img = document.getElementById('heroImg');
       img.src = d.imgSrc;
       img.alt = d.imgAlt;
+
+      // Specs image
+      const specsImg = document.getElementById('specsImg');
+      if (specsImg && d.specsImgSrc) { specsImg.src = d.specsImgSrc; }
 
       // Features section
       document.getElementById('featuresLabel').textContent = d.featuresLabel;

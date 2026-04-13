@@ -139,9 +139,21 @@ Last updated: 2026-04-13 (session 9)
   - Created mobile-screenshot.mjs (390×844 iPhone viewport)
 - [x] sitemap.xml updated: domain → theicebathnz.co.nz, added /buy-now, added lastmod dates (session 9)
 
+- [x] Real product photos wired across all pages (session 10)
+  - Standard Chiller `No bg standard chiller.png` → homepage card, buy-now card, chiller hero + JS standard variant
+  - Premium Chiller `premium chiller (front no bg).png` → chiller page JS premium variant + specs toggle
+  - Barrel Sauna `Main Hero no bg.png` → homepage card, buy-now card, sauna hero; interior shot for specs
+  - Square Sauna `main hero no bg.png` → sauna page JS square variant; `Inside sauna wide angle.jpg` for specs
+  - All remaining `placehold.co` product images replaced on index, buy-now, chiller page, sauna page
+  - Related product cards on sauna + chiller pages now show real images
+- [x] Favicon added to all 9 pages — `brand assets/Site Favicon/Minimalistic ice cube in blue.png` (session 10)
+- [x] buy-now.html expanded from 3 → 5 product cards (session 10)
+  - Chiller split into: Ice Bath Chiller (NZ$2,712) + Premium Chiller (NZ$3,299)
+  - Sauna split into: Barrel Sauna (NZ$9,899) + Square Sauna (NZ$9,999)
+  - Both chiller cards link to `ice-bath-chiller.html`; both sauna cards link to `barrel-sauna.html`
+  - Layout: 3-col grid — row 1: Ice Bath, Std Chiller, Premium Chiller; row 2: Barrel Sauna, Square Sauna
+
 ### Pending
-- [ ] Real product photos throughout entire website
-- [ ] Favicon for website
 ---
 
 ## Prices
