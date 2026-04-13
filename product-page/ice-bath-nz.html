@@ -420,13 +420,58 @@
     }
     .specs-visual img {
       width: 100%; height: 100%;
-      object-fit: contain; padding: 2rem;
+      object-fit: cover;
     }
     .specs-visual::after {
       content: '';
       position: absolute; inset: 0;
       background: radial-gradient(ellipse at 50% 100%, rgba(91,200,245,0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
+    /* ── Specs Carousel ─────────────────────────────────── */
+    .specs-carousel { position: absolute; inset: 0; }
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 2.25rem; height: 2.25rem;
+      background: rgba(6,14,26,0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer; z-index: 2;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .carousel-btn:hover {
+      background: rgba(91,200,245,0.18);
+      border-color: rgba(91,200,245,0.45);
+      color: #5BC8F5;
+    }
+    .carousel-btn:active { transform: translateY(-50%) scale(0.91); }
+    .carousel-btn:focus-visible { outline: 2px solid rgba(91,200,245,0.55); outline-offset: 2px; }
+    .carousel-prev { left: 0.75rem; }
+    .carousel-next { right: 0.75rem; }
+    .carousel-dots {
+      position: absolute; bottom: 0.875rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 0.4rem; z-index: 2;
+    }
+    .cdot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.32);
+      border: none; cursor: pointer; padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .cdot.active { background: #5BC8F5; transform: scale(1.25); }
+    .cdot:hover { background: rgba(255,255,255,0.6); }
     .specs-content { padding-top: 0.5rem; }
     .specs-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -1034,7 +1079,28 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="../brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.png" alt="Arctic Steel Pro detail">
+          <div class="specs-carousel" id="specsCarousel">
+            <div class="carousel-slide active">
+              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section.avif" alt="Ice Bath detail">
+            </div>
+            <div class="carousel-slide">
+              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section2.avif" alt="Ice Bath detail 2">
+            </div>
+            <div class="carousel-slide">
+              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section3.avif" alt="Ice Bath detail 3">
+            </div>
+            <button class="carousel-btn carousel-prev" onclick="specsCarouselNav(-1)" aria-label="Previous image">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="carousel-btn carousel-next" onclick="specsCarouselNav(1)" aria-label="Next image">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="carousel-dots">
+              <button class="cdot active" onclick="specsCarouselGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="specsCarouselGo(1)" aria-label="Slide 2"></button>
+              <button class="cdot" onclick="specsCarouselGo(2)" aria-label="Slide 3"></button>
+            </div>
+          </div>
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -1383,6 +1449,21 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Specs carousel
+    let specsIdx = 0;
+    const specsSlides = document.querySelectorAll('#specsCarousel .carousel-slide');
+    const specsDots = document.querySelectorAll('#specsCarousel .cdot');
+    function specsCarouselGo(n) {
+      specsSlides[specsIdx].classList.remove('active');
+      specsDots[specsIdx].classList.remove('active');
+      specsIdx = n;
+      specsSlides[specsIdx].classList.add('active');
+      specsDots[specsIdx].classList.add('active');
+    }
+    function specsCarouselNav(dir) {
+      specsCarouselGo((specsIdx + dir + specsSlides.length) % specsSlides.length);
+    }
   </script>
 </body>
 </html>

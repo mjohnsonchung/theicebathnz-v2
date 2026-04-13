@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-13 (session 9)
+Last updated: 2026-04-13 (session 11)
 
 ---
 
@@ -147,11 +147,17 @@ Last updated: 2026-04-13 (session 9)
   - All remaining `placehold.co` product images replaced on index, buy-now, chiller page, sauna page
   - Related product cards on sauna + chiller pages now show real images
 - [x] Favicon added to all 9 pages — `brand assets/Site Favicon/Minimalistic ice cube in blue.png` (session 10)
+- [x] Favicon cropped — removed ~26% transparent padding so icon fills frame; all 9 pages updated to `favicon-cropped.png` (session 11)
 - [x] buy-now.html expanded from 3 → 5 product cards (session 10)
   - Chiller split into: Ice Bath Chiller (NZ$2,712) + Premium Chiller (NZ$3,299)
   - Sauna split into: Barrel Sauna (NZ$9,899) + Square Sauna (NZ$9,999)
   - Both chiller cards link to `ice-bath-chiller.html`; both sauna cards link to `barrel-sauna.html`
   - Layout: 3-col grid — row 1: Ice Bath, Std Chiller, Premium Chiller; row 2: Barrel Sauna, Square Sauna
+
+- [x] Homepage "Why cold changes everything" section: new ice close-up photo (brand assets/Homepage/why the cold change everything photo.jfif) (session 12)
+- [x] Homepage "Engineered for serious cold" feature section: new outdoor/glacial photo (brand assets/Homepage/Engineered for serious cold section.jfif) (session 12)
+- [x] ice-bath-nz.html specs section: replaced single image with 3-photo click-only carousel (for the specs section.avif / 2 / 3) — prev/next buttons + dot indicators (session 12)
+- [x] ice-bath-chiller.html specs section: replaced old unedited chiller photo with new back-of-chiller photo (brand assets/Standard Chiller/photo of back of chiller.avif) (session 12)
 
 ### Pending
 ---
