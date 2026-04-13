@@ -159,6 +159,11 @@ Last updated: 2026-04-13 (session 11)
 - [x] ice-bath-nz.html specs section: replaced single image with 3-photo click-only carousel (for the specs section.avif / 2 / 3) — prev/next buttons + dot indicators (session 12)
 - [x] ice-bath-chiller.html specs section: replaced old unedited chiller photo with new back-of-chiller photo (brand assets/Standard Chiller/photo of back of chiller.avif) (session 12)
 
+- [x] Homepage benefits section: removed floating chiller sub-image, main photo only (session 12)
+- [x] Homepage feature section spec cells updated: Steel Grade / Hot-Dipped / Outdoors / Warranty — removed ice-bath-centric cells (session 12)
+- [x] Homepage feature section: "View Specs" button removed; "Shop Ice Bath" → "Shop Ice Baths" pointing to /buy-now (session 12)
+- [x] Homepage hero: "The Science" ghost button updated from #science anchor → /benefits (session 12)
+
 ### Pending
 ---
 
