@@ -123,6 +123,9 @@ Last updated: 2026-04-13 (session 9)
 - [x] vercel.json: removed stale `/buy-now → /` redirect (was overriding the new page); redirected `/category/all-products` → `/buy-now`
 - [x] Pushed to GitHub (session 8)
 
+- [x] ice-bath-chiller.html: Premium variant specs reduced to 4 cells — removed "Delivery 5–7 wks" and "Includes Full Kit" (session 10)
+- [x] ice-bath-chiller.html: Standard Chiller specs reduced to 4 cells — removed "Outdoor Use -10°C" and "Pump Self-priming" (session 10)
+
 - [x] Mobile polish pass — all 9 pages (session 9)
   - Reduced section padding to mobile-appropriate values (5rem / 4rem)
   - Nav padding: 2.5rem → 1.25rem on all pages
