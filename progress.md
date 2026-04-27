@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-13 (session 12)
+Last updated: 2026-04-28 (session 13)
 
 ---
 
@@ -167,6 +167,14 @@ Last updated: 2026-04-13 (session 12)
 - [x] Image optimisation — all brand assets converted to WebP (quality 82); favicons re-optimised as PNG; AVIFs kept as-is (session 12)
   - 7.3MB → 1.6MB total (77% reduction); biggest wins: product hero PNGs (88–96% each)
   - 17 new optimised files added to brand assets/; 34 src/href references updated across all 9 HTML pages
+
+- [x] faq.html: delivery FAQ updated — Mainfreight depot collection / $100 flat rate NI / South Island surcharge (session 13)
+- [x] Chiller badge changed from "New Arrival" → "Top Seller" on index.html, buy-now.html, ice-bath-chiller.html (4 locations) (session 13)
+- [x] Created privacy-policy.html, terms-of-service.html, cookie-policy.html — themed to match site, content ported from Wix (session 13)
+- [x] Footer legal links updated on all 9 pages — old Wix absolute URLs replaced with local relative paths (session 13)
+- [x] vercel.json: /cookies → /cookie-policy redirect added (session 13)
+- [x] sitemap.xml: 3 new legal pages added (session 13)
+- [x] Pushed to GitHub (session 13)
 
 ### Pending
 ---
