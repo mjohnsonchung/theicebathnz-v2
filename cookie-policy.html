@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="brand%20assets/Site%20Favicon/favicon-cropped-opt.png">
+  <title>Cookie Policy — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+
+    /* ── Navigation ─────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    /* ── Legal Hero ──────────────────────────────────── */
+    .legal-hero {
+      position: relative;
+      padding: 10rem 2.5rem 5rem;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .legal-hero-atmo {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 80% at 20% 50%, rgba(91,200,245,0.045) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 85% 20%, rgba(18,50,100,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #071525 0%, #020B15 60%);
+    }
+    .legal-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .legal-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 1.75rem;
+    }
+    .legal-eyebrow::before {
+      content: ''; display: block;
+      width: 2rem; height: 1px; background: var(--ice); opacity: 0.6;
+    }
+    .legal-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--snow);
+      margin-bottom: 1.5rem;
+    }
+    .legal-hero h1 em { font-style: italic; color: var(--ice); }
+    .legal-meta {
+      font-size: 0.82rem;
+      color: var(--fog);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Legal Body ──────────────────────────────────── */
+    .legal-body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 8rem;
+    }
+    .legal-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .legal-section h2 {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--snow);
+      margin-bottom: 1.25rem;
+    }
+    .legal-section h2 em { font-style: italic; color: var(--ice); }
+    .legal-section p {
+      font-size: 0.95rem;
+      line-height: 1.82;
+      color: var(--mist);
+      margin-bottom: 1rem;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul {
+      list-style: none;
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .legal-section ul li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--mist);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--ice); opacity: 0.5;
+      font-size: 0.8rem;
+    }
+    .legal-section a {
+      color: var(--ice);
+      border-bottom: 1px solid rgba(91,200,245,0.3);
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+    .legal-section a:hover { border-color: var(--ice); opacity: 0.8; }
+
+    /* ── Cookie type cards ───────────────────────────── */
+    .cookie-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1rem;
+    }
+    .cookie-card:last-child { margin-bottom: 0; }
+    .cookie-card-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .cookie-card-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--snow);
+      letter-spacing: -0.01em;
+    }
+    .cookie-card-badge {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+      border: 1px solid rgba(91,200,245,0.25); color: var(--ice);
+    }
+    .cookie-card-badge.used { border-color: rgba(91,200,245,0.5); color: var(--ice); }
+    .cookie-card-badge.not-used { border-color: var(--border); color: var(--fog); }
+    .cookie-card p {
+      font-size: 0.9rem;
+      line-height: 1.78;
+      color: var(--mist);
+      margin-bottom: 0;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { display: inline-flex; margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { display: flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1px solid var(--border); color: var(--mist); transition: color 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: 0.85rem 1.25rem; }
+      .legal-hero { padding: 8rem 1.5rem 4rem; }
+      .legal-body { padding: 4rem 1.5rem 6rem; }
+      .cookie-card { padding: 1.25rem 1.25rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="buy-now.html" onclick="closeMobile()">Products</a>
+    <a href="benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="about-us.html" onclick="closeMobile()">About</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="buy-now.html" class="btn-shop" style="font-family:var(--body);margin-top:0.5rem" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="buy-now.html">Products</a></li>
+      <li><a href="benefits.html">Benefits</a></li>
+      <li><a href="about-us.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="buy-now.html" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="legal-hero">
+    <div class="legal-hero-atmo"></div>
+    <div class="legal-hero-inner">
+      <div class="legal-eyebrow">Legal</div>
+      <h1>Cookie <em>Policy</em></h1>
+      <p class="legal-meta">This policy forms part of our Privacy Policy</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="legal-body">
+
+    <div class="legal-section">
+      <p>We use cookies to help improve your experience of our website at <a href="https://www.theicebathnz.co.nz">https://www.theicebathnz.co.nz</a>. This cookie policy is part of The Ice Bath NZ's privacy policy. It covers the use of cookies between your device and our site.</p>
+      <p>We also provide basic information on third-party services we may use, who may also use cookies as part of their service. This policy does not cover their cookies.</p>
+      <p>If you don't wish to accept cookies from us, you should instruct your browser to refuse cookies from <a href="https://www.theicebathnz.co.nz">https://www.theicebathnz.co.nz</a>. In such a case, we may be unable to provide you with some of your desired content and services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>What is a <em>cookie?</em></h2>
+      <p>A cookie is a small piece of data that a website stores on your device when you visit. It typically contains information about the website itself, a unique identifier that allows the site to recognize your web browser when you return, additional data that serves the cookie's purpose, and the lifespan of the cookie itself.</p>
+      <p>Cookies are used to enable certain features (e.g. logging in), track site usage (e.g. analytics), store your user settings (e.g. time zone, notification preferences), and to personalize your content (e.g. advertising, language).</p>
+      <p>Cookies set by the website you are visiting are usually referred to as first-party cookies. They typically only track your activity on that particular site.</p>
+      <p>Cookies set by other sites and companies (i.e. third parties) are called third-party cookies. They can be used to track you on other websites that use the same third-party service.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Types of cookies and how we use them</h2>
+
+      <div class="cookie-card">
+        <div class="cookie-card-header">
+          <span class="cookie-card-title">Essential cookies</span>
+          <span class="cookie-card-badge used">We use these</span>
+        </div>
+        <p>Essential cookies are crucial to your experience of a website, enabling core features like user logins, account management, shopping carts, and payment processing. We use essential cookies to enable certain functions on our website.</p>
+      </div>
+
+      <div class="cookie-card">
+        <div class="cookie-card-header">
+          <span class="cookie-card-title">Performance cookies</span>
+          <span class="cookie-card-badge used">We use these</span>
+        </div>
+        <p>Performance cookies track how you use a website during your visit. Typically, this information is anonymous and aggregated, with information tracked across all site users. They help companies understand visitor usage patterns, identify and diagnose problems or errors their users may encounter, and make better strategic decisions in improving their audience's overall website experience. These cookies may be set by the website you're visiting (first-party) or by third-party services. They do not collect personal information about you.</p>
+      </div>
+
+      <div class="cookie-card">
+        <div class="cookie-card-header">
+          <span class="cookie-card-title">Functionality cookies</span>
+          <span class="cookie-card-badge not-used">Not used</span>
+        </div>
+        <p>Functionality cookies are used to collect information about your device and any settings you may configure on the website you're visiting (like language and time zone settings). With this information, websites can provide you with customized, enhanced, or optimized content and services. These cookies may be set by the website you're visiting (first-party) or by third-party services. We do not use this type of cookie on our site.</p>
+      </div>
+
+      <div class="cookie-card">
+        <div class="cookie-card-header">
+          <span class="cookie-card-title">Targeting / advertising cookies</span>
+          <span class="cookie-card-badge used">We use these</span>
+        </div>
+        <p>Targeting/advertising cookies help determine what promotional content is most relevant and appropriate to you and your interests. Websites may use them to deliver targeted advertising or limit the number of times you see an advertisement. This helps companies improve the effectiveness of their campaigns and the quality of content presented to you. These cookies may be set by the website you're visiting (first-party) or by third-party services. Targeting/advertising cookies set by third-parties may be used to track you on other websites that use the same third-party service. We use targeting/advertising cookies on our site.</p>
+      </div>
+    </div>
+
+    <div class="legal-section">
+      <h2>Contact <em>Us</em></h2>
+      <p>For any questions about our use of cookies, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
+        <li>Business address: Auckland, New Zealand</li>
+        <li>Phone: <a href="tel:+64212103737">021 210 3737</a></li>
+      </ul>
+      <p style="margin-top:1rem">For more information on how we handle your personal data, please refer to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="product-page/ice-bath-nz.html">Ice Bath</a></li>
+            <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="product-page/barrel-sauna.html">Sauna</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="benefits.html">The Science</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+  </script>
+</body>
+</html>

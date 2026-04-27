@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-13 (session 11)
+Last updated: 2026-04-13 (session 12)
 
 ---
 
@@ -163,6 +163,10 @@ Last updated: 2026-04-13 (session 11)
 - [x] Homepage feature section spec cells updated: Steel Grade / Hot-Dipped / Outdoors / Warranty — removed ice-bath-centric cells (session 12)
 - [x] Homepage feature section: "View Specs" button removed; "Shop Ice Bath" → "Shop Ice Baths" pointing to /buy-now (session 12)
 - [x] Homepage hero: "The Science" ghost button updated from #science anchor → /benefits (session 12)
+
+- [x] Image optimisation — all brand assets converted to WebP (quality 82); favicons re-optimised as PNG; AVIFs kept as-is (session 12)
+  - 7.3MB → 1.6MB total (77% reduction); biggest wins: product hero PNGs (88–96% each)
+  - 17 new optimised files added to brand assets/; 34 src/href references updated across all 9 HTML pages
 
 ### Pending
 ---

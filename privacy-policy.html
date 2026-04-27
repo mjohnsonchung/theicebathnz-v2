@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="brand%20assets/Site%20Favicon/favicon-cropped-opt.png">
+  <title>Privacy Policy — The Ice Bath NZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:      #020B15;
+      --deep:      #071525;
+      --surface:   #0C1E35;
+      --elevated:  #122645;
+      --lift:      #183360;
+      --ice:       #5BC8F5;
+      --ice-glow:  rgba(91, 200, 245, 0.18);
+      --frost:     #B8E8FF;
+      --arctic:    #E4F4FF;
+      --snow:      #EEF5FA;
+      --mist:      #7A9BB5;
+      --fog:       #3A5A7A;
+      --border:    rgba(91, 200, 245, 0.1);
+      --border-hi: rgba(91, 200, 245, 0.25);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--void); color: var(--snow); font-family: var(--body); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--body); cursor: pointer; }
+
+    .grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 250px 250px; opacity: 0.032; mix-blend-mode: overlay; }
+
+    /* ── Navigation ─────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; transition: background 0.5s var(--ease-smooth), backdrop-filter 0.5s, padding 0.4s var(--ease-smooth), border-color 0.4s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(2,11,21,0.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 1rem 2.5rem; border-bottom-color: var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--snow); display: flex; align-items: baseline; gap: 0.2rem; }
+    .nav-logo sup { font-family: var(--body); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.25em; color: var(--ice); vertical-align: super; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--snow); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
+    .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s, opacity 0.2s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--snow); }
+
+    /* ── Legal Hero ──────────────────────────────────── */
+    .legal-hero {
+      position: relative;
+      padding: 10rem 2.5rem 5rem;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .legal-hero-atmo {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 80% at 20% 50%, rgba(91,200,245,0.045) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 85% 20%, rgba(18,50,100,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #071525 0%, #020B15 60%);
+    }
+    .legal-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .legal-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ice); margin-bottom: 1.75rem;
+    }
+    .legal-eyebrow::before {
+      content: ''; display: block;
+      width: 2rem; height: 1px; background: var(--ice); opacity: 0.6;
+    }
+    .legal-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--snow);
+      margin-bottom: 1.5rem;
+    }
+    .legal-hero h1 em { font-style: italic; color: var(--ice); }
+    .legal-meta {
+      font-size: 0.82rem;
+      color: var(--fog);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Legal Body ──────────────────────────────────── */
+    .legal-body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 8rem;
+    }
+    .legal-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .legal-section h2 {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--snow);
+      margin-bottom: 1.25rem;
+    }
+    .legal-section h2 em { font-style: italic; color: var(--ice); }
+    .legal-section p {
+      font-size: 0.95rem;
+      line-height: 1.82;
+      color: var(--mist);
+      margin-bottom: 1rem;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul {
+      list-style: none;
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .legal-section ul li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--mist);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--ice); opacity: 0.5;
+      font-size: 0.8rem;
+    }
+    .legal-section a {
+      color: var(--ice);
+      border-bottom: 1px solid rgba(91,200,245,0.3);
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+    .legal-section a:hover { border-color: var(--ice); opacity: 0.8; }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
+    .footer-inner { max-width: 1440px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+    .footer-brand .nav-logo { display: inline-flex; margin-bottom: 1.25rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); max-width: 28ch; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
+    .social-btn { display: flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1px solid var(--border); color: var(--mist); transition: color 0.2s, border-color 0.2s; }
+    .social-btn:hover { color: var(--snow); border-color: var(--border-hi); }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--snow); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--fog); }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--mist); }
+
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: 0.85rem 1.25rem; }
+      .legal-hero { padding: 8rem 1.5rem 4rem; }
+      .legal-body { padding: 4rem 1.5rem 6rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="buy-now.html" onclick="closeMobile()">Products</a>
+    <a href="benefits.html" onclick="closeMobile()">Benefits</a>
+    <a href="about-us.html" onclick="closeMobile()">About</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="buy-now.html" class="btn-shop" style="font-family:var(--body);margin-top:0.5rem" onclick="closeMobile()">Shop Now</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+    <ul class="nav-links">
+      <li><a href="buy-now.html">Products</a></li>
+      <li><a href="benefits.html">Benefits</a></li>
+      <li><a href="about-us.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="buy-now.html" class="btn-shop">Shop Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="legal-hero">
+    <div class="legal-hero-atmo"></div>
+    <div class="legal-hero-inner">
+      <div class="legal-eyebrow">Legal</div>
+      <h1>Privacy <em>Policy</em></h1>
+      <p class="legal-meta">Effective: 29 June 2023 &nbsp;·&nbsp; Last updated: 29 June 2023</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="legal-body">
+
+    <div class="legal-section">
+      <p>Your privacy is important to us. It is The Ice Bath NZ's policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, <a href="https://www.theicebathnz.co.nz">https://www.theicebathnz.co.nz</a>, and other sites we own and operate.</p>
+      <p>Personal information is any information about you which can be used to identify you. This includes information about you as a person (such as name, address, and date of birth), your devices, payment details, and even information about how you use a website or online service.</p>
+      <p>In the event our site contains links to third-party sites and services, please be aware that those sites and services have their own privacy policies. After following a link to any third-party content, you should read their posted privacy policy information about how they collect and use personal information. This Privacy Policy does not apply to any of your activities after you leave our site.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Information We <em>Collect</em></h2>
+      <p>Information we collect falls into one of two categories: "voluntarily provided" information and "automatically collected" information.</p>
+      <p>"Voluntarily provided" information refers to any information you knowingly and actively provide us when using or participating in any of our services and promotions.</p>
+      <p>"Automatically collected" information refers to any information automatically sent by your devices in the course of accessing our products and services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Log Data</h2>
+      <p>When you visit our website, our servers may automatically log the standard data provided by your web browser. It may include your device's Internet Protocol (IP) address, your browser type and version, the pages you visit, the time and date of your visit, the time spent on each page, and other details about your visit.</p>
+      <p>Additionally, if you encounter certain errors while using the site, we may automatically collect data about the error and the circumstances surrounding its occurrence. This data may include technical details about your device, what you were trying to do when the error happened, and other technical information relating to the problem.</p>
+      <p>Please be aware that while this information may not be personally identifying by itself, it may be possible to combine it with other data to personally identify individual persons.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Device Data</h2>
+      <p>When you visit our website or interact with our services, we may automatically collect data about your device, such as:</p>
+      <ul>
+        <li>Unique device identifiers</li>
+        <li>Geo-location data</li>
+      </ul>
+      <p>Data we collect can depend on the individual settings of your device and software. We recommend checking the policies of your device manufacturer or software provider to learn what information they make available to us.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Personal Information</h2>
+      <p>We may ask for personal information — for example, when you subscribe to our newsletter or when you contact us — which may include one or more of the following:</p>
+      <ul>
+        <li>Name</li>
+        <li>Email</li>
+        <li>Date of birth</li>
+        <li>Phone/mobile number</li>
+        <li>Home/mailing address</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>Legitimate Reasons for Processing Your Personal Information</h2>
+      <p>We only collect and use your personal information when we have a legitimate reason for doing so. In which instance, we only collect personal information that is reasonably necessary to provide our services to you.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Collection and Use of <em>Information</em></h2>
+      <p>We may collect personal information from you when you do any of the following on our website:</p>
+      <ul>
+        <li>Sign up to receive updates from us via email or social media channels</li>
+        <li>Use a mobile device or web browser to access our content</li>
+        <li>Contact us via email, social media, or on any similar technologies</li>
+        <li>When you mention us on social media</li>
+      </ul>
+      <p>We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:</p>
+      <ul>
+        <li>To provide you with our platform's core features and services</li>
+        <li>To deliver products and/or services to you</li>
+        <li>To contact and communicate with you</li>
+        <li>For analytics, market research, and business development, including to operate and improve our website, associated applications, and associated social media platforms</li>
+        <li>For advertising and marketing, including to send you promotional information about our products and services and information about third parties that we consider may be of interest to you</li>
+        <li>For internal record keeping and administrative purposes</li>
+        <li>For security and fraud prevention, and to ensure that our sites and apps are safe, secure, and used in line with our terms of use</li>
+        <li>For technical assessment, including to operate and improve our app, associated applications, and associated social media platforms</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>Security of Your Personal Information</h2>
+      <p>When we collect and process personal information, and while we retain this information, we will protect it within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use, or modification.</p>
+      <p>Although we will do our best to protect the personal information you provide to us, we advise that no method of electronic transmission or storage is 100% secure, and no one can guarantee absolute data security.</p>
+      <p>You are responsible for selecting any password and its overall security strength, ensuring the security of your own information within the bounds of our services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>How Long We Keep Your Personal Information</h2>
+      <p>We keep your personal information only for as long as we need to. This time period may depend on what we are using your information for, in accordance with this privacy policy. For example, if you have provided us with personal information such as an email address when contacting us about a specific enquiry, we may retain this information for the duration of your enquiry remaining open as well as for our own records so we may effectively address similar enquiries in future. If your personal information is no longer required for this purpose, we will delete it or make it anonymous by removing all details that identify you.</p>
+      <p>However, if necessary, we may retain your personal information for our compliance with a legal, accounting, or reporting obligation or for archiving purposes in the public interest, scientific, or historical research purposes or statistical purposes.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Children's Privacy</h2>
+      <p>We do not aim any of our products or services directly at children under the age of 13, and we do not knowingly collect personal information about children under 13.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>International Transfers of Personal Information</h2>
+      <p>The personal information we collect is stored and/or processed in New Zealand, or where we or our partners, affiliates, and third-party providers maintain facilities.</p>
+      <p>The countries to which we store, process, or transfer your personal information may not have the same data protection laws as the country in which you initially provided the information. If we transfer your personal information to third parties in other countries: (i) we will perform those transfers in accordance with the requirements of applicable law; and (ii) we will protect the transferred personal information in accordance with this privacy policy.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Your Rights and Controlling Your Personal Information</h2>
+      <p><strong style="color:var(--snow);font-weight:400">Your choice:</strong> By providing personal information to us, you understand we will collect, hold, use, and disclose your personal information in accordance with this privacy policy. You do not have to provide personal information to us, however, if you do not, it may affect your use of our website or the products and/or services offered on or through it.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Information from third parties:</strong> If we receive personal information about you from a third party, we will protect it as set out in this privacy policy. If you are a third party providing personal information about somebody else, you represent and warrant that you have such person's consent to provide the personal information to us.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Marketing permission:</strong> If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by contacting us using the details below.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Access:</strong> You may request details of the personal information that we hold about you.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Correction:</strong> If you believe that any information we hold about you is inaccurate, out of date, incomplete, irrelevant, or misleading, please contact us using the details provided in this privacy policy. We will take reasonable steps to correct any information found to be inaccurate, incomplete, misleading, or out of date.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Non-discrimination:</strong> We will not discriminate against you for exercising any of your rights over your personal information.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Notification of data breaches:</strong> We will comply with laws applicable to us in respect of any data breach.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Complaints:</strong> If you believe that we have breached a relevant data protection law and wish to make a complaint, please contact us using the details below and provide us with full details of the alleged breach. We will promptly investigate your complaint and respond to you, in writing, setting out the outcome of our investigation and the steps we will take to deal with your complaint.</p>
+      <p><strong style="color:var(--snow);font-weight:400">Unsubscribe:</strong> To unsubscribe from our email database or opt-out of communications (including marketing communications), please contact us using the details provided in this privacy policy, or opt-out using the opt-out facilities provided in the communication. Please send an email to <a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a> to unsubscribe.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Use of Cookies</h2>
+      <p>We use "cookies" to collect information about you and your activity across our site. A cookie is a small piece of data that our website stores on your computer, and accesses each time you visit, so we can understand how you use our site. This helps us serve you content based on preferences you have specified.</p>
+      <p>Please refer to our <a href="cookie-policy.html">Cookie Policy</a> for more information.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Business Transfers</h2>
+      <p>If we or our assets are acquired, or in the unlikely event that we go out of business or enter bankruptcy, we would include data, including your personal information, among the assets transferred to any parties who acquire us. You acknowledge that such transfers may occur, and that any parties who acquire us may, to the extent permitted by applicable law, continue to use your personal information according to this policy, which they will be required to assume as it is the basis for any ownership or use rights we have over such information.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Limits of Our Policy</h2>
+      <p>Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Changes to This Policy</h2>
+      <p>At our discretion, we may change our privacy policy to reflect updates to our business processes, current acceptable practices, or legislative or regulatory changes. If we decide to change this privacy policy, we will post the changes here at the same link by which you are accessing this privacy policy.</p>
+      <p>If required by law, we will get your permission or give you the opportunity to opt in to or opt out of, as applicable, any new uses of your personal information.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Contact <em>Us</em></h2>
+      <p>For any questions or concerns regarding your privacy, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
+        <li>Business address: Auckland, New Zealand</li>
+        <li>Phone: <a href="tel:+64212103737">021 210 3737</a></li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
+          <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="product-page/ice-bath-nz.html">Ice Bath</a></li>
+            <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
+            <li><a href="product-page/barrel-sauna.html">Sauna</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="benefits.html">The Science</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(() => mobileMenu.classList.toggle('open'), 10);
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+    }
+  </script>
+</body>
+</html>

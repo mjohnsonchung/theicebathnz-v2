@@ -10,6 +10,7 @@
 { "source": "/product-page/premium-square-sauna", "destination": "/product-page/barrel-sauna", "permanent": true },
     { "source": "/outdoor-sauna-nz", "destination": "/product-page/barrel-sauna", "permanent": true },
     { "source": "/category/ice-baths", "destination": "/product-page/ice-bath-nz", "permanent": true },
-    { "source": "/category/all-products", "destination": "/buy-now", "permanent": true }
+    { "source": "/category/all-products", "destination": "/buy-now", "permanent": true },
+    { "source": "/cookies", "destination": "/cookie-policy", "permanent": true }
   ]
 }
