@@ -203,7 +203,14 @@ Last updated: 2026-04-28 (session 15)
   - Buy button (`#buy-button`) moved up to hero actions — select region and buy in one place
   - Order CTA section below simplified: duplicate form elements removed, replaced with "Configure & Buy Above" scroll-up link
 
+- [x] `api/create-checkout.js` updated to accept `items` array instead of single `sku` — each SKU resolved via `resolveSkuToItems()` and flattened; full product list passed to `calculateShipping()`; metadata updated to `items: items.join(',')` (session 16)
+- [x] `js/configurator.js` created — `setupConfigurator()` module with live order summary panel: line items, subtotal (multi-item only), shipping, total; dynamic freight category (dominant category repopulates dropdown when items change); buy button disabled until region selected; total shows subtotal+ until region picked; errors shown inline via `#buy-error`; returns `{ refresh() }` for variant change hooks (session 16)
+
 ### Pending
+
+- [ ] Phase 3: Wire up ice-bath-nz.html order panel with configurator
+- [ ] Phase 4: Wire up ice-bath-chiller.html order panel + ice bath cross-sell
+- [ ] Phase 5: Wire up barrel-sauna.html order panel
 ---
 
 ## Prices

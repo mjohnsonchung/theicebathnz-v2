@@ -1,12 +1,13 @@
 // =============================================================================
 // /api/create-checkout
 // =============================================================================
-// POST endpoint. Accepts { sku, region, success_url, cancel_url } and returns
+// POST endpoint. Accepts { items, region, success_url, cancel_url } and returns
 // a Stripe Checkout Session URL with the correct line items + shipping rate
 // for the customer's selected Mainfreight region.
 //
-// Replaces the old static Stripe Payment Links: each Buy button on the site
-// now POSTs here, gets a one-time checkout URL, and redirects.
+// `items` is an array of SKU strings (product IDs or bundle IDs).
+// Each SKU is resolved to its constituent products via resolveSkuToItems(),
+// so both single-product and bundle SKUs work.
 //
 // Required env var (set in Vercel dashboard → Settings → Environment Variables):
 //   STRIPE_SECRET_KEY  — your Stripe live or test secret key (sk_live_… / sk_test_…)
@@ -35,16 +36,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { sku, region, success_url, cancel_url } = req.body || {};
+    const { items, region, success_url, cancel_url } = req.body || {};
 
-    if (!sku || !region || !success_url || !cancel_url) {
-      return res.status(400).json({ error: 'Missing required field (sku, region, success_url, cancel_url)' });
+    // Validate items
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ error: 'items must be a non-empty array of SKU strings' });
     }
 
-    // Resolve SKU to one or more line items (handles both single products and bundles)
+    if (!region || !success_url || !cancel_url) {
+      return res.status(400).json({ error: 'Missing required field (region, success_url, cancel_url)' });
+    }
+
+    // Resolve each SKU to its constituent product IDs and flatten.
+    // resolveSkuToItems() handles both single products and bundle SKUs.
     let productIds;
     try {
-      productIds = resolveSkuToItems(sku);
+      productIds = items.flatMap(sku => resolveSkuToItems(sku));
     } catch (e) {
       return res.status(400).json({ error: e.message });
     }
@@ -81,8 +88,8 @@ export default async function handler(req, res) {
           display_name: cityLabel, // e.g. "Auckland", "Palmerston North"
         },
       }],
-      // Track which SKU and region for fulfilment reports
-      metadata: { sku, region, shipping_nzd: String(shippingNZD) },
+      // Track which items and region for fulfilment reports
+      metadata: { items: items.join(','), region, shipping_nzd: String(shippingNZD) },
       success_url,
       cancel_url,
     });
