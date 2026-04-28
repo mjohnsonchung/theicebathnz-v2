@@ -1023,11 +1023,7 @@
         <p id="ship-note" class="shipping-note"></p>
       </div>
 
-      <div class="product-price-block">
-        <span class="price-cur">NZ$</span>
-        <span class="price-amount" id="priceAmount">784</span>
-        <span class="price-note" id="priceNote">incl. GST</span>
-      </div>
+      <div id="order-summary"></div>
 
       <div class="product-hero-actions">
         <button id="buy-button" class="btn-primary" type="button">
@@ -1036,6 +1032,7 @@
         </button>
         <a href="../contact.html" class="btn-ghost">Talk to Us First</a>
       </div>
+      <p id="buy-error" hidden></p>
 
       <ul class="product-highlights" id="highlightsList">
         <li class="highlight-item" id="hlCapacity">~350L capacity — full-body immersion</li>
@@ -1375,30 +1372,15 @@
     let currentChiller = 'none';
 
     function updatePrice() {
-      const total = priceMatrix[currentSize][currentChiller];
-      const pa = document.getElementById('priceAmount');
-      const pn = document.getElementById('priceNote');
-      pa.style.opacity = '0';
-      pa.style.transform = 'translateY(6px)';
-      setTimeout(() => {
-        pa.textContent = total.toLocaleString('en-NZ');
-        pa.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-        pa.style.opacity = '1';
-        pa.style.transform = 'translateY(0)';
-      }, 120);
-      const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
-      document.getElementById('ctaPrice').textContent = 'NZ$' + total.toLocaleString('en-NZ');
-      document.getElementById('ctaSizeLabel').textContent = ctaLabel;
-      // buy-button is now wired via checkout.js module (no href to update)
-      // Update all chiller option price hints for current size
+      // Update chiller option price hints for current size
       document.getElementById('chHintNone').textContent    = 'NZ$' + priceMatrix[currentSize].none.toLocaleString('en-NZ');
       document.getElementById('chHintChiller').textContent = 'NZ$' + priceMatrix[currentSize].chiller.toLocaleString('en-NZ');
       document.getElementById('chHintPremium').textContent = 'NZ$' + priceMatrix[currentSize].premium.toLocaleString('en-NZ');
-      if (currentChiller !== 'none') {
-        pn.innerHTML = 'incl. GST &nbsp;<span style="color:var(--ice);font-size:0.7rem;letter-spacing:0.06em">Bundle price</span>';
-      } else {
-        pn.textContent = 'incl. GST';
-      }
+      // Update CTA section labels
+      const total = priceMatrix[currentSize][currentChiller];
+      const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
+      document.getElementById('ctaPrice').textContent = 'NZ$' + total.toLocaleString('en-NZ');
+      document.getElementById('ctaSizeLabel').textContent = ctaLabel;
     }
 
     function selectSize(size) {
@@ -1483,31 +1465,31 @@
   </script>
 
   <script type="module">
-    import { setupCheckout } from '/js/checkout.js';
-
-    const SKU_MAP = {
-      '4ft|none':    'ice_bath_4ft',
-      '5ft|none':    'ice_bath_5ft',
-      '4ft|chiller': 'bath_4ft_std',
-      '5ft|chiller': 'bath_5ft_std',
-      '4ft|premium': 'bath_4ft_prem',
-      '5ft|premium': 'bath_5ft_prem',
-    };
+    import { setupConfigurator } from '/js/configurator.js';
 
     const getSize    = () => document.querySelector('.size-option.active')?.dataset.size    || '4ft';
     const getChiller = () => document.querySelector('.chiller-option.active')?.dataset.chiller || 'none';
 
-    const checkout = setupCheckout({
-      selectEl:    document.getElementById('ship-region'),
-      buyButton:   document.getElementById('buy-button'),
-      category:    'ice_bath',
-      getSku:      () => SKU_MAP[`${getSize()}|${getChiller()}`],
-      productPath: '/product-page/ice-bath-nz',
-      priceNoteEl: document.getElementById('ship-note'),
+    function getItems() {
+      const items = [getSize() === '5ft' ? 'ice_bath_5ft' : 'ice_bath_4ft'];
+      const ch = getChiller();
+      if (ch === 'chiller') items.push('chiller_standard');
+      if (ch === 'premium') items.push('chiller_premium');
+      return items;
+    }
+
+    const config = setupConfigurator({
+      summaryEl:      document.getElementById('order-summary'),
+      buyButton:      document.getElementById('buy-button'),
+      regionSelectEl: document.getElementById('ship-region'),
+      shipNoteEl:     document.getElementById('ship-note'),
+      category:       'ice_bath',
+      productPath:    '/product-page/ice-bath-nz',
+      getItems,
     });
 
     document.querySelectorAll('.size-option, .chiller-option')
-      .forEach(el => el.addEventListener('click', () => checkout.refresh()));
+      .forEach(el => el.addEventListener('click', () => config.refresh()));
   </script>
 </body>
 </html>

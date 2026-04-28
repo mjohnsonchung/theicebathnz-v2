@@ -309,6 +309,27 @@
     }
     .variant-option.active .variant-price-hint { color: var(--frost); }
 
+    /* ── Bath Add-on Selector ──────────────────────────── */
+    .bath-addon-selector { margin-bottom: 2rem; }
+    .bath-addon-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
+    .bath-addon-options { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .bath-addon {
+      flex: 1; min-width: calc(33% - 0.4rem);
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 0.875rem 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 0.75rem; cursor: pointer;
+      transition: border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth), transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .bath-addon:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
+    .bath-addon:active { transform: translateY(0); }
+    .bath-addon.active { border-color: var(--ice); background: rgba(91,200,245,0.06); }
+    .bath-addon:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+    .addon-name { font-family: var(--display); font-size: 1.1rem; font-weight: 300; color: var(--mist); transition: color 0.2s; }
+    .bath-addon.active .addon-name { color: var(--ice); }
+    .addon-sub { font-size: 0.72rem; color: var(--fog); font-family: var(--body); margin-top: 0.2rem; }
+
     /* ── Shipping Region Picker ─────────────────────────── */
     .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.7s forwards; }
     .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
@@ -378,6 +399,25 @@
         </div>
       </div>
 
+      <!-- Bath Add-on Cross-sell -->
+      <div class="bath-addon-selector">
+        <p class="bath-addon-label">Add an Ice Bath?</p>
+        <div class="bath-addon-options">
+          <button class="bath-addon active" data-bath="none" onclick="selectBathAddon('none')">
+            <span class="addon-name">No Bath</span>
+            <span class="addon-sub">Chiller only</span>
+          </button>
+          <button class="bath-addon" data-bath="4ft" onclick="selectBathAddon('4ft')">
+            <span class="addon-name">+ 4ft Bath</span>
+            <span class="addon-sub">NZ$784</span>
+          </button>
+          <button class="bath-addon" data-bath="5ft" onclick="selectBathAddon('5ft')">
+            <span class="addon-name">+ 5ft Bath</span>
+            <span class="addon-sub">NZ$888</span>
+          </button>
+        </div>
+      </div>
+
       <div class="shipping-region">
         <p class="shipping-region-label">Shipping Region</p>
         <div class="ship-select-wrap">
@@ -386,12 +426,8 @@
         <p id="ship-note" class="shipping-note"></p>
       </div>
 
-      <div class="product-price-block">
-        <span class="price-cur">NZ$</span>
-        <span class="price-amount" id="heroPrice">2,712</span>
-        <del id="heroPriceOrig" style="font-family:var(--body);font-size:1rem;color:var(--fog);display:none;margin-left:0.25rem;align-self:center;"></del>
-        <span class="price-note" id="heroPriceNote">incl. GST · NZ Delivery</span>
-      </div>
+      <div id="order-summary"></div>
+
       <div class="product-hero-actions">
         <button id="buy-button" class="btn-primary" type="button">
           Order Now
@@ -399,6 +435,7 @@
         </button>
         <a href="../contact.html" class="btn-ghost">Ask a Question</a>
       </div>
+      <p id="buy-error" hidden></p>
       <ul class="product-highlights" id="heroHighlights">
         <li class="highlight-item">Cools water down to 3°C (37°F)</li>
         <li class="highlight-item">1 HP motor — industrial-grade components</li>
@@ -808,16 +845,6 @@
       document.getElementById('heroBadge').textContent = d.badge;
       document.getElementById('heroName').innerHTML = d.name;
       document.getElementById('heroTagline').textContent = d.tagline;
-      document.getElementById('heroPrice').textContent = d.price;
-
-      const origEl = document.getElementById('heroPriceOrig');
-      if (d.priceOrig) {
-        origEl.textContent = 'NZ$' + d.priceOrig;
-        origEl.style.display = 'inline';
-      } else {
-        origEl.style.display = 'none';
-      }
-      document.getElementById('heroPriceNote').textContent = d.priceNote;
 
       // Highlights
       document.getElementById('heroHighlights').innerHTML =
@@ -844,32 +871,43 @@
       // Order CTA
       document.getElementById('ctaLabel').textContent = d.ctaLabel;
       document.getElementById('ctaPrice').textContent = d.ctaPrice;
-      // buy-button is now wired via checkout.js module (no href to update)
+    }
+
+    let currentBathAddon = 'none';
+    function selectBathAddon(bath) {
+      currentBathAddon = bath;
+      document.querySelectorAll('.bath-addon').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.bath === bath);
+      });
     }
   </script>
 
   <script type="module">
-    import { setupCheckout } from '/js/checkout.js';
+    import { setupConfigurator } from '/js/configurator.js';
 
-    const getVariant = () =>
-      document.querySelector('.variant-option.active')?.dataset.variant || 'chiller';
+    const getVariant   = () => document.querySelector('.variant-option.active')?.dataset.variant || 'chiller';
+    const getBathAddon = () => document.querySelector('.bath-addon.active')?.dataset.bath || 'none';
 
-    const SKU_MAP = {
-      chiller: 'chiller_standard',
-      premium: 'chiller_premium',
-    };
+    function getItems() {
+      const items = [getVariant() === 'premium' ? 'chiller_premium' : 'chiller_standard'];
+      const bath = getBathAddon();
+      if (bath === '4ft') items.unshift('ice_bath_4ft');
+      if (bath === '5ft') items.unshift('ice_bath_5ft');
+      return items;
+    }
 
-    const checkout = setupCheckout({
-      selectEl:    document.getElementById('ship-region'),
-      buyButton:   document.getElementById('buy-button'),
-      category:    'chiller',
-      getSku:      () => SKU_MAP[getVariant()],
-      productPath: '/product-page/ice-bath-chiller',
-      priceNoteEl: document.getElementById('ship-note'),
+    const config = setupConfigurator({
+      summaryEl:      document.getElementById('order-summary'),
+      buyButton:      document.getElementById('buy-button'),
+      regionSelectEl: document.getElementById('ship-region'),
+      shipNoteEl:     document.getElementById('ship-note'),
+      category:       'chiller',
+      productPath:    '/product-page/ice-bath-chiller',
+      getItems,
     });
 
-    document.querySelectorAll('.variant-option')
-      .forEach(el => el.addEventListener('click', () => checkout.refresh()));
+    document.querySelectorAll('.variant-option, .bath-addon')
+      .forEach(el => el.addEventListener('click', () => config.refresh()));
   </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-28 (session 15)
+Last updated: 2026-04-28 (session 17)
 
 ---
 
@@ -206,10 +206,11 @@ Last updated: 2026-04-28 (session 15)
 - [x] `api/create-checkout.js` updated to accept `items` array instead of single `sku` — each SKU resolved via `resolveSkuToItems()` and flattened; full product list passed to `calculateShipping()`; metadata updated to `items: items.join(',')` (session 16)
 - [x] `js/configurator.js` created — `setupConfigurator()` module with live order summary panel: line items, subtotal (multi-item only), shipping, total; dynamic freight category (dominant category repopulates dropdown when items change); buy button disabled until region selected; total shows subtotal+ until region picked; errors shown inline via `#buy-error`; returns `{ refresh() }` for variant change hooks (session 16)
 
+- [x] Phase 3 complete — ice-bath-nz.html: price block replaced with `#order-summary`; old `setupCheckout` module replaced with `setupConfigurator`; `updatePrice()` simplified to keep only chiller hints + CTA label updates; `data-chiller="chiller"` correctly maps to `chiller_standard` SKU (session 17)
+- [x] Phase 4 complete — ice-bath-chiller.html: price block replaced with `#order-summary`; "Add an Ice Bath?" cross-sell added (No Bath / +4ft / +5ft); `selectBathAddon()` handler added; `setupConfigurator` wired with dynamic `getItems()` — dominant freight category auto-switches to `ice_bath` when bath is added; `setupCheckout` module replaced (session 17)
+
 ### Pending
 
-- [ ] Phase 3: Wire up ice-bath-nz.html order panel with configurator
-- [ ] Phase 4: Wire up ice-bath-chiller.html order panel + ice bath cross-sell
 - [ ] Phase 5: Wire up barrel-sauna.html order panel
 ---
 
