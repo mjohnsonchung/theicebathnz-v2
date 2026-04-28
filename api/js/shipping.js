@@ -72,7 +72,7 @@ export const REGION_ORDER = [
 export const PRODUCTS = {
   ice_bath_4ft:     { name: 'Ice Bath 4ft',             amount:  78400, ship: 'ice_bath' },
   ice_bath_5ft:     { name: 'Ice Bath 5ft',             amount:  88800, ship: 'ice_bath' },
-  chiller_standard: { name: 'Ice Bath Chiller',         amount: 271200, ship: 'chiller'  },
+  chiller_standard: { name: 'Ice Bath Chiller',         amount: 239900, ship: 'chiller'  },
   chiller_premium:  { name: 'Premium Ice Bath Chiller', amount: 329900, ship: 'chiller'  },
   sauna_barrel:     { name: 'Barrel Sauna',             amount: 989900, ship: 'sauna'    },
   sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'    },

@@ -995,17 +995,16 @@
           <button class="chiller-option active" data-chiller="none" onclick="selectChiller('none')">
             <span class="chiller-name">No Chiller</span>
             <span class="chiller-sub">Ice bath only</span>
-            <span class="chiller-price-hint" id="chHintNone">NZ$784</span>
           </button>
           <button class="chiller-option" data-chiller="chiller" onclick="selectChiller('chiller')">
             <span class="chiller-name">+ Chiller</span>
             <span class="chiller-sub">Cools to 4°C · ~1.5hrs</span>
-            <span class="chiller-price-hint" id="chHintChiller">NZ$3,479</span>
+            <span class="chiller-price-hint">+ $2,399</span>
           </button>
           <button class="chiller-option" data-chiller="premium" onclick="selectChiller('premium')">
             <span class="chiller-name">+ Premium</span>
             <span class="chiller-sub">Advanced temp control</span>
-            <span class="chiller-price-hint" id="chHintPremium">NZ$4,379</span>
+            <span class="chiller-price-hint">+ $3,299</span>
           </button>
         </div>
       </div>
@@ -1251,7 +1250,7 @@
               <p class="related-desc">Standalone precision chiller — pairs with any tub. Cools to 4°C in 45 minutes.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>2,712</span>
+              <span class="related-price"><span class="cur">NZ$</span>2,399</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
@@ -1360,8 +1359,8 @@
       '5ft': { ctaLabel: 'Ice Bath — 5ft', capacity: '~500L', length: '1500mm', hlCapacity: '~500L capacity — full-body immersion' }
     };
     const priceMatrix = {
-      '4ft': { none: 784,  chiller: 3479, premium: 4379 },
-      '5ft': { none: 888,  chiller: 3609, premium: 4509 }
+      '4ft': { none: 784,  chiller: 3183, premium: 4083 },
+      '5ft': { none: 888,  chiller: 3287, premium: 4187 }
     };
     const stripeLinks = {
       '4ft': { none: 'https://buy.stripe.com/28E7sNfLrcmV4Fwa9Z2oE00', chiller: 'https://buy.stripe.com/5kQaEZgPv2Ml9ZQgyn2oE04', premium: 'https://buy.stripe.com/8x2bJ3bvb2Ml3Bs4PF2oE06' },
@@ -1372,10 +1371,6 @@
     let currentChiller = 'none';
 
     function updatePrice() {
-      // Update chiller option price hints for current size
-      document.getElementById('chHintNone').textContent    = 'NZ$' + priceMatrix[currentSize].none.toLocaleString('en-NZ');
-      document.getElementById('chHintChiller').textContent = 'NZ$' + priceMatrix[currentSize].chiller.toLocaleString('en-NZ');
-      document.getElementById('chHintPremium').textContent = 'NZ$' + priceMatrix[currentSize].premium.toLocaleString('en-NZ');
       // Update CTA section labels
       const total = priceMatrix[currentSize][currentChiller];
       const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
