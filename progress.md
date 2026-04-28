@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-28 (session 14)
+Last updated: 2026-04-28 (session 15)
 
 ---
 
@@ -195,6 +195,13 @@ Last updated: 2026-04-28 (session 14)
   - Stripe Checkout shipping line shows the city name (e.g. "Auckland", "Palmerston North")
   - Setup: `STRIPE_SECRET_KEY` env var added in Vercel; see STRIPE_SETUP.md
   - Old Stripe Payment Links retained (not deleted) until live testing complete
+
+- [x] Shipping region picker moved into hero selector area on all 3 product pages (session 15)
+  - Dropdown now sits directly after the variant/size/chiller toggle cards, before the price block
+  - Restyled to match toggle aesthetic: same small-caps label, `--surface` bg, `0.75rem` border-radius, custom chevron arrow
+  - Focus accent: `--ice` on ice bath & chiller pages, `--ember` on sauna page
+  - Buy button (`#buy-button`) moved up to hero actions — select region and buy in one place
+  - Order CTA section below simplified: duplicate form elements removed, replaced with "Configure & Buy Above" scroll-up link
 
 ### Pending
 ---

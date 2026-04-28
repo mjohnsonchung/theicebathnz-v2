@@ -798,38 +798,15 @@
     }
 
     /* ── Shipping Region Picker ─────────────────────────── */
-    .shipping-region { margin: 1.25rem 0; }
-    .shipping-region label {
-      display: block;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 0.5rem;
-    }
-    .shipping-region select {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: #fff;
-      font-family: 'Jost', sans-serif;
-      font-size: 1rem;
-      border-radius: 4px;
-      appearance: none;
-      cursor: pointer;
-    }
-    .shipping-region select:focus {
-      outline: none;
-      border-color: var(--ember);
-    }
-    .shipping-note {
-      margin-top: 0.5rem;
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.6);
-      min-height: 1.25em;
-    }
+    .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.45s forwards; }
+    .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
+    .ship-select-wrap { position: relative; }
+    .ship-select-wrap::after { content: ''; position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--mist); pointer-events: none; }
+    #ship-region { width: 100%; padding: 0.9rem 2.5rem 0.9rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; color: var(--snow); font-family: var(--body); font-size: 0.88rem; font-weight: 300; appearance: none; cursor: pointer; transition: border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth); }
+    #ship-region:hover { border-color: var(--border-hi); background: var(--elevated); }
+    #ship-region:focus { outline: none; border-color: var(--ember); background: var(--elevated); }
+    #ship-region option, #ship-region optgroup { background: var(--deep); }
+    .shipping-note { margin-top: 0.6rem; font-size: 0.72rem; color: var(--fog); min-height: 1.2em; }
   </style>
 </head>
 <body>
@@ -898,18 +875,26 @@
 
       <p class="product-hero-tagline" id="heroTagline">Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. The perfect heat ritual — alone or paired with cold immersion.</p>
 
+      <div class="shipping-region">
+        <p class="shipping-region-label">Shipping Region</p>
+        <div class="ship-select-wrap">
+          <select id="ship-region" required></select>
+        </div>
+        <p id="ship-note" class="shipping-note"></p>
+      </div>
+
       <div class="product-price-block">
         <span class="price-cur" id="heroPriceCur">NZ$</span>
         <span class="price-amount" id="heroPrice">9,899</span>
-        <span class="price-note" id="heroPriceNote">incl. GST · Free delivery NZ</span>
+        <span class="price-note" id="heroPriceNote">incl. GST · NZ Delivery</span>
       </div>
 
       <div class="product-hero-actions">
-        <a href="#order" class="btn-primary">
+        <button id="buy-button" class="btn-primary" type="button">
           Order Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#specs" class="btn-ghost">View Specs</a>
+        </button>
+        <a href="../contact.html" class="btn-ghost">Ask a Question</a>
       </div>
 
       <ul class="product-highlights" id="heroHighlights">
@@ -1087,18 +1072,10 @@
       <p class="order-cta-price" id="ctaPrice">NZ$9,899</p>
       <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
       <p class="order-cta-sub" id="ctaSub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
-      <div class="shipping-region">
-        <label for="ship-region">Shipping Region</label>
-        <select id="ship-region" required></select>
-        <p id="ship-note" class="shipping-note"></p>
-      </div>
-      <div class="order-actions">
-        <button id="buy-button" class="btn-primary" type="button">
-          Order Now
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <a href="../contact.html" class="btn-ghost">Ask a Question</a>
-      </div>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn-ghost" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.85rem;">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 13V1M2 6l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Configure &amp; Buy Above
+      </a>
       <div class="order-trust">
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
