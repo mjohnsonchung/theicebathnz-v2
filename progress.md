@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-28 (session 18)
+Last updated: 2026-04-29 (session 19)
 
 ---
 
@@ -14,7 +14,7 @@ Last updated: 2026-04-28 (session 18)
 
 ### Products (3 only)
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
-- **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs)
+- **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs). Prices: NZ$2,399 / NZ$3,299
 - **Barrel Sauna / Square Sauna** → `product-page/barrel-sauna.html` — variant toggle; Barrel ($9,899, cedar, 6kW) and Square ($9,999, Thermo Hemlock, 8kW, LED, stadium seating)
 
 ### Design System
@@ -212,6 +212,18 @@ Last updated: 2026-04-28 (session 18)
 - [x] Order summary reveal — `#order-summary` now hidden (height 0) until user selects a shipping region; on first selection, panel fades in with `cfgReveal` animation (matches hero cascade pattern) and gains `margin-bottom: 2rem` gap before the buy/contact buttons; implemented via `cfg-visible` class + `hasBeenRevealed` flag in `js/configurator.js` (session 18)
 - [x] Phase 5 complete — barrel-sauna.html: static `.product-price-block` removed; `#order-summary` + `#buy-error` added; `setupCheckout` replaced with `setupConfigurator`; `.variant-option.active` / `data-variant` used as state reader; `.cfg-total` overridden to amber (`var(--ember)`) for sauna accent; stale price-update lines removed from `selectVariant()` (session 18)
 
+- [x] Standard chiller price corrected NZ$2,712 → NZ$2,399 across all files: shipping.js (source of truth), ice-bath-chiller.html (variant hint, CTA, JS data), ice-bath-nz.html (related card, priceMatrix), buy-now.html, index.html, barrel-sauna.html related card (session 19)
+- [x] ice-bath-nz.html chiller toggle hints changed to show price deltas: No Chiller = no price, + Chiller = +$2,399, + Premium = +$3,299 (removed full bundle price display); `updatePrice()` no longer overwrites the now-static hint spans (session 19)
+- [x] "Free NZ Delivery" and "Free delivery across New Zealand" removed site-wide — replaced with "Delivery NZ Wide" / "Delivery across New Zealand" (barrel-sauna.html trust row, priceNote, ctaSub for both variants) (session 19)
+
+- [x] SEO meta tags added to all 12 pages (session 20)
+  - `<meta name="description">` — unique copy per page, ~155 chars, includes key specs/prices
+  - `<link rel="canonical">` — absolute URLs (domain: theicebathnz.co.nz)
+  - Open Graph: `og:type`, `og:site_name`, `og:title`, `og:description`, `og:url`, `og:image`
+  - Twitter Card: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+  - Product pages use product hero images; info/legal pages use brand lifestyle shot
+  - OG titles on product pages include price (e.g. "Ice Bath — From NZ$784 | The Ice Bath NZ")
+
 ### Pending
 
 - [ ] Phase 6: Smoke test full Stripe checkout flow (all 3 pages)
@@ -222,12 +234,12 @@ Last updated: 2026-04-28 (session 18)
 |----------------------------|-----------|
 | Ice Bath 4ft               | NZ$784    |
 | Ice Bath 5ft               | NZ$888    |
-| Chiller (standalone)       | NZ$2,712  |
+| Chiller (standalone)       | NZ$2,399  |
 | Premium Ice Bath Chiller (sale) | NZ$3,299 |
 | Premium Ice Bath Chiller (orig) | NZ$4,999 |
-| 4ft + Chiller bundle       | NZ$3,479  |
-| 5ft + Chiller bundle       | NZ$3,609  |
-| 4ft + Premium Chiller      | NZ$4,379  |
-| 5ft + Premium Chiller      | NZ$4,509  |
+| 4ft + Chiller bundle       | NZ$3,183  |
+| 5ft + Chiller bundle       | NZ$3,287  |
+| 4ft + Premium Chiller      | NZ$4,083  |
+| 5ft + Premium Chiller      | NZ$4,187  |
 | Barrel Sauna               | NZ$9,899  |
 | Square Sauna               | NZ$9,999  |
