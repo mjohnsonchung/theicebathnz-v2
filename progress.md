@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-28 (session 13)
+Last updated: 2026-04-28 (session 14)
 
 ---
 
@@ -36,6 +36,14 @@ Last updated: 2026-04-28 (session 13)
 ```
 /
 ├── index.html              — Homepage
+├── package.json            — NEW: stripe dep, ESM module type
+├── api/
+│   └── create-checkout.js  — NEW: Stripe Checkout Session endpoint
+├── js/
+│   ├── shipping.js         — NEW: rates, products, bundles (single source of truth)
+│   └── checkout.js         — NEW: frontend dropdown + buy button helpers
+├── INTEGRATION.md          — NEW: per-page wiring instructions
+├── STRIPE_SETUP.md         — NEW: env var + deploy steps
 ├── buy-now.html            — Product catalog (/buy-now) — 3 product cards → product pages
 ├── benefits.html           — Science/benefits page (was science.html)
 ├── about-us.html
@@ -175,6 +183,18 @@ Last updated: 2026-04-28 (session 13)
 - [x] vercel.json: /cookies → /cookie-policy redirect added (session 13)
 - [x] sitemap.xml: 3 new legal pages added (session 13)
 - [x] Pushed to GitHub (session 13)
+
+- [x] Variable shipping by Mainfreight depot — replaces static Stripe Payment Links with dynamic Checkout Sessions (session 14)
+  - New `/api/create-checkout.js` Vercel serverless function
+  - New `/js/shipping.js` — single source of truth for 25 depot rates + product catalog + bundle SKUs
+  - New `/js/checkout.js` — frontend helpers: `populateRegionSelect()`, `goToCheckout()`, `setupCheckout()`
+  - New `package.json` — adds `stripe` dep and `type:module`
+  - All 3 product pages now have a "Shipping Region" `<select>` above Buy Now (North Island / South Island optgroups, prices shown next to each city)
+  - Bundle rule: bath + chiller ships at bath rate only (chiller rides for free) — toggle via `BUNDLE_RULE` const
+  - Timaru ice-bath rate corrected $22 → $220 (typo in source spreadsheet)
+  - Stripe Checkout shipping line shows the city name (e.g. "Auckland", "Palmerston North")
+  - Setup: `STRIPE_SECRET_KEY` env var added in Vercel; see STRIPE_SETUP.md
+  - Old Stripe Payment Links retained (not deleted) until live testing complete
 
 ### Pending
 ---

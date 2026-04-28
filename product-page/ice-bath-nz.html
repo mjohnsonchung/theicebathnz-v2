@@ -910,6 +910,40 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
+
+    /* ── Shipping Region Picker ─────────────────────────── */
+    .shipping-region { margin: 1.25rem 0; }
+    .shipping-region label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.5rem;
+    }
+    .shipping-region select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      border-radius: 4px;
+      appearance: none;
+      cursor: pointer;
+    }
+    .shipping-region select:focus {
+      outline: none;
+      border-color: var(--ice);
+    }
+    .shipping-note {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      min-height: 1.25em;
+    }
   </style>
 </head>
 <body>
@@ -1198,11 +1232,16 @@
       <p class="order-cta-price" id="ctaPrice">NZ$784</p>
       <h2 class="order-cta-heading">Ready to commit<br>to the cold?</h2>
       <p class="order-cta-sub">NZ delivery. Installation support included. 1-year manufacturer's warranty.</p>
+      <div class="shipping-region">
+        <label for="ship-region">Shipping Region</label>
+        <select id="ship-region" required></select>
+        <p id="ship-note" class="shipping-note"></p>
+      </div>
       <div class="order-actions">
-        <a id="buyBtn" href="https://buy.stripe.com/28E7sNfLrcmV4Fwa9Z2oE00" class="btn-primary" target="_blank" rel="noopener">
+        <button id="buy-button" class="btn-primary" type="button">
           Order Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </button>
         <a href="../contact.html" class="btn-ghost">Talk to Us First</a>
       </div>
       <div class="order-trust">
@@ -1373,7 +1412,7 @@
       const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
       document.getElementById('ctaPrice').textContent = 'NZ$' + total.toLocaleString('en-NZ');
       document.getElementById('ctaSizeLabel').textContent = ctaLabel;
-      document.getElementById('buyBtn').href = stripeLinks[currentSize][currentChiller];
+      // buy-button is now wired via checkout.js module (no href to update)
       // Update all chiller option price hints for current size
       document.getElementById('chHintNone').textContent    = 'NZ$' + priceMatrix[currentSize].none.toLocaleString('en-NZ');
       document.getElementById('chHintChiller').textContent = 'NZ$' + priceMatrix[currentSize].chiller.toLocaleString('en-NZ');
@@ -1464,6 +1503,34 @@
     function specsCarouselNav(dir) {
       specsCarouselGo((specsIdx + dir + specsSlides.length) % specsSlides.length);
     }
+  </script>
+
+  <script type="module">
+    import { setupCheckout } from '/js/checkout.js';
+
+    const SKU_MAP = {
+      '4ft|none':    'ice_bath_4ft',
+      '5ft|none':    'ice_bath_5ft',
+      '4ft|chiller': 'bath_4ft_std',
+      '5ft|chiller': 'bath_5ft_std',
+      '4ft|premium': 'bath_4ft_prem',
+      '5ft|premium': 'bath_5ft_prem',
+    };
+
+    const getSize    = () => document.querySelector('.size-option.active')?.dataset.size    || '4ft';
+    const getChiller = () => document.querySelector('.chiller-option.active')?.dataset.chiller || 'none';
+
+    const checkout = setupCheckout({
+      selectEl:    document.getElementById('ship-region'),
+      buyButton:   document.getElementById('buy-button'),
+      category:    'ice_bath',
+      getSku:      () => SKU_MAP[`${getSize()}|${getChiller()}`],
+      productPath: '/product-page/ice-bath-nz',
+      priceNoteEl: document.getElementById('ship-note'),
+    });
+
+    document.querySelectorAll('.size-option, .chiller-option')
+      .forEach(el => el.addEventListener('click', () => checkout.refresh()));
   </script>
 </body>
 </html>

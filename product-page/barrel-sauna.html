@@ -796,6 +796,40 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
+
+    /* ── Shipping Region Picker ─────────────────────────── */
+    .shipping-region { margin: 1.25rem 0; }
+    .shipping-region label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.5rem;
+    }
+    .shipping-region select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      border-radius: 4px;
+      appearance: none;
+      cursor: pointer;
+    }
+    .shipping-region select:focus {
+      outline: none;
+      border-color: var(--ember);
+    }
+    .shipping-note {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      min-height: 1.25em;
+    }
   </style>
 </head>
 <body>
@@ -1053,11 +1087,16 @@
       <p class="order-cta-price" id="ctaPrice">NZ$9,899</p>
       <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
       <p class="order-cta-sub" id="ctaSub">Free delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase. Available in 2, 4 & 6-person configurations — contact us for config pricing.</p>
+      <div class="shipping-region">
+        <label for="ship-region">Shipping Region</label>
+        <select id="ship-region" required></select>
+        <p id="ship-note" class="shipping-note"></p>
+      </div>
       <div class="order-actions">
-        <a id="buyBtn" href="https://buy.stripe.com/eVq28t7eVbiR3Bs4PF2oE08" class="btn-primary" target="_blank" rel="noopener">
+        <button id="buy-button" class="btn-primary" type="button">
           Order Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </button>
         <a href="../contact.html" class="btn-ghost">Ask a Question</a>
       </div>
       <div class="order-trust">
@@ -1392,8 +1431,32 @@
       document.getElementById('ctaLabel').textContent = d.ctaLabel;
       document.getElementById('ctaPrice').textContent = d.ctaPrice;
       document.getElementById('ctaSub').textContent = d.ctaSub;
-      document.getElementById('buyBtn').href = d.stripeUrl;
+      // buy-button is now wired via checkout.js module (no href to update)
     }
+  </script>
+
+  <script type="module">
+    import { setupCheckout } from '/js/checkout.js';
+
+    const getVariant = () =>
+      document.querySelector('.variant-option.active')?.dataset.variant || 'barrel';
+
+    const SKU_MAP = {
+      barrel: 'sauna_barrel',
+      square: 'sauna_square',
+    };
+
+    const checkout = setupCheckout({
+      selectEl:    document.getElementById('ship-region'),
+      buyButton:   document.getElementById('buy-button'),
+      category:    'sauna',
+      getSku:      () => SKU_MAP[getVariant()],
+      productPath: '/product-page/barrel-sauna',
+      priceNoteEl: document.getElementById('ship-note'),
+    });
+
+    document.querySelectorAll('.variant-option')
+      .forEach(el => el.addEventListener('click', () => checkout.refresh()));
   </script>
 </body>
 </html>
