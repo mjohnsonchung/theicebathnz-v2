@@ -69,6 +69,23 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'cfg-styles';
   style.textContent = `
+    /* Order summary — hidden until region is selected */
+    #order-summary {
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-bottom: 0;
+    }
+    #order-summary.cfg-visible {
+      height: auto;
+      overflow: visible;
+      margin-bottom: 2rem;
+      animation: cfgReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes cfgReveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     .cfg-summary {
       padding: 1.25rem 1.5rem;
       background: var(--surface, #0A1828);
@@ -152,6 +169,7 @@ export function setupConfigurator(config) {
   } = config;
 
   let currentCategory = initialCategory;
+  let hasBeenRevealed = false;
 
   // Inject shared styles
   injectStyles();
@@ -244,6 +262,12 @@ export function setupConfigurator(config) {
       </div>`);
 
     summaryEl.innerHTML = `<div class="cfg-summary">${rows.join('')}</div>`;
+
+    // Reveal the summary panel on first region selection
+    if (region && !hasBeenRevealed) {
+      hasBeenRevealed = true;
+      summaryEl.classList.add('cfg-visible');
+    }
 
     // Ship note element (e.g. above the buy button)
     if (shipNoteEl) {

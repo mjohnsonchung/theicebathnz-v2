@@ -750,6 +750,8 @@
     .variant-option:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
     .variant-option:active { transform: translateY(0); }
     .variant-option.active { border-color: var(--ember); background: rgba(232,131,42,0.06); }
+    /* Configurator accent override for sauna page */
+    .cfg-total { color: var(--ember) !important; }
     .variant-option:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
     .variant-name {
       display: block;
@@ -883,11 +885,7 @@
         <p id="ship-note" class="shipping-note"></p>
       </div>
 
-      <div class="product-price-block">
-        <span class="price-cur" id="heroPriceCur">NZ$</span>
-        <span class="price-amount" id="heroPrice">9,899</span>
-        <span class="price-note" id="heroPriceNote">incl. GST · NZ Delivery</span>
-      </div>
+      <div id="order-summary"></div>
 
       <div class="product-hero-actions">
         <button id="buy-button" class="btn-primary" type="button">
@@ -896,6 +894,7 @@
         </button>
         <a href="../contact.html" class="btn-ghost">Ask a Question</a>
       </div>
+      <p id="buy-error" hidden></p>
 
       <ul class="product-highlights" id="heroHighlights">
         <li class="highlight-item">Handcrafted rustic cedar construction</li>
@@ -1376,9 +1375,6 @@
       document.getElementById('heroBadge').textContent = d.badge;
       document.getElementById('heroName').innerHTML = d.name;
       document.getElementById('heroTagline').textContent = d.tagline;
-      document.getElementById('heroPriceCur').textContent = d.priceCur;
-      document.getElementById('heroPrice').textContent = d.price;
-      document.getElementById('heroPriceNote').textContent = d.priceNote;
       document.getElementById('heroHighlights').innerHTML = d.highlights.map(h => `<li class="highlight-item">${h}</li>`).join('');
 
       // Hero image
@@ -1413,27 +1409,27 @@
   </script>
 
   <script type="module">
-    import { setupCheckout } from '/js/checkout.js';
+    import { setupConfigurator } from '/js/configurator.js';
 
     const getVariant = () =>
       document.querySelector('.variant-option.active')?.dataset.variant || 'barrel';
 
-    const SKU_MAP = {
-      barrel: 'sauna_barrel',
-      square: 'sauna_square',
-    };
+    function getItems() {
+      return [getVariant() === 'square' ? 'sauna_square' : 'sauna_barrel'];
+    }
 
-    const checkout = setupCheckout({
-      selectEl:    document.getElementById('ship-region'),
-      buyButton:   document.getElementById('buy-button'),
-      category:    'sauna',
-      getSku:      () => SKU_MAP[getVariant()],
-      productPath: '/product-page/barrel-sauna',
-      priceNoteEl: document.getElementById('ship-note'),
+    const config = setupConfigurator({
+      summaryEl:      document.getElementById('order-summary'),
+      buyButton:      document.getElementById('buy-button'),
+      regionSelectEl: document.getElementById('ship-region'),
+      shipNoteEl:     document.getElementById('ship-note'),
+      category:       'sauna',
+      productPath:    '/product-page/barrel-sauna',
+      getItems,
     });
 
     document.querySelectorAll('.variant-option')
-      .forEach(el => el.addEventListener('click', () => checkout.refresh()));
+      .forEach(el => el.addEventListener('click', () => config.refresh()));
   </script>
 </body>
 </html>

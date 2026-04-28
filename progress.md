@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-28 (session 17)
+Last updated: 2026-04-28 (session 18)
 
 ---
 
@@ -209,9 +209,12 @@ Last updated: 2026-04-28 (session 17)
 - [x] Phase 3 complete — ice-bath-nz.html: price block replaced with `#order-summary`; old `setupCheckout` module replaced with `setupConfigurator`; `updatePrice()` simplified to keep only chiller hints + CTA label updates; `data-chiller="chiller"` correctly maps to `chiller_standard` SKU (session 17)
 - [x] Phase 4 complete — ice-bath-chiller.html: price block replaced with `#order-summary`; "Add an Ice Bath?" cross-sell added (No Bath / +4ft / +5ft); `selectBathAddon()` handler added; `setupConfigurator` wired with dynamic `getItems()` — dominant freight category auto-switches to `ice_bath` when bath is added; `setupCheckout` module replaced (session 17)
 
+- [x] Order summary reveal — `#order-summary` now hidden (height 0) until user selects a shipping region; on first selection, panel fades in with `cfgReveal` animation (matches hero cascade pattern) and gains `margin-bottom: 2rem` gap before the buy/contact buttons; implemented via `cfg-visible` class + `hasBeenRevealed` flag in `js/configurator.js` (session 18)
+- [x] Phase 5 complete — barrel-sauna.html: static `.product-price-block` removed; `#order-summary` + `#buy-error` added; `setupCheckout` replaced with `setupConfigurator`; `.variant-option.active` / `data-variant` used as state reader; `.cfg-total` overridden to amber (`var(--ember)`) for sauna accent; stale price-update lines removed from `selectVariant()` (session 18)
+
 ### Pending
 
-- [ ] Phase 5: Wire up barrel-sauna.html order panel
+- [ ] Phase 6: Smoke test full Stripe checkout flow (all 3 pages)
 ---
 
 ## Prices
