@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-29 (session 19)
+Last updated: 2026-04-30 (session 21)
 
 ---
 
@@ -15,7 +15,7 @@ Last updated: 2026-04-29 (session 19)
 ### Products (3 only)
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
 - **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs). Prices: NZ$2,399 / NZ$3,299
-- **Barrel Sauna / Square Sauna** → `product-page/barrel-sauna.html` — variant toggle; Barrel ($9,899, cedar, 6kW) and Square ($9,999, Thermo Hemlock, 8kW, LED, stadium seating)
+- **Barrel Sauna / Square Sauna** → `product-page/outdoor-sauna.html` — variant toggle; Barrel ($9,899, cedar, 6kW) and Square ($9,999, Thermo Hemlock, 8kW, LED, stadium seating)
 
 ### Design System
 - Typography: **Cormorant Garamond** (display/serif) + **Jost** (body/sans)
@@ -60,7 +60,7 @@ Last updated: 2026-04-29 (session 19)
 └── product-page/
     ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
     ├── ice-bath-chiller.html — Chiller / Premium Chiller model selector
-    └── barrel-sauna.html
+    └── outdoor-sauna.html
 ```
 
 ---
@@ -223,6 +223,14 @@ Last updated: 2026-04-29 (session 19)
   - Twitter Card: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
   - Product pages use product hero images; info/legal pages use brand lifestyle shot
   - OG titles on product pages include price (e.g. "Ice Bath — From NZ$784 | The Ice Bath NZ")
+
+- [x] barrel-sauna.html renamed to outdoor-sauna.html — all internal links, canonical, og:url, og:title, twitter:title, productPath updated; vercel.json adds permanent redirect /product-page/barrel-sauna → /product-page/outdoor-sauna; sitemap updated (session 21)
+- [x] robots.txt created — allows all, disallows /api/, references sitemap (session 21)
+- [x] Legal pages (privacy-policy, terms-of-service, cookie-policy) removed from sitemap.xml; noindex,nofollow added to all 3 (session 21)
+- [x] benefits.html title fixed to match og:title: "The Science of Cold Therapy — The Ice Bath NZ" (session 21)
+- [x] Footer nav inconsistency fixed: "Ice Bath NZ" changed to "Ice Bath" on about-us, benefits, contact, faq (session 21)
+- [x] og:type changed "website" to "product" on all 3 product pages (session 21)
+- NOTE: JSON-LD structured data not yet added anywhere — Product schema on product pages, FAQPage on faq, Organization/WebSite on homepage would unlock Google rich results; implement when ready
 
 ### Pending
 
