@@ -923,6 +923,9 @@
       .chiller-options { flex-wrap: wrap; }
       .chiller-option { min-width: calc(50% - 0.3rem); }
 
+      .accessory-options { flex-wrap: wrap; }
+      .accessory-option { min-width: calc(50% - 0.3rem); }
+
       .features-grid { grid-template-columns: 1fr; }
       .includes-grid { grid-template-columns: 1fr; }
       .related-card { grid-template-columns: 1fr; }
@@ -931,6 +934,60 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
     }
+
+    /* ── Accessories Selector ────────────────────────────── */
+    .accessory-selector { margin-bottom: 2rem; }
+    .accessory-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 0.75rem;
+    }
+    .accessory-options {
+      display: flex; gap: 0.6rem;
+    }
+    .accessory-option {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 0.9rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .accessory-option:hover {
+      border-color: var(--border-hi);
+      background: var(--elevated);
+      transform: translateY(-1px);
+    }
+    .accessory-option:active { transform: translateY(0); }
+    .accessory-option.active {
+      border-color: var(--ice);
+      background: rgba(91, 200, 245, 0.06);
+    }
+    .accessory-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+    .accessory-name {
+      font-family: var(--display);
+      font-size: 1rem; font-weight: 400;
+      color: var(--mist);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .accessory-option.active .accessory-name { color: var(--ice); }
+    .accessory-sub {
+      font-size: 0.66rem; color: var(--fog);
+      margin-bottom: 0.45rem;
+      font-family: var(--body);
+    }
+    .accessory-price-hint {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--fog); font-family: var(--body);
+      transition: color 0.2s;
+    }
+    .accessory-option.active .accessory-price-hint { color: var(--frost); }
 
     /* ── Shipping Region Picker ─────────────────────────── */
     .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.75s forwards; }
@@ -1033,6 +1090,23 @@
       <!-- Chiller Info Panel -->
       <div class="chiller-info-panel" id="chillerInfoPanel" style="display:none">
         <div id="chillerInfoInner"></div>
+      </div>
+
+      <!-- Accessories -->
+      <div class="accessory-selector">
+        <p class="accessory-selector-label">Accessories</p>
+        <div class="accessory-options">
+          <button class="accessory-option" data-accessory="ice_bath_cover" onclick="toggleAccessory(this)">
+            <span class="accessory-name">Ice Bath Cover</span>
+            <span class="accessory-sub">Keeps cold in · reduces evaporation</span>
+            <span class="accessory-price-hint">+ $20</span>
+          </button>
+          <button class="accessory-option" data-accessory="hose_attachment" onclick="toggleAccessory(this)">
+            <span class="accessory-name">Hose Attachment</span>
+            <span class="accessory-sub">Easy fill & drain</span>
+            <span class="accessory-price-hint">+ $20</span>
+          </button>
+        </div>
       </div>
 
       <div class="shipping-region">
@@ -1457,6 +1531,10 @@
       updateChillerInfo(chiller);
     }
 
+    function toggleAccessory(btn) {
+      btn.classList.toggle('active');
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
@@ -1491,6 +1569,9 @@
       const ch = getChiller();
       if (ch === 'chiller') items.push('chiller_standard');
       if (ch === 'premium') items.push('chiller_premium');
+      document.querySelectorAll('.accessory-option.active').forEach(btn => {
+        items.push(btn.dataset.accessory);
+      });
       return items;
     }
 
@@ -1504,7 +1585,7 @@
       getItems,
     });
 
-    document.querySelectorAll('.size-option, .chiller-option')
+    document.querySelectorAll('.size-option, .chiller-option, .accessory-option')
       .forEach(el => el.addEventListener('click', () => config.refresh()));
   </script>
 </body>

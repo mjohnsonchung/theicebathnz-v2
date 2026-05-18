@@ -351,6 +351,37 @@
     .bath-addon.active .addon-name { color: var(--ice); }
     .addon-sub { font-size: 0.72rem; color: var(--fog); font-family: var(--body); margin-top: 0.2rem; }
 
+    /* ── Accessories Selector ────────────────────────────── */
+    .accessory-selector { margin-bottom: 2rem; }
+    .accessory-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 0.75rem;
+    }
+    .accessory-options { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .accessory-option {
+      flex: 1; min-width: calc(50% - 0.3rem);
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 0.9rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s var(--ease-smooth),
+        background 0.2s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+      text-align: left;
+    }
+    .accessory-option:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
+    .accessory-option:active { transform: translateY(0); }
+    .accessory-option.active { border-color: var(--ice); background: rgba(91,200,245,0.06); }
+    .accessory-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+    .accessory-name { font-family: var(--display); font-size: 1rem; font-weight: 400; color: var(--mist); margin-bottom: 0.25rem; transition: color 0.2s; }
+    .accessory-option.active .accessory-name { color: var(--ice); }
+    .accessory-sub { font-size: 0.66rem; color: var(--fog); margin-bottom: 0.45rem; font-family: var(--body); }
+    .accessory-price-hint { font-size: 0.75rem; font-weight: 500; color: var(--fog); font-family: var(--body); transition: color 0.2s; }
+    .accessory-option.active .accessory-price-hint { color: var(--frost); }
+
     /* ── Shipping Region Picker ─────────────────────────── */
     .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.7s forwards; }
     .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
@@ -435,6 +466,23 @@
           <button class="bath-addon" data-bath="5ft" onclick="selectBathAddon('5ft')">
             <span class="addon-name">+ 5ft Bath</span>
             <span class="addon-sub">NZ$888</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Accessories -->
+      <div class="accessory-selector">
+        <p class="accessory-selector-label">Accessories</p>
+        <div class="accessory-options">
+          <button class="accessory-option" data-accessory="ice_bath_cover" onclick="toggleAccessory(this)">
+            <span class="accessory-name">Ice Bath Cover</span>
+            <span class="accessory-sub">Keeps cold in · reduces evaporation</span>
+            <span class="accessory-price-hint">+ $20</span>
+          </button>
+          <button class="accessory-option" data-accessory="hose_attachment" onclick="toggleAccessory(this)">
+            <span class="accessory-name">Hose Attachment</span>
+            <span class="accessory-sub">Easy fill & drain</span>
+            <span class="accessory-price-hint">+ $20</span>
           </button>
         </div>
       </div>
@@ -901,6 +949,10 @@
         btn.classList.toggle('active', btn.dataset.bath === bath);
       });
     }
+
+    function toggleAccessory(btn) {
+      btn.classList.toggle('active');
+    }
   </script>
 
   <script type="module">
@@ -914,6 +966,9 @@
       const bath = getBathAddon();
       if (bath === '4ft') items.unshift('ice_bath_4ft');
       if (bath === '5ft') items.unshift('ice_bath_5ft');
+      document.querySelectorAll('.accessory-option.active').forEach(btn => {
+        items.push(btn.dataset.accessory);
+      });
       return items;
     }
 
@@ -927,7 +982,7 @@
       getItems,
     });
 
-    document.querySelectorAll('.variant-option, .bath-addon')
+    document.querySelectorAll('.variant-option, .bath-addon, .accessory-option')
       .forEach(el => el.addEventListener('click', () => config.refresh()));
   </script>
 </body>

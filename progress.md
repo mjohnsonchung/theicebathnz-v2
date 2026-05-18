@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-11 (session 22)
+Last updated: 2026-05-18 (session 24)
 
 ---
 
@@ -238,6 +238,15 @@ Last updated: 2026-05-11 (session 22)
 - [x] Favicon replaced — new ice cube photo (`Theicebathfavicon.png`) optimised to 64×64px PNG, 5.5KB (down from 1.8MB); saved as `favicon-cropped-opt.png`; all 12 pages already referenced that filename (session 23)
 - [x] Homepage og:image + twitter:image updated → `bath tub & chiller no bg.webp` (was Engineered-for-serious-cold photo) (session 23)
 
+- [x] Accessory toggles added to ice-bath-nz.html and ice-bath-chiller.html (session 24)
+  - Two new accessories: "Ice Bath Cover" (NZ$20) and "Hose Attachment" (NZ$20)
+  - Appear as an "ACCESSORIES" selector section between the existing selectors and the shipping region picker
+  - Checkbox-style behaviour — both can be selected simultaneously (independent toggle, unlike radio-style selectors)
+  - Styling matches existing toggle cards exactly (`.chiller-option` / `.bath-addon` aesthetic)
+  - Mobile responsive: wrap to 2-column at ≤768px
+  - Both SKUs added to `js/shipping.js` PRODUCTS catalog; `accessory` shipping rates set to $0 (free shipping bundled with main product)
+  - `getItems()` on both pages now includes any active accessory SKUs; order summary panel updates in real time
+
 ### Pending
 
 - [ ] Phase 6: Smoke test full Stripe checkout flow (all 3 pages)
@@ -257,3 +266,5 @@ Last updated: 2026-05-11 (session 22)
 | 5ft + Premium Chiller      | NZ$4,187  |
 | Barrel Sauna               | NZ$9,899  |
 | Square Sauna               | NZ$9,999  |
+| Ice Bath Cover (accessory) | NZ$20     |
+| Hose Attachment (accessory)| NZ$20     |

@@ -23,32 +23,32 @@
 // column covers both.
 export const SHIPPING_RATES = {
   // ── North Island ────────────────────────────────────────────────────────
-  AUCKLAND:           { ice_bath:  80, chiller:  80, sauna: 100, accessory: 20 },
-  HAMILTON:           { ice_bath: 150, chiller:  90, sauna: 100, accessory: 20 },
-  TAURANGA:           { ice_bath: 150, chiller:  90, sauna: 150, accessory: 20 },
-  THAMES:             { ice_bath: 160, chiller:  95, sauna: 300, accessory: 20 },
-  WHANGAREI:          { ice_bath: 160, chiller:  95, sauna: 300, accessory: 20 },
-  TAUPO:              { ice_bath: 160, chiller:  95, sauna: 300, accessory: 20 },
-  ROTORUA:            { ice_bath: 165, chiller: 100, sauna: 300, accessory: 20 },
-  NAPIER:             { ice_bath: 165, chiller: 100, sauna: 300, accessory: 20 },
-  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100, sauna: 300, accessory: 20 },
-  KAITAIA:            { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
-  GISBORNE:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
-  WANGANUI:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
-  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
-  LEVIN:              { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
-  WELLINGTON:         { ice_bath: 170, chiller: 100, sauna: 300, accessory: 20 },
+  AUCKLAND:           { ice_bath:  80, chiller:  80, sauna: 100, accessory: 0 },
+  HAMILTON:           { ice_bath: 150, chiller:  90, sauna: 100, accessory: 0 },
+  TAURANGA:           { ice_bath: 150, chiller:  90, sauna: 150, accessory: 0 },
+  THAMES:             { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
+  WHANGAREI:          { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
+  TAUPO:              { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
+  ROTORUA:            { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
+  NAPIER:             { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
+  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
+  KAITAIA:            { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  GISBORNE:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  WANGANUI:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  LEVIN:              { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  WELLINGTON:         { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
   // ── South Island ────────────────────────────────────────────────────────
-  CHRISTCHURCH:       { ice_bath: 200, chiller: 120, sauna: 350, accessory: 20 },
-  BLENHEIM:           { ice_bath: 210, chiller: 130, sauna: 350, accessory: 20 },
-  NELSON:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 20 },
-  TIMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 20 },
-  OAMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 20 },
-  DUNEDIN:            { ice_bath: 225, chiller: 130, sauna: 350, accessory: 20 },
-  GREYMOUTH:          { ice_bath: 230, chiller: 130, sauna: 350, accessory: 20 },
-  INVERCARGILL:       { ice_bath: 230, chiller: 140, sauna: 350, accessory: 20 },
-  CROMWELL:           { ice_bath: 240, chiller: 140, sauna: 350, accessory: 20 },
-  GORE:               { ice_bath: 240, chiller: 140, sauna: 350, accessory: 20 },
+  CHRISTCHURCH:       { ice_bath: 200, chiller: 120, sauna: 350, accessory: 0 },
+  BLENHEIM:           { ice_bath: 210, chiller: 130, sauna: 350, accessory: 0 },
+  NELSON:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
+  TIMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
+  OAMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
+  DUNEDIN:            { ice_bath: 225, chiller: 130, sauna: 350, accessory: 0 },
+  GREYMOUTH:          { ice_bath: 230, chiller: 130, sauna: 350, accessory: 0 },
+  INVERCARGILL:       { ice_bath: 230, chiller: 140, sauna: 350, accessory: 0 },
+  CROMWELL:           { ice_bath: 240, chiller: 140, sauna: 350, accessory: 0 },
+  GORE:               { ice_bath: 240, chiller: 140, sauna: 350, accessory: 0 },
 };
 
 // Region display order in the dropdown (north → south, then alphabetical).
@@ -70,12 +70,14 @@ export const REGION_ORDER = [
 // `amount` is in NZD cents (Stripe's required minor-unit format).
 // `ship` is the freight category used to look up rates above.
 export const PRODUCTS = {
-  ice_bath_4ft:     { name: 'Ice Bath 4ft',             amount:  78400, ship: 'ice_bath' },
-  ice_bath_5ft:     { name: 'Ice Bath 5ft',             amount:  88800, ship: 'ice_bath' },
-  chiller_standard: { name: 'Ice Bath Chiller',         amount: 271200, ship: 'chiller'  },
-  chiller_premium:  { name: 'Premium Ice Bath Chiller', amount: 329900, ship: 'chiller'  },
-  sauna_barrel:     { name: 'Barrel Sauna',             amount: 989900, ship: 'sauna'    },
-  sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'    },
+  ice_bath_4ft:     { name: 'Ice Bath 4ft',             amount:  78400, ship: 'ice_bath'  },
+  ice_bath_5ft:     { name: 'Ice Bath 5ft',             amount:  88800, ship: 'ice_bath'  },
+  chiller_standard: { name: 'Ice Bath Chiller',         amount: 271200, ship: 'chiller'   },
+  chiller_premium:  { name: 'Premium Ice Bath Chiller', amount: 329900, ship: 'chiller'   },
+  sauna_barrel:     { name: 'Barrel Sauna',             amount: 989900, ship: 'sauna'     },
+  sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'     },
+  ice_bath_cover:   { name: 'Ice Bath Cover',           amount:   2000, ship: 'accessory' },
+  hose_attachment:  { name: 'Hose Attachment',          amount:   2000, ship: 'accessory' },
 };
 
 // ---------------------------------------------------------------------------
