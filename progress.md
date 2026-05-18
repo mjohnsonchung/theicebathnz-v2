@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-04-30 (session 21)
+Last updated: 2026-05-11 (session 22)
 
 ---
 
@@ -231,6 +231,12 @@ Last updated: 2026-04-30 (session 21)
 - [x] Footer nav inconsistency fixed: "Ice Bath NZ" changed to "Ice Bath" on about-us, benefits, contact, faq (session 21)
 - [x] og:type changed "website" to "product" on all 3 product pages (session 21)
 - NOTE: JSON-LD structured data not yet added anywhere — Product schema on product pages, FAQPage on faq, Organization/WebSite on homepage would unlock Google rich results; implement when ready
+
+- [x] Google Analytics GA4 added to all 12 pages — Measurement ID G-MF5374TSTP inserted in `<head>` (session 22)
+
+- [x] Shipping region dropdown: dollar costs removed from option labels — cities only ("Auckland", not "Auckland — $80"); shipping still calculated and shown in order summary + Stripe checkout (session 23)
+- [x] Favicon replaced — new ice cube photo (`Theicebathfavicon.png`) optimised to 64×64px PNG, 5.5KB (down from 1.8MB); saved as `favicon-cropped-opt.png`; all 12 pages already referenced that filename (session 23)
+- [x] Homepage og:image + twitter:image updated → `bath tub & chiller no bg.webp` (was Engineered-for-serious-cold photo) (session 23)
 
 ### Pending
 

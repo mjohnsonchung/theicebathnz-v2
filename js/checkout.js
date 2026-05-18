@@ -43,7 +43,7 @@ export function populateRegionSelect(selectEl, productCategory = 'ice_bath') {
     const cost = SHIPPING_RATES[region][productCategory];
     const opt = document.createElement('option');
     opt.value = region;
-    opt.textContent = `${prettyCity(region)} — $${cost}`;
+    opt.textContent = prettyCity(region);
     opt.dataset.cost = cost;
     (i <= northIslandEnd ? ni : si).appendChild(opt);
   });
