@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-18 (session 24)
+Last updated: 2026-05-18 (session 25)
 
 ---
 
@@ -239,7 +239,7 @@ Last updated: 2026-05-18 (session 24)
 - [x] Homepage og:image + twitter:image updated → `bath tub & chiller no bg.webp` (was Engineered-for-serious-cold photo) (session 23)
 
 - [x] Accessory toggles added to ice-bath-nz.html and ice-bath-chiller.html (session 24)
-  - Two new accessories: "Ice Bath Cover" (NZ$20) and "Hose Attachment" (NZ$20)
+  - Two new accessories: "Ice Bath Cover" (NZ$199, free shipping) and "Hose Attachment" (NZ$79, free shipping)
   - Appear as an "ACCESSORIES" selector section between the existing selectors and the shipping region picker
   - Checkbox-style behaviour — both can be selected simultaneously (independent toggle, unlike radio-style selectors)
   - Styling matches existing toggle cards exactly (`.chiller-option` / `.bath-addon` aesthetic)
@@ -247,9 +247,15 @@ Last updated: 2026-05-18 (session 24)
   - Both SKUs added to `js/shipping.js` PRODUCTS catalog; `accessory` shipping rates set to $0 (free shipping bundled with main product)
   - `getItems()` on both pages now includes any active accessory SKUs; order summary panel updates in real time
 
+- [x] Accessory prices updated (session 25)
+  - Ice Bath Cover: NZ$20 → NZ$199 (free shipping retained)
+  - Hose Attachment: NZ$20 → NZ$79 (free shipping retained)
+  - Updated in: `js/shipping.js` (cents: 2000→19900 / 2000→7900), price hints in `ice-bath-nz.html` and `ice-bath-chiller.html`
+
+- [x] Phase 6: Stripe checkout flow smoke tested and confirmed on all 3 product pages (session 25)
+
 ### Pending
 
-- [ ] Phase 6: Smoke test full Stripe checkout flow (all 3 pages)
 ---
 
 ## Prices
@@ -266,5 +272,5 @@ Last updated: 2026-05-18 (session 24)
 | 5ft + Premium Chiller      | NZ$4,187  |
 | Barrel Sauna               | NZ$9,899  |
 | Square Sauna               | NZ$9,999  |
-| Ice Bath Cover (accessory) | NZ$20     |
-| Hose Attachment (accessory)| NZ$20     |
+| Ice Bath Cover (accessory) | NZ$199 (free shipping) |
+| Hose Attachment (accessory)| NZ$79 (free shipping)  |

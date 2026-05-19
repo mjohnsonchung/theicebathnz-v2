@@ -76,8 +76,8 @@ export const PRODUCTS = {
   chiller_premium:  { name: 'Premium Ice Bath Chiller', amount: 329900, ship: 'chiller'   },
   sauna_barrel:     { name: 'Barrel Sauna',             amount: 989900, ship: 'sauna'     },
   sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'     },
-  ice_bath_cover:   { name: 'Ice Bath Cover',           amount:   2000, ship: 'accessory' },
-  hose_attachment:  { name: 'Hose Attachment',          amount:   2000, ship: 'accessory' },
+  ice_bath_cover:   { name: 'Ice Bath Cover',           amount:  19900, ship: 'accessory' },
+  hose_attachment:  { name: 'Hose Attachment',          amount:   7900, ship: 'accessory' },
 };
 
 // ---------------------------------------------------------------------------
