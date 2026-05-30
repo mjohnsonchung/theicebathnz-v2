@@ -21,11 +21,11 @@
   <meta property="og:title" content="Ice Bath Chiller — From NZ$2,399 | The Ice Bath NZ">
   <meta property="og:description" content="Maintain precise cold therapy temperatures year-round. 1HP ice bath chiller cools water to 3°C in ~1.5 hours. Standard NZ$2,399 or Premium with WiFi NZ$3,299.">
   <meta property="og:url" content="https://theicebathnz.co.nz/product-page/ice-bath-chiller">
-  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp">
+  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Standard%20Chiller/main-photo.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ice Bath Chiller — From NZ$2,399 | The Ice Bath NZ">
   <meta name="twitter:description" content="Maintain precise cold therapy temperatures year-round. 1HP ice bath chiller cools water to 3°C in ~1.5 hours. Standard NZ$2,399 or Premium with WiFi NZ$3,299.">
-  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp">
+  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Standard%20Chiller/main-photo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -382,6 +382,44 @@
     .accessory-price-hint { font-size: 0.75rem; font-weight: 500; color: var(--fog); font-family: var(--body); transition: color 0.2s; }
     .accessory-option.active .accessory-price-hint { color: var(--frost); }
 
+    /* ── Accessory Thumbnail + Lightbox ───────────────────── */
+    .acc-thumb-wrap {
+      margin-top: 0.6rem; overflow: hidden;
+      max-height: 0; opacity: 0;
+      transition: max-height 0.4s var(--ease-out), opacity 0.35s var(--ease-out);
+    }
+    .accessory-option.active .acc-thumb-wrap { max-height: 90px; opacity: 1; }
+    .acc-thumb-wrap img {
+      width: 68px; height: 68px; object-fit: cover;
+      border-radius: 0.5rem; cursor: pointer;
+      border: 1px solid var(--border);
+      transition: transform 0.2s var(--ease-spring), border-color 0.2s;
+    }
+    .acc-thumb-wrap img:hover { transform: scale(1.06); border-color: var(--ice); }
+    .acc-lightbox {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(2,11,21,0.93);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+    .acc-lightbox.open { opacity: 1; pointer-events: auto; }
+    .acc-lightbox > img {
+      max-width: 88vw; max-height: 82vh;
+      object-fit: contain; border-radius: 0.75rem;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+    }
+    .acc-lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+      color: var(--snow); width: 2.5rem; height: 2.5rem;
+      border-radius: 50%; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; font-family: var(--body);
+    }
+    .acc-lightbox-close:hover { background: rgba(255,255,255,0.18); }
+
     /* ── Shipping Region Picker ─────────────────────────── */
     .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.7s forwards; }
     .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
@@ -483,6 +521,9 @@
             <span class="accessory-name">Hose Attachment</span>
             <span class="accessory-sub">Easy fill & drain</span>
             <span class="accessory-price-hint">+ $79</span>
+            <div class="acc-thumb-wrap">
+              <img src="../brand%20assets/Hose%20attachment/main-photo.webp" alt="Hose Attachment" onclick="event.stopPropagation(); openLightbox(this.src)">
+            </div>
           </button>
         </div>
       </div>
@@ -516,7 +557,7 @@
     </div>
     <div class="product-hero-right">
       <div class="product-hero-img-wrap">
-        <img id="heroImg" src="../brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp" alt="Ice Bath Chiller Unit" style="object-fit:contain;">
+        <img id="heroImg" src="../brand%20assets/Standard%20Chiller/main-photo.webp" alt="Ice Bath Chiller Unit" style="object-fit:contain;">
       </div>
     </div>
   </section>
@@ -565,7 +606,7 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img id="specsImg" src="../brand%20assets/Standard%20Chiller/photo%20of%20back%20of%20chiller.avif" alt="Ice Bath Chiller detail" style="object-fit:cover;">
+          <img id="specsImg" src="../brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller detail" style="object-fit:cover;">
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -825,9 +866,9 @@
           'Indoor and outdoor use (down to -10°C)',
           '1-year manufacturer\'s warranty'
         ],
-        imgSrc: '../brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp',
+        imgSrc: '../brand%20assets/Standard%20Chiller/main-photo.webp',
         imgAlt: 'Ice Bath Chiller Unit',
-        specsImgSrc: '../brand%20assets/Standard%20Chiller/Unnedited/IMG_6627_edited.jpg',
+        specsImgSrc: '../brand%20assets/Standard%20Chiller/img-6627.webp',
         featuresLabel: 'Why the Ice Bath Chiller',
         featuresHeading: 'Cold, <em>precisely.</em>',
         featuresSub: 'Purpose-built for serious cold therapy. The Ice Bath Chiller pairs with your existing tub — or add it to any setup — and delivers exact, consistent temperatures without the hassle of ice.',
@@ -862,9 +903,9 @@
           'Portable with 2x lockable wheels',
           '1-year manufacturer\'s warranty'
         ],
-        imgSrc: '../brand%20assets/Premium%20Chiller/premium%20chiller%20%28front%20no%20bg%29.webp',
+        imgSrc: '../brand%20assets/Premium%20Chiller/main-photo.webp',
         imgAlt: 'Premium Ice Bath Chiller Unit',
-        specsImgSrc: '../brand%20assets/Premium%20Chiller/Unedited/Ice%20Bath%20NZ%20Chiller%20%28side%29.JPG',
+        specsImgSrc: '../brand%20assets/Premium%20Chiller/chiller-side.webp',
         featuresLabel: 'Why the Premium Ice Bath Chiller',
         featuresHeading: 'Cold, <em>connected.</em>',
         featuresSub: 'The Premium Ice Bath Chiller delivers precise cold therapy with intelligent WiFi connectivity — so your bath is at exactly the right temperature when you need it.',
@@ -984,6 +1025,20 @@
 
     document.querySelectorAll('.variant-option, .bath-addon, .accessory-option')
       .forEach(el => el.addEventListener('click', () => config.refresh()));
+
+    function openLightbox(src) {
+      document.getElementById('accLightboxImg').src = src;
+      document.getElementById('accLightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('accLightbox').classList.remove('open');
+    }
   </script>
+
+  <!-- Accessory Lightbox -->
+  <div id="accLightbox" class="acc-lightbox" onclick="closeLightbox()">
+    <button class="acc-lightbox-close" onclick="event.stopPropagation(); closeLightbox()" aria-label="Close">✕</button>
+    <img id="accLightboxImg" src="" alt="Accessory photo" onclick="event.stopPropagation()">
+  </div>
 </body>
 </html>

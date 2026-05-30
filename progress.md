@@ -277,8 +277,23 @@ Last updated: 2026-05-30 (session 26)
   - Square Sauna: lifestyle-1/2/3/4/5, great-pic
 - [x] outdoor-sauna.html hero updated to `main-photo.webp`; specs image updated to `interior-heater.webp` (session 26)
 
+- [x] ice-bath-nz.html photo updates (session 26)
+  - Hero image: `bath tub & chiller no bg.webp` → `main pic v2.webp`
+  - OG/Twitter meta images updated to match
+  - Accessory thumbnail + lightbox added: hose_attachment toggle shows 68×68px thumbnail; clicking opens full-screen lightbox with ✕ close button
+  - `.acc-thumb-wrap` CSS: max-height 0→90px transition on `.active` (reveal animation)
+  - `.acc-lightbox` CSS: fixed overlay z-index 300, `openLightbox(src)` / `closeLightbox()` JS
+  - Ice Bath Cover has no thumbnail (no photo available yet)
+- [x] ice-bath-chiller.html photo updates (session 26)
+  - Standard hero: `No bg standard chiller.webp` → `main-photo.webp` (both static src and variantData.chiller.imgSrc)
+  - Standard specs: `photo of back of chiller.avif` → `img-6627.webp`; variantData specsImgSrc also updated
+  - Premium hero: `premium chiller (front no bg).webp` → `main-photo.webp`
+  - Premium specs: old unedited JPG → `chiller-side.webp`
+  - OG/Twitter meta images updated to `main-photo.webp`
+  - Same accessory thumbnail + lightbox added for hose_attachment
+
 ### Pending
-- [ ] Update all photos on existing product pages (ice-bath-nz.html, ice-bath-chiller.html) with new brand assets; add accessory thumbnail + lightbox on ice-bath-nz and ice-bath-chiller when accessory toggle is checked
+- [ ] New product page: All-in-One Ice Bath & Chiller ($10,899) — full page, SEO, carousel, shipping
 - [ ] New product page: All-in-One Ice Bath & Chiller ($10,899) — full page, SEO, carousel, shipping
 - [ ] New product page: Stainless Steel Ice Bath (304 grade $3,849 / 316 grade $4,399, chiller bundle options) — full page, SEO, carousel, shipping
 - [ ] New product page: Hose Attachment accessory — full page, SEO

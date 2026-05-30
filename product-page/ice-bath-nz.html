@@ -21,11 +21,11 @@
   <meta property="og:title" content="Ice Bath — From NZ$784 | The Ice Bath NZ">
   <meta property="og:description" content="G90 galvanised steel ice bath in 4ft (350L) or 5ft (500L). Cools to 3°C with an optional chiller add-on. Built tough for NZ conditions. From NZ$784.">
   <meta property="og:url" content="https://theicebathnz.co.nz/product-page/ice-bath-nz">
-  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.webp">
+  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/main%20pic%20v2.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ice Bath — From NZ$784 | The Ice Bath NZ">
   <meta name="twitter:description" content="G90 galvanised steel ice bath in 4ft (350L) or 5ft (500L). Cools to 3°C with an optional chiller add-on. Built tough for NZ conditions. From NZ$784.">
-  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.webp">
+  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/main%20pic%20v2.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -989,6 +989,44 @@
     }
     .accessory-option.active .accessory-price-hint { color: var(--frost); }
 
+    /* ── Accessory Thumbnail + Lightbox ───────────────────── */
+    .acc-thumb-wrap {
+      margin-top: 0.6rem; overflow: hidden;
+      max-height: 0; opacity: 0;
+      transition: max-height 0.4s var(--ease-out), opacity 0.35s var(--ease-out);
+    }
+    .accessory-option.active .acc-thumb-wrap { max-height: 90px; opacity: 1; }
+    .acc-thumb-wrap img {
+      width: 68px; height: 68px; object-fit: cover;
+      border-radius: 0.5rem; cursor: pointer;
+      border: 1px solid var(--border);
+      transition: transform 0.2s var(--ease-spring), border-color 0.2s;
+    }
+    .acc-thumb-wrap img:hover { transform: scale(1.06); border-color: var(--ice); }
+    .acc-lightbox {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(2,11,21,0.93);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+    .acc-lightbox.open { opacity: 1; pointer-events: auto; }
+    .acc-lightbox > img {
+      max-width: 88vw; max-height: 82vh;
+      object-fit: contain; border-radius: 0.75rem;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+    }
+    .acc-lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+      color: var(--snow); width: 2.5rem; height: 2.5rem;
+      border-radius: 50%; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; font-family: var(--body);
+    }
+    .acc-lightbox-close:hover { background: rgba(255,255,255,0.18); }
+
     /* ── Shipping Region Picker ─────────────────────────── */
     .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.75s forwards; }
     .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
@@ -1105,6 +1143,9 @@
             <span class="accessory-name">Hose Attachment</span>
             <span class="accessory-sub">Easy fill & drain</span>
             <span class="accessory-price-hint">+ $79</span>
+            <div class="acc-thumb-wrap">
+              <img src="../brand%20assets/Hose%20attachment/main-photo.webp" alt="Hose Attachment" onclick="event.stopPropagation(); openLightbox(this.src)">
+            </div>
           </button>
         </div>
       </div>
@@ -1139,7 +1180,7 @@
 
     <div class="product-hero-right">
       <img class="product-hero-img"
-        src="../brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.webp"
+        src="../brand%20assets/Ice%20Bath/main%20pic%20v2.webp"
         alt="Ice Bath tub">
     </div>
   </section>
@@ -1587,6 +1628,20 @@
 
     document.querySelectorAll('.size-option, .chiller-option, .accessory-option')
       .forEach(el => el.addEventListener('click', () => config.refresh()));
+
+    function openLightbox(src) {
+      document.getElementById('accLightboxImg').src = src;
+      document.getElementById('accLightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('accLightbox').classList.remove('open');
+    }
   </script>
+
+  <!-- Accessory Lightbox -->
+  <div id="accLightbox" class="acc-lightbox" onclick="closeLightbox()">
+    <button class="acc-lightbox-close" onclick="event.stopPropagation(); closeLightbox()" aria-label="Close">✕</button>
+    <img id="accLightboxImg" src="" alt="Accessory photo" onclick="event.stopPropagation()">
+  </div>
 </body>
 </html>
