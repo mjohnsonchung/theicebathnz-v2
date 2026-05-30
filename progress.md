@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-30 (session 26)
+Last updated: 2026-05-30 (session 27)
 
 ---
 
@@ -292,14 +292,22 @@ Last updated: 2026-05-30 (session 26)
   - OG/Twitter meta images updated to `main-photo.webp`
   - Same accessory thumbnail + lightbox added for hose_attachment
 
+- [x] New product pages created — all 4 new products (session 27)
+  - `product-page/stainless-steel-ice-bath.html` — 304/316 grade selector, chiller bundle, accessories, carousel (image-1, image-2, lifestyle-gym)
+  - `product-page/all-in-one-ice-bath.html` — single SKU, no selectors, 3-slide carousel (main-photo, lifestyle-1/2)
+  - `product-page/hose-attachment.html` — simple accessory page, 2-image carousel, related products section
+  - `product-page/ice-bath-cover.html` — accessory page, no hero image, specs grid only, related products section
+  - `js/shipping.js` updated with 3 new SKUs: `allinone_bath` (1089900¢), `steel_bath_304` (384900¢), `steel_bath_316` (439900¢)
+- [x] buy-now.html: 4 new product cards added — Stainless Steel Ice Bath, All-in-One Ice Bath, Hose Attachment, Ice Bath Cover (session 27)
+  - Grid now has 9 cards total (5 existing + 4 new)
+  - Each new card has carousel (except Ice Bath Cover which shows a branded SVG placeholder)
+  - New chips: "New" for Stainless Steel + All-in-One, "Accessory" for Hose + Cover
+- [x] sitemap.xml: 4 new URLs added (stainless-steel-ice-bath, all-in-one-ice-bath, hose-attachment, ice-bath-cover), lastmod 2026-05-30 (session 27)
+- [x] vercel.json: 6 new redirect aliases added for new pages (session 27)
+
 ### Pending
-- [ ] New product page: All-in-One Ice Bath & Chiller ($10,899) — full page, SEO, carousel, shipping
-- [ ] New product page: All-in-One Ice Bath & Chiller ($10,899) — full page, SEO, carousel, shipping
-- [ ] New product page: Stainless Steel Ice Bath (304 grade $3,849 / 316 grade $4,399, chiller bundle options) — full page, SEO, carousel, shipping
-- [ ] New product page: Hose Attachment accessory — full page, SEO
-- [ ] New product page: Ice Bath Cover accessory — full page, SEO; no hero image yet
-- [ ] Add new product cards for all 4 new products to buy-now.html catalog
-- [ ] Update vercel.json (redirects) and sitemap.xml for all new pages
+- [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
+- [ ] Ice Bath Cover hero image — no photo available yet; cover placeholder shown in buy-now.html and product page
 
 ---
 
@@ -321,3 +329,6 @@ Last updated: 2026-05-30 (session 26)
 | Square Sauna               | NZ$9,999  |
 | Ice Bath Cover (accessory) | NZ$199 (free shipping) |
 | Hose Attachment (accessory)| NZ$79 (free shipping)  |
+| Stainless Steel Ice Bath 304 | NZ$3,849             |
+| Stainless Steel Ice Bath 316 | NZ$4,399             |
+| All-in-One Ice Bath & Chiller | NZ$10,899           |

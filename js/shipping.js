@@ -80,6 +80,9 @@ export const PRODUCTS = {
   sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'     },
   ice_bath_cover:   { name: 'Ice Bath Cover',           amount:  19900, ship: 'accessory' },
   hose_attachment:  { name: 'Hose Attachment',          amount:   7900, ship: 'accessory' },
+  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller', amount: 1089900, ship: 'ice_bath' },
+  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)', amount: 384900, ship: 'ice_bath' },
+  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)', amount: 439900, ship: 'ice_bath' },
 };
 
 // ---------------------------------------------------------------------------

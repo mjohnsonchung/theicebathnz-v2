@@ -12,6 +12,12 @@
     { "source": "/outdoor-sauna-nz", "destination": "/product-page/outdoor-sauna", "permanent": true },
     { "source": "/category/ice-baths", "destination": "/product-page/ice-bath-nz", "permanent": true },
     { "source": "/category/all-products", "destination": "/buy-now", "permanent": true },
-    { "source": "/cookies", "destination": "/cookie-policy", "permanent": true }
+    { "source": "/cookies", "destination": "/cookie-policy", "permanent": true },
+    { "source": "/product-page/stainless-steel-bath", "destination": "/product-page/stainless-steel-ice-bath", "permanent": true },
+    { "source": "/product-page/steel-ice-bath", "destination": "/product-page/stainless-steel-ice-bath", "permanent": true },
+    { "source": "/product-page/all-in-one", "destination": "/product-page/all-in-one-ice-bath", "permanent": true },
+    { "source": "/product-page/all-in-one-chiller", "destination": "/product-page/all-in-one-ice-bath", "permanent": true },
+    { "source": "/product-page/accessories", "destination": "/buy-now", "permanent": true },
+    { "source": "/accessories", "destination": "/buy-now", "permanent": true }
   ]
 }
