@@ -430,6 +430,29 @@
     #ship-region:focus { outline: none; border-color: var(--ice); background: var(--elevated); }
     #ship-region option, #ship-region optgroup { background: var(--deep); }
     .shipping-note { margin-top: 0.6rem; font-size: 0.72rem; color: var(--fog); min-height: 1.2em; }
+    /* ── Specs Carousel ─────────────────────────────────── */
+    .specs-carousel { position: absolute; inset: 0; }
+    .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 2.25rem; height: 2.25rem;
+      background: rgba(6,14,26,0.72); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.8); cursor: pointer; z-index: 2;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .carousel-btn:hover { background: rgba(91,200,245,0.18); border-color: rgba(91,200,245,0.45); color: #5BC8F5; }
+    .carousel-btn:active { transform: translateY(-50%) scale(0.91); }
+    .carousel-btn:focus-visible { outline: 2px solid rgba(91,200,245,0.55); outline-offset: 2px; }
+    .carousel-prev { left: 0.75rem; }
+    .carousel-next { right: 0.75rem; }
+    .carousel-dots { position: absolute; bottom: 0.875rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 2; }
+    .cdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.32); border: none; cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.2s ease; }
+    .cdot.active { background: #5BC8F5; transform: scale(1.25); }
+    .cdot:hover { background: rgba(255,255,255,0.6); }
   </style>
 </head>
 <body>
@@ -606,7 +629,32 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img id="specsImg" src="../brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller detail" style="object-fit:cover;">
+          <!-- Standard Chiller carousel -->
+          <div class="specs-carousel" id="standardSpecsCarousel">
+            <div class="carousel-slide active"><img src="../brand%20assets/Standard%20Chiller/img-6627.webp" alt="Standard Chiller detail"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6644.webp" alt="Standard Chiller detail 2"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6645.webp" alt="Standard Chiller detail 3"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6652.webp" alt="Standard Chiller detail 4"></div>
+            <button class="carousel-btn carousel-prev" onclick="stdCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-next" onclick="stdCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="cdot active" onclick="stdCarGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="stdCarGo(1)" aria-label="Slide 2"></button>
+              <button class="cdot" onclick="stdCarGo(2)" aria-label="Slide 3"></button>
+              <button class="cdot" onclick="stdCarGo(3)" aria-label="Slide 4"></button>
+            </div>
+          </div>
+          <!-- Premium Chiller carousel -->
+          <div class="specs-carousel" id="premiumSpecsCarousel" style="display:none;">
+            <div class="carousel-slide active"><img src="../brand%20assets/Premium%20Chiller/chiller-side.webp" alt="Premium Chiller side view"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Premium%20Chiller/Ice%20Bath%20NZ%20Chiller%20Hose.webp" alt="Premium Chiller hose connection"></div>
+            <button class="carousel-btn carousel-prev" onclick="premCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-next" onclick="premCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="cdot active" onclick="premCarGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="premCarGo(1)" aria-label="Slide 2"></button>
+            </div>
+          </div>
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -965,9 +1013,16 @@
       img.src = d.imgSrc;
       img.alt = d.imgAlt;
 
-      // Specs image
-      const specsImg = document.getElementById('specsImg');
-      if (specsImg && d.specsImgSrc) { specsImg.src = d.specsImgSrc; }
+      // Specs carousel — show variant-specific carousel, reset to slide 0
+      if (v === 'chiller') {
+        stdCarGo(0);
+        document.getElementById('standardSpecsCarousel').style.display = 'block';
+        document.getElementById('premiumSpecsCarousel').style.display = 'none';
+      } else {
+        premCarGo(0);
+        document.getElementById('premiumSpecsCarousel').style.display = 'block';
+        document.getElementById('standardSpecsCarousel').style.display = 'none';
+      }
 
       // Features section
       document.getElementById('featuresLabel').textContent = d.featuresLabel;
@@ -1007,6 +1062,29 @@
       const v = new URLSearchParams(location.search).get('variant');
       if (v === 'premium' || v === 'chiller') selectVariant(v);
     })();
+
+    // ── Specs Carousels ──────────────────────────────────
+    let stdCarIdx = 0;
+    function stdCarGo(n) {
+      const car = document.getElementById('standardSpecsCarousel');
+      car.querySelectorAll('.carousel-slide')[stdCarIdx].classList.remove('active');
+      car.querySelectorAll('.cdot')[stdCarIdx].classList.remove('active');
+      stdCarIdx = n;
+      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
+      car.querySelectorAll('.cdot')[n].classList.add('active');
+    }
+    function stdCarNav(dir) { stdCarGo((stdCarIdx + dir + 4) % 4); }
+
+    let premCarIdx = 0;
+    function premCarGo(n) {
+      const car = document.getElementById('premiumSpecsCarousel');
+      car.querySelectorAll('.carousel-slide')[premCarIdx].classList.remove('active');
+      car.querySelectorAll('.cdot')[premCarIdx].classList.remove('active');
+      premCarIdx = n;
+      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
+      car.querySelectorAll('.cdot')[n].classList.add('active');
+    }
+    function premCarNav(dir) { premCarGo((premCarIdx + dir + 2) % 2); }
   </script>
 
   <script type="module">

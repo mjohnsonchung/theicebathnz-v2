@@ -851,6 +851,29 @@
     #ship-region:focus { outline: none; border-color: var(--ember); background: var(--elevated); }
     #ship-region option, #ship-region optgroup { background: var(--deep); }
     .shipping-note { margin-top: 0.6rem; font-size: 0.72rem; color: var(--fog); min-height: 1.2em; }
+    /* ── Specs Carousel ─────────────────────────────────── */
+    .specs-carousel { position: absolute; inset: 0; }
+    .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 2.25rem; height: 2.25rem;
+      background: rgba(6,14,26,0.72); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.8); cursor: pointer; z-index: 2;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .carousel-btn:hover { background: rgba(232,131,42,0.18); border-color: rgba(232,131,42,0.45); color: #E8832A; }
+    .carousel-btn:active { transform: translateY(-50%) scale(0.91); }
+    .carousel-btn:focus-visible { outline: 2px solid rgba(232,131,42,0.55); outline-offset: 2px; }
+    .carousel-prev { left: 0.75rem; }
+    .carousel-next { right: 0.75rem; }
+    .carousel-dots { position: absolute; bottom: 0.875rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 2; }
+    .cdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.32); border: none; cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.2s ease; }
+    .cdot.active { background: #E8832A; transform: scale(1.25); }
+    .cdot:hover { background: rgba(255,255,255,0.6); }
   </style>
 </head>
 <body>
@@ -1021,7 +1044,36 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img id="specsImg" src="../brand%20assets/Barrel%20Sauna/interior-heater.webp" alt="Cedar Barrel Sauna interior">
+          <!-- Barrel Sauna carousel -->
+          <div class="specs-carousel" id="barrelSpecsCarousel">
+            <div class="carousel-slide active"><img src="../brand%20assets/Barrel%20Sauna/interior-heater.webp" alt="Barrel Sauna interior heater"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/interior-bench.webp" alt="Barrel Sauna bench seating"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night"></div>
+            <button class="carousel-btn carousel-prev" onclick="barrelCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-next" onclick="barrelCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="cdot active" onclick="barrelCarGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="barrelCarGo(1)" aria-label="Slide 2"></button>
+              <button class="cdot" onclick="barrelCarGo(2)" aria-label="Slide 3"></button>
+              <button class="cdot" onclick="barrelCarGo(3)" aria-label="Slide 4"></button>
+            </div>
+          </div>
+          <!-- Square Sauna carousel -->
+          <div class="specs-carousel" id="squareSpecsCarousel" style="display:none;">
+            <div class="carousel-slide active"><img src="../brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/great-pic.webp" alt="Square Sauna detail"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/lifestyle-3.webp" alt="Square Sauna lifestyle 2"></div>
+            <button class="carousel-btn carousel-prev" onclick="squareCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-next" onclick="squareCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="cdot active" onclick="squareCarGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="squareCarGo(1)" aria-label="Slide 2"></button>
+              <button class="cdot" onclick="squareCarGo(2)" aria-label="Slide 3"></button>
+              <button class="cdot" onclick="squareCarGo(3)" aria-label="Slide 4"></button>
+            </div>
+          </div>
         </div>
         <div class="specs-content">
           <p class="section-label reveal" id="specsLabel">Technical Specifications</p>
@@ -1468,10 +1520,16 @@
       document.getElementById('featuresSub').textContent = d.featuresSub;
       document.getElementById('featuresGrid').innerHTML = d.features.map(buildFeatureCard).join('');
 
-      // Specs section
-      const specsImg = document.getElementById('specsImg');
-      specsImg.src = d.specsImgSrc;
-      specsImg.alt = d.specsImgAlt;
+      // Specs carousel — show variant-specific carousel, reset to slide 0
+      if (v === 'barrel') {
+        barrelCarGo(0);
+        document.getElementById('barrelSpecsCarousel').style.display = 'block';
+        document.getElementById('squareSpecsCarousel').style.display = 'none';
+      } else {
+        squareCarGo(0);
+        document.getElementById('squareSpecsCarousel').style.display = 'block';
+        document.getElementById('barrelSpecsCarousel').style.display = 'none';
+      }
       document.getElementById('specsLabel').textContent = d.specsLabel;
       document.getElementById('specsHeading').innerHTML = d.specsHeading;
       document.getElementById('specsSub').textContent = d.specsSub;
@@ -1492,6 +1550,29 @@
       const v = new URLSearchParams(location.search).get('variant');
       if (v === 'square' || v === 'barrel') selectVariant(v);
     })();
+
+    // ── Specs Carousels ──────────────────────────────────
+    let barrelCarIdx = 0;
+    function barrelCarGo(n) {
+      const car = document.getElementById('barrelSpecsCarousel');
+      car.querySelectorAll('.carousel-slide')[barrelCarIdx].classList.remove('active');
+      car.querySelectorAll('.cdot')[barrelCarIdx].classList.remove('active');
+      barrelCarIdx = n;
+      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
+      car.querySelectorAll('.cdot')[n].classList.add('active');
+    }
+    function barrelCarNav(dir) { barrelCarGo((barrelCarIdx + dir + 4) % 4); }
+
+    let squareCarIdx = 0;
+    function squareCarGo(n) {
+      const car = document.getElementById('squareSpecsCarousel');
+      car.querySelectorAll('.carousel-slide')[squareCarIdx].classList.remove('active');
+      car.querySelectorAll('.cdot')[squareCarIdx].classList.remove('active');
+      squareCarIdx = n;
+      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
+      car.querySelectorAll('.cdot')[n].classList.add('active');
+    }
+    function squareCarNav(dir) { squareCarGo((squareCarIdx + dir + 4) % 4); }
   </script>
 
   <script type="module">
