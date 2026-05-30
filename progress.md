@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-30 (session 27)
+Last updated: 2026-05-30 (session 28)
 
 ---
 
@@ -304,6 +304,14 @@ Last updated: 2026-05-30 (session 27)
   - New chips: "New" for Stainless Steel + All-in-One, "Accessory" for Hose + Cover
 - [x] sitemap.xml: 4 new URLs added (stainless-steel-ice-bath, all-in-one-ice-bath, hose-attachment, ice-bath-cover), lastmod 2026-05-30 (session 27)
 - [x] vercel.json: 6 new redirect aliases added for new pages (session 27)
+
+- [x] buy-now.html product grid carousel image tweaks (session 28)
+  - Ice Bath: removed no-bg hero from carousel; `for the specs section.webp` is now slide 1
+  - Standard Chiller: removed no-bg main-photo; `img-6627.webp` is now slide 1
+  - Stainless Steel: removed no-bg main-photo; `image-1.webp` is now slide 1
+  - Hose Attachment: swapped order — `img-0597.webp` is now slide 1 (main-photo moved to slide 2)
+  - All 4 cards reduced from 3 → 2 dots where applicable
+- [x] outdoor-sauna.html: Square Sauna specs image fixed — `Inside sauna wide angle.webp` (missing file) → `lifestyle-2.webp` (session 28)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
