@@ -644,16 +644,9 @@
               <button class="cdot" onclick="stdCarGo(3)" aria-label="Slide 4"></button>
             </div>
           </div>
-          <!-- Premium Chiller carousel -->
+          <!-- Premium Chiller - single image -->
           <div class="specs-carousel" id="premiumSpecsCarousel" style="display:none;">
             <div class="carousel-slide active"><img src="../brand%20assets/Premium%20Chiller/chiller-side.webp" alt="Premium Chiller side view"></div>
-            <div class="carousel-slide"><img src="../brand%20assets/Premium%20Chiller/Ice%20Bath%20NZ%20Chiller%20Hose.webp" alt="Premium Chiller hose connection"></div>
-            <button class="carousel-btn carousel-prev" onclick="premCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="carousel-btn carousel-next" onclick="premCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <div class="carousel-dots">
-              <button class="cdot active" onclick="premCarGo(0)" aria-label="Slide 1"></button>
-              <button class="cdot" onclick="premCarGo(1)" aria-label="Slide 2"></button>
-            </div>
           </div>
         </div>
         <div class="specs-content">
@@ -1075,16 +1068,9 @@
     }
     function stdCarNav(dir) { stdCarGo((stdCarIdx + dir + 4) % 4); }
 
-    let premCarIdx = 0;
-    function premCarGo(n) {
-      const car = document.getElementById('premiumSpecsCarousel');
-      car.querySelectorAll('.carousel-slide')[premCarIdx].classList.remove('active');
-      car.querySelectorAll('.cdot')[premCarIdx].classList.remove('active');
-      premCarIdx = n;
-      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
-      car.querySelectorAll('.cdot')[n].classList.add('active');
-    }
-    function premCarNav(dir) { premCarGo((premCarIdx + dir + 2) % 2); }
+    // premiumSpecsCarousel has a single slide — no navigation needed; premCarGo is a no-op
+    function premCarGo(n) {}
+    function premCarNav(dir) {}
   </script>
 
   <script type="module">
