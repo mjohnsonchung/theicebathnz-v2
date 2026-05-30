@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-18 (session 25)
+Last updated: 2026-05-30 (session 26)
 
 ---
 
@@ -254,7 +254,37 @@ Last updated: 2026-05-18 (session 25)
 
 - [x] Phase 6: Stripe checkout flow smoke tested and confirmed on all 3 product pages (session 25)
 
+- [x] Homepage og:image + twitter:image updated → `main pic v2.webp` (session 26)
+- [x] Barrel Sauna 2/4/6 person size selector added to outdoor-sauna.html (session 26)
+  - New sub-selector "Choose Size" appears under Barrel variant: 2 Person ($7,500), 4 Person ($9,899), 6 Person ($11,899)
+  - `barrelSizePrices` lookup object + `activeBarrelSize` state; `selectBarrelSize()` updates CTA + triggers configurator refresh
+  - `window._saunaCfg = config` pattern for cross-script access between module and non-module scripts
+  - `js/shipping.js`: added `sauna_barrel_2p` (750000¢) and `sauna_barrel_6p` (1189900¢); renamed `sauna_barrel` → 'Barrel Sauna (4 Person)'
+- [x] buy-now.html barrel sauna card updated: image → `main-photo.webp`, price → `from NZ$7,500` (session 26)
+- [x] buy-now.html: image carousels added to all 5 product cards (session 26)
+  - `.carousel-track` / `.carousel-slide` / `.carousel-btn` / `.carousel-dots` CSS classes added
+  - `carouselMove()`, `carouselPrev()`, `carouselNext()`, `carouselDot()` JS helpers
+  - Prev/next buttons use `e.stopPropagation()` to prevent link navigation
+  - Image sets: Ice Bath (3 slides), Std Chiller (3), Premium Chiller (2), Barrel Sauna (3), Square Sauna (3)
+- [x] Batch WebP conversion — ~30 new brand asset images converted at quality 82 (session 26)
+  - Barrel Sauna: main-photo, lifestyle-night, lifestyle-pool, interior-bench, interior-heater
+  - Standard Chiller: main-photo, img-6627, img-6644, img-6645, img-6652
+  - Premium Chiller: main-photo, chiller-side
+  - Ice Bath: review-pic, review-pic-1, review-pic-2
+  - Hose attachment: main-photo, img-0597
+  - Stainless Steel Ice Bath (NEW): main-photo, image-1/2/3/4, lifestyle-gym/2/3/4
+  - All in one Ice Bath (New): main-photo, lifestyle-1/2
+  - Square Sauna: lifestyle-1/2/3/4/5, great-pic
+- [x] outdoor-sauna.html hero updated to `main-photo.webp`; specs image updated to `interior-heater.webp` (session 26)
+
 ### Pending
+- [ ] Update all photos on existing product pages (ice-bath-nz.html, ice-bath-chiller.html) with new brand assets; add accessory thumbnail + lightbox on ice-bath-nz and ice-bath-chiller when accessory toggle is checked
+- [ ] New product page: All-in-One Ice Bath & Chiller ($10,899) — full page, SEO, carousel, shipping
+- [ ] New product page: Stainless Steel Ice Bath (304 grade $3,849 / 316 grade $4,399, chiller bundle options) — full page, SEO, carousel, shipping
+- [ ] New product page: Hose Attachment accessory — full page, SEO
+- [ ] New product page: Ice Bath Cover accessory — full page, SEO; no hero image yet
+- [ ] Add new product cards for all 4 new products to buy-now.html catalog
+- [ ] Update vercel.json (redirects) and sitemap.xml for all new pages
 
 ---
 
@@ -270,7 +300,9 @@ Last updated: 2026-05-18 (session 25)
 | 5ft + Chiller bundle       | NZ$3,287  |
 | 4ft + Premium Chiller      | NZ$4,083  |
 | 5ft + Premium Chiller      | NZ$4,187  |
-| Barrel Sauna               | NZ$9,899  |
+| Barrel Sauna (2 Person)    | NZ$7,500  |
+| Barrel Sauna (4 Person)    | NZ$9,899  |
+| Barrel Sauna (6 Person)    | NZ$11,899 |
 | Square Sauna               | NZ$9,999  |
 | Ice Bath Cover (accessory) | NZ$199 (free shipping) |
 | Hose Attachment (accessory)| NZ$79 (free shipping)  |

@@ -194,23 +194,69 @@
       position: relative; aspect-ratio: 4/3; overflow: hidden;
       background: var(--elevated);
     }
-    .product-img-frame img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.7s var(--ease-smooth);
-    }
-    .product-card:hover .product-img-frame img { transform: scale(1.05); }
     .product-img-frame::after {
       content: '';
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; z-index: 2;
       background: linear-gradient(to bottom, transparent 50%, rgba(12, 30, 53, 0.8) 100%);
+      pointer-events: none;
     }
     .product-chip {
-      position: absolute; top: 1rem; left: 1rem; z-index: 2;
+      position: absolute; top: 1rem; left: 1rem; z-index: 4;
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--void); background: var(--ice);
       padding: 0.28rem 0.75rem; border-radius: 999px;
     }
+    /* ── Carousel ──────────────────────────────────────── */
+    .carousel-track {
+      display: flex; height: 100%;
+      transition: transform 0.45s var(--ease-smooth);
+      will-change: transform;
+    }
+    .carousel-slide {
+      flex: 0 0 100%; height: 100%; overflow: hidden;
+    }
+    .carousel-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s var(--ease-smooth);
+    }
+    .product-card:hover .carousel-slide.active img { transform: scale(1.05); }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 5;
+      background: rgba(2, 11, 21, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--snow);
+      width: 2rem; height: 2rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s var(--ease-smooth), background 0.2s, transform 0.2s var(--ease-spring);
+      cursor: pointer; padding: 0;
+      backdrop-filter: blur(6px);
+    }
+    .product-card:hover .carousel-btn { opacity: 1; }
+    .carousel-btn-prev { left: 0.65rem; }
+    .carousel-btn-next { right: 0.65rem; }
+    .carousel-btn:hover {
+      background: rgba(91, 200, 245, 0.25);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-btn:active { transform: translateY(-50%) scale(0.95); }
+    .carousel-dots {
+      position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.3rem; z-index: 5;
+    }
+    .carousel-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: background 0.2s, transform 0.2s var(--ease-spring);
+      cursor: pointer; border: none; padding: 0;
+    }
+    .carousel-dot.active {
+      background: var(--ice);
+      transform: scale(1.4);
+    }
+    .carousel-dot:hover { background: rgba(255,255,255,0.6); }
     .product-body { padding: 1.75rem 1.75rem 1.5rem; position: relative; z-index: 2; }
     .product-name {
       font-family: var(--display);
@@ -339,7 +385,18 @@
         <!-- Ice Bath -->
         <a href="product-page/ice-bath-nz.html" class="product-card reveal">
           <div class="product-img-frame">
-            <img src="brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.webp" alt="Ice Bath" style="object-fit:contain; background:#0a1e35;">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Ice%20Bath/main%20pic%20v2.webp" alt="Ice Bath" style="object-fit:contain; background:#0a1e35;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath detail" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section2.webp" alt="Ice Bath exterior" style="object-fit:cover;"></div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+            </div>
             <span class="product-chip">Bestseller</span>
           </div>
           <div class="product-body">
@@ -355,7 +412,18 @@
         <!-- Standard Chiller -->
         <a href="product-page/ice-bath-chiller.html" class="product-card reveal reveal-d1">
           <div class="product-img-frame">
-            <img src="brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp" alt="Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Standard%20Chiller/main-photo.webp" alt="Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Standard%20Chiller/img-6627.webp" alt="Chiller side view" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Standard%20Chiller/img-6644.webp" alt="Chiller in use" style="object-fit:cover;"></div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+            </div>
             <span class="product-chip">Top Seller</span>
           </div>
           <div class="product-body">
@@ -371,7 +439,16 @@
         <!-- Premium Chiller -->
         <a href="product-page/ice-bath-chiller.html" class="product-card reveal reveal-d2">
           <div class="product-img-frame">
-            <img src="brand%20assets/Premium%20Chiller/premium%20chiller%20%28front%20no%20bg%29.webp" alt="Premium Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Premium%20Chiller/main-photo.webp" alt="Premium Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Premium%20Chiller/chiller-side.webp" alt="Premium Chiller side view" style="object-fit:contain; background:#0a1e35;"></div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+            </div>
             <span class="product-chip">Premium</span>
           </div>
           <div class="product-body">
@@ -387,14 +464,25 @@
         <!-- Barrel Sauna -->
         <a href="product-page/outdoor-sauna.html" class="product-card reveal">
           <div class="product-img-frame">
-            <img src="brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.webp" alt="Cedar Barrel Sauna" style="object-fit:contain; background:#0a1e35;">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside" style="object-fit:cover;"></div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+            </div>
             <span class="product-chip">Best Value</span>
           </div>
           <div class="product-body">
             <h3 class="product-name">Barrel Sauna</h3>
-            <p class="product-tagline">Handcrafted rustic cedar with a 6kW traditional Finnish heater. Dry or steamy — the authentic heat ritual in your backyard.</p>
+            <p class="product-tagline">Handcrafted rustic cedar with a 6kW traditional Finnish heater. Available in 2, 4 & 6-person sizes. The authentic heat ritual in your backyard.</p>
             <div class="product-footer">
-              <span class="product-price"><span class="cur">NZ$</span>9,899</span>
+              <span class="product-price"><span class="cur">from NZ$</span>7,500</span>
               <button class="btn-card">Buy Now</button>
             </div>
           </div>
@@ -403,7 +491,18 @@
         <!-- Square Sauna -->
         <a href="product-page/outdoor-sauna.html" class="product-card reveal reveal-d1">
           <div class="product-img-frame">
-            <img src="brand%20assets/Square%20Sauna/main%20hero%20no%20bg.webp" alt="Square Sauna" style="object-fit:contain; background:#0a1e35;">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Square%20Sauna/great-pic.webp" alt="Square Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior" style="object-fit:cover;"></div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+            </div>
             <span class="product-chip">New</span>
           </div>
           <div class="product-body">
@@ -507,6 +606,35 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Carousel ──────────────────────────────────────────
+    function carouselMove(frame, idx) {
+      const track = frame.querySelector('.carousel-track');
+      const slides = track.querySelectorAll('.carousel-slide');
+      const dots = frame.querySelectorAll('.carousel-dot');
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      track.dataset.index = String(idx);
+    }
+    function carouselPrev(btn, e) {
+      e.preventDefault(); e.stopPropagation();
+      const frame = btn.closest('.product-img-frame');
+      const track = frame.querySelector('.carousel-track');
+      const count = track.querySelectorAll('.carousel-slide').length;
+      carouselMove(frame, ((parseInt(track.dataset.index) - 1) + count) % count);
+    }
+    function carouselNext(btn, e) {
+      e.preventDefault(); e.stopPropagation();
+      const frame = btn.closest('.product-img-frame');
+      const track = frame.querySelector('.carousel-track');
+      const count = track.querySelectorAll('.carousel-slide').length;
+      carouselMove(frame, (parseInt(track.dataset.index) + 1) % count);
+    }
+    function carouselDot(dot, idx, e) {
+      e.preventDefault(); e.stopPropagation();
+      carouselMove(dot.closest('.product-img-frame'), idx);
+    }
   </script>
 </body>
 </html>
