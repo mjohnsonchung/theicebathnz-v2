@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-30 (session 28)
+Last updated: 2026-05-30 (session 29)
 
 ---
 
@@ -312,6 +312,20 @@ Last updated: 2026-05-30 (session 28)
   - Hose Attachment: swapped order — `img-0597.webp` is now slide 1 (main-photo moved to slide 2)
   - All 4 cards reduced from 3 → 2 dots where applicable
 - [x] outdoor-sauna.html: Square Sauna specs image fixed — `Inside sauna wide angle.webp` (missing file) → `lifestyle-2.webp` (session 28)
+
+- [x] outdoor-sauna.html: variant selector (Choose Model / Choose Size) moved below product name + tagline to match ice-bath-nz.html layout (session 28)
+- [x] outdoor-sauna.html: barrel sauna hero changed to no-bg version — `Main Hero no bg.webp` (both static src and variantData.barrel.imgSrc) (session 28)
+
+- [x] "You might also need these" related cards — fixed all broken/placeholder images across all product pages (session 29)
+  - `ice-bath-nz.html`: Chiller placehold.co → `Standard Chiller/main-photo.webp`; Sauna placehold.co → `Barrel Sauna/Main Hero no bg.webp`
+  - `ice-bath-chiller.html`: Ice Bath `bath tub & chiller no bg.webp` (missing file) → `Ice Bath/for the specs section.webp`
+  - `stainless-steel-ice-bath.html`: Chiller placehold.co → `Standard Chiller/main-photo.webp`; Sauna placehold.co → `Barrel Sauna/Main Hero no bg.webp`
+  - `all-in-one-ice-bath.html`: Ice Bath `bath tub & chiller no bg.webp` (missing) → `Ice Bath/for the specs section.webp`
+  - `outdoor-sauna.html`: Ice Bath `bath tub & chiller no bg.webp` (missing) → `Ice Bath/for the specs section.webp`; Chiller `No bg standard chiller.webp` (missing) → `Standard Chiller/main-photo.webp`
+- [x] URL query param variant pre-selection (session 29)
+  - `outdoor-sauna.html`: `?variant=square` or `?variant=barrel` auto-selects via IIFE at end of main script
+  - `ice-bath-chiller.html`: `?variant=premium` or `?variant=chiller` auto-selects via IIFE
+  - `buy-now.html`: Square Sauna card → `outdoor-sauna.html?variant=square`; Premium Chiller card → `ice-bath-chiller.html?variant=premium`
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section

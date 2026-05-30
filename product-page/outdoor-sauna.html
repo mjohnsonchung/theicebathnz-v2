@@ -1164,7 +1164,7 @@
       <div class="related-grid">
         <a href="ice-bath-nz.html" class="related-card reveal">
           <div class="related-img">
-            <img src="../brand%20assets/Ice%20Bath/bath%20tub%20%26%20chiller%20no%20bg.webp" alt="Ice Bath NZ" style="object-fit:contain; background:#0a1e35;">
+            <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath NZ" style="object-fit:cover;">
           </div>
           <div class="related-body">
             <div>
@@ -1179,7 +1179,7 @@
         </a>
         <a href="ice-bath-chiller.html" class="related-card reveal reveal-d1">
           <div class="related-img">
-            <img src="../brand%20assets/Standard%20Chiller/No%20bg%20standard%20chiller.webp" alt="Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;">
+            <img src="../brand%20assets/Standard%20Chiller/main-photo.webp" alt="Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;">
           </div>
           <div class="related-body">
             <div>
@@ -1487,6 +1487,11 @@
       document.getElementById('ctaSub').textContent = d.ctaSub;
       if (window._saunaCfg) window._saunaCfg.refresh();
     }
+    // URL query param variant pre-selection
+    (function(){
+      const v = new URLSearchParams(location.search).get('variant');
+      if (v === 'square' || v === 'barrel') selectVariant(v);
+    })();
   </script>
 
   <script type="module">
