@@ -341,6 +341,7 @@ Last updated: 2026-06-01 (session 31)
   - OG/Twitter meta was already correct (`main pic v2.webp`) from session 26
 
 - [x] Homepage hero replaced — `IMG_6632_edited.png` converted to `img-6632-edited.webp` (brand assets/Ice Bath/); scaled to 75% on desktop via `transform: scale(0.75)` anchored to bottom-right; mobile unchanged (session 31)
+- [x] ice-bath-nz.html hero updated to `img-6632-edited.webp` (same photo as homepage hero) (session 31)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
