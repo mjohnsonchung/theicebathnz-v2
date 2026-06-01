@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-05-30 (session 29)
+Last updated: 2026-06-01 (session 31)
 
 ---
 
@@ -326,6 +326,21 @@ Last updated: 2026-05-30 (session 29)
   - `outdoor-sauna.html`: `?variant=square` or `?variant=barrel` auto-selects via IIFE at end of main script
   - `ice-bath-chiller.html`: `?variant=premium` or `?variant=chiller` auto-selects via IIFE
   - `buy-now.html`: Square Sauna card → `outdoor-sauna.html?variant=square`; Premium Chiller card → `ice-bath-chiller.html?variant=premium`
+
+- [x] Specs-section photo carousels added to chiller + sauna pages (session 30)
+  - `ice-bath-chiller.html`: Standard variant → 4-slide carousel (img-6627, img-6644, img-6645, img-6652); Premium variant → single image (chiller-side.webp only; hose photo removed — broken); variant switch auto-hides old carousel + resets to slide 0
+  - `outdoor-sauna.html`: Barrel variant → 4-slide carousel (interior-heater, interior-bench, lifestyle-pool, lifestyle-night); Square variant → 4-slide carousel (lifestyle-2, great-pic, lifestyle-1, lifestyle-3); amber (#E8832A) dot accent matches sauna theme
+  - Pages already with carousels (`ice-bath-nz.html`, `stainless-steel-ice-bath.html`, `all-in-one-ice-bath.html`) unchanged
+  - `brand assets/Homepage/` folder committed to git (was untracked — `why the cold change everything photo.webp` + `Engineered for serious cold section.webp`)
+
+- [x] Homepage broken images fixed + no-bg product photos applied (session 30)
+  - Hero: `bath tub & chiller no bg.webp` (missing file) → `main pic v2.webp`
+  - Ice Bath card: same missing file → `main pic v2.webp`
+  - Chiller card: `No bg standard chiller.webp` (missing file) → `main-photo.webp`
+  - Barrel Sauna card: `main-photo.webp` (had background) → `Main Hero no bg.webp`
+  - OG/Twitter meta was already correct (`main pic v2.webp`) from session 26
+
+- [x] Homepage hero replaced — `IMG_6632_edited.png` converted to `img-6632-edited.webp` (brand assets/Ice Bath/); scaled to 75% on desktop via `transform: scale(0.75)` anchored to bottom-right; mobile unchanged (session 31)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
