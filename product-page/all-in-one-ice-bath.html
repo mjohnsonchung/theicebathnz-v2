@@ -337,16 +337,6 @@
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
-    /* Shipping Region Picker */
-    .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.7s forwards; }
-    .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
-    .ship-select-wrap { position: relative; }
-    .ship-select-wrap::after { content: ''; position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--mist); pointer-events: none; }
-    #ship-region { width: 100%; padding: 0.9rem 2.5rem 0.9rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; color: var(--snow); font-family: var(--body); font-size: 0.88rem; font-weight: 300; appearance: none; cursor: pointer; transition: border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth); }
-    #ship-region:hover { border-color: var(--border-hi); background: var(--elevated); }
-    #ship-region:focus { outline: none; border-color: var(--ice); background: var(--elevated); }
-    #ship-region option, #ship-region optgroup { background: var(--deep); }
-    .shipping-note { margin-top: 0.6rem; font-size: 0.72rem; color: var(--fog); min-height: 1.2em; }
 
     @media (max-width: 1100px) {
       .product-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -421,24 +411,13 @@
         <span class="price-note">incl. GST &middot; NZ Delivery</span>
       </div>
 
-      <div class="shipping-region">
-        <p class="shipping-region-label">Shipping Region</p>
-        <div class="ship-select-wrap">
-          <select id="ship-region" required></select>
-        </div>
-        <p id="ship-note" class="shipping-note"></p>
-      </div>
-
-      <div id="order-summary"></div>
-
       <div class="product-hero-actions">
-        <button id="buy-button" class="btn-primary" type="button">
-          Order Now
+        <button id="add-to-cart-btn" class="btn-primary" type="button">
+          Add to Cart
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <a href="../contact.html" class="btn-ghost">Ask a Question</a>
+        <button id="buy-now-btn" class="btn-ghost" type="button">Buy Now</button>
       </div>
-      <p id="buy-error" hidden></p>
       <ul class="product-highlights">
         <li class="highlight-item">Integrated 1HP chiller — cools to 3°C</li>
         <li class="highlight-item">Built-in filtration + ozone purification</li>
@@ -791,20 +770,17 @@
   </script>
 
   <script type="module">
-    import { setupConfigurator } from '/js/configurator.js';
+    import { addItem } from '/js/cart.js';
+    import { openDrawer } from '/js/cart-ui.js';
 
-    function getItems() {
-      return ['allinone_bath'];
-    }
+    document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+      addItem('allinone_bath');
+      openDrawer();
+    });
 
-    const config = setupConfigurator({
-      summaryEl:      document.getElementById('order-summary'),
-      buyButton:      document.getElementById('buy-button'),
-      regionSelectEl: document.getElementById('ship-region'),
-      shipNoteEl:     document.getElementById('ship-note'),
-      category:       'ice_bath',
-      productPath:    '/product-page/all-in-one-ice-bath',
-      getItems,
+    document.getElementById('buy-now-btn').addEventListener('click', () => {
+      addItem('allinone_bath');
+      openDrawer();
     });
   </script>
 

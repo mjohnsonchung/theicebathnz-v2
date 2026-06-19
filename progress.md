@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-01 (session 31)
+Last updated: 2026-06-19 (session 32)
 
 ---
 
@@ -40,8 +40,9 @@ Last updated: 2026-06-01 (session 31)
 ├── api/
 │   └── create-checkout.js  — NEW: Stripe Checkout Session endpoint
 ├── js/
-│   ├── shipping.js         — NEW: rates, products, bundles (single source of truth)
-│   └── checkout.js         — NEW: frontend dropdown + buy button helpers
+│   ├── shipping.js         — rates, products, bundles, SAUNA_FREIGHT, calculateShipping (single source of truth)
+│   ├── cart.js             — NEW: localStorage cart state (getLines, addItem, setQty, etc.)
+│   └── cart-ui.js          — NEW: cart drawer + nav badge + region/sauna selectors + checkout
 ├── INTEGRATION.md          — NEW: per-page wiring instructions
 ├── STRIPE_SETUP.md         — NEW: env var + deploy steps
 ├── buy-now.html            — Product catalog (/buy-now) — 3 product cards → product pages
@@ -342,6 +343,15 @@ Last updated: 2026-06-01 (session 31)
 
 - [x] Homepage hero replaced — `IMG_6632_edited.png` converted to `img-6632-edited.webp` (brand assets/Ice Bath/); scaled to 75% on desktop via `transform: scale(0.75)` anchored to bottom-right; mobile unchanged (session 31)
 - [x] ice-bath-nz.html hero updated to `img-6632-edited.webp` (same photo as homepage hero) (session 31)
+
+- [x] **Cart + Shipping Rework — full implementation (session 32)**
+  - `js/shipping.js` rewritten: `chiller_standard.amount` fixed 271200 → 239900; `sauna` + `accessory` columns removed from `SHIPPING_RATES`; `BUNDLE_RULE` removed; new `ACCESSORY_SOLO_RATE = 20`; new `SAUNA_FREIGHT` constant (own_freight $0, pickup_akl $0, north_island $349, south_island $449); new `islandOf(region)` helper; `calculateShipping()` replaced with new logic (baths × rate; surplus chillers × chiller rate; accessories free alongside bath/chiller else $20 each; saunas × sauna freight cost)
+  - `js/cart.js` created — localStorage-backed cart (`tibnz_cart_v1`); `{ sku, qty }` line shape; exports: `getLines`, `addItem`, `setQty`, `removeLine`, `clear`, `getCount`, `expandToProductIds`, `subscribe`; validates stored lines against catalog on load
+  - `js/cart-ui.js` created — self-initialising module; injects cart icon + badge into `.nav-right` on every page; slide-in drawer from right with: line items + qty steppers + remove buttons; region dropdown (shown only if bath/chiller in cart); sauna freight selector (shown only if sauna in cart; auto-pre-selects NI/SI from region, user can override); live subtotal / shipping / total; checkout button disabled until required selections made; empty state with link to /buy-now; POSTs `{ items: [{ sku, qty }], region?, saunaFreight? }` to `/api/create-checkout`
+  - All 7 product pages updated: `setupConfigurator` removed; per-page `#ship-region`, `#order-summary`, `#ship-note`, `.shipping-region` CSS removed; "Order Now" replaced with "Add to Cart" + "Buy Now" buttons (both add items and open the cart drawer); live hero price display added (updates with variant/accessory selection); pages now import `addItem` + `openDrawer` from the new modules
+  - `api/create-checkout.js` updated: accepts `[{ sku, qty }]` (or legacy string array); selective validation (region only if bath/chiller, saunaFreight only if sauna); aggregates line items by product ID with correct `quantity`; updated metadata encoding `skuxqty` format; updated `display_name` logic
+  - Stale files deleted: `api/js/` (duplicate shipping.js + checkout.js), `js/checkout.js`, `js/configurator.js`
+  - `cart-ui.js` added to all non-product pages: `index.html`, `buy-now.html`, `about-us.html`, `benefits.html`, `contact.html`, `faq.html`
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section

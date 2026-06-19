@@ -289,16 +289,6 @@
       animation: fadeUp 0.7s var(--ease-out) 0.5s forwards;
     }
 
-    /* ── Shipping Region Picker ─────────────────────────── */
-    .shipping-region { margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.55s forwards; }
-    .shipping-region-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
-    .ship-select-wrap { position: relative; }
-    .ship-select-wrap::after { content: ''; position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--mist); pointer-events: none; }
-    #ship-region { width: 100%; padding: 0.9rem 2.5rem 0.9rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; color: var(--snow); font-family: var(--body); font-size: 0.88rem; font-weight: 300; appearance: none; cursor: pointer; transition: border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth); }
-    #ship-region:hover { border-color: var(--border-hi); background: var(--elevated); }
-    #ship-region:focus { outline: none; border-color: var(--ice); background: var(--elevated); }
-    #ship-region option, #ship-region optgroup { background: var(--deep); }
-    .shipping-note { margin-top: 0.6rem; font-size: 0.72rem; color: var(--fog); min-height: 1.2em; }
 
     .product-hero-actions {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -640,24 +630,18 @@
 
       <p class="product-hero-tagline">Fill and drain your ice bath in minutes — no buckets, no mess. Universal hose fitting compatible with 4ft and 5ft baths.</p>
 
-      <div class="shipping-region">
-        <p class="shipping-region-label">Shipping Region</p>
-        <div class="ship-select-wrap">
-          <select id="ship-region" required></select>
-        </div>
-        <p id="ship-note" class="shipping-note"></p>
+      <div class="product-price-block" style="display:flex;align-items:baseline;gap:0.5rem;margin-bottom:2rem;">
+        <span class="price-cur">NZ</span>
+        <span class="price-amount">$79</span>
       </div>
-
-      <div id="order-summary"></div>
 
       <div class="product-hero-actions">
-        <button id="buy-button" class="btn-primary" type="button">
-          Order Now
+        <button id="add-to-cart-btn" class="btn-primary" type="button">
+          Add to Cart
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <a href="../contact.html" class="btn-ghost">Ask a Question</a>
+        <button id="buy-now-btn" class="btn-ghost" type="button">Buy Now</button>
       </div>
-      <p id="buy-error" hidden></p>
 
       <ul class="product-highlights">
         <li class="highlight-item">Universal garden hose connector</li>
@@ -871,21 +855,17 @@
   </script>
 
   <script type="module">
-    import { setupConfigurator } from '/js/configurator.js';
-    import { populateRegionSelect } from '/js/checkout.js';
+    import { addItem } from '/js/cart.js';
+    import { openDrawer } from '/js/cart-ui.js';
 
-    populateRegionSelect(document.getElementById('ship-region'), 'accessory');
+    document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+      addItem('hose_attachment');
+      openDrawer();
+    });
 
-    function getItems() { return ['hose_attachment']; }
-
-    setupConfigurator({
-      summaryEl:      document.getElementById('order-summary'),
-      buyButton:      document.getElementById('buy-button'),
-      regionSelectEl: document.getElementById('ship-region'),
-      shipNoteEl:     document.getElementById('ship-note'),
-      category:       'accessory',
-      productPath:    '/product-page/hose-attachment',
-      getItems,
+    document.getElementById('buy-now-btn').addEventListener('click', () => {
+      addItem('hose_attachment');
+      openDrawer();
     });
   </script>
 

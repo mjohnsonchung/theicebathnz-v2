@@ -5,11 +5,10 @@
 //   • Mainfreight depot shipping rates
 //   • Product catalog (prices in NZD cents)
 //   • Bundle SKUs (bath + chiller combos)
-//   • Bundle-shipping rule
 //
-// This file is loaded by both:
-//   • /api/create-checkout.js  (server, creates Stripe Checkout Session)
-//   • Product pages            (browser, populates the region dropdown)
+// Loaded by:
+//   • /api/create-checkout.js  (server — Stripe Checkout Session)
+//   • /js/cart-ui.js           (browser — cart drawer shipping calc)
 //
 // To change a price or add a region, edit here and redeploy.
 // =============================================================================
@@ -17,43 +16,40 @@
 // ---------------------------------------------------------------------------
 // SHIPPING RATES — NZD, per Mainfreight depot
 // ---------------------------------------------------------------------------
-// Source: The_Ice_Bath_-_Shipping_Pricing.xlsx (Timaru ice-bath rate corrected
-// from $22 → $220, presumed typo in source).
-// 4ft and 5ft ice baths share the same freight rate, so a single `ice_bath`
-// column covers both.
+// Columns: ice_bath (each bath is one freight unit), chiller (surplus chillers)
+// Saunas use SAUNA_FREIGHT below. Accessories: ACCESSORY_SOLO_RATE.
+// Source: The_Ice_Bath_-_Shipping_Pricing.xlsx (Timaru ice_bath corrected $22→$220)
 export const SHIPPING_RATES = {
   // ── North Island ────────────────────────────────────────────────────────
-  AUCKLAND:           { ice_bath:  80, chiller:  80, sauna: 100, accessory: 0 },
-  HAMILTON:           { ice_bath: 150, chiller:  90, sauna: 100, accessory: 0 },
-  TAURANGA:           { ice_bath: 150, chiller:  90, sauna: 150, accessory: 0 },
-  THAMES:             { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
-  WHANGAREI:          { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
-  TAUPO:              { ice_bath: 160, chiller:  95, sauna: 300, accessory: 0 },
-  ROTORUA:            { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
-  NAPIER:             { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
-  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100, sauna: 300, accessory: 0 },
-  KAITAIA:            { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
-  GISBORNE:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
-  WANGANUI:           { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
-  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
-  LEVIN:              { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
-  WELLINGTON:         { ice_bath: 170, chiller: 100, sauna: 300, accessory: 0 },
+  AUCKLAND:           { ice_bath:  80, chiller:  80 },
+  HAMILTON:           { ice_bath: 150, chiller:  90 },
+  TAURANGA:           { ice_bath: 150, chiller:  90 },
+  THAMES:             { ice_bath: 160, chiller:  95 },
+  WHANGAREI:          { ice_bath: 160, chiller:  95 },
+  TAUPO:              { ice_bath: 160, chiller:  95 },
+  ROTORUA:            { ice_bath: 165, chiller: 100 },
+  NAPIER:             { ice_bath: 165, chiller: 100 },
+  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100 },
+  KAITAIA:            { ice_bath: 170, chiller: 100 },
+  GISBORNE:           { ice_bath: 170, chiller: 100 },
+  WANGANUI:           { ice_bath: 170, chiller: 100 },
+  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100 },
+  LEVIN:              { ice_bath: 170, chiller: 100 },
+  WELLINGTON:         { ice_bath: 170, chiller: 100 },
   // ── South Island ────────────────────────────────────────────────────────
-  CHRISTCHURCH:       { ice_bath: 200, chiller: 120, sauna: 350, accessory: 0 },
-  BLENHEIM:           { ice_bath: 210, chiller: 130, sauna: 350, accessory: 0 },
-  NELSON:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
-  TIMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
-  OAMARU:             { ice_bath: 220, chiller: 130, sauna: 350, accessory: 0 },
-  DUNEDIN:            { ice_bath: 225, chiller: 130, sauna: 350, accessory: 0 },
-  GREYMOUTH:          { ice_bath: 230, chiller: 130, sauna: 350, accessory: 0 },
-  INVERCARGILL:       { ice_bath: 230, chiller: 140, sauna: 350, accessory: 0 },
-  CROMWELL:           { ice_bath: 240, chiller: 140, sauna: 350, accessory: 0 },
-  GORE:               { ice_bath: 240, chiller: 140, sauna: 350, accessory: 0 },
+  NELSON:             { ice_bath: 220, chiller: 130 },
+  BLENHEIM:           { ice_bath: 210, chiller: 130 },
+  CHRISTCHURCH:       { ice_bath: 200, chiller: 120 },
+  GREYMOUTH:          { ice_bath: 230, chiller: 130 },
+  TIMARU:             { ice_bath: 220, chiller: 130 },
+  OAMARU:             { ice_bath: 220, chiller: 130 },
+  DUNEDIN:            { ice_bath: 225, chiller: 130 },
+  CROMWELL:           { ice_bath: 240, chiller: 140 },
+  GORE:               { ice_bath: 240, chiller: 140 },
+  INVERCARGILL:       { ice_bath: 230, chiller: 140 },
 };
 
-// Region display order in the dropdown (north → south, then alphabetical).
-// Customers scan vertically; geographic order makes scanning faster than
-// alphabetical-only.
+// Region display order in the dropdown (north → south).
 export const REGION_ORDER = [
   // North Island
   'KAITAIA', 'WHANGAREI', 'AUCKLAND', 'THAMES', 'HAMILTON', 'TAURANGA',
@@ -65,49 +61,59 @@ export const REGION_ORDER = [
 ];
 
 // ---------------------------------------------------------------------------
+// ACCESSORY SOLO RATE — flat per-accessory, region-independent
+// ---------------------------------------------------------------------------
+// Accessories ride free with any bath or chiller. Solo-only cart pays this.
+export const ACCESSORY_SOLO_RATE = 20;
+
+// ---------------------------------------------------------------------------
+// SAUNA FREIGHT — per sauna, separate from depot table
+// ---------------------------------------------------------------------------
+export const SAUNA_FREIGHT = {
+  own_freight:  { label: 'Arrange your own freight',  cost: 0   },
+  pickup_akl:   { label: 'Pick up — Auckland',        cost: 0   },
+  north_island: { label: 'North Island delivery',     cost: 349 },
+  south_island: { label: 'South Island delivery',     cost: 449 },
+};
+
+// ---------------------------------------------------------------------------
+// ISLAND HELPER — pre-select sauna freight from the depot region
+// ---------------------------------------------------------------------------
+const SI_START = REGION_ORDER.indexOf('NELSON'); // first South Island entry
+const NORTH_ISLAND = new Set(REGION_ORDER.slice(0, SI_START));
+export function islandOf(region) {
+  return NORTH_ISLAND.has(region) ? 'north' : 'south';
+}
+
+// ---------------------------------------------------------------------------
 // PRODUCT CATALOG
 // ---------------------------------------------------------------------------
-// `amount` is in NZD cents (Stripe's required minor-unit format).
-// `ship` is the freight category used to look up rates above.
+// `amount` is in NZD cents. `ship` is the freight category.
 export const PRODUCTS = {
-  ice_bath_4ft:     { name: 'Ice Bath 4ft',             amount:  78400, ship: 'ice_bath'  },
-  ice_bath_5ft:     { name: 'Ice Bath 5ft',             amount:  88800, ship: 'ice_bath'  },
-  chiller_standard: { name: 'Ice Bath Chiller',         amount: 271200, ship: 'chiller'   },
-  chiller_premium:  { name: 'Premium Ice Bath Chiller', amount: 329900, ship: 'chiller'   },
-  sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',   amount: 750000, ship: 'sauna'     },
-  sauna_barrel:     { name: 'Barrel Sauna (4 Person)',   amount: 989900, ship: 'sauna'     },
-  sauna_barrel_6p:  { name: 'Barrel Sauna (6 Person)',   amount: 1189900, ship: 'sauna'    },
-  sauna_square:     { name: 'Square Sauna',             amount: 999900, ship: 'sauna'     },
-  ice_bath_cover:   { name: 'Ice Bath Cover',           amount:  19900, ship: 'accessory' },
-  hose_attachment:  { name: 'Hose Attachment',          amount:   7900, ship: 'accessory' },
-  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller', amount: 1089900, ship: 'ice_bath' },
-  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)', amount: 384900, ship: 'ice_bath' },
-  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)', amount: 439900, ship: 'ice_bath' },
+  ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath'  },
+  ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath'  },
+  chiller_standard: { name: 'Ice Bath Chiller',                  amount:  239900, ship: 'chiller'   },
+  chiller_premium:  { name: 'Premium Ice Bath Chiller',          amount:  329900, ship: 'chiller'   },
+  sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',           amount:  750000, ship: 'sauna'     },
+  sauna_barrel:     { name: 'Barrel Sauna (4 Person)',           amount:  989900, ship: 'sauna'     },
+  sauna_barrel_6p:  { name: 'Barrel Sauna (6 Person)',           amount: 1189900, ship: 'sauna'     },
+  sauna_square:     { name: 'Square Sauna',                      amount:  999900, ship: 'sauna'     },
+  ice_bath_cover:   { name: 'Ice Bath Cover',                    amount:   19900, ship: 'accessory' },
+  hose_attachment:  { name: 'Hose Attachment',                   amount:    7900, ship: 'accessory' },
+  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath'  },
+  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath'  },
+  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath'  },
 };
 
 // ---------------------------------------------------------------------------
 // BUNDLE SKUs
 // ---------------------------------------------------------------------------
-// A bundle is a single front-end SKU that maps to multiple line items at
-// checkout. Line item totals match the bundle prices in progress.md.
 export const BUNDLES = {
-  bath_4ft_std:  { items: ['ice_bath_4ft', 'chiller_standard'] }, // $3,479
-  bath_5ft_std:  { items: ['ice_bath_5ft', 'chiller_standard'] }, // $3,609
-  bath_4ft_prem: { items: ['ice_bath_4ft', 'chiller_premium']  }, // $4,379
-  bath_5ft_prem: { items: ['ice_bath_5ft', 'chiller_premium']  }, // $4,509
+  bath_4ft_std:  { items: ['ice_bath_4ft', 'chiller_standard'] },
+  bath_5ft_std:  { items: ['ice_bath_5ft', 'chiller_standard'] },
+  bath_4ft_prem: { items: ['ice_bath_4ft', 'chiller_premium']  },
+  bath_5ft_prem: { items: ['ice_bath_5ft', 'chiller_premium']  },
 };
-
-// ---------------------------------------------------------------------------
-// BUNDLE SHIPPING RULE
-// ---------------------------------------------------------------------------
-// When a bath + chiller bundle ships, the chiller fits inside the bath and
-// goes as a single freight job. So we charge the bath rate only.
-//
-// If your freight provider quotes you separately for bundles, switch this to
-// 'sum' and both rates will be added.
-//   'bath_only' — charge ice-bath rate (chiller rides for free) ← recommended
-//   'sum'       — charge ice-bath + chiller rates
-export const BUNDLE_RULE = 'bath_only';
 
 // ---------------------------------------------------------------------------
 // HELPERS
@@ -120,34 +126,46 @@ export function resolveSkuToItems(sku) {
   throw new Error(`Unknown SKU: ${sku}`);
 }
 
-// Calculate shipping cost in NZD (whole dollars) for a list of product IDs
-// shipping to a given region.
-export function calculateShipping(productIds, region) {
-  const rates = SHIPPING_RATES[region];
-  if (!rates) throw new Error(`Unknown region: ${region}`);
-
-  const cats = productIds.map(id => PRODUCTS[id].ship);
-  const hasBath    = cats.includes('ice_bath');
-  const hasChiller = cats.includes('chiller');
-
-  // Bath + chiller bundle — apply rule
-  if (hasBath && hasChiller && BUNDLE_RULE === 'bath_only') {
-    const accessoryTotal = cats
-      .filter(c => c === 'accessory')
-      .reduce((s, c) => s + rates[c], 0);
-    return rates.ice_bath + accessoryTotal;
-  }
-
-  // Default: sum each item's category rate
-  return cats.reduce((sum, c) => sum + rates[c], 0);
-}
-
 // Convert "PALMERSTON NORTH" → "Palmerston North" (for Stripe checkout label).
 export function prettyCity(region) {
   return region.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// Calculate shipping for a SKU directly (convenience for the frontend).
-export function shippingForSku(sku, region) {
-  return calculateShipping(resolveSkuToItems(sku), region);
+// ---------------------------------------------------------------------------
+// CALCULATE SHIPPING
+// ---------------------------------------------------------------------------
+// productIds: flat array with bundles AND quantities already expanded
+//             (e.g. 2× ice_bath_4ft → ['ice_bath_4ft', 'ice_bath_4ft'])
+// region:          depot key — required only if cart has a bath or chiller
+// saunaFreightKey: a SAUNA_FREIGHT key — required only if cart has a sauna
+export function calculateShipping(productIds, region, saunaFreightKey) {
+  const cats = productIds.map(id => PRODUCTS[id].ship);
+  const baths       = cats.filter(c => c === 'ice_bath').length;
+  const chillers    = cats.filter(c => c === 'chiller').length;
+  const saunas      = cats.filter(c => c === 'sauna').length;
+  const accessories = cats.filter(c => c === 'accessory').length;
+
+  let total = 0;
+
+  // Depot-rated: each bath is a freight unit; one chiller nests free per bath.
+  if (baths > 0 || chillers > 0) {
+    const rates = SHIPPING_RATES[region];
+    if (!rates) throw new Error(`Unknown region: ${region}`);
+    total += baths * rates.ice_bath;
+    total += Math.max(0, chillers - baths) * rates.chiller;
+  }
+
+  // Accessories: free alongside any bath/chiller, else $20 each.
+  if (baths === 0 && chillers === 0) {
+    total += accessories * ACCESSORY_SOLO_RATE;
+  }
+
+  // Saunas: own flat freight, ship alone, charged per sauna.
+  if (saunas > 0) {
+    const f = SAUNA_FREIGHT[saunaFreightKey];
+    if (!f) throw new Error(`Sauna freight option required (got: ${saunaFreightKey})`);
+    total += saunas * f.cost;
+  }
+
+  return total;
 }
