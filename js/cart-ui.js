@@ -533,6 +533,10 @@ function render() {
 
   // ── Footer ────────────────────────────────────────────────────────────────
 
+  // Snapshot selections BEFORE wiping footer — the module-level vars still
+  // point to the old DOM nodes, which retain their .value until GC'd.
+  const prevRegion = regionSelect?.value || '';
+  const prevSauna  = saunaSelect?.value  || '';
   footer.innerHTML = '';
 
   const expandedIds = expandToProductIds();
@@ -560,9 +564,7 @@ function render() {
     wrap.className = 'cart-select-wrap';
 
     regionSelect = buildRegionSelect();
-    // Restore previous selection if available
-    const savedRegion = footer.querySelector('#cart-region-select')?.value || '';
-    if (savedRegion && SHIPPING_RATES[savedRegion]) regionSelect.value = savedRegion;
+    if (prevRegion && SHIPPING_RATES[prevRegion]) regionSelect.value = prevRegion;
 
     regionSelect.addEventListener('change', () => {
       // Auto-update sauna freight default when region changes
@@ -598,12 +600,11 @@ function render() {
     const wrap = document.createElement('div');
     wrap.className = 'cart-select-wrap';
 
-    const prevSaunaVal = footer.querySelector('#cart-sauna-select')?.value || '';
     saunaSelect = buildSaunaSelect();
 
     // Restore or auto-select from region
-    if (prevSaunaVal) {
-      saunaSelect.value = prevSaunaVal;
+    if (prevSauna) {
+      saunaSelect.value = prevSauna;
     } else if (needsRegion && regionSelect?.value) {
       const island = islandOf(regionSelect.value);
       saunaSelect.value = island === 'north' ? 'north_island' : 'south_island';

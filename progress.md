@@ -352,6 +352,10 @@ Last updated: 2026-06-19 (session 32)
   - `api/create-checkout.js` updated: accepts `[{ sku, qty }]` (or legacy string array); selective validation (region only if bath/chiller, saunaFreight only if sauna); aggregates line items by product ID with correct `quantity`; updated metadata encoding `skuxqty` format; updated `display_name` logic
   - Stale files deleted: `api/js/` (duplicate shipping.js + checkout.js), `js/checkout.js`, `js/configurator.js`
   - `cart-ui.js` added to all non-product pages: `index.html`, `buy-now.html`, `about-us.html`, `benefits.html`, `contact.html`, `faq.html`
+- [x] `cart-ui.js` render() selection-preservation bug fixed (session 32)
+  - Root cause: `footer.innerHTML = ''` destroyed the DOM nodes, then code tried to read `.value` back from the now-empty footer via `footer.querySelector(...)` — always returned `''`
+  - Fix: snapshot `prevRegion = regionSelect?.value` and `prevSauna = saunaSelect?.value` from the module-level vars (which still point to the old nodes) BEFORE clearing footer; use those snapshots to restore selections after rebuild
+  - Result: region + sauna selections now survive re-renders triggered by qty changes; checkout button stays enabled correctly
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
