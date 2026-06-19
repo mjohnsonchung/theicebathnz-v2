@@ -132,6 +132,21 @@ export function prettyCity(region) {
 }
 
 // ---------------------------------------------------------------------------
+// FREIGHT CONSOLIDATION FACTORS
+// ---------------------------------------------------------------------------
+// Per-additional-unit freight factor.
+// 0.5 = each extra unit at half rate (2 = 1.5×, 3 = 2×, …)
+// 1   = no discount (N × rate), i.e. current behaviour
+export const FREIGHT_FACTOR = { ice_bath: 0.5, chiller: 1, sauna: 1 };
+
+// Freight for N like units to one region. First unit full rate, each
+// additional unit at `factor` of the rate. Rounded to a whole dollar so the
+// displayed total matches the Stripe charge.
+function unitsFreight(n, rate, factor) {
+  return n <= 0 ? 0 : Math.round(rate * (1 + (n - 1) * factor));
+}
+
+// ---------------------------------------------------------------------------
 // CALCULATE SHIPPING
 // ---------------------------------------------------------------------------
 // productIds: flat array with bundles AND quantities already expanded
@@ -151,7 +166,7 @@ export function calculateShipping(productIds, region, saunaFreightKey) {
   if (baths > 0 || chillers > 0) {
     const rates = SHIPPING_RATES[region];
     if (!rates) throw new Error(`Unknown region: ${region}`);
-    total += baths * rates.ice_bath;
+    total += unitsFreight(baths, rates.ice_bath, FREIGHT_FACTOR.ice_bath);
     total += Math.max(0, chillers - baths) * rates.chiller;
   }
 

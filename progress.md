@@ -356,6 +356,12 @@ Last updated: 2026-06-19 (session 32)
   - Root cause: `footer.innerHTML = ''` destroyed the DOM nodes, then code tried to read `.value` back from the now-empty footer via `footer.querySelector(...)` — always returned `''`
   - Fix: snapshot `prevRegion = regionSelect?.value` and `prevSauna = saunaSelect?.value` from the module-level vars (which still point to the old nodes) BEFORE clearing footer; use those snapshots to restore selections after rebuild
   - Result: region + sauna selections now survive re-renders triggered by qty changes; checkout button stays enabled correctly
+- [x] Multi-bath freight consolidation added to `js/shipping.js` (session 32)
+  - New `FREIGHT_FACTOR` export: `{ ice_bath: 0.5, chiller: 1, sauna: 1 }` — extensible per-category factor
+  - New `unitsFreight(n, rate, factor)` helper: first unit full rate, each additional at `factor` × rate, rounded to whole dollar
+  - `calculateShipping()` updated: `baths * rates.ice_bath` → `unitsFreight(baths, rates.ice_bath, FREIGHT_FACTOR.ice_bath)`
+  - Chiller nesting logic unchanged; accessories and saunas unchanged
+  - Result: 2 baths = 1.5× rate (e.g. Christchurch $400 → $300); 3 baths = 2×; odd rates round (Rotorua 2 baths = $248)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
