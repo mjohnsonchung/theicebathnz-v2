@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-22 (session 34)
+Last updated: 2026-06-22 (session 35)
 
 ---
 
@@ -402,9 +402,30 @@ Last updated: 2026-06-22 (session 34)
     - buy-now.html "Shop All Products" `<h1>` title removed — redundant with the "View All Products" button, not clickable, and had the same `.reveal` transform centering bug; CSS + HTML + mobile rule all deleted
     - buy-now.html back button restyled for visibility — changed from plain text link (`color:var(--mist)`, no background) to pill button with backdrop-blur background, border, `color:var(--snow)`, larger font (0.78→0.82rem), padding + border-radius; matches `.split-back-btn` aesthetic across COLD, OUTDOOR, INDOOR, and ALL states
 
+- [x] **Buy-now filter system overhaul + cold indoor/outdoor split (session 35)**
+  - `js/shipping.js`: `indoor`/`outdoor` tags added to all cold products — Ice Bath (`outdoor`), Chillers (`indoor outdoor`), Stainless Steel (`indoor outdoor`), All-in-One (`indoor`), Ice Bath Cover (`indoor outdoor`), Hose Attachment (`outdoor`)
+  - `buy-now.html`: product card `data-tags` updated to match shipping.js tags
+  - `buy-now.html`: new **Cold indoor/outdoor split screen** (`#splitCold`) — mirrors Heat split pattern; Indoor Cold background = `All in one Ice Bath (New)/lifestyle-1.webp`, Outdoor Cold background = `Stainless Steel Ice Bath (NEW)/lifestyle-4.webp`
+  - `buy-now.html`: HOME → Cold Therapy now navigates to cold split screen (was: direct to grid)
+  - `buy-now.html`: **filter tabs always visible** on all product grid states (was: ALL state only); two-row layout:
+    - Row 1: All Products | Cold Therapy | Heat Therapy
+    - Row 2: All | Indoor | Outdoor
+  - Two-level filtering: `activeCategory` × `activeLocation` — e.g. "Cold Therapy + Indoor" shows only indoor cold products
+  - Category switch resets location to "all" to prevent empty results
+  - New states: `cold-split`, `cold-indoor`, `cold-outdoor`; `GRID_STATES` array for cleaner state management
+  - Title dynamically updates: "Cold Therapy" (ice accent), "Heat Therapy" (ember accent), "All Products"
+
+- [x] **Image updates (session 35)**
+  - Ice Bath Cover photo added to accessory toggle on `ice-bath-nz.html`, `ice-bath-chiller.html`, `stainless-steel-ice-bath.html` — `ice-bath-cover.webp` (converted from `Photo 01-10-2023, 3 29 42 PM.jpg`, 1705KB)
+  - Ice Bath Cover accessory + Hose Attachment accessory both now on stainless-steel-ice-bath.html (was hose only)
+  - Homepage og:image + twitter:image → `Homepage/homepage-snippet.webp` (converted from `Photo 24-04-2024, 4 53 42 PM.jpg`, 1754KB)
+  - Homepage "Why cold changes everything" photo → `Homepage/why-cold-changes-v2.webp` (150KB)
+  - Homepage "Engineered for serious cold" photo → `Homepage/img-4712.webp` (1460KB)
+  - Stainless Steel Ice Bath main photo updated across product page hero, buy-now card carousel, og:image, twitter:image → `stainless-steel-main.webp` (108KB, converted from `Stainless Steel Ice Bath.png`)
+  - 5 new WebP conversions total (quality 82 via sharp)
+
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
-- [ ] Ice Bath Cover hero image — no photo available yet; cover placeholder shown in buy-now.html and product page
 
 ---
 

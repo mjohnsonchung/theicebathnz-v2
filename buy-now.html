@@ -291,10 +291,12 @@
     .products-title.accent-heat em { color: var(--ember); }
 
     /* ── Filter Tabs ─────────────────────────────────── */
+    .filter-tabs-container { margin-top: 1.5rem; }
     .filter-tabs {
       display: flex; gap: 0.5rem;
-      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
+    .filter-tabs-sub { margin-top: 0.5rem; }
     .filter-tab {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -525,6 +527,7 @@
       .product-body { padding: 1.5rem; }
       .product-name { font-size: 1.5rem; }
       .filter-tabs { flex-wrap: wrap; }
+      .filter-tabs-sub { flex-wrap: wrap; }
 
       .coming-soon { padding: 6rem 1.5rem; }
       .coming-soon .back-btn { top: 5.5rem; left: 1.5rem; }
@@ -576,7 +579,7 @@
        HOME — Cold / Heat split
        ═══════════════════════════════════════════════════ -->
   <section class="split-screen" id="splitHome">
-    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold')" aria-label="Explore cold therapy products">
+    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-split')" aria-label="Explore cold therapy products">
       <div class="split-bg" style="background-image:url('brand%20assets/Homepage/engineered-for-serious-cold.webp')"></div>
       <div class="split-overlay split-overlay-cold"></div>
       <div class="split-content">
@@ -602,6 +605,38 @@
       View All Products
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       COLD — Indoor / Outdoor sub-split
+       ═══════════════════════════════════════════════════ -->
+  <section class="split-screen" id="splitCold" style="display:none">
+    <button class="split-back-btn" onclick="goBack()" aria-label="Go back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </button>
+
+    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-indoor')" aria-label="Indoor cold therapy products">
+      <div class="split-bg" style="background-image:url('brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/lifestyle-1.webp')"></div>
+      <div class="split-overlay split-overlay-cold"></div>
+      <div class="split-content">
+        <p class="split-label">Indoor</p>
+        <h2 class="split-heading">Indoor <em>Cold</em></h2>
+        <p class="split-sub">Ice baths &amp; chillers for indoor spaces</p>
+        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-outdoor')" aria-label="Outdoor cold therapy products">
+      <div class="split-bg" style="background-image:url('brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-4.webp')"></div>
+      <div class="split-overlay split-overlay-cold"></div>
+      <div class="split-content">
+        <p class="split-label">Outdoor</p>
+        <h2 class="split-heading">Outdoor <em>Cold</em></h2>
+        <p class="split-sub">Ice baths &amp; chillers for the backyard</p>
+        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
   </section>
 
   <!-- ═══════════════════════════════════════════════════
@@ -663,17 +698,24 @@
           Back
         </button>
         <h2 class="products-title accent-cold" id="productsTitle">All <em>Products</em></h2>
-        <div class="filter-tabs" id="filterTabs" style="display:none">
-          <button class="filter-tab active" data-filter="all" onclick="setFilter('all',this)">All</button>
-          <button class="filter-tab" data-filter="cold" onclick="setFilter('cold',this)">Cold Therapy</button>
-          <button class="filter-tab" data-filter="heat" onclick="setFilter('heat',this)">Heat Therapy</button>
+        <div class="filter-tabs-container" id="filterTabsContainer">
+          <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-filter="all" onclick="setCategoryFilter('all',this)">All Products</button>
+            <button class="filter-tab" data-filter="cold" onclick="setCategoryFilter('cold',this)">Cold Therapy</button>
+            <button class="filter-tab" data-filter="heat" onclick="setCategoryFilter('heat',this)">Heat Therapy</button>
+          </div>
+          <div class="filter-tabs filter-tabs-sub" id="filterTabsSub">
+            <button class="filter-tab active" data-filter="all" onclick="setLocationFilter('all',this)">All</button>
+            <button class="filter-tab" data-filter="indoor" onclick="setLocationFilter('indoor',this)">Indoor</button>
+            <button class="filter-tab" data-filter="outdoor" onclick="setLocationFilter('outdoor',this)">Outdoor</button>
+          </div>
         </div>
       </div>
 
       <div class="products-grid">
 
         <!-- Ice Bath -->
-        <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold">
+        <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath" style="object-fit:cover;"></div>
@@ -698,7 +740,7 @@
         </a>
 
         <!-- Standard Chiller -->
-        <a href="product-page/ice-bath-chiller.html" class="product-card" data-tags="cold">
+        <a href="product-page/ice-bath-chiller.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller" style="object-fit:cover;"></div>
@@ -723,7 +765,7 @@
         </a>
 
         <!-- Premium Chiller -->
-        <a href="product-page/ice-bath-chiller.html?variant=premium" class="product-card" data-tags="cold">
+        <a href="product-page/ice-bath-chiller.html?variant=premium" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Premium%20Chiller/main-photo.webp" alt="Premium Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;"></div>
@@ -802,10 +844,10 @@
         </a>
 
         <!-- Stainless Steel Ice Bath -->
-        <a href="product-page/stainless-steel-ice-bath.html" class="product-card" data-tags="cold">
+        <a href="product-page/stainless-steel-ice-bath.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/image-1.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-gym.webp" alt="Stainless Steel Ice Bath in use" style="object-fit:cover;"></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -827,7 +869,7 @@
         </a>
 
         <!-- All-in-One Ice Bath & Chiller -->
-        <a href="product-page/all-in-one-ice-bath.html" class="product-card" data-tags="cold">
+        <a href="product-page/all-in-one-ice-bath.html" class="product-card" data-tags="cold indoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/main-photo.webp" alt="All-in-One Ice Bath & Chiller" style="object-fit:contain; background:#0a1e35;"></div>
@@ -854,7 +896,7 @@
         </a>
 
         <!-- Hose Attachment -->
-        <a href="product-page/hose-attachment.html" class="product-card" data-tags="accessory cold">
+        <a href="product-page/hose-attachment.html" class="product-card" data-tags="accessory cold outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Hose%20attachment/img-0597.webp" alt="Hose Attachment in use" style="object-fit:cover;"></div>
@@ -879,7 +921,7 @@
         </a>
 
         <!-- Ice Bath Cover -->
-        <a href="product-page/ice-bath-cover.html" class="product-card" data-tags="accessory cold">
+        <a href="product-page/ice-bath-cover.html" class="product-card" data-tags="accessory cold indoor outdoor">
           <div class="product-img-frame" style="background: linear-gradient(135deg, var(--surface) 0%, var(--elevated) 50%, #0d2a48 100%); display:flex; align-items:center; justify-content:center;">
             <div style="text-align:center; padding:2rem; position:relative; z-index:2;">
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style="margin:0 auto 1rem;" opacity="0.55">
@@ -1025,21 +1067,25 @@
 
     /* ── State Machine ───────────────────────────────── */
     const TRANSITION_MS = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
+    const GRID_STATES = ['cold', 'cold-indoor', 'cold-outdoor', 'outdoor', 'all'];
 
     let currentState = 'home';
     let stateHistory = [];
+    let activeCategory = 'all';
+    let activeLocation = 'all';
 
     function getSection(state) {
       switch (state) {
-        case 'home':    return document.getElementById('splitHome');
-        case 'heat':    return document.getElementById('splitHeat');
-        case 'indoor':  return document.getElementById('sectionIndoor');
-        default:        return document.getElementById('productsSection');
+        case 'home':       return document.getElementById('splitHome');
+        case 'cold-split': return document.getElementById('splitCold');
+        case 'heat':       return document.getElementById('splitHeat');
+        case 'indoor':     return document.getElementById('sectionIndoor');
+        default:           return document.getElementById('productsSection');
       }
     }
 
     function getDisplay(state) {
-      return ['cold', 'outdoor', 'all'].includes(state) ? 'block' : 'flex';
+      return GRID_STATES.includes(state) ? 'block' : 'flex';
     }
 
     function navigate(state) {
@@ -1062,7 +1108,7 @@
       const newDisplay = getDisplay(toState);
 
       // Configure grid before showing
-      if (['cold', 'outdoor', 'all'].includes(toState)) {
+      if (GRID_STATES.includes(toState)) {
         configureGrid(toState);
       }
 
@@ -1104,44 +1150,68 @@
 
     /* ── Grid Configuration ──────────────────────────── */
     function configureGrid(state) {
-      const title = document.getElementById('productsTitle');
-      const tabs = document.getElementById('filterTabs');
-
+      // Set filter state based on navigation source
       if (state === 'cold') {
+        activeCategory = 'cold'; activeLocation = 'all';
+      } else if (state === 'cold-indoor') {
+        activeCategory = 'cold'; activeLocation = 'indoor';
+      } else if (state === 'cold-outdoor') {
+        activeCategory = 'cold'; activeLocation = 'outdoor';
+      } else if (state === 'outdoor') {
+        activeCategory = 'heat'; activeLocation = 'outdoor';
+      } else {
+        activeCategory = 'all'; activeLocation = 'all';
+      }
+      updateTitle();
+      updateFilterUI();
+      applyFilters();
+    }
+
+    function updateTitle() {
+      const title = document.getElementById('productsTitle');
+      if (activeCategory === 'cold') {
         title.innerHTML = 'Cold <em>Therapy</em>';
         title.className = 'products-title accent-cold';
-        tabs.style.display = 'none';
-        filterCards('cold');
-      } else if (state === 'outdoor') {
-        title.innerHTML = 'Outdoor <em>Saunas</em>';
+      } else if (activeCategory === 'heat') {
+        title.innerHTML = 'Heat <em>Therapy</em>';
         title.className = 'products-title accent-heat';
-        tabs.style.display = 'none';
-        filterCards('outdoor');
       } else {
         title.innerHTML = 'All <em>Products</em>';
         title.className = 'products-title accent-cold';
-        tabs.style.display = 'flex';
-        filterCards('all');
-        document.querySelectorAll('.filter-tab').forEach(t => {
-          t.classList.toggle('active', t.dataset.filter === 'all');
-        });
       }
     }
 
-    function filterCards(tag) {
-      document.querySelectorAll('#productsSection .product-card').forEach(card => {
-        if (tag === 'all') {
-          card.style.display = '';
-        } else {
-          const tags = card.dataset.tags.split(' ');
-          card.style.display = tags.includes(tag) ? '' : 'none';
-        }
+    function updateFilterUI() {
+      document.querySelectorAll('#filterTabs .filter-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.filter === activeCategory);
+      });
+      document.querySelectorAll('#filterTabsSub .filter-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.filter === activeLocation);
       });
     }
 
-    function setFilter(tag, btn) {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t === btn));
-      filterCards(tag);
+    function applyFilters() {
+      document.querySelectorAll('#productsSection .product-card').forEach(card => {
+        const tags = card.dataset.tags.split(' ');
+        let show = true;
+        if (activeCategory !== 'all') show = show && tags.includes(activeCategory);
+        if (activeLocation !== 'all') show = show && tags.includes(activeLocation);
+        card.style.display = show ? '' : 'none';
+      });
+    }
+
+    function setCategoryFilter(cat) {
+      activeCategory = cat;
+      activeLocation = 'all'; // reset location when switching category
+      updateTitle();
+      updateFilterUI();
+      applyFilters();
+    }
+
+    function setLocationFilter(loc) {
+      activeLocation = loc;
+      updateFilterUI();
+      applyFilters();
     }
   </script>
   <script type="module" src="/js/cart-ui.js"></script>
