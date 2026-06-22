@@ -399,6 +399,8 @@ Last updated: 2026-06-22 (session 34)
     - buy-now.html Cold Therapy split background changed from `img-6632-edited.webp` → `engineered-for-serious-cold.webp` (converted from `The Ice Bath — engineered for serious cold..png` via sharp, 169KB)
     - buy-now.html "View All Products" button centering fixed — `.reveal` class was overriding `transform: translateX(-50%)`; switched to margin-based centering (`left:0; right:0; margin:0 auto; width:fit-content`)
     - buy-now.html HEAT split Indoor/Outdoor heading alignment fixed — wrapped "Coming Soon" badge in `<p class="split-label">` so both halves have identical DOM structure above the heading
+    - buy-now.html "Shop All Products" `<h1>` title removed — redundant with the "View All Products" button, not clickable, and had the same `.reveal` transform centering bug; CSS + HTML + mobile rule all deleted
+    - buy-now.html back button restyled for visibility — changed from plain text link (`color:var(--mist)`, no background) to pill button with backdrop-blur background, border, `color:var(--snow)`, larger font (0.78→0.82rem), padding + border-radius; matches `.split-back-btn` aesthetic across COLD, OUTDOOR, INDOOR, and ALL states
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
