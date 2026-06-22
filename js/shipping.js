@@ -71,19 +71,19 @@ export const ACCESSORY_SOLO_RATE = 20;
 // ---------------------------------------------------------------------------
 // `amount` is in NZD cents. `ship` is the freight category.
 export const PRODUCTS = {
-  ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath'  },
-  ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath'  },
-  chiller_standard: { name: 'Ice Bath Chiller',                  amount:  239900, ship: 'chiller'   },
-  chiller_premium:  { name: 'Premium Ice Bath Chiller',          amount:  329900, ship: 'chiller'   },
-  sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',           amount:  750000, ship: 'sauna'     },
-  sauna_barrel:     { name: 'Barrel Sauna (4 Person)',           amount:  989900, ship: 'sauna'     },
-  sauna_barrel_6p:  { name: 'Barrel Sauna (6 Person)',           amount: 1189900, ship: 'sauna'     },
-  sauna_square:     { name: 'Square Sauna',                      amount:  999900, ship: 'sauna'     },
-  ice_bath_cover:   { name: 'Ice Bath Cover',                    amount:   19900, ship: 'accessory' },
-  hose_attachment:  { name: 'Hose Attachment',                   amount:    7900, ship: 'accessory' },
-  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath'  },
-  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath'  },
-  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath'  },
+  ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath',  tags: ['cold'] },
+  ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath',  tags: ['cold'] },
+  chiller_standard: { name: 'Ice Bath Chiller',                  amount:  239900, ship: 'chiller',   tags: ['cold'] },
+  chiller_premium:  { name: 'Premium Ice Bath Chiller',          amount:  329900, ship: 'chiller',   tags: ['cold'] },
+  sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',           amount:  750000, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  sauna_barrel:     { name: 'Barrel Sauna (4 Person)',           amount:  989900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  sauna_barrel_6p:  { name: 'Barrel Sauna (6 Person)',           amount: 1189900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  sauna_square:     { name: 'Square Sauna',                      amount:  999900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  ice_bath_cover:   { name: 'Ice Bath Cover',                    amount:   19900, ship: 'accessory', tags: ['accessory', 'cold'] },
+  hose_attachment:  { name: 'Hose Attachment',                   amount:    7900, ship: 'accessory', tags: ['accessory', 'cold'] },
+  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath',  tags: ['cold'] },
+  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath',  tags: ['cold'] },
+  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath',  tags: ['cold'] },
 };
 
 // ---------------------------------------------------------------------------

@@ -12,20 +12,20 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../brand%20assets/Site%20Favicon/favicon-cropped-opt.png">
-  <title>Ice Bath — The Ice Bath NZ</title>
+  <title>Barrel Sauna — From NZ$7,500 | TIBNZ</title>
   <!-- SEO -->
-  <meta name="description" content="G90 galvanised steel ice bath in 4ft (350L) or 5ft (500L). Cools to 3°C with an optional chiller add-on. Built tough for NZ conditions. From NZ$784.">
-  <link rel="canonical" href="https://theicebathnz.co.nz/product-page/ice-bath-nz">
+  <meta name="description" content="Handcrafted rustic cedar barrel sauna with 6kW Finnish heater. Available in 2, 4 & 6-person sizes from NZ$7,500. Delivered across New Zealand.">
+  <link rel="canonical" href="https://theicebathnz.co.nz/product-page/barrel-sauna">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="The Ice Bath NZ">
-  <meta property="og:title" content="Ice Bath — From NZ$784 | The Ice Bath NZ">
-  <meta property="og:description" content="G90 galvanised steel ice bath in 4ft (350L) or 5ft (500L). Cools to 3°C with an optional chiller add-on. Built tough for NZ conditions. From NZ$784.">
-  <meta property="og:url" content="https://theicebathnz.co.nz/product-page/ice-bath-nz">
-  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/main%20pic%20v2.webp">
+  <meta property="og:title" content="Barrel Sauna — From NZ$7,500 | TIBNZ">
+  <meta property="og:description" content="Handcrafted rustic cedar barrel sauna with 6kW Finnish heater. Available in 2, 4 & 6-person sizes from NZ$7,500. Delivered across NZ.">
+  <meta property="og:url" content="https://theicebathnz.co.nz/product-page/barrel-sauna">
+  <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ice Bath — From NZ$784 | The Ice Bath NZ">
-  <meta name="twitter:description" content="G90 galvanised steel ice bath in 4ft (350L) or 5ft (500L). Cools to 3°C with an optional chiller add-on. Built tough for NZ conditions. From NZ$784.">
-  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Ice%20Bath/main%20pic%20v2.webp">
+  <meta name="twitter:title" content="Barrel Sauna — From NZ$7,500 | TIBNZ">
+  <meta name="twitter:description" content="Handcrafted rustic cedar barrel sauna with 6kW Finnish heater. Available in 2, 4 & 6-person sizes from NZ$7,500. Delivered across NZ.">
+  <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -43,6 +43,11 @@
       --ice-glow:  rgba(91, 200, 245, 0.18);
       --frost:     #B8E8FF;
       --arctic:    #E4F4FF;
+
+      --ember:     #E8832A;
+      --ember-dim: rgba(232, 131, 42, 0.12);
+      --ember-glow:rgba(232, 131, 42, 0.25);
+      --wood:      #C4854A;
 
       --snow:      #EEF5FA;
       --mist:      #7A9BB5;
@@ -122,21 +127,6 @@
     .nav-links a:hover { color: var(--snow); }
     .nav-links a.active { color: var(--snow); }
     .nav-right { display: flex; align-items: center; gap: 1.25rem; }
-    .nav-cart {
-      position: relative; background: none; border: none;
-      color: var(--mist);
-      transition: color 0.2s var(--ease-smooth);
-      padding: 0.4rem;
-    }
-    .nav-cart:hover { color: var(--snow); }
-    .cart-badge {
-      position: absolute; top: 0; right: 0;
-      width: 1rem; height: 1rem;
-      background: var(--ice); color: var(--void);
-      border-radius: 50%;
-      font-size: 0.55rem; font-weight: 600;
-      display: flex; align-items: center; justify-content: center;
-    }
     .btn-shop {
       font-size: 0.72rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -196,7 +186,7 @@
       display: inline-flex; align-items: center; gap: 0.6rem;
       font-size: 0.78rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--void); background: var(--ice);
+      color: var(--void); background: var(--ember);
       padding: 0.9rem 2rem; border-radius: 999px; border: none;
       transition:
         background 0.2s var(--ease-smooth),
@@ -204,11 +194,12 @@
         box-shadow 0.25s var(--ease-smooth);
     }
     .btn-primary:hover {
-      background: var(--frost);
+      background: var(--wood);
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(91, 200, 245, 0.35);
+      box-shadow: 0 12px 40px rgba(232, 131, 42, 0.35);
     }
     .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-size: 0.78rem; font-weight: 400;
@@ -225,6 +216,25 @@
       color: var(--snow); border-color: var(--border-hi);
       transform: translateY(-1px);
     }
+    .btn-ghost:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+    .btn-ice {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--void); background: var(--ice);
+      padding: 0.9rem 2rem; border-radius: 999px; border: none;
+      transition:
+        background 0.2s var(--ease-smooth),
+        transform 0.25s var(--ease-spring),
+        box-shadow 0.25s var(--ease-smooth);
+    }
+    .btn-ice:hover {
+      background: var(--frost);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(91, 200, 245, 0.35);
+    }
+    .btn-ice:active { transform: translateY(0); }
+    .btn-ice:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
 
     /* ── Scroll Reveal ─────────────────────────────────── */
     .reveal {
@@ -237,7 +247,6 @@
     .reveal-d1 { transition-delay: 0.1s; }
     .reveal-d2 { transition-delay: 0.2s; }
     .reveal-d3 { transition-delay: 0.3s; }
-    .reveal-d4 { transition-delay: 0.4s; }
 
     @keyframes fadeUp  { to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn  { to { opacity: 1; } }
@@ -256,7 +265,7 @@
     .product-hero-atmosphere {
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 80% at 70% 50%, rgba(91, 200, 245, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 80% at 70% 50%, rgba(232, 131, 42, 0.05) 0%, transparent 55%),
         radial-gradient(ellipse 60% 80% at 10% 80%, rgba(18, 60, 120, 0.15) 0%, transparent 50%),
         linear-gradient(165deg, #071525 0%, #020B15 50%, #030F1E 100%);
     }
@@ -276,7 +285,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--void); background: var(--ice);
+      color: var(--void); background: var(--ember);
       padding: 0.28rem 0.85rem; border-radius: 999px;
       margin-bottom: 1.75rem;
     }
@@ -295,6 +304,7 @@
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
     }
+    .product-hero-name em { font-style: italic; color: var(--ember); }
     .product-hero-tagline {
       font-size: 1rem; line-height: 1.7;
       color: var(--mist);
@@ -303,10 +313,44 @@
       opacity: 0; transform: translateY(16px);
       animation: fadeUp 0.7s var(--ease-out) 0.5s forwards;
     }
+
+    /* ── Size Selector ────────────────────────────────── */
+    .variant-selector {
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.25s forwards;
+    }
+    .variant-selector-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 0.85rem;
+    }
+    .variant-options { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .barrel-size-option {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      padding: 0.85rem 1.25rem;
+      text-align: left; cursor: pointer;
+      transition:
+        border-color 0.25s var(--ease-smooth),
+        background 0.25s var(--ease-smooth),
+        transform 0.2s var(--ease-spring);
+    }
+    .barrel-size-option:hover { border-color: var(--border-hi); background: var(--elevated); transform: translateY(-1px); }
+    .barrel-size-option:active { transform: translateY(0); }
+    .barrel-size-option.active { border-color: var(--ember); background: rgba(232,131,42,0.06); }
+    .barrel-size-option:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+    .barrel-size-option .variant-name { display: block; font-family: var(--display); font-size: 1rem; font-weight: 400; color: var(--snow); letter-spacing: -0.01em; margin-bottom: 0.2rem; }
+    .barrel-size-option.active .variant-name { color: var(--ember); }
+    .barrel-size-option .variant-sub { font-size: 0.72rem; color: var(--mist); font-family: var(--body); display: block; }
+    .barrel-size-option .variant-price-hint { display: block; font-family: var(--display); font-size: 0.95rem; font-weight: 300; color: var(--fog); margin-top: 0.4rem; }
+    .barrel-size-option.active .variant-price-hint { color: var(--wood); }
+
+    .cfg-total { color: var(--ember) !important; }
+
     .product-price-block {
       display: flex; align-items: baseline; gap: 0.5rem;
       margin-bottom: 2rem;
-      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.65s forwards;
     }
     .price-cur {
       font-family: var(--body); font-size: 0.9rem;
@@ -317,9 +361,6 @@
       font-size: clamp(2.5rem, 4vw, 3.5rem);
       font-weight: 300; color: var(--snow);
       letter-spacing: -0.02em;
-    }
-    .price-note {
-      font-size: 0.75rem; color: var(--fog);
     }
     .product-hero-actions {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -338,7 +379,7 @@
     .highlight-item::before {
       content: '';
       width: 18px; height: 1px;
-      background: var(--ice); flex-shrink: 0;
+      background: var(--ember); flex-shrink: 0;
     }
     .product-hero-right {
       position: relative; z-index: 5;
@@ -352,7 +393,7 @@
       object-fit: contain;
       object-position: bottom center;
       filter:
-        drop-shadow(0 0 80px rgba(91,200,245,0.12))
+        drop-shadow(0 0 80px rgba(232, 131, 42, 0.1))
         drop-shadow(0 40px 100px rgba(2,11,21,0.7));
       opacity: 0;
       transform: translateY(30px);
@@ -368,7 +409,7 @@
     .section-label {
       font-size: 0.68rem; font-weight: 600;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--ice); margin-bottom: 1.25rem;
+      color: var(--ember); margin-bottom: 1.25rem;
     }
     .section-heading {
       font-family: var(--display);
@@ -378,7 +419,7 @@
       color: var(--snow);
       margin-bottom: 1rem;
     }
-    .section-heading em { font-style: italic; color: var(--ice); }
+    .section-heading em { font-style: italic; color: var(--ember); }
     .section-sub {
       font-size: 0.95rem; line-height: 1.7;
       color: var(--mist); max-width: 52ch;
@@ -405,11 +446,11 @@
       background: var(--surface);
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      color: var(--ice);
+      color: var(--ember);
       margin-bottom: 1.5rem;
       transition: background 0.3s, border-color 0.3s;
     }
-    .feature-card:hover .feature-icon { background: var(--elevated); border-color: var(--border-hi); }
+    .feature-card:hover .feature-icon { background: var(--elevated); border-color: rgba(232, 131, 42, 0.3); }
     .feature-title {
       font-family: var(--display);
       font-size: 1.35rem; font-weight: 400;
@@ -446,53 +487,8 @@
     .specs-visual::after {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(91,200,245,0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 1;
+      background: radial-gradient(ellipse at 50% 100%, rgba(232, 131, 42, 0.08), transparent 70%);
     }
-    /* ── Specs Carousel ─────────────────────────────────── */
-    .specs-carousel { position: absolute; inset: 0; }
-    .carousel-slide {
-      position: absolute; inset: 0;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .carousel-slide.active { opacity: 1; }
-    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .carousel-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 2.25rem; height: 2.25rem;
-      background: rgba(6,14,26,0.72);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.8);
-      cursor: pointer; z-index: 2;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-      backdrop-filter: blur(6px);
-    }
-    .carousel-btn:hover {
-      background: rgba(91,200,245,0.18);
-      border-color: rgba(91,200,245,0.45);
-      color: #5BC8F5;
-    }
-    .carousel-btn:active { transform: translateY(-50%) scale(0.91); }
-    .carousel-btn:focus-visible { outline: 2px solid rgba(91,200,245,0.55); outline-offset: 2px; }
-    .carousel-prev { left: 0.75rem; }
-    .carousel-next { right: 0.75rem; }
-    .carousel-dots {
-      position: absolute; bottom: 0.875rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; gap: 0.4rem; z-index: 2;
-    }
-    .cdot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(255,255,255,0.32);
-      border: none; cursor: pointer; padding: 0;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .cdot.active { background: #5BC8F5; transform: scale(1.25); }
-    .cdot:hover { background: rgba(255,255,255,0.6); }
     .specs-content { padding-top: 0.5rem; }
     .specs-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -510,7 +506,7 @@
     .spec-label {
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--ice); margin-bottom: 0.5rem;
+      color: var(--ember); margin-bottom: 0.5rem;
     }
     .spec-value {
       font-family: var(--display);
@@ -540,11 +536,11 @@
       display: flex; flex-direction: column; gap: 1rem;
       transition: border-color 0.3s, background 0.3s;
     }
-    .include-card:hover { border-color: var(--border-hi); background: var(--elevated); }
+    .include-card:hover { border-color: rgba(232, 131, 42, 0.3); background: var(--elevated); }
     .include-num {
       font-family: var(--display);
       font-size: 2.5rem; font-weight: 300;
-      color: var(--ice); opacity: 0.4; line-height: 1;
+      color: var(--ember); opacity: 0.4; line-height: 1;
     }
     .include-title {
       font-family: var(--display);
@@ -556,19 +552,42 @@
       color: var(--mist);
     }
 
-    /* ── Testimonial ───────────────────────────────────── */
-    .testimonial-section {
-      padding: 6rem 2.5rem;
+    /* ── Contrast CTA Banner ───────────────────────────── */
+    .contrast-banner {
+      padding: 4rem 2.5rem;
       background: var(--deep);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+    }
+    .contrast-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .contrast-text h3 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 300; color: var(--snow);
+      margin-bottom: 0.5rem;
+    }
+    .contrast-text h3 em { font-style: italic; color: var(--ice); }
+    .contrast-text p {
+      font-size: 0.9rem; line-height: 1.6; color: var(--mist);
+      max-width: 50ch;
+    }
+    .contrast-action { flex-shrink: 0; }
+
+    /* ── Testimonial ───────────────────────────────────── */
+    .testimonial-section {
+      padding: 6rem 2.5rem;
+      background: var(--void);
     }
     .testimonial-inner {
       max-width: 800px; margin: 0 auto; text-align: center;
     }
     .testimonial-stars {
       display: flex; justify-content: center; gap: 0.3rem;
-      margin-bottom: 2rem; color: var(--ice);
+      margin-bottom: 2rem; color: var(--ember);
     }
     .testimonial-quote {
       font-family: var(--display);
@@ -596,7 +615,8 @@
     /* ── Related Products ──────────────────────────────── */
     .related-section {
       padding: 7rem 2.5rem;
-      background: var(--void);
+      background: var(--deep);
+      border-top: 1px solid var(--border);
     }
     .related-inner { max-width: 1200px; margin: 0 auto; }
     .related-grid {
@@ -666,7 +686,7 @@
     .order-cta::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(91,200,245,0.07), transparent 60%);
+      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(232, 131, 42, 0.07), transparent 60%);
     }
     .order-cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
     .order-cta-price {
@@ -702,7 +722,7 @@
       display: flex; align-items: center; gap: 0.5rem;
       font-size: 0.75rem; color: var(--fog); letter-spacing: 0.08em;
     }
-    .trust-item svg { color: var(--ice); }
+    .trust-item svg { color: var(--ember); }
 
     /* ── Footer ────────────────────────────────────────── */
     footer {
@@ -744,160 +764,27 @@
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
-    /* ── Size Selector ─────────────────────────────────── */
-    .size-selector {
-      margin-bottom: 2rem;
-      opacity: 0; animation: fadeIn 0.6s var(--ease-out) 0.55s forwards;
+    /* ── Specs Carousel ───────────────────────────────── */
+    .specs-carousel { position: relative; width: 100%; height: 100%; }
+    .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 2.25rem; height: 2.25rem; border-radius: 50%;
+      background: rgba(2,11,21,0.55); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; backdrop-filter: blur(6px);
+      transition: background 0.2s, transform 0.2s;
     }
-    .size-selector-label {
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--fog); margin-bottom: 0.75rem;
-    }
-    .size-options {
-      display: flex; gap: 0.75rem;
-    }
-    .size-option {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: flex-start;
-      padding: 1rem 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      cursor: pointer;
-      transition:
-        border-color 0.2s var(--ease-smooth),
-        background 0.2s var(--ease-smooth),
-        transform 0.2s var(--ease-spring);
-      text-align: left;
-    }
-    .size-option:hover {
-      border-color: var(--border-hi);
-      background: var(--elevated);
-      transform: translateY(-1px);
-    }
-    .size-option:active { transform: translateY(0); }
-    .size-option.active {
-      border-color: var(--ice);
-      background: rgba(91, 200, 245, 0.06);
-    }
-    .size-option:focus-visible {
-      outline: 2px solid var(--ice);
-      outline-offset: 2px;
-    }
-    .size-name {
-      font-family: var(--display);
-      font-size: 1.5rem; font-weight: 300;
-      color: var(--snow); line-height: 1;
-      margin-bottom: 0.25rem;
-      transition: color 0.2s var(--ease-smooth);
-    }
-    .size-option.active .size-name { color: var(--ice); }
-    .size-dim {
-      font-size: 0.72rem; color: var(--mist);
-      font-family: var(--body);
-    }
-    .size-price-hint {
-      font-size: 0.82rem; font-weight: 500;
-      color: var(--fog); margin-top: 0.4rem;
-      font-family: var(--body);
-      transition: color 0.2s var(--ease-smooth);
-    }
-    .size-option.active .size-price-hint { color: var(--frost); }
-
-    /* ── Chiller Selector ───────────────────────────────── */
-    .chiller-selector {
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeIn 0.7s var(--ease-out) 0.7s forwards;
-    }
-    .chiller-selector-label {
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--fog); margin-bottom: 0.75rem;
-    }
-    .chiller-options {
-      display: flex; gap: 0.6rem;
-    }
-    .chiller-option {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: flex-start;
-      padding: 0.9rem 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      cursor: pointer;
-      transition:
-        border-color 0.2s var(--ease-smooth),
-        background 0.2s var(--ease-smooth),
-        transform 0.2s var(--ease-spring);
-      text-align: left;
-    }
-    .chiller-option:hover {
-      border-color: var(--border-hi);
-      background: var(--elevated);
-      transform: translateY(-1px);
-    }
-    .chiller-option:active { transform: translateY(0); }
-    .chiller-option.active {
-      border-color: var(--ice);
-      background: rgba(91, 200, 245, 0.06);
-    }
-    .chiller-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
-    .chiller-name {
-      font-family: var(--display);
-      font-size: 1rem; font-weight: 400;
-      color: var(--snow); line-height: 1;
-      margin-bottom: 0.25rem;
-      transition: color 0.2s;
-    }
-    .chiller-option.active .chiller-name { color: var(--ice); }
-    .chiller-sub {
-      font-size: 0.66rem; color: var(--fog);
-      margin-bottom: 0.45rem;
-      line-height: 1.3; font-family: var(--body);
-    }
-    .chiller-price-hint {
-      font-size: 0.8rem; font-weight: 500;
-      color: var(--fog); font-family: var(--body);
-      transition: color 0.2s;
-    }
-    .chiller-option.active .chiller-price-hint { color: var(--frost); }
-
-    /* ── Chiller Info Panel ──────────────────────────────── */
-    .chiller-info-panel {
-      margin-bottom: 1.5rem;
-      background: var(--elevated);
-      border: 1px solid var(--border-hi);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      animation: fadeIn 0.3s var(--ease-out) forwards;
-    }
-    .chiller-info-title {
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ice); margin-bottom: 0.55rem;
-    }
-    .chiller-info-list {
-      list-style: none; padding: 0; margin: 0 0 0.6rem;
-      display: flex; flex-direction: column; gap: 0.28rem;
-    }
-    .chiller-info-list li {
-      font-size: 0.77rem; color: var(--mist);
-      padding-left: 1rem; position: relative; line-height: 1.4;
-    }
-    .chiller-info-list li::before {
-      content: '—'; position: absolute; left: 0;
-      color: var(--ice); font-size: 0.65rem; top: 0.05em;
-    }
-    .chiller-info-link {
-      display: inline-block;
-      font-size: 0.67rem; color: var(--ice); letter-spacing: 0.1em;
-      text-decoration: none; text-transform: uppercase;
-      font-weight: 500; opacity: 0.75;
-      transition: opacity 0.2s;
-    }
-    .chiller-info-link:hover { opacity: 1; }
+    .carousel-btn:hover { background: rgba(2,11,21,0.8); transform: translateY(-50%) scale(1.08); }
+    .carousel-btn:focus-visible { outline: 2px solid rgba(232,131,42,0.55); outline-offset: 2px; }
+    .carousel-prev { left: 0.75rem; }
+    .carousel-next { right: 0.75rem; }
+    .carousel-dots { position: absolute; bottom: 0.875rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 2; }
+    .cdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.32); border: none; cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.2s ease; }
+    .cdot.active { background: #E8832A; transform: scale(1.25); }
+    .cdot:hover { background: rgba(255,255,255,0.6); }
 
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
@@ -909,124 +796,23 @@
       .specs-visual { max-width: 500px; }
       .related-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .contrast-inner { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 768px) {
       .nav-links, .btn-shop { display: none; }
       .nav-hamburger { display: flex; }
       .nav { padding: 1rem 1.25rem; }
       .nav.scrolled { padding: 0.85rem 1.25rem; }
-
       .product-hero-left { padding: 1rem 1.5rem 2rem; }
       .product-hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
-
-      /* 3-button chiller selector: wrap to 2+1 layout */
-      .chiller-options { flex-wrap: wrap; }
-      .chiller-option { min-width: calc(50% - 0.3rem); }
-
-      .accessory-options { flex-wrap: wrap; }
-      .accessory-option { min-width: calc(50% - 0.3rem); }
-
       .features-grid { grid-template-columns: 1fr; }
       .includes-grid { grid-template-columns: 1fr; }
       .related-card { grid-template-columns: 1fr; }
-      .related-img { aspect-ratio: 16/9; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
+      .footer-legal { flex-wrap: wrap; }
+      .order-cta { padding: 5rem 1.5rem; }
     }
-
-    /* ── Accessories Selector ────────────────────────────── */
-    .accessory-selector { margin-bottom: 2rem; }
-    .accessory-selector-label {
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--fog); margin-bottom: 0.75rem;
-    }
-    .accessory-options {
-      display: flex; gap: 0.6rem;
-    }
-    .accessory-option {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: flex-start;
-      padding: 0.9rem 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      cursor: pointer;
-      transition: border-color 0.2s var(--ease-smooth),
-        background 0.2s var(--ease-smooth),
-        transform 0.2s var(--ease-spring);
-      text-align: left;
-    }
-    .accessory-option:hover {
-      border-color: var(--border-hi);
-      background: var(--elevated);
-      transform: translateY(-1px);
-    }
-    .accessory-option:active { transform: translateY(0); }
-    .accessory-option.active {
-      border-color: var(--ice);
-      background: rgba(91, 200, 245, 0.06);
-    }
-    .accessory-option:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
-    .accessory-name {
-      font-family: var(--display);
-      font-size: 1rem; font-weight: 400;
-      color: var(--mist);
-      margin-bottom: 0.25rem;
-      transition: color 0.2s;
-    }
-    .accessory-option.active .accessory-name { color: var(--ice); }
-    .accessory-sub {
-      font-size: 0.66rem; color: var(--fog);
-      margin-bottom: 0.45rem;
-      font-family: var(--body);
-    }
-    .accessory-price-hint {
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--fog); font-family: var(--body);
-      transition: color 0.2s;
-    }
-    .accessory-option.active .accessory-price-hint { color: var(--frost); }
-
-    /* ── Accessory Thumbnail + Lightbox ───────────────────── */
-    .acc-thumb-wrap {
-      margin-top: 0.6rem; overflow: hidden;
-      max-height: 0; opacity: 0;
-      transition: max-height 0.4s var(--ease-out), opacity 0.35s var(--ease-out);
-    }
-    .accessory-option.active .acc-thumb-wrap { max-height: 90px; opacity: 1; }
-    .acc-thumb-wrap img {
-      width: 68px; height: 68px; object-fit: cover;
-      border-radius: 0.5rem; cursor: pointer;
-      border: 1px solid var(--border);
-      transition: transform 0.2s var(--ease-spring), border-color 0.2s;
-    }
-    .acc-thumb-wrap img:hover { transform: scale(1.06); border-color: var(--ice); }
-    .acc-lightbox {
-      position: fixed; inset: 0; z-index: 300;
-      background: rgba(2,11,21,0.93);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s var(--ease-smooth);
-    }
-    .acc-lightbox.open { opacity: 1; pointer-events: auto; }
-    .acc-lightbox > img {
-      max-width: 88vw; max-height: 82vh;
-      object-fit: contain; border-radius: 0.75rem;
-      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
-    }
-    .acc-lightbox-close {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
-      color: var(--snow); width: 2.5rem; height: 2.5rem;
-      border-radius: 50%; font-size: 1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s; font-family: var(--body);
-    }
-    .acc-lightbox-close:hover { background: rgba(255,255,255,0.18); }
-
   </style>
 </head>
 <body>
@@ -1069,80 +855,42 @@
         <span>/</span>
         <a href="../buy-now.html">Products</a>
         <span>/</span>
-        Ice Bath
+        <a href="outdoor-sauna.html">Outdoor Saunas</a>
+        <span>/</span>
+        <span>Cedar Barrel Sauna</span>
       </p>
 
-      <span class="product-badge-chip">Bestseller</span>
+      <span class="product-badge-chip">Premium</span>
 
-      <h1 class="product-hero-name">Ice<br><em>Bath</em></h1>
+      <h1 class="product-hero-name">Cedar<br>Barrel<br><em>Sauna</em></h1>
 
-      <p class="product-hero-tagline">All-steel construction built for the New Zealand climate. Choose your size, fill it, and get in — no plumbing, no fuss.</p>
+      <p class="product-hero-tagline">Handcrafted rustic cedar with a 6kW Traditional Finnish Heater. Choose your size — 2, 4, or 6 person. The perfect heat ritual, alone or paired with cold immersion.</p>
 
-      <div class="size-selector">
-        <p class="size-selector-label">Choose Size</p>
-        <div class="size-options">
-          <button class="size-option active" data-size="4ft" onclick="selectSize('4ft')">
-            <span class="size-name">4ft</span>
-            <span class="size-dim">1200 × 600 × 600mm</span>
-            <span class="size-price-hint">NZ$784</span>
+      <!-- Size Selector -->
+      <div class="variant-selector">
+        <p class="variant-selector-label">Choose Size</p>
+        <div class="variant-options">
+          <button class="barrel-size-option active" data-size="2p" onclick="selectBarrelSize('2p')">
+            <span class="variant-name">2 Person</span>
+            <span class="variant-sub">Compact · Solo or duo</span>
+            <span class="variant-price-hint">NZ$7,500</span>
           </button>
-          <button class="size-option" data-size="5ft" onclick="selectSize('5ft')">
-            <span class="size-name">5ft</span>
-            <span class="size-dim">1500 × 600 × 600mm</span>
-            <span class="size-price-hint">NZ$888</span>
+          <button class="barrel-size-option" data-size="4p" onclick="selectBarrelSize('4p')">
+            <span class="variant-name">4 Person</span>
+            <span class="variant-sub">Popular size</span>
+            <span class="variant-price-hint">NZ$9,899</span>
           </button>
-        </div>
-      </div>
-
-      <!-- Chiller Selector -->
-      <div class="chiller-selector">
-        <p class="chiller-selector-label">Choose Setup</p>
-        <div class="chiller-options">
-          <button class="chiller-option active" data-chiller="none" onclick="selectChiller('none')">
-            <span class="chiller-name">No Chiller</span>
-            <span class="chiller-sub">Ice bath only</span>
-          </button>
-          <button class="chiller-option" data-chiller="chiller" onclick="selectChiller('chiller')">
-            <span class="chiller-name">+ Chiller</span>
-            <span class="chiller-sub">Cools to 4°C · ~1.5hrs</span>
-            <span class="chiller-price-hint">+ $2,399</span>
-          </button>
-          <button class="chiller-option" data-chiller="premium" onclick="selectChiller('premium')">
-            <span class="chiller-name">+ Premium</span>
-            <span class="chiller-sub">Advanced temp control</span>
-            <span class="chiller-price-hint">+ $3,299</span>
+          <button class="barrel-size-option" data-size="6p" onclick="selectBarrelSize('6p')">
+            <span class="variant-name">6 Person</span>
+            <span class="variant-sub">Large · Group sessions</span>
+            <span class="variant-price-hint">NZ$11,899</span>
           </button>
         </div>
       </div>
 
-      <!-- Chiller Info Panel -->
-      <div class="chiller-info-panel" id="chillerInfoPanel" style="display:none">
-        <div id="chillerInfoInner"></div>
-      </div>
-
-      <!-- Accessories -->
-      <div class="accessory-selector">
-        <p class="accessory-selector-label">Accessories</p>
-        <div class="accessory-options">
-          <button class="accessory-option" data-accessory="ice_bath_cover" onclick="toggleAccessory(this)">
-            <span class="accessory-name">Ice Bath Cover</span>
-            <span class="accessory-sub">Keeps cold in · reduces evaporation</span>
-            <span class="accessory-price-hint">+ $199</span>
-          </button>
-          <button class="accessory-option" data-accessory="hose_attachment" onclick="toggleAccessory(this)">
-            <span class="accessory-name">Hose Attachment</span>
-            <span class="accessory-sub">Easy fill & drain</span>
-            <span class="accessory-price-hint">+ $79</span>
-            <div class="acc-thumb-wrap">
-              <img src="../brand%20assets/Hose%20attachment/main-photo.webp" alt="Hose Attachment" onclick="event.stopPropagation(); openLightbox(this.src)">
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <div class="product-price-block" id="hero-price-block" style="opacity:1;animation:none;">
+      <div class="product-price-block">
         <span class="price-cur">NZ</span>
-        <span class="price-amount" id="hero-price">$784</span>
+        <span class="price-amount" id="hero-price">$7,500</span>
       </div>
 
       <div class="product-hero-actions">
@@ -1153,57 +901,57 @@
         <button id="buy-now-btn" class="btn-ghost" type="button">Buy Now</button>
       </div>
 
-      <ul class="product-highlights" id="highlightsList">
-        <li class="highlight-item" id="hlCapacity">~350L capacity — full-body immersion</li>
-        <li class="highlight-item">Galvanised steel — built for NZ outdoors</li>
-        <li class="highlight-item">20mm side drain plug for easy empty</li>
-        <li class="highlight-item">Compatible with our Chiller unit</li>
-        <li class="highlight-item">1-year manufacturer's warranty</li>
+      <ul class="product-highlights">
+        <li class="highlight-item">Handcrafted rustic cedar construction</li>
+        <li class="highlight-item">6kW Traditional Finnish Heater + natural stones</li>
+        <li class="highlight-item">Available in 2, 4 & 6-person configurations</li>
+        <li class="highlight-item">Dry or steamy — switch with a ladle of water</li>
+        <li class="highlight-item">2-year manufacturer's warranty</li>
       </ul>
     </div>
 
     <div class="product-hero-right">
       <img class="product-hero-img"
-        src="../brand%20assets/Ice%20Bath/img-6632-edited.webp"
-        alt="Ice Bath tub">
+        src="../brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.webp"
+        alt="Cedar Barrel Sauna" style="object-fit:contain;">
     </div>
   </section>
 
   <!-- Features -->
   <section class="features-section">
     <div class="features-inner">
-      <p class="section-label reveal">Why Ice Bath</p>
-      <h2 class="section-heading reveal reveal-d1">Engineered for<br><em>serious cold.</em></h2>
-      <p class="section-sub reveal reveal-d2">Every detail — from the gauge of the steel to the drain placement — is built for New Zealand conditions. Get in, get cold, recover faster.</p>
+      <p class="section-label reveal">Why Barrel Sauna</p>
+      <h2 class="section-heading reveal reveal-d1">Built for<br><em>deep heat.</em></h2>
+      <p class="section-sub reveal reveal-d2">Every detail — from the grain of the cedar to the placement of the heater — is designed to deliver an authentic Finnish sauna experience in your own backyard.</p>
 
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>
           </div>
-          <h3 class="feature-title">Chiller-Ready</h3>
-          <p class="feature-desc">Designed to pair directly with our Chiller unit — achieve and hold any target temperature down to 3°C without ice runs.</p>
+          <h3 class="feature-title">Finnish Heating</h3>
+          <p class="feature-desc">A 6kW traditional Finnish heater loaded with natural volcanic stones. Reaches temperature in under 45 minutes — authentic sauna heat, not a pale imitation.</p>
         </div>
         <div class="feature-card reveal reveal-d1">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8C8 10 5.9 16.17 3.82 19.54A1 1 0 004.7 21 7 7 0 0012 18a7 7 0 006.88-8.23A7 7 0 0017 8z"/></svg>
           </div>
-          <h3 class="feature-title">Outdoor-Ready</h3>
-          <p class="feature-desc">Galvanised steel construction handles NZ's weather year-round — leave it on the deck, in the shed, or by the pool without a second thought.</p>
+          <h3 class="feature-title">Cedar Construction</h3>
+          <p class="feature-desc">Handcrafted from rustic cedar — naturally aromatic, rot-resistant, and built for NZ's outdoor conditions. Ages beautifully with every session.</p>
         </div>
         <div class="feature-card reveal reveal-d2">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
           </div>
-          <h3 class="feature-title">Steel Construction</h3>
-          <p class="feature-desc">Galvanised steel built for durability — no flex, no soft spots, no plastic liners. Cleans easily and holds its shape session after session.</p>
+          <h3 class="feature-title">Dual Climate</h3>
+          <p class="feature-desc">Use it dry for intense penetrating heat, or add water to the stones for a humid steam session. One sauna, two completely different experiences.</p>
         </div>
         <div class="feature-card reveal reveal-d3">
           <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V12M12 12L8 16M12 12l4 4M20 7a8 8 0 00-16 0c0 3 1.5 5.5 4 7"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <h3 class="feature-title">Dead-Simple Setup</h3>
-          <p class="feature-desc">Fill, connect, set temperature. No plumbing required — the self-contained system handles filtration, cooling, and circulation automatically.</p>
+          <h3 class="feature-title">Multi-Person</h3>
+          <p class="feature-desc">Available in 2, 4, or 6-person configurations — choose the size that fits your space and lifestyle.</p>
         </div>
       </div>
     </div>
@@ -1215,62 +963,54 @@
       <div class="specs-layout">
         <div class="specs-visual reveal">
           <div class="specs-carousel" id="specsCarousel">
-            <div class="carousel-slide active">
-              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section.avif" alt="Ice Bath detail">
-            </div>
-            <div class="carousel-slide">
-              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section2.avif" alt="Ice Bath detail 2">
-            </div>
-            <div class="carousel-slide">
-              <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section3.avif" alt="Ice Bath detail 3">
-            </div>
-            <button class="carousel-btn carousel-prev" onclick="specsCarouselNav(-1)" aria-label="Previous image">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button class="carousel-btn carousel-next" onclick="specsCarouselNav(1)" aria-label="Next image">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+            <div class="carousel-slide active"><img src="../brand%20assets/Barrel%20Sauna/interior-heater.webp" alt="Barrel Sauna interior heater"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/interior-bench.webp" alt="Barrel Sauna bench seating"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night"></div>
+            <button class="carousel-btn carousel-prev" onclick="carNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="carousel-btn carousel-next" onclick="carNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <div class="carousel-dots">
-              <button class="cdot active" onclick="specsCarouselGo(0)" aria-label="Slide 1"></button>
-              <button class="cdot" onclick="specsCarouselGo(1)" aria-label="Slide 2"></button>
-              <button class="cdot" onclick="specsCarouselGo(2)" aria-label="Slide 3"></button>
+              <button class="cdot active" onclick="carGo(0)" aria-label="Slide 1"></button>
+              <button class="cdot" onclick="carGo(1)" aria-label="Slide 2"></button>
+              <button class="cdot" onclick="carGo(2)" aria-label="Slide 3"></button>
+              <button class="cdot" onclick="carGo(3)" aria-label="Slide 4"></button>
             </div>
           </div>
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
-          <h2 class="section-heading reveal reveal-d1">Built to<br>last <em>decades.</em></h2>
-          <p class="section-sub reveal reveal-d2">Every specification is chosen for durability and performance — not cost-cutting. This is infrastructure for your daily ritual.</p>
+          <h2 class="section-heading reveal reveal-d1">Crafted to<br>last <em>generations.</em></h2>
+          <p class="section-sub reveal reveal-d2">Specifications that reflect serious craftsmanship — not flat-pack shortcuts. This is a permanent fixture for your wellness routine.</p>
           <div class="specs-grid reveal reveal-d2">
             <div class="spec-item">
-              <p class="spec-label">Length</p>
-              <p class="spec-value" id="specLength">1200mm</p>
-              <p class="spec-note">Interior dimension</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Width</p>
-              <p class="spec-value">600mm</p>
-              <p class="spec-note">Interior dimension</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-label">Height</p>
-              <p class="spec-value">600mm</p>
-              <p class="spec-note">Interior dimension</p>
+              <p class="spec-label">Heater</p>
+              <p class="spec-value">6kW</p>
+              <p class="spec-note">Traditional Finnish</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Capacity</p>
-              <p class="spec-value" id="specCapacity">~350L</p>
-              <p class="spec-note">Full-body immersion</p>
+              <p class="spec-value">2–6 pax</p>
+              <p class="spec-note">3 size options</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Material</p>
-              <p class="spec-value">GalvSteel</p>
-              <p class="spec-note">Galvanised for outdoors</p>
+              <p class="spec-value">Cedar</p>
+              <p class="spec-note">Rustic cedar wood</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Max Temp</p>
+              <p class="spec-value">~90°C</p>
+              <p class="spec-note">Authentic sauna heat</p>
+            </div>
+            <div class="spec-item">
+              <p class="spec-label">Heat-Up</p>
+              <p class="spec-value">~45min</p>
+              <p class="spec-note">To full temperature</p>
             </div>
             <div class="spec-item">
               <p class="spec-label">Warranty</p>
-              <p class="spec-value">1 Yr</p>
-              <p class="spec-note">Manufacturer's warranty</p>
+              <p class="spec-value">2 Yrs</p>
+              <p class="spec-note">Full manufacturer cover</p>
             </div>
           </div>
         </div>
@@ -1286,19 +1026,35 @@
       <div class="includes-grid">
         <div class="include-card reveal">
           <span class="include-num">01</span>
-          <h3 class="include-title">Ice Bath Tub</h3>
-          <p class="include-desc">Galvanised steel tub in your chosen size (4ft or 5ft), pre-assembled and ready to fill straight from the box.</p>
+          <h3 class="include-title">Cedar Barrel Unit</h3>
+          <p class="include-desc">Handcrafted cedar barrel in your chosen size (2, 4, or 6 person), fully assembled and ready for placement.</p>
         </div>
         <div class="include-card reveal reveal-d1">
           <span class="include-num">02</span>
-          <h3 class="include-title">Drain Plug</h3>
-          <p class="include-desc">20mm thread drain plug fitted to the side of the tub for easy draining — no tools, no mess, no fuss.</p>
+          <h3 class="include-title">6kW Finnish Heater</h3>
+          <p class="include-desc">Traditional Finnish heater pre-loaded with natural volcanic sauna stones. Ready to heat on day one.</p>
         </div>
         <div class="include-card reveal reveal-d2">
           <span class="include-num">03</span>
-          <h3 class="include-title">Setup Guide</h3>
-          <p class="include-desc">Quick-start guide with placement tips, care instructions, and how to pair with our Chiller for temperature control.</p>
+          <h3 class="include-title">Accessories & Guide</h3>
+          <p class="include-desc">Sauna ladle, bucket, and thermometer included. Full setup guide and care instructions for your cedar sauna.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contrast CTA Banner -->
+  <section class="contrast-banner">
+    <div class="contrast-inner reveal">
+      <div class="contrast-text">
+        <h3>Complete the contrast.<br>Heat up, then <em>get cold.</em></h3>
+        <p>Contrast therapy — alternating between sauna heat and cold immersion — is one of the most powerful recovery protocols available. Pair your Barrel Sauna with an Ice Bath for the full ritual.</p>
+      </div>
+      <div class="contrast-action">
+        <a href="ice-bath-nz.html" class="btn-ice">
+          View Ice Bath
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -1313,14 +1069,14 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       </div>
-      <p class="testimonial-quote">"Having a daily ice bath has cut down my recovery time from a couple days to less than half of that. Seriously recommend."</p>
+      <p class="testimonial-quote">"We use the sauna and ice bath back-to-back every morning. The cedar quality is beautiful and the Finnish heater gets it to temperature faster than I expected. Completely transformed our home wellness routine."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">
-          <img src="https://placehold.co/80x80/122645/5BC8F5?text=JK" alt="James K.">
+          <img src="https://placehold.co/80x80/122645/E8832A?text=SR" alt="Sarah R.">
         </div>
         <div>
-          <p class="testimonial-name">James K.</p>
-          <p class="testimonial-role">Professional Rugby Player, Christchurch</p>
+          <p class="testimonial-name">Sarah R.</p>
+          <p class="testimonial-role">CrossFit Coach, Wellington</p>
         </div>
       </div>
     </div>
@@ -1329,10 +1085,10 @@
   <!-- Order CTA -->
   <section class="order-cta" id="order">
     <div class="order-cta-inner">
-      <p class="order-cta-label" id="ctaSizeLabel">Ice Bath — 4ft</p>
-      <p class="order-cta-price" id="ctaPrice">NZ$784</p>
-      <h2 class="order-cta-heading">Ready to commit<br>to the cold?</h2>
-      <p class="order-cta-sub">NZ delivery. Installation support included. 1-year manufacturer's warranty.</p>
+      <p class="order-cta-label" id="ctaLabel">Barrel Sauna (2 Person)</p>
+      <p class="order-cta-price" id="ctaPrice">NZ$7,500</p>
+      <h2 class="order-cta-heading">Ready to build<br>your heat ritual?</h2>
+      <p class="order-cta-sub">Delivery across New Zealand. Professional installation available. 2-year warranty from date of purchase.</p>
       <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn-ghost" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.85rem;">
         <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 13V1M2 6l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Configure &amp; Buy Above
@@ -1340,11 +1096,11 @@
       <div class="order-trust">
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          1-Year Warranty
+          2-Year Warranty
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          NZ Delivery
+          Delivery NZ Wide
         </span>
         <span class="trust-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
@@ -1360,32 +1116,32 @@
       <p class="section-label reveal">Complete Your Setup</p>
       <h2 class="section-heading reveal reveal-d1">You might also<br><em>need these.</em></h2>
       <div class="related-grid">
-        <a href="ice-bath-chiller.html" class="related-card reveal">
+        <a href="square-sauna.html" class="related-card reveal">
           <div class="related-img">
-            <img src="../brand%20assets/Standard%20Chiller/main-photo.webp" alt="Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;">
+            <img src="../brand%20assets/Square%20Sauna/main%20hero%20no%20bg.webp" alt="Square Sauna" style="object-fit:contain; background:#0a1e35;">
           </div>
           <div class="related-body">
             <div>
-              <p class="related-name">Chiller</p>
-              <p class="related-desc">Standalone precision chiller — pairs with any tub. Cools to 4°C in 45 minutes.</p>
+              <p class="related-name">Square Sauna</p>
+              <p class="related-desc">Premium Thermo Hemlock with stadium seating for up to 5. 8kW heater, LED lighting, bitumen roof.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price"><span class="cur">NZ$</span>2,399</span>
+              <span class="related-price"><span class="cur">NZ$</span>9,999</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
         </a>
-        <a href="outdoor-sauna.html" class="related-card reveal reveal-d1">
+        <a href="ice-bath-nz.html" class="related-card reveal reveal-d1">
           <div class="related-img">
-            <img src="../brand%20assets/Barrel%20Sauna/Main%20Hero%20no%20bg.webp" alt="Barrel Sauna" style="object-fit:contain; background:#0a1e35;">
+            <img src="../brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath NZ" style="object-fit:cover;">
           </div>
           <div class="related-body">
             <div>
-              <p class="related-name">Sauna</p>
-              <p class="related-desc">The perfect contrast therapy pairing. Heat up, then get cold — the classic recovery combo.</p>
+              <p class="related-name">Ice Bath</p>
+              <p class="related-desc">Galvanised steel ice bath in 4ft or 5ft. The cold half of your contrast therapy routine.</p>
             </div>
             <div class="related-footer">
-              <span class="related-price">from <span class="cur">NZ$</span>7,500</span>
+              <span class="related-price"><span class="cur">from NZ$</span>784</span>
               <span class="btn-sm">View →</span>
             </div>
           </div>
@@ -1420,7 +1176,6 @@
             <li><a href="ice-bath-chiller.html">Chiller</a></li>
             <li><a href="outdoor-sauna.html">Sauna</a></li>
             <li><a href="#">Accessories</a></li>
-            <li><a href="#">Bundles</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1428,9 +1183,7 @@
           <ul>
             <li><a href="../about-us.html">About Us</a></li>
             <li><a href="../benefits.html">The Science</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Ambassadors</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="../contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1438,14 +1191,12 @@
           <ul>
             <li><a href="../contact.html">Contact Us</a></li>
             <li><a href="../faq.html">FAQ</a></li>
-            <li><a href="#">Shipping & Returns</a></li>
-            <li><a href="#">Warranty</a></li>
             <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <span class="footer-copy">&copy; 2021 The Ice Bath NZ &mdash; theicebathnz.co.nz. All rights reserved.</span>
         <div class="footer-legal">
           <a href="../privacy-policy.html">Privacy Policy</a>
           <a href="../terms-of-service.html">Terms of Service</a>
@@ -1474,100 +1225,6 @@
       setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
     }
 
-    const sizeData = {
-      '4ft': { ctaLabel: 'Ice Bath — 4ft', capacity: '~350L', length: '1200mm', hlCapacity: '~350L capacity — full-body immersion' },
-      '5ft': { ctaLabel: 'Ice Bath — 5ft', capacity: '~500L', length: '1500mm', hlCapacity: '~500L capacity — full-body immersion' }
-    };
-    const priceMatrix = {
-      '4ft': { none: 784,  chiller: 3183, premium: 4083 },
-      '5ft': { none: 888,  chiller: 3287, premium: 4187 }
-    };
-    const stripeLinks = {
-      '4ft': { none: 'https://buy.stripe.com/28E7sNfLrcmV4Fwa9Z2oE00', chiller: 'https://buy.stripe.com/5kQaEZgPv2Ml9ZQgyn2oE04', premium: 'https://buy.stripe.com/8x2bJ3bvb2Ml3Bs4PF2oE06' },
-      '5ft': { none: 'https://buy.stripe.com/fZudRbczf2Mlfkabe32oE01', chiller: 'https://buy.stripe.com/bJe7sNgPvfz7fkaci72oE05', premium: 'https://buy.stripe.com/5kQdRb42J86Ffka5TJ2oE07' }
-    };
-    const chillerSuffix = { none: '', chiller: ' + Chiller', premium: ' + Premium Chiller' };
-    let currentSize = '4ft';
-    let currentChiller = 'none';
-
-    function updatePrice() {
-      // Update CTA section labels
-      const total = priceMatrix[currentSize][currentChiller];
-      const ctaLabel = sizeData[currentSize].ctaLabel + chillerSuffix[currentChiller];
-      document.getElementById('ctaPrice').textContent = 'NZ$' + total.toLocaleString('en-NZ');
-      document.getElementById('ctaSizeLabel').textContent = ctaLabel;
-    }
-
-    function selectSize(size) {
-      currentSize = size;
-      document.querySelectorAll('.size-option').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.size === size);
-      });
-      document.getElementById('specCapacity').textContent = sizeData[size].capacity;
-      document.getElementById('specLength').textContent = sizeData[size].length;
-      document.getElementById('hlCapacity').textContent = sizeData[size].hlCapacity;
-      updatePrice();
-    }
-
-    const chillerInfoData = {
-      chiller: {
-        title: 'Ice Bath Chiller — Included',
-        items: [
-          'Cools to ~4°C for optimal cold therapy',
-          'Reaches 4°C in approx. 1.5 hours (summer conditions)',
-          '1HP motor with UV + particle filtration',
-          'Self-priming pump — low maintenance',
-          'Compatible with 4ft &amp; 5ft tubs'
-        ],
-        link: '../product-page/ice-bath-chiller.html',
-        linkLabel: 'View full chiller specs →'
-      },
-      premium: {
-        title: 'Premium Ice Bath Chiller — Included',
-        items: [
-          'Cools to 3°C with precise digital temperature control',
-          'WiFi app control + 7&quot; LCD display',
-          'Reaches target temp in approx. 1.5 hours',
-          'Advanced filtration system included',
-          'Compatible with 4ft &amp; 5ft tubs'
-        ],
-        link: '../product-page/ice-bath-chiller.html',
-        linkLabel: 'View full chiller specs →'
-      }
-    };
-
-    function updateChillerInfo(chiller) {
-      const panel = document.getElementById('chillerInfoPanel');
-      if (chiller === 'none') { panel.style.display = 'none'; return; }
-      const d = chillerInfoData[chiller];
-      document.getElementById('chillerInfoInner').innerHTML =
-        '<p class="chiller-info-title">' + d.title + '</p>' +
-        '<ul class="chiller-info-list">' + d.items.map(i => '<li>' + i + '</li>').join('') + '</ul>' +
-        '<a href="' + d.link + '" class="chiller-info-link">' + d.linkLabel + '</a>';
-      panel.style.display = 'block';
-    }
-
-    function selectChiller(chiller) {
-      currentChiller = chiller;
-      document.querySelectorAll('.chiller-option').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.chiller === chiller);
-      });
-      updatePrice();
-      updateChillerInfo(chiller);
-    }
-
-    function toggleAccessory(btn) {
-      btn.classList.toggle('active');
-    }
-
-    function openLightbox(src) {
-      document.getElementById('accLightboxImg').src = src;
-      document.getElementById('accLightbox').classList.add('open');
-    }
-    function closeLightbox() {
-      document.getElementById('accLightbox').classList.remove('open');
-    }
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
@@ -1575,20 +1232,35 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Specs carousel
-    let specsIdx = 0;
-    const specsSlides = document.querySelectorAll('#specsCarousel .carousel-slide');
-    const specsDots = document.querySelectorAll('#specsCarousel .cdot');
-    function specsCarouselGo(n) {
-      specsSlides[specsIdx].classList.remove('active');
-      specsDots[specsIdx].classList.remove('active');
-      specsIdx = n;
-      specsSlides[specsIdx].classList.add('active');
-      specsDots[specsIdx].classList.add('active');
+    /* ── Barrel Size Selector ──────────────────────────── */
+    const barrelSizePrices = {
+      '2p': { price: '7,500',  ctaPrice: 'NZ$7,500',  ctaLabel: 'Barrel Sauna (2 Person)', sku: 'sauna_barrel_2p' },
+      '4p': { price: '9,899',  ctaPrice: 'NZ$9,899',  ctaLabel: 'Barrel Sauna (4 Person)', sku: 'sauna_barrel'    },
+      '6p': { price: '11,899', ctaPrice: 'NZ$11,899', ctaLabel: 'Barrel Sauna (6 Person)', sku: 'sauna_barrel_6p' },
+    };
+    let activeBarrelSize = '2p';
+
+    function selectBarrelSize(size) {
+      activeBarrelSize = size;
+      document.querySelectorAll('.barrel-size-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.size === size);
+      });
+      const sz = barrelSizePrices[size];
+      document.getElementById('ctaLabel').textContent = sz.ctaLabel;
+      document.getElementById('ctaPrice').textContent = sz.ctaPrice;
     }
-    function specsCarouselNav(dir) {
-      specsCarouselGo((specsIdx + dir + specsSlides.length) % specsSlides.length);
+
+    /* ── Specs Carousel ────────────────────────────────── */
+    let carIdx = 0;
+    function carGo(n) {
+      const car = document.getElementById('specsCarousel');
+      car.querySelectorAll('.carousel-slide')[carIdx].classList.remove('active');
+      car.querySelectorAll('.cdot')[carIdx].classList.remove('active');
+      carIdx = n;
+      car.querySelectorAll('.carousel-slide')[n].classList.add('active');
+      car.querySelectorAll('.cdot')[n].classList.add('active');
     }
+    function carNav(dir) { carGo((carIdx + dir + 4) % 4); }
   </script>
 
   <script type="module">
@@ -1596,18 +1268,8 @@
     import { addItem } from '/js/cart.js';
     import { openDrawer } from '/js/cart-ui.js';
 
-    const getSize    = () => document.querySelector('.size-option.active')?.dataset.size    || '4ft';
-    const getChiller = () => document.querySelector('.chiller-option.active')?.dataset.chiller || 'none';
-
     function getItems() {
-      const items = [getSize() === '5ft' ? 'ice_bath_5ft' : 'ice_bath_4ft'];
-      const ch = getChiller();
-      if (ch === 'chiller') items.push('chiller_standard');
-      if (ch === 'premium') items.push('chiller_premium');
-      document.querySelectorAll('.accessory-option.active').forEach(btn => {
-        items.push(btn.dataset.accessory);
-      });
-      return items;
+      return [barrelSizePrices[activeBarrelSize].sku];
     }
 
     function updateHeroPrice() {
@@ -1626,16 +1288,10 @@
       openDrawer();
     });
 
-    document.querySelectorAll('.size-option, .chiller-option, .accessory-option')
+    document.querySelectorAll('.barrel-size-option')
       .forEach(el => el.addEventListener('click', updateHeroPrice));
 
     updateHeroPrice();
   </script>
-
-  <!-- Accessory Lightbox -->
-  <div id="accLightbox" class="acc-lightbox" onclick="closeLightbox()">
-    <button class="acc-lightbox-close" onclick="event.stopPropagation(); closeLightbox()" aria-label="Close">✕</button>
-    <img id="accLightboxImg" src="" alt="Accessory photo" onclick="event.stopPropagation()">
-  </div>
 </body>
 </html>

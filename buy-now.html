@@ -14,17 +14,17 @@
   <link rel="icon" type="image/png" href="brand%20assets/Site%20Favicon/favicon-cropped-opt.png">
   <title>Shop All Products — The Ice Bath NZ</title>
   <!-- SEO -->
-  <meta name="description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$9,899. Delivered across New Zealand.">
+  <meta name="description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$7,500. Delivered across New Zealand.">
   <link rel="canonical" href="https://theicebathnz.co.nz/buy-now">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ice Bath NZ">
   <meta property="og:title" content="Shop All Products — The Ice Bath NZ">
-  <meta property="og:description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$9,899. Delivered across New Zealand.">
+  <meta property="og:description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$7,500. Delivered across New Zealand.">
   <meta property="og:url" content="https://theicebathnz.co.nz/buy-now">
   <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Homepage/Engineered%20for%20serious%20cold%20section.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Shop All Products — The Ice Bath NZ">
-  <meta name="twitter:description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$9,899. Delivered across New Zealand.">
+  <meta name="twitter:description" content="Browse the full range — ice baths from NZ$784, ice bath chillers from NZ$2,399, and cedar barrel saunas from NZ$7,500. Delivered across New Zealand.">
   <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Homepage/Engineered%20for%20serious%20cold%20section.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +44,9 @@
       --snow:      #EEF5FA;
       --mist:      #7A9BB5;
       --fog:       #3A5A7A;
+      --ember:     #E8832A;
+      --ember-dim: rgba(232, 131, 42, 0.12);
+      --ember-glow:rgba(232, 131, 42, 0.25);
       --border:    rgba(91, 200, 245, 0.1);
       --border-hi: rgba(91, 200, 245, 0.25);
       --display: 'Cormorant Garamond', Georgia, serif;
@@ -74,12 +77,12 @@
     .btn-shop { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.6rem 1.5rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; }
     .btn-shop:hover { background: var(--frost); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(91,200,245,0.3); }
     .btn-shop:active { transform: translateY(0); }
+    .btn-shop:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.4rem; cursor: pointer; }
     .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--snow); transition: transform 0.3s var(--ease-smooth), opacity 0.2s; }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
     .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,21,0.97); backdrop-filter: blur(20px); z-index: 90; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .mobile-menu.open { opacity: 1; pointer-events: auto; }
     .mobile-menu a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); padding: 0.9rem 2rem; transition: color 0.2s; }
@@ -88,8 +91,11 @@
     /* ── Buttons ─────────────────────────────────────── */
     .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--void); background: var(--ice); padding: 0.9rem 2rem; border-radius: 999px; border: none; transition: background 0.2s, transform 0.25s var(--ease-spring), box-shadow 0.25s; cursor: pointer; }
     .btn-primary:hover { background: var(--frost); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,200,245,0.35); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); background: transparent; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s, transform 0.25s var(--ease-spring); }
-    .btn-ghost:hover { color: var(--snow); border-color: var(--border-hi); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
+    .btn-primary.btn-ember { background: var(--ember); }
+    .btn-primary.btn-ember:hover { background: #f09540; box-shadow: 0 12px 40px rgba(232,131,42,0.35); }
+    .btn-primary.btn-ember:focus-visible { outline-color: var(--ember); }
 
     /* ── Reveal ──────────────────────────────────────── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
@@ -97,67 +103,218 @@
     .reveal-d1 { transition-delay: 0.1s; }
     .reveal-d2 { transition-delay: 0.2s; }
     .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
 
-    /* ── Page Hero ───────────────────────────────────── */
-    .page-hero {
-      position: relative; overflow: hidden;
-      padding: 11rem 2.5rem 7rem;
-      background: var(--void);
+    /* ── Split Screen ────────────────────────────────── */
+    .split-screen {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
     }
-    .page-hero-atmo {
+    .split-half {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: opacity 0.5s var(--ease-smooth);
+    }
+    .split-screen:hover .split-half:not(:hover) { opacity: 0.5; }
+    .split-half:focus-visible { outline: none; }
+    .split-half:focus-visible .split-cta { border-color: var(--snow); background: rgba(255,255,255,0.08); }
+
+    .split-bg {
       position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s var(--ease-smooth);
+    }
+    .split-half:hover .split-bg { transform: scale(1.04); }
+
+    .split-overlay {
+      position: absolute; inset: 0;
+      transition: opacity 0.5s var(--ease-smooth);
+    }
+    .split-overlay-cold {
       background:
-        radial-gradient(ellipse 70% 70% at 60% 40%, rgba(91, 200, 245, 0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(18, 38, 69, 0.5) 0%, transparent 50%),
-        linear-gradient(180deg, var(--deep) 0%, var(--void) 100%);
+        linear-gradient(180deg, rgba(2,11,21,0.55) 0%, rgba(2,11,21,0.7) 50%, rgba(2,11,21,0.85) 100%),
+        linear-gradient(135deg, rgba(91,200,245,0.12) 0%, transparent 60%);
     }
-    .page-hero-rings {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: flex-end;
-      pointer-events: none; overflow: hidden;
+    .split-overlay-heat {
+      background:
+        linear-gradient(180deg, rgba(2,11,21,0.55) 0%, rgba(2,11,21,0.7) 50%, rgba(2,11,21,0.85) 100%),
+        linear-gradient(135deg, rgba(232,131,42,0.12) 0%, transparent 60%);
     }
-    .page-hero-ring {
-      position: absolute; right: -8vw; top: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(91, 200, 245, 0.07);
-      transform: translateY(-50%);
+    .split-overlay-indoor {
+      background:
+        linear-gradient(180deg, rgba(2,11,21,0.6) 0%, rgba(2,11,21,0.8) 50%, rgba(2,11,21,0.9) 100%),
+        linear-gradient(135deg, rgba(232,131,42,0.08) 0%, transparent 60%);
     }
-    .page-hero-ring:nth-child(1) { width: 28vw; height: 28vw; }
-    .page-hero-ring:nth-child(2) { width: 44vw; height: 44vw; border-color: rgba(91, 200, 245, 0.045); }
-    .page-hero-ring:nth-child(3) { width: 62vw; height: 62vw; border-color: rgba(91, 200, 245, 0.025); }
-    .page-hero-content {
+    .split-half:hover .split-overlay { opacity: 0.7; }
+
+    .split-bg-indoor {
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(232,131,42,0.06) 0%, transparent 60%),
+        linear-gradient(135deg, #1a0f05 0%, #2a1808 40%, #0f0a04 100%);
+    }
+
+    .split-content {
       position: relative; z-index: 2;
-      max-width: 1440px; margin: 0 auto;
+      text-align: center; padding: 2rem;
     }
-    .page-hero-label {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--ice); margin-bottom: 1.25rem;
+    .split-label {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      margin-bottom: 0.75rem; opacity: 0.7;
     }
-    .page-hero-h1 {
+    .split-cold .split-label { color: var(--ice); }
+    .split-heat .split-label, .split-outdoor .split-label, .split-indoor .split-label { color: var(--ember); }
+
+    .split-heading {
       font-family: var(--display);
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
       font-weight: 300; line-height: 1.05;
       letter-spacing: -0.02em; color: var(--snow);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem;
     }
-    .page-hero-h1 em { font-style: italic; color: var(--ice); }
-    .page-hero-sub {
-      font-size: 0.95rem; line-height: 1.75; color: var(--mist);
-      max-width: 46ch;
+    .split-cold .split-heading em { font-style: italic; color: var(--ice); }
+    .split-heat .split-heading em,
+    .split-outdoor .split-heading em,
+    .split-indoor .split-heading em { font-style: italic; color: var(--ember); }
+
+    .split-sub {
+      font-size: 0.88rem; line-height: 1.6; color: var(--mist);
+      max-width: 28ch; margin: 0 auto 1.75rem;
+    }
+    .split-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--snow);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.65rem 1.75rem; border-radius: 999px;
+      transition: border-color 0.3s var(--ease-smooth), background 0.3s var(--ease-smooth), transform 0.25s var(--ease-spring);
+    }
+    .split-cold:hover .split-cta { border-color: var(--ice); background: rgba(91,200,245,0.1); }
+    .split-heat:hover .split-cta,
+    .split-outdoor:hover .split-cta { border-color: var(--ember); background: rgba(232,131,42,0.1); }
+    .split-indoor:hover .split-cta { border-color: var(--ember); background: rgba(232,131,42,0.1); }
+    .split-cta:active { transform: scale(0.97); }
+
+    .split-badge {
+      display: inline-block;
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ember); background: var(--ember-dim);
+      padding: 0.2rem 0.7rem; border-radius: 999px;
     }
 
-    /* ── Section shared ─────────────────────────────── */
-    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; }
-    .section-heading { font-family: var(--display); font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.015em; color: var(--snow); }
-    .section-heading em { font-style: italic; color: var(--ice); }
+    /* Page title (SEO) */
+    .split-page-title {
+      position: absolute; top: 5.5rem; left: 50%;
+      transform: translateX(-50%); z-index: 10;
+      font-family: var(--body);
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--mist); opacity: 0.55;
+      white-space: nowrap;
+    }
 
-    /* ── Products ────────────────────────────────────── */
+    /* View All Products button */
+    .view-all-btn {
+      position: absolute; bottom: 2.5rem; left: 0; right: 0;
+      margin: 0 auto; width: fit-content; z-index: 10;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--body);
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--snow);
+      background: rgba(2,11,21,0.55);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.7rem 2rem; border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), transform 0.25s var(--ease-spring);
+    }
+    .view-all-btn:hover {
+      background: rgba(2,11,21,0.75);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-2px);
+    }
+    .view-all-btn:active { transform: translateY(0); }
+    .view-all-btn:focus-visible { outline: 2px solid var(--snow); outline-offset: 3px; }
+
+    /* Back button (floating on split screens) */
+    .split-back-btn {
+      position: absolute; top: 5.5rem; left: 2rem; z-index: 10;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-family: var(--body);
+      font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 0.06em; color: var(--snow);
+      background: rgba(2,11,21,0.5);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.5rem 1.2rem; border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .split-back-btn:hover { background: rgba(2,11,21,0.7); border-color: rgba(255,255,255,0.3); }
+    .split-back-btn:focus-visible { outline: 2px solid var(--snow); outline-offset: 3px; }
+
+    /* ── Back Button (inline) ─────────────────────────── */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-family: var(--body);
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.06em; color: var(--mist);
+      background: none; border: none; padding: 0.5rem 0;
+      cursor: pointer; transition: color 0.2s;
+      margin-bottom: 0.75rem;
+    }
+    .back-btn:hover { color: var(--snow); }
+    .back-btn:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
+
+    /* ── Products Section ────────────────────────────── */
     .products-section {
       background: var(--deep);
-      padding: 7rem 2.5rem 9rem;
+      padding: 7.5rem 2.5rem 6rem;
+      min-height: 100vh;
     }
     .products-inner { max-width: 1440px; margin: 0 auto; }
+    .products-header { margin-bottom: 2.5rem; }
+    .products-title {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.015em; color: var(--snow);
+      margin-bottom: 0.25rem;
+    }
+    .products-title em { font-style: italic; }
+    .products-title.accent-cold em { color: var(--ice); }
+    .products-title.accent-heat em { color: var(--ember); }
+
+    /* ── Filter Tabs ─────────────────────────────────── */
+    .filter-tabs {
+      display: flex; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .filter-tab {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mist);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.45rem 1.15rem; border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .filter-tab:hover { color: var(--snow); border-color: var(--border-hi); }
+    .filter-tab.active { color: var(--void); background: var(--ice); border-color: var(--ice); }
+    .filter-tab:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
+
+    /* ── Product Cards ───────────────────────────────── */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -190,6 +347,7 @@
     }
     .product-card:hover::after { opacity: 1; }
     .product-card:active { transform: translateY(-4px); }
+    .product-card:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
     .product-img-frame {
       position: relative; aspect-ratio: 4/3; overflow: hidden;
       background: var(--elevated);
@@ -207,6 +365,7 @@
       color: var(--void); background: var(--ice);
       padding: 0.28rem 0.75rem; border-radius: 999px;
     }
+
     /* ── Carousel ──────────────────────────────────────── */
     .carousel-track {
       display: flex; height: 100%;
@@ -242,6 +401,7 @@
       transform: translateY(-50%) scale(1.1);
     }
     .carousel-btn:active { transform: translateY(-50%) scale(0.95); }
+    .carousel-btn:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
     .carousel-dots {
       position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
       display: flex; gap: 0.3rem; z-index: 5;
@@ -288,6 +448,44 @@
     }
     .btn-card:active { transform: scale(0.97); }
 
+    /* ── Coming Soon ─────────────────────────────────── */
+    .coming-soon {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 2.5rem;
+      background: var(--deep);
+      position: relative;
+    }
+    .coming-soon::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 45% at 50% 45%, rgba(232,131,42,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .coming-soon .back-btn {
+      position: absolute; top: 7rem; left: 2.5rem;
+    }
+    .coming-soon-inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 520px;
+    }
+    .coming-soon-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ember); margin-bottom: 1.25rem;
+    }
+    .coming-soon-heading {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--snow); margin-bottom: 1.5rem;
+    }
+    .coming-soon-heading em { font-style: italic; color: var(--ember); }
+    .coming-soon-text {
+      font-size: 1rem; line-height: 1.7;
+      color: var(--mist); margin-bottom: 2.5rem;
+    }
+
     /* ── Footer ──────────────────────────────────────── */
     footer { background: var(--deep); border-top: 1px solid var(--border); padding: 6rem 2.5rem 3rem; }
     .footer-inner { max-width: 1440px; margin: 0 auto; }
@@ -297,6 +495,7 @@
     .footer-social { display: flex; gap: 0.75rem; margin-top: 1.75rem; }
     .social-btn { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--mist); transition: color 0.2s, background 0.2s, border-color 0.2s; }
     .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .social-btn:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
     .footer-col h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--snow); margin-bottom: 1.5rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
     .footer-col a { font-size: 0.87rem; color: var(--mist); transition: color 0.2s; }
@@ -318,17 +517,33 @@
       .nav { padding: 1rem 1.25rem; }
       .nav.scrolled { padding: 0.85rem 1.25rem; }
 
-      .page-hero { padding: 8rem 1.5rem 4rem; }
-      .page-hero-h1 { font-size: clamp(2.75rem, 9vw, 4rem); }
+      .split-screen { flex-direction: column; }
+      .split-half { min-height: 50vh; flex: none; }
+      .split-half + .split-half { border-top: 1px solid rgba(255,255,255,0.06); }
+      .split-heading { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+      .split-page-title { top: 4.5rem; font-size: 0.55rem; }
+      .view-all-btn { bottom: 1.5rem; font-size: 0.65rem; padding: 0.55rem 1.25rem; }
+      .split-back-btn { top: 4.5rem; left: 1.25rem; }
 
-      .products-section { padding: 4rem 1.5rem 6rem; }
+      .products-section { padding: 6rem 1.5rem 4rem; }
       .products-grid { grid-template-columns: 1fr; }
       .product-body { padding: 1.5rem; }
       .product-name { font-size: 1.5rem; }
+      .filter-tabs { flex-wrap: wrap; }
+
+      .coming-soon { padding: 6rem 1.5rem; }
+      .coming-soon .back-btn { top: 5.5rem; left: 1.5rem; }
 
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -362,28 +577,110 @@
     </div>
   </nav>
 
-  <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="page-hero-atmo"></div>
-    <div class="page-hero-rings" aria-hidden="true">
-      <div class="page-hero-ring"></div>
-      <div class="page-hero-ring"></div>
-      <div class="page-hero-ring"></div>
-    </div>
-    <div class="page-hero-content">
-      <p class="page-hero-label reveal">The Collection</p>
-      <h1 class="page-hero-h1 reveal reveal-d1">Shop <em>all products.</em></h1>
-      <p class="page-hero-sub reveal reveal-d2">Premium cold therapy and sauna equipment, built for New Zealand's athletes and everyday high-performers. Choose your setup below.</p>
+  <!-- ═══════════════════════════════════════════════════
+       HOME — Cold / Heat split
+       ═══════════════════════════════════════════════════ -->
+  <section class="split-screen" id="splitHome">
+    <h1 class="split-page-title reveal">Shop All Products</h1>
+
+    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold')" aria-label="Explore cold therapy products">
+      <div class="split-bg" style="background-image:url('brand%20assets/Homepage/engineered-for-serious-cold.webp')"></div>
+      <div class="split-overlay split-overlay-cold"></div>
+      <div class="split-content">
+        <p class="split-label reveal">Ice Baths &amp; Chillers</p>
+        <h2 class="split-heading reveal reveal-d1">Cold <em>Therapy</em></h2>
+        <p class="split-sub reveal reveal-d2">Ice baths, chillers &amp; accessories for serious cold exposure</p>
+        <span class="split-cta reveal reveal-d3">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a class="split-half split-heat" href="#" onclick="event.preventDefault(); navigate('heat')" aria-label="Explore heat therapy products">
+      <div class="split-bg" style="background-image:url('brand%20assets/Barrel%20Sauna/lifestyle-pool.webp')"></div>
+      <div class="split-overlay split-overlay-heat"></div>
+      <div class="split-content">
+        <p class="split-label reveal">Saunas</p>
+        <h2 class="split-heading reveal reveal-d1">Heat <em>Therapy</em></h2>
+        <p class="split-sub reveal reveal-d2">Outdoor &amp; indoor saunas crafted for the full heat ritual</p>
+        <span class="split-cta reveal reveal-d3">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <button class="view-all-btn reveal reveal-d4" onclick="navigate('all')">
+      View All Products
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       HEAT — Indoor / Outdoor sub-split
+       ═══════════════════════════════════════════════════ -->
+  <section class="split-screen" id="splitHeat" style="display:none">
+    <button class="split-back-btn" onclick="goBack()" aria-label="Go back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </button>
+
+    <a class="split-half split-indoor" href="#" onclick="event.preventDefault(); navigate('indoor')" aria-label="Indoor saunas — coming soon">
+      <div class="split-bg split-bg-indoor"></div>
+      <div class="split-overlay split-overlay-indoor"></div>
+      <div class="split-content">
+        <p class="split-label"><span class="split-badge">Coming Soon</span></p>
+        <h2 class="split-heading">Indoor <em>Saunas</em></h2>
+        <p class="split-sub">Launching soon for New Zealand</p>
+        <span class="split-cta">Learn More</span>
+      </div>
+    </a>
+
+    <a class="split-half split-outdoor" href="#" onclick="event.preventDefault(); navigate('outdoor')" aria-label="Explore outdoor saunas">
+      <div class="split-bg" style="background-image:url('brand%20assets/Barrel%20Sauna/lifestyle-night.webp')"></div>
+      <div class="split-overlay split-overlay-heat"></div>
+      <div class="split-content">
+        <p class="split-label">Barrel &amp; Square</p>
+        <h2 class="split-heading">Outdoor <em>Saunas</em></h2>
+        <p class="split-sub">Cedar barrel and hemlock square saunas for your backyard</p>
+        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       INDOOR — Coming Soon
+       ═══════════════════════════════════════════════════ -->
+  <section class="coming-soon" id="sectionIndoor" style="display:none">
+    <button class="back-btn" onclick="goBack()" aria-label="Go back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </button>
+    <div class="coming-soon-inner">
+      <p class="coming-soon-label">Indoor Saunas</p>
+      <h2 class="coming-soon-heading">Coming <em>Soon</em></h2>
+      <p class="coming-soon-text">We're developing indoor sauna solutions for New Zealand homes and studios. Register your interest and we'll let you know the moment they're available.</p>
+      <a href="contact.html" class="btn-primary btn-ember">Register Interest</a>
     </div>
   </section>
 
-  <!-- Products -->
-  <section class="products-section" id="products">
+  <!-- ═══════════════════════════════════════════════════
+       Products Grid (COLD / OUTDOOR / ALL)
+       ═══════════════════════════════════════════════════ -->
+  <section class="products-section" id="productsSection" style="display:none">
     <div class="products-inner">
+      <div class="products-header">
+        <button class="back-btn" onclick="goBack()" aria-label="Go back">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="products-title accent-cold" id="productsTitle">All <em>Products</em></h2>
+        <div class="filter-tabs" id="filterTabs" style="display:none">
+          <button class="filter-tab active" data-filter="all" onclick="setFilter('all',this)">All</button>
+          <button class="filter-tab" data-filter="cold" onclick="setFilter('cold',this)">Cold Therapy</button>
+          <button class="filter-tab" data-filter="heat" onclick="setFilter('heat',this)">Heat Therapy</button>
+        </div>
+      </div>
+
       <div class="products-grid">
 
         <!-- Ice Bath -->
-        <a href="product-page/ice-bath-nz.html" class="product-card reveal">
+        <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath" style="object-fit:cover;"></div>
@@ -408,7 +705,7 @@
         </a>
 
         <!-- Standard Chiller -->
-        <a href="product-page/ice-bath-chiller.html" class="product-card reveal reveal-d1">
+        <a href="product-page/ice-bath-chiller.html" class="product-card" data-tags="cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller" style="object-fit:cover;"></div>
@@ -433,7 +730,7 @@
         </a>
 
         <!-- Premium Chiller -->
-        <a href="product-page/ice-bath-chiller.html?variant=premium" class="product-card reveal reveal-d2">
+        <a href="product-page/ice-bath-chiller.html?variant=premium" class="product-card" data-tags="cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Premium%20Chiller/main-photo.webp" alt="Premium Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;"></div>
@@ -458,7 +755,7 @@
         </a>
 
         <!-- Barrel Sauna -->
-        <a href="product-page/outdoor-sauna.html" class="product-card reveal">
+        <a href="product-page/barrel-sauna.html" class="product-card" data-tags="heat outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" style="object-fit:cover;"></div>
@@ -485,7 +782,7 @@
         </a>
 
         <!-- Square Sauna -->
-        <a href="product-page/outdoor-sauna.html?variant=square" class="product-card reveal reveal-d1">
+        <a href="product-page/square-sauna.html" class="product-card" data-tags="heat outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Square%20Sauna/great-pic.webp" alt="Square Sauna" style="object-fit:cover;"></div>
@@ -512,7 +809,7 @@
         </a>
 
         <!-- Stainless Steel Ice Bath -->
-        <a href="product-page/stainless-steel-ice-bath.html" class="product-card reveal reveal-d2">
+        <a href="product-page/stainless-steel-ice-bath.html" class="product-card" data-tags="cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/image-1.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
@@ -537,7 +834,7 @@
         </a>
 
         <!-- All-in-One Ice Bath & Chiller -->
-        <a href="product-page/all-in-one-ice-bath.html" class="product-card reveal">
+        <a href="product-page/all-in-one-ice-bath.html" class="product-card" data-tags="cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/main-photo.webp" alt="All-in-One Ice Bath & Chiller" style="object-fit:contain; background:#0a1e35;"></div>
@@ -564,7 +861,7 @@
         </a>
 
         <!-- Hose Attachment -->
-        <a href="product-page/hose-attachment.html" class="product-card reveal reveal-d1">
+        <a href="product-page/hose-attachment.html" class="product-card" data-tags="accessory cold">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Hose%20attachment/img-0597.webp" alt="Hose Attachment in use" style="object-fit:cover;"></div>
@@ -589,7 +886,7 @@
         </a>
 
         <!-- Ice Bath Cover -->
-        <a href="product-page/ice-bath-cover.html" class="product-card reveal reveal-d2">
+        <a href="product-page/ice-bath-cover.html" class="product-card" data-tags="accessory cold">
           <div class="product-img-frame" style="background: linear-gradient(135deg, var(--surface) 0%, var(--elevated) 50%, #0d2a48 100%); display:flex; align-items:center; justify-content:center;">
             <div style="text-align:center; padding:2rem; position:relative; z-index:2;">
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style="margin:0 auto 1rem;" opacity="0.55">
@@ -667,7 +964,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2021 The Ice Bath NZ — theicebathnz.co.nz. All rights reserved.</span>
+        <span class="footer-copy">&copy; 2021 The Ice Bath NZ &mdash; theicebathnz.co.nz. All rights reserved.</span>
         <div class="footer-legal">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>
@@ -678,13 +975,13 @@
   </footer>
 
   <script>
-    // Nav scroll
+    /* ── Nav scroll ──────────────────────────────────── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // Mobile menu
+    /* ── Mobile menu ─────────────────────────────────── */
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
@@ -698,13 +995,13 @@
       setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
     }
 
-    // Reveal on scroll
+    /* ── Reveal on scroll ────────────────────────────── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── Carousel ──────────────────────────────────────────
+    /* ── Carousel ────────────────────────────────────── */
     function carouselMove(frame, idx) {
       const track = frame.querySelector('.carousel-track');
       const slides = track.querySelectorAll('.carousel-slide');
@@ -731,6 +1028,127 @@
     function carouselDot(dot, idx, e) {
       e.preventDefault(); e.stopPropagation();
       carouselMove(dot.closest('.product-img-frame'), idx);
+    }
+
+    /* ── State Machine ───────────────────────────────── */
+    const TRANSITION_MS = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
+
+    let currentState = 'home';
+    let stateHistory = [];
+
+    function getSection(state) {
+      switch (state) {
+        case 'home':    return document.getElementById('splitHome');
+        case 'heat':    return document.getElementById('splitHeat');
+        case 'indoor':  return document.getElementById('sectionIndoor');
+        default:        return document.getElementById('productsSection');
+      }
+    }
+
+    function getDisplay(state) {
+      return ['cold', 'outdoor', 'all'].includes(state) ? 'block' : 'flex';
+    }
+
+    function navigate(state) {
+      const fromState = currentState;
+      stateHistory.push(fromState);
+      currentState = state;
+      transitionBetween(fromState, state);
+    }
+
+    function goBack() {
+      if (!stateHistory.length) return;
+      const fromState = currentState;
+      currentState = stateHistory.pop();
+      transitionBetween(fromState, currentState);
+    }
+
+    function transitionBetween(fromState, toState) {
+      const oldEl = getSection(fromState);
+      const newEl = getSection(toState);
+      const newDisplay = getDisplay(toState);
+
+      // Configure grid before showing
+      if (['cold', 'outdoor', 'all'].includes(toState)) {
+        configureGrid(toState);
+      }
+
+      // Fade out old
+      oldEl.style.transition = `opacity ${TRANSITION_MS}ms var(--ease-smooth), transform ${TRANSITION_MS}ms var(--ease-smooth)`;
+      oldEl.style.opacity = '0';
+      oldEl.style.transform = 'translateY(-16px)';
+
+      setTimeout(() => {
+        // Hide old
+        oldEl.style.display = 'none';
+        oldEl.style.transition = '';
+        oldEl.style.opacity = '';
+        oldEl.style.transform = '';
+
+        // Prep new (invisible)
+        newEl.style.transition = 'none';
+        newEl.style.opacity = '0';
+        newEl.style.transform = 'translateY(16px)';
+        newEl.style.display = newDisplay;
+
+        void newEl.offsetHeight; // reflow
+
+        // Fade in new
+        newEl.style.transition = `opacity ${TRANSITION_MS}ms var(--ease-smooth), transform ${TRANSITION_MS}ms var(--ease-smooth)`;
+        newEl.style.opacity = '1';
+        newEl.style.transform = 'translateY(0)';
+
+        window.scrollTo(0, 0);
+
+        // Clean up inline styles after transition
+        setTimeout(() => {
+          newEl.style.removeProperty('transition');
+          newEl.style.removeProperty('opacity');
+          newEl.style.removeProperty('transform');
+        }, TRANSITION_MS + 50);
+      }, TRANSITION_MS);
+    }
+
+    /* ── Grid Configuration ──────────────────────────── */
+    function configureGrid(state) {
+      const title = document.getElementById('productsTitle');
+      const tabs = document.getElementById('filterTabs');
+
+      if (state === 'cold') {
+        title.innerHTML = 'Cold <em>Therapy</em>';
+        title.className = 'products-title accent-cold';
+        tabs.style.display = 'none';
+        filterCards('cold');
+      } else if (state === 'outdoor') {
+        title.innerHTML = 'Outdoor <em>Saunas</em>';
+        title.className = 'products-title accent-heat';
+        tabs.style.display = 'none';
+        filterCards('outdoor');
+      } else {
+        title.innerHTML = 'All <em>Products</em>';
+        title.className = 'products-title accent-cold';
+        tabs.style.display = 'flex';
+        filterCards('all');
+        document.querySelectorAll('.filter-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.filter === 'all');
+        });
+      }
+    }
+
+    function filterCards(tag) {
+      document.querySelectorAll('#productsSection .product-card').forEach(card => {
+        if (tag === 'all') {
+          card.style.display = '';
+        } else {
+          const tags = card.dataset.tags.split(' ');
+          card.style.display = tags.includes(tag) ? '' : 'none';
+        }
+      });
+    }
+
+    function setFilter(tag, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t === btn));
+      filterCards(tag);
     }
   </script>
   <script type="module" src="/js/cart-ui.js"></script>

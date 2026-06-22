@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-22 (session 33)
+Last updated: 2026-06-22 (session 34)
 
 ---
 
@@ -15,7 +15,9 @@ Last updated: 2026-06-22 (session 33)
 ### Products (3 only)
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
 - **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs). Prices: NZ$2,399 / NZ$3,299
-- **Barrel Sauna / Square Sauna** → `product-page/outdoor-sauna.html` — variant toggle; Barrel ($9,899, cedar, 6kW) and Square ($9,999, Thermo Hemlock, 8kW, LED, stadium seating)
+- **Barrel Sauna** → `product-page/barrel-sauna.html` — 2P/4P/6P size selector; cedar, 6kW heater; from NZ$7,500
+- **Square Sauna** → `product-page/square-sauna.html` — single SKU NZ$9,999; Thermo Hemlock, 8kW, LED, stadium seating
+- **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel + square; legacy ?variant= redirects preserved
 
 ### Design System
 - Typography: **Cormorant Garamond** (display/serif) + **Jost** (body/sans)
@@ -61,7 +63,13 @@ Last updated: 2026-06-22 (session 33)
 └── product-page/
     ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
     ├── ice-bath-chiller.html — Chiller / Premium Chiller model selector
-    └── outdoor-sauna.html
+    ├── barrel-sauna.html   — Barrel Sauna (2P / 4P / 6P size selector)
+    ├── square-sauna.html   — Square Sauna (single SKU)
+    ├── outdoor-sauna.html  — Outdoor Saunas category page (links to barrel + square)
+    ├── stainless-steel-ice-bath.html — Stainless Steel Ice Bath (304 / 316 selector)
+    ├── all-in-one-ice-bath.html — All-in-One Ice Bath & Chiller
+    ├── hose-attachment.html — Hose Attachment accessory
+    └── ice-bath-cover.html — Ice Bath Cover accessory
 ```
 
 ---
@@ -368,6 +376,30 @@ Last updated: 2026-06-22 (session 33)
   - `js/cart-ui.js`: `SAUNA_FREIGHT`/`islandOf` imports removed; `saunaSelect` variable + `buildSaunaSelect()` function deleted; `needsRegion` now includes `hasSauna` (region dropdown appears for sauna-only carts); sauna freight selector DOM block removed entirely; shipping compute simplified to 2-arg `calculateShipping(expandedIds, region)`; `canCheckout` drops `saunaReady`; `handleCheckout()` no longer sends `saunaFreight` in payload
   - `api/create-checkout.js`: `SAUNA_FREIGHT` import removed; `saunaFreight` removed from request body destructuring; unified `needsRegion` validation covers bath/chiller/sauna; `calculateShipping()` called with 2 args; display name simplified to `prettyCity(region)`; `saunaFreight` removed from Stripe metadata
 
+- [x] **Sauna page split + buy-now category navigation (session 34)**
+  - `js/shipping.js`: `tags` array added to all 13 products — `['cold']`, `['heat','outdoor']`, `['accessory','cold']` — used for buy-now filter tabs
+  - `product-page/barrel-sauna.html` **created**: extracted barrel-only content from outdoor-sauna.html; 2P/4P/6P size sub-selector; SEO: "Barrel Sauna — From NZ$7,500 | TIBNZ"; cart integration via `addItem`/`openDrawer`; related products: Square Sauna + Ice Bath
+  - `product-page/square-sauna.html` **created**: extracted square-only content; single SKU `sauna_square` NZ$9,999; SEO: "Square Sauna — NZ$9,999 | TIBNZ"; related products: Barrel Sauna + Ice Bath
+  - `product-page/outdoor-sauna.html` **rewritten**: product page → lightweight category page (~250 lines); "Find your heat ritual." heading; 2-card grid linking to barrel + square pages; JS redirect for legacy `?variant=square` → `/product-page/square-sauna` and `?variant=barrel` → `/product-page/barrel-sauna`; SEO: "Outdoor Saunas — From NZ$7,500 | TIBNZ"
+  - `buy-now.html` **rewritten**: state machine with 6 states (HOME / COLD / HEAT / OUTDOOR / INDOOR / ALL)
+    - HOME: full-viewport Cold Therapy / Heat Therapy split screen with real brand images; "View All Products" button
+    - COLD: back button + "Cold Therapy" heading + 7-card grid (all cold + accessory products)
+    - HEAT: Indoor Saunas (Coming Soon badge) / Outdoor Saunas sub-split
+    - OUTDOOR: back button + "Outdoor Saunas" heading + 2-card grid (barrel + square)
+    - INDOOR: "Coming Soon" page with "Register Interest" CTA
+    - ALL: "All Products" heading + filter tabs (All / Cold Therapy / Heat Therapy) + full 9-card grid
+    - Smooth fade transitions between states; `prefers-reduced-motion` respected
+    - Product cards have `data-tags` attribute for JS filtering; no card HTML duplication
+    - Barrel Sauna card href → `product-page/barrel-sauna.html`; Square Sauna → `product-page/square-sauna.html`
+    - Meta description: "from NZ$9,899" → "from NZ$7,500"
+  - `vercel.json`: removed `/product-page/barrel-sauna → outdoor-sauna` redirect (was blocking new file); changed `/product-page/premium-square-sauna` → `/product-page/square-sauna`
+  - `sitemap.xml`: added `/product-page/barrel-sauna` + `/product-page/square-sauna` (priority 0.9); outdoor-sauna priority lowered to 0.8
+  - `ice-bath-nz.html` + `ice-bath-chiller.html`: related sauna card price fixed `NZ$9,899` → `from NZ$7,500`
+  - **Bug fixes (session 34 cont.):**
+    - buy-now.html Cold Therapy split background changed from `img-6632-edited.webp` → `engineered-for-serious-cold.webp` (converted from `The Ice Bath — engineered for serious cold..png` via sharp, 169KB)
+    - buy-now.html "View All Products" button centering fixed — `.reveal` class was overriding `transform: translateX(-50%)`; switched to margin-based centering (`left:0; right:0; margin:0 auto; width:fit-content`)
+    - buy-now.html HEAT split Indoor/Outdoor heading alignment fixed — wrapped "Coming Soon" badge in `<p class="split-label">` so both halves have identical DOM structure above the heading
+
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
 - [ ] Ice Bath Cover hero image — no photo available yet; cover placeholder shown in buy-now.html and product page
@@ -375,23 +407,4 @@ Last updated: 2026-06-22 (session 33)
 ---
 
 ## Prices
-| Product                    | Price     |
-|----------------------------|-----------|
-| Ice Bath 4ft               | NZ$784    |
-| Ice Bath 5ft               | NZ$888    |
-| Chiller (standalone)       | NZ$2,399  |
-| Premium Ice Bath Chiller (sale) | NZ$3,299 |
-| Premium Ice Bath Chiller (orig) | NZ$4,999 |
-| 4ft + Chiller bundle       | NZ$3,183  |
-| 5ft + Chiller bundle       | NZ$3,287  |
-| 4ft + Premium Chiller      | NZ$4,083  |
-| 5ft + Premium Chiller      | NZ$4,187  |
-| Barrel Sauna (2 Person)    | NZ$7,500  |
-| Barrel Sauna (4 Person)    | NZ$9,899  |
-| Barrel Sauna (6 Person)    | NZ$11,899 |
-| Square Sauna               | NZ$9,999  |
-| Ice Bath Cover (accessory) | NZ$199 (free shipping) |
-| Hose Attachment (accessory)| NZ$79 (free shipping)  |
-| Stainless Steel Ice Bath 304 | NZ$3,849             |
-| Stainless Steel Ice Bath 316 | NZ$4,399             |
-| All-in-One Ice Bath & Chiller | NZ$10,899           |
+Found in shipping.js (Single Source of Truth)     |
