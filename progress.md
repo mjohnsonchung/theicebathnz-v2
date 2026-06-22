@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-22 (session 36)
+Last updated: 2026-06-23 (session 37)
 
 ---
 
@@ -440,6 +440,8 @@ Last updated: 2026-06-22 (session 36)
   - Homepage feature section: removed "Flagship Product" badge
   - Homepage feature specs: "Rated For" → "Tried and Tested in", "NZ Outdoors" → "The NZ Outdoors"
   - Homepage feature specs: "Warranty" / "1 Year" → "Temp Rating" / "-5°C to 40°C"
+
+- [x] buy-now.html: Indoor Saunas split text updated — "Launching soon for New Zealand" → "Check back soon for premium indoor saunas here in NZ" (session 37)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
