@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-19 (session 32)
+Last updated: 2026-06-22 (session 33)
 
 ---
 
@@ -40,9 +40,9 @@ Last updated: 2026-06-19 (session 32)
 ├── api/
 │   └── create-checkout.js  — NEW: Stripe Checkout Session endpoint
 ├── js/
-│   ├── shipping.js         — rates, products, bundles, SAUNA_FREIGHT, calculateShipping (single source of truth)
+│   ├── shipping.js         — rates, products, bundles, calculateShipping (single source of truth)
 │   ├── cart.js             — NEW: localStorage cart state (getLines, addItem, setQty, etc.)
-│   └── cart-ui.js          — NEW: cart drawer + nav badge + region/sauna selectors + checkout
+│   └── cart-ui.js          — NEW: cart drawer + nav badge + region selector + checkout
 ├── INTEGRATION.md          — NEW: per-page wiring instructions
 ├── STRIPE_SETUP.md         — NEW: env var + deploy steps
 ├── buy-now.html            — Product catalog (/buy-now) — 3 product cards → product pages
@@ -362,6 +362,11 @@ Last updated: 2026-06-19 (session 32)
   - `calculateShipping()` updated: `baths * rates.ice_bath` → `unitsFreight(baths, rates.ice_bath, FREIGHT_FACTOR.ice_bath)`
   - Chiller nesting logic unchanged; accessories and saunas unchanged
   - Result: 2 baths = 1.5× rate (e.g. Christchurch $400 → $300); 3 baths = 2×; odd rates round (Rotorua 2 baths = $248)
+
+- [x] **Sauna shipping simplified — uses depot region instead of separate selector (session 33)**
+  - `js/shipping.js`: `SHIPPING_RATES` gains `sauna` column (NI depots = $349, SI depots = $449); `SAUNA_FREIGHT` constant, `islandOf()` helper, `SI_START`/`NORTH_ISLAND` consts all deleted; `calculateShipping()` signature drops `saunaFreightKey` — saunas now use `unitsFreight(saunas, rates.sauna, FREIGHT_FACTOR.sauna)` from the depot table; per-sauna pricing (no consolidation): 2 saunas = 2× rate
+  - `js/cart-ui.js`: `SAUNA_FREIGHT`/`islandOf` imports removed; `saunaSelect` variable + `buildSaunaSelect()` function deleted; `needsRegion` now includes `hasSauna` (region dropdown appears for sauna-only carts); sauna freight selector DOM block removed entirely; shipping compute simplified to 2-arg `calculateShipping(expandedIds, region)`; `canCheckout` drops `saunaReady`; `handleCheckout()` no longer sends `saunaFreight` in payload
+  - `api/create-checkout.js`: `SAUNA_FREIGHT` import removed; `saunaFreight` removed from request body destructuring; unified `needsRegion` validation covers bath/chiller/sauna; `calculateShipping()` called with 2 args; display name simplified to `prettyCity(region)`; `saunaFreight` removed from Stripe metadata
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section

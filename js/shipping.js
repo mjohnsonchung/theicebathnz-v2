@@ -16,37 +16,37 @@
 // ---------------------------------------------------------------------------
 // SHIPPING RATES — NZD, per Mainfreight depot
 // ---------------------------------------------------------------------------
-// Columns: ice_bath (each bath is one freight unit), chiller (surplus chillers)
-// Saunas use SAUNA_FREIGHT below. Accessories: ACCESSORY_SOLO_RATE.
+// Columns: ice_bath, chiller (surplus), sauna (NI=349, SI=449).
+// Accessories: ACCESSORY_SOLO_RATE.
 // Source: The_Ice_Bath_-_Shipping_Pricing.xlsx (Timaru ice_bath corrected $22→$220)
 export const SHIPPING_RATES = {
-  // ── North Island ────────────────────────────────────────────────────────
-  AUCKLAND:           { ice_bath:  80, chiller:  80 },
-  HAMILTON:           { ice_bath: 150, chiller:  90 },
-  TAURANGA:           { ice_bath: 150, chiller:  90 },
-  THAMES:             { ice_bath: 160, chiller:  95 },
-  WHANGAREI:          { ice_bath: 160, chiller:  95 },
-  TAUPO:              { ice_bath: 160, chiller:  95 },
-  ROTORUA:            { ice_bath: 165, chiller: 100 },
-  NAPIER:             { ice_bath: 165, chiller: 100 },
-  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100 },
-  KAITAIA:            { ice_bath: 170, chiller: 100 },
-  GISBORNE:           { ice_bath: 170, chiller: 100 },
-  WANGANUI:           { ice_bath: 170, chiller: 100 },
-  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100 },
-  LEVIN:              { ice_bath: 170, chiller: 100 },
-  WELLINGTON:         { ice_bath: 170, chiller: 100 },
-  // ── South Island ────────────────────────────────────────────────────────
-  NELSON:             { ice_bath: 220, chiller: 130 },
-  BLENHEIM:           { ice_bath: 210, chiller: 130 },
-  CHRISTCHURCH:       { ice_bath: 200, chiller: 120 },
-  GREYMOUTH:          { ice_bath: 230, chiller: 130 },
-  TIMARU:             { ice_bath: 220, chiller: 130 },
-  OAMARU:             { ice_bath: 220, chiller: 130 },
-  DUNEDIN:            { ice_bath: 225, chiller: 130 },
-  CROMWELL:           { ice_bath: 240, chiller: 140 },
-  GORE:               { ice_bath: 240, chiller: 140 },
-  INVERCARGILL:       { ice_bath: 230, chiller: 140 },
+  // ── North Island — sauna 349 ────────────────────────────────────────────
+  AUCKLAND:           { ice_bath:  80, chiller:  80, sauna: 349 },
+  HAMILTON:           { ice_bath: 150, chiller:  90, sauna: 349 },
+  TAURANGA:           { ice_bath: 150, chiller:  90, sauna: 349 },
+  THAMES:             { ice_bath: 160, chiller:  95, sauna: 349 },
+  WHANGAREI:          { ice_bath: 160, chiller:  95, sauna: 349 },
+  TAUPO:              { ice_bath: 160, chiller:  95, sauna: 349 },
+  ROTORUA:            { ice_bath: 165, chiller: 100, sauna: 349 },
+  NAPIER:             { ice_bath: 165, chiller: 100, sauna: 349 },
+  'NEW PLYMOUTH':     { ice_bath: 165, chiller: 100, sauna: 349 },
+  KAITAIA:            { ice_bath: 170, chiller: 100, sauna: 349 },
+  GISBORNE:           { ice_bath: 170, chiller: 100, sauna: 349 },
+  WANGANUI:           { ice_bath: 170, chiller: 100, sauna: 349 },
+  'PALMERSTON NORTH': { ice_bath: 170, chiller: 100, sauna: 349 },
+  LEVIN:              { ice_bath: 170, chiller: 100, sauna: 349 },
+  WELLINGTON:         { ice_bath: 170, chiller: 100, sauna: 349 },
+  // ── South Island — sauna 449 ────────────────────────────────────────────
+  NELSON:             { ice_bath: 220, chiller: 130, sauna: 449 },
+  BLENHEIM:           { ice_bath: 210, chiller: 130, sauna: 449 },
+  CHRISTCHURCH:       { ice_bath: 200, chiller: 120, sauna: 449 },
+  GREYMOUTH:          { ice_bath: 230, chiller: 130, sauna: 449 },
+  TIMARU:             { ice_bath: 220, chiller: 130, sauna: 449 },
+  OAMARU:             { ice_bath: 220, chiller: 130, sauna: 449 },
+  DUNEDIN:            { ice_bath: 225, chiller: 130, sauna: 449 },
+  CROMWELL:           { ice_bath: 240, chiller: 140, sauna: 449 },
+  GORE:               { ice_bath: 240, chiller: 140, sauna: 449 },
+  INVERCARGILL:       { ice_bath: 230, chiller: 140, sauna: 449 },
 };
 
 // Region display order in the dropdown (north → south).
@@ -65,25 +65,6 @@ export const REGION_ORDER = [
 // ---------------------------------------------------------------------------
 // Accessories ride free with any bath or chiller. Solo-only cart pays this.
 export const ACCESSORY_SOLO_RATE = 20;
-
-// ---------------------------------------------------------------------------
-// SAUNA FREIGHT — per sauna, separate from depot table
-// ---------------------------------------------------------------------------
-export const SAUNA_FREIGHT = {
-  own_freight:  { label: 'Arrange your own freight',  cost: 0   },
-  pickup_akl:   { label: 'Pick up — Auckland',        cost: 0   },
-  north_island: { label: 'North Island delivery',     cost: 349 },
-  south_island: { label: 'South Island delivery',     cost: 449 },
-};
-
-// ---------------------------------------------------------------------------
-// ISLAND HELPER — pre-select sauna freight from the depot region
-// ---------------------------------------------------------------------------
-const SI_START = REGION_ORDER.indexOf('NELSON'); // first South Island entry
-const NORTH_ISLAND = new Set(REGION_ORDER.slice(0, SI_START));
-export function islandOf(region) {
-  return NORTH_ISLAND.has(region) ? 'north' : 'south';
-}
 
 // ---------------------------------------------------------------------------
 // PRODUCT CATALOG
@@ -151,9 +132,8 @@ function unitsFreight(n, rate, factor) {
 // ---------------------------------------------------------------------------
 // productIds: flat array with bundles AND quantities already expanded
 //             (e.g. 2× ice_bath_4ft → ['ice_bath_4ft', 'ice_bath_4ft'])
-// region:          depot key — required only if cart has a bath or chiller
-// saunaFreightKey: a SAUNA_FREIGHT key — required only if cart has a sauna
-export function calculateShipping(productIds, region, saunaFreightKey) {
+// region:     depot key — required if cart has a bath, chiller, or sauna
+export function calculateShipping(productIds, region) {
   const cats = productIds.map(id => PRODUCTS[id].ship);
   const baths       = cats.filter(c => c === 'ice_bath').length;
   const chillers    = cats.filter(c => c === 'chiller').length;
@@ -162,24 +142,18 @@ export function calculateShipping(productIds, region, saunaFreightKey) {
 
   let total = 0;
 
-  // Depot-rated: each bath is a freight unit; one chiller nests free per bath.
-  if (baths > 0 || chillers > 0) {
+  // Region-rated: baths, surplus chillers, AND saunas all use the depot.
+  if (baths > 0 || chillers > 0 || saunas > 0) {
     const rates = SHIPPING_RATES[region];
     if (!rates) throw new Error(`Unknown region: ${region}`);
-    total += unitsFreight(baths, rates.ice_bath, FREIGHT_FACTOR.ice_bath);
+    total += unitsFreight(baths,  rates.ice_bath, FREIGHT_FACTOR.ice_bath);
+    total += unitsFreight(saunas, rates.sauna,    FREIGHT_FACTOR.sauna);
     total += Math.max(0, chillers - baths) * rates.chiller;
   }
 
-  // Accessories: free alongside any bath/chiller, else $20 each.
+  // Accessories: free alongside any bath/chiller, else $20 each. (Unchanged.)
   if (baths === 0 && chillers === 0) {
     total += accessories * ACCESSORY_SOLO_RATE;
-  }
-
-  // Saunas: own flat freight, ship alone, charged per sauna.
-  if (saunas > 0) {
-    const f = SAUNA_FREIGHT[saunaFreightKey];
-    if (!f) throw new Error(`Sauna freight option required (got: ${saunaFreightKey})`);
-    total += saunas * f.cost;
   }
 
   return total;

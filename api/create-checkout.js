@@ -4,8 +4,7 @@
 // POST endpoint. Accepts:
 //   {
 //     items:       [{ sku, qty }]  — or legacy string[] (each qty=1)
-//     region:      string          — Mainfreight depot key (required if bath/chiller in cart)
-//     saunaFreight: string         — SAUNA_FREIGHT key (required if sauna in cart)
+//     region:      string          — Mainfreight depot key (required if bath/chiller/sauna in cart)
 //     success_url: string
 //     cancel_url:  string
 //   }
@@ -17,7 +16,6 @@
 import Stripe from 'stripe';
 import {
   PRODUCTS,
-  SAUNA_FREIGHT,
   SHIPPING_RATES,
   resolveSkuToItems,
   calculateShipping,
@@ -37,7 +35,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { items, region, saunaFreight, success_url, cancel_url } = req.body || {};
+    const { items, region, success_url, cancel_url } = req.body || {};
 
     // ── Validate items ──────────────────────────────────────────────────────
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -69,24 +67,12 @@ export default async function handler(req, res) {
 
     // ── Determine what's in the cart ────────────────────────────────────────
     const cats = productIds.map(id => PRODUCTS[id]?.ship);
-    const hasBathOrChiller = cats.includes('ice_bath') || cats.includes('chiller');
-    const hasSauna         = cats.includes('sauna');
+    const needsRegion = cats.includes('ice_bath') || cats.includes('chiller') || cats.includes('sauna');
 
     // ── Conditional validation ──────────────────────────────────────────────
-    if (hasBathOrChiller) {
-      if (!region) {
-        return res.status(400).json({ error: 'region is required for bath/chiller orders' });
-      }
-      if (!SHIPPING_RATES[region]) {
-        return res.status(400).json({ error: `Unknown shipping region: ${region}` });
-      }
-    }
-    if (hasSauna) {
-      if (!saunaFreight || !SAUNA_FREIGHT[saunaFreight]) {
-        return res.status(400).json({
-          error: `saunaFreight is required for sauna orders. Valid options: ${Object.keys(SAUNA_FREIGHT).join(', ')}`,
-        });
-      }
+    if (needsRegion) {
+      if (!region) return res.status(400).json({ error: 'region is required' });
+      if (!SHIPPING_RATES[region]) return res.status(400).json({ error: `Unknown shipping region: ${region}` });
     }
 
     // ── Build Stripe line items (aggregate by product ID) ───────────────────
@@ -108,18 +94,10 @@ export default async function handler(req, res) {
     });
 
     // ── Calculate shipping ──────────────────────────────────────────────────
-    const shippingNZD = calculateShipping(productIds, region || null, saunaFreight || null);
+    const shippingNZD = calculateShipping(productIds, region || null);
 
     // Determine display name for the shipping line
-    let shippingDisplayName = 'Shipping';
-    if (hasBathOrChiller && region) {
-      shippingDisplayName = prettyCity(region);
-      if (hasSauna && saunaFreight) {
-        shippingDisplayName += ` + ${SAUNA_FREIGHT[saunaFreight].label}`;
-      }
-    } else if (hasSauna && saunaFreight) {
-      shippingDisplayName = SAUNA_FREIGHT[saunaFreight].label;
-    }
+    const shippingDisplayName = (needsRegion && region) ? prettyCity(region) : 'Shipping';
 
     // ── Create Stripe Checkout Session ──────────────────────────────────────
     const session = await stripe.checkout.sessions.create({
@@ -135,9 +113,8 @@ export default async function handler(req, res) {
       }],
       metadata: {
         items: normalisedItems.map(i => `${i.sku}x${i.qty}`).join(','),
-        region:         region         || '',
-        saunaFreight:   saunaFreight   || '',
-        shipping_nzd:   String(shippingNZD),
+        region:       region || '',
+        shipping_nzd: String(shippingNZD),
       },
       success_url,
       cancel_url,

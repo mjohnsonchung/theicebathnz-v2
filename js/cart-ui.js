@@ -12,8 +12,8 @@
 // =============================================================================
 
 import {
-  PRODUCTS, SHIPPING_RATES, REGION_ORDER, SAUNA_FREIGHT,
-  calculateShipping, prettyCity, islandOf,
+  PRODUCTS, SHIPPING_RATES, REGION_ORDER,
+  calculateShipping, prettyCity,
 } from './shipping.js';
 import {
   getLines, addItem, setQty, removeLine, getCount,
@@ -312,7 +312,7 @@ function fmtNZD(cents) {
 // Drawer DOM refs
 // ---------------------------------------------------------------------------
 let overlay, drawer, body, footer;
-let regionSelect, saunaSelect, checkoutBtn, errorEl;
+let regionSelect, checkoutBtn, errorEl;
 let isOpen = false;
 
 // ---------------------------------------------------------------------------
@@ -445,30 +445,6 @@ function buildRegionSelect() {
 }
 
 // ---------------------------------------------------------------------------
-// Populate sauna freight dropdown
-// ---------------------------------------------------------------------------
-function buildSaunaSelect() {
-  const sel = document.createElement('select');
-  sel.className = 'cart-select';
-  sel.id = 'cart-sauna-select';
-
-  const placeholder = document.createElement('option');
-  placeholder.value = '';
-  placeholder.textContent = 'Select delivery option…';
-  placeholder.disabled = true;
-  placeholder.selected = true;
-  sel.appendChild(placeholder);
-
-  for (const [key, { label }] of Object.entries(SAUNA_FREIGHT)) {
-    const opt = document.createElement('option');
-    opt.value = key;
-    opt.textContent = label;
-    sel.appendChild(opt);
-  }
-  return sel;
-}
-
-// ---------------------------------------------------------------------------
 // Main render — builds body + footer from current cart state
 // ---------------------------------------------------------------------------
 function render() {
@@ -536,7 +512,6 @@ function render() {
   // Snapshot selections BEFORE wiping footer — the module-level vars still
   // point to the old DOM nodes, which retain their .value until GC'd.
   const prevRegion = regionSelect?.value || '';
-  const prevSauna  = saunaSelect?.value  || '';
   footer.innerHTML = '';
 
   const expandedIds = expandToProductIds();
@@ -544,7 +519,7 @@ function render() {
   const hasBath    = cats.includes('ice_bath');
   const hasChiller = cats.includes('chiller');
   const hasSauna   = cats.includes('sauna');
-  const needsRegion = hasBath || hasChiller;
+  const needsRegion = hasBath || hasChiller || hasSauna;
 
   // Subtotal
   const subtotalCents = currentLines.reduce(
@@ -566,19 +541,7 @@ function render() {
     regionSelect = buildRegionSelect();
     if (prevRegion && SHIPPING_RATES[prevRegion]) regionSelect.value = prevRegion;
 
-    regionSelect.addEventListener('change', () => {
-      // Auto-update sauna freight default when region changes
-      if (hasSauna && saunaSelect) {
-        const island = islandOf(regionSelect.value);
-        const currentSauna = saunaSelect.value;
-        // Only auto-select if user hasn't picked a zero-cost option
-        const isFreeOption = currentSauna === 'own_freight' || currentSauna === 'pickup_akl';
-        if (!currentSauna || !isFreeOption) {
-          saunaSelect.value = island === 'north' ? 'north_island' : 'south_island';
-        }
-      }
-      render();
-    });
+    regionSelect.addEventListener('change', () => render());
 
     wrap.appendChild(regionSelect);
     group.appendChild(label);
@@ -588,53 +551,18 @@ function render() {
     regionSelect = null;
   }
 
-  // ── Sauna freight selector ────────────────────────────────────────────────
-  if (hasSauna) {
-    const group = document.createElement('div');
-    group.className = 'cart-select-group';
-
-    const label = document.createElement('p');
-    label.className = 'cart-select-label';
-    label.textContent = 'Sauna Delivery';
-
-    const wrap = document.createElement('div');
-    wrap.className = 'cart-select-wrap';
-
-    saunaSelect = buildSaunaSelect();
-
-    // Restore or auto-select from region
-    if (prevSauna) {
-      saunaSelect.value = prevSauna;
-    } else if (needsRegion && regionSelect?.value) {
-      const island = islandOf(regionSelect.value);
-      saunaSelect.value = island === 'north' ? 'north_island' : 'south_island';
-    }
-
-    saunaSelect.addEventListener('change', render);
-
-    wrap.appendChild(saunaSelect);
-    group.appendChild(label);
-    group.appendChild(wrap);
-    footer.appendChild(group);
-  } else {
-    saunaSelect = null;
-  }
-
   // ── Compute shipping ──────────────────────────────────────────────────────
-  const region         = regionSelect?.value || null;
-  const saunaFreightKey = saunaSelect?.value  || null;
+  const region = regionSelect?.value || null;
 
   let shippingCents = null;
   let shippingLabel = 'Shipping';
 
   const regionReady = !needsRegion || (region && SHIPPING_RATES[region]);
-  const saunaReady  = !hasSauna   || !!saunaFreightKey;
 
-  if (regionReady && saunaReady) {
+  if (regionReady) {
     try {
-      shippingCents = calculateShipping(expandedIds, region, saunaFreightKey) * 100;
+      shippingCents = calculateShipping(expandedIds, region) * 100;
       if (region) shippingLabel = `Shipping to ${prettyCity(region)}`;
-      else if (saunaFreightKey && !needsRegion) shippingLabel = 'Sauna delivery';
     } catch (_) { /* invalid state — keep null */ }
   }
 
@@ -671,7 +599,7 @@ function render() {
   footer.appendChild(errorEl);
 
   // ── Checkout button ───────────────────────────────────────────────────────
-  const canCheckout = currentLines.length > 0 && regionReady && saunaReady;
+  const canCheckout = currentLines.length > 0 && regionReady;
 
   checkoutBtn = document.createElement('button');
   checkoutBtn.className = 'cart-checkout-btn';
@@ -694,7 +622,6 @@ async function handleCheckout() {
 
   const currentLines = getLines();
   const region = regionSelect?.value || null;
-  const saunaFreight = saunaSelect?.value || null;
 
   if (errorEl) { errorEl.hidden = true; }
 
@@ -712,7 +639,6 @@ async function handleCheckout() {
     cancel_url,
   };
   if (region) payload.region = region;
-  if (saunaFreight) payload.saunaFreight = saunaFreight;
 
   try {
     const res = await fetch('/api/create-checkout', {
