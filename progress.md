@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-22 (session 35)
+Last updated: 2026-06-22 (session 36)
 
 ---
 
@@ -423,6 +423,23 @@ Last updated: 2026-06-22 (session 35)
   - Homepage "Engineered for serious cold" photo → `Homepage/img-4712.webp` (1460KB)
   - Stainless Steel Ice Bath main photo updated across product page hero, buy-now card carousel, og:image, twitter:image → `stainless-steel-main.webp` (108KB, converted from `Stainless Steel Ice Bath.png`)
   - 5 new WebP conversions total (quality 82 via sharp)
+
+- [x] **Site-wide polish pass (session 36)**
+  - Favicon updated to `brand assets/Logo/7419a4b8-6cc9-4fb8-b3f0-f72537d6b373.png` across all 18 HTML files
+  - Homepage hero "Shop the Collection" button → `buy-now.html` (was `#products` anchor)
+  - Homepage ticker: removed "Recovery Science" and "1–2-Year Warranty" items
+  - Footer copyright updated © 2021 → © 2026 across all 18 pages
+  - Buy-now cold split labels: "Indoor Cold" → "Indoor Baths", "Outdoor Cold" → "Outdoor Baths"; small labels "Indoor" → "Premium", "Outdoor" → "NZ weather tested"
+  - Buy-now heat split: "Barrel & Square" → "Durable & Effective"
+  - Square Sauna buy-now card image → `product-card-main.webp` (converted from `paroduct card main.jpg`)
+  - Chiller page: `img-6652.webp` rotated 90° right → `img-6652-rotated.webp`
+  - "Configure and Buy Above" button: added `margin-bottom: 2rem` on all product pages
+  - Product hero images: `align-items: flex-end` → `center` on 6 product pages (images now vertically centred with H1)
+  - Homepage product cards reordered: Ice Bath / Square Sauna / Stainless Steel (left to right); images and copy updated
+  - Homepage spacing: products section bottom padding 8rem → 5rem; stats section top padding 5rem → 4rem
+  - Homepage feature section: removed "Flagship Product" badge
+  - Homepage feature specs: "Rated For" → "Tried and Tested in", "NZ Outdoors" → "The NZ Outdoors"
+  - Homepage feature specs: "Warranty" / "1 Year" → "Temp Rating" / "-5°C to 40°C"
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
