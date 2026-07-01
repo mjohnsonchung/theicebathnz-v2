@@ -17,6 +17,14 @@
     { "source": "/product-page/all-in-one", "destination": "/product-page/all-in-one-ice-bath", "permanent": true },
     { "source": "/product-page/all-in-one-chiller", "destination": "/product-page/all-in-one-ice-bath", "permanent": true },
     { "source": "/product-page/accessories", "destination": "/buy-now", "permanent": true },
-    { "source": "/accessories", "destination": "/buy-now", "permanent": true }
+    { "source": "/accessories", "destination": "/buy-now", "permanent": true },
+    { "source": "/product-page/indoor-saunas", "destination": "/product-page/indoor-sauna", "permanent": true },
+    { "source": "/product-page/aurora-2p", "destination": "/product-page/aurora-2p-infrared-sauna", "permanent": true },
+    { "source": "/product-page/aurora-3p", "destination": "/product-page/aurora-3p-infrared-sauna", "permanent": true },
+    { "source": "/product-page/aurora-4p", "destination": "/product-page/aurora-4p-infrared-sauna", "permanent": true },
+    { "source": "/product-page/solara-2p", "destination": "/product-page/solara-2p-infrared-sauna", "permanent": true },
+    { "source": "/product-page/solara-3p", "destination": "/product-page/solara-3p-infrared-sauna", "permanent": true },
+    { "source": "/product-page/tampere", "destination": "/product-page/tampere-sauna", "permanent": true },
+    { "source": "/product-page/lahti", "destination": "/product-page/lahti-sauna", "permanent": true }
   ]
 }

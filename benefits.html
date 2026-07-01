@@ -12,19 +12,19 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="brand%20assets/Logo/7419a4b8-6cc9-4fb8-b3f0-f72537d6b373.png">
-  <title>The Science of Cold Therapy — The Ice Bath NZ</title>
+  <title>The Science of Cold & Heat Therapy — The Ice Bath NZ</title>
   <!-- SEO -->
-  <meta name="description" content="The science behind cold water immersion. Explore peer-reviewed research on ice baths — from dopamine and cortisol responses to recovery, focus, and cold adaptation.">
+  <meta name="description" content="The science behind cold water immersion and sauna therapy. Explore peer-reviewed research on ice baths and saunas — from dopamine and cardiovascular benefits to recovery, focus, and longevity.">
   <link rel="canonical" href="https://theicebathnz.co.nz/benefits">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Ice Bath NZ">
-  <meta property="og:title" content="The Science of Cold Therapy — The Ice Bath NZ">
-  <meta property="og:description" content="The science behind cold water immersion. Explore peer-reviewed research on ice baths — from dopamine and cortisol responses to recovery, focus, and cold adaptation.">
+  <meta property="og:title" content="The Science of Cold & Heat Therapy — The Ice Bath NZ">
+  <meta property="og:description" content="The science behind cold water immersion and sauna therapy. Explore peer-reviewed research on ice baths and saunas — from dopamine and cardiovascular benefits to recovery, focus, and longevity.">
   <meta property="og:url" content="https://theicebathnz.co.nz/benefits">
   <meta property="og:image" content="https://theicebathnz.co.nz/brand%20assets/Homepage/why%20the%20cold%20change%20everything%20photo.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Science of Cold Therapy — The Ice Bath NZ">
-  <meta name="twitter:description" content="The science behind cold water immersion. Explore peer-reviewed research on ice baths — from dopamine and cortisol responses to recovery, focus, and cold adaptation.">
+  <meta name="twitter:title" content="The Science of Cold & Heat Therapy — The Ice Bath NZ">
+  <meta name="twitter:description" content="The science behind cold water immersion and sauna therapy. Explore peer-reviewed research on ice baths and saunas — from dopamine and cardiovascular benefits to recovery, focus, and longevity.">
   <meta name="twitter:image" content="https://theicebathnz.co.nz/brand%20assets/Homepage/why%20the%20cold%20change%20everything%20photo.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +48,11 @@
       --border-hi: rgba(91, 200, 245, 0.25);
       --display: 'Cormorant Garamond', Georgia, serif;
       --body:    'Jost', sans-serif;
+      --ember:       #E8832A;
+      --ember-glow:  rgba(232, 131, 42, 0.18);
+      --ember-dim:   rgba(232, 131, 42, 0.10);
+      --ember-border:rgba(232, 131, 42, 0.15);
+      --ember-border-hi:rgba(232, 131, 42, 0.30);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
       --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -330,12 +335,256 @@
     .footer-legal a { font-size: 0.78rem; color: var(--fog); transition: color 0.2s; }
     .footer-legal a:hover { color: var(--mist); }
 
+    /* ── Section Nav ──────────────────────────────────── */
+    .section-nav {
+      position: sticky; top: 68px; z-index: 50;
+      background: rgba(2,11,21,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .section-nav-inner {
+      display: flex; gap: 0.25rem;
+      max-width: 1200px; width: 100%;
+      justify-content: center;
+    }
+    .section-nav-btn {
+      font-family: var(--body); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--mist); background: transparent; border: none;
+      padding: 1rem 2rem; position: relative;
+      transition: color 0.25s;
+      cursor: pointer; text-decoration: none; display: inline-block;
+    }
+    .section-nav-btn::after {
+      content: ''; position: absolute; bottom: 0; left: 1rem; right: 1rem;
+      height: 2px; background: transparent;
+      transition: background 0.25s;
+    }
+    .section-nav-btn:hover { color: var(--snow); }
+    .section-nav-btn[data-theme="cold"]:hover::after,
+    .section-nav-btn[data-theme="cold"].active::after { background: var(--ice); }
+    .section-nav-btn[data-theme="cold"].active { color: var(--ice); }
+    .section-nav-btn[data-theme="heat"]:hover::after,
+    .section-nav-btn[data-theme="heat"].active::after { background: var(--ember); }
+    .section-nav-btn[data-theme="heat"].active { color: var(--ember); }
+
+    /* ── Section Divider ─────────────────────────────── */
+    .section-divider {
+      position: relative; padding: 0 2.5rem;
+      background: var(--void); overflow: hidden;
+    }
+    .section-divider-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 2rem;
+      padding: 5rem 0;
+    }
+    .section-divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-hi), transparent);
+    }
+    .section-divider-icon {
+      width: 3rem; height: 3rem; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border-hi);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ember); flex-shrink: 0;
+    }
+
+    /* ── Sauna Hero ──────────────────────────────────── */
+    .sauna-hero {
+      padding: 6rem 2.5rem 5rem; background: var(--void);
+      position: relative; overflow: hidden;
+    }
+    .sauna-hero-atmosphere {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,131,42,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(120,50,10,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .sauna-hero-inner {
+      position: relative; z-index: 1; max-width: 1200px; margin: 0 auto;
+      text-align: center;
+    }
+    .sauna-hero-inner .section-label { color: var(--ember); }
+    .sauna-hero-inner .section-heading em { color: var(--ember); }
+    .sauna-hero-sub {
+      font-size: 1rem; line-height: 1.8; color: var(--mist);
+      max-width: 65ch; margin: 0 auto 1.5rem;
+    }
+    .sauna-hero-intro {
+      font-size: 0.95rem; line-height: 1.8; color: var(--mist);
+      max-width: 65ch; margin: 0 auto;
+    }
+
+    /* ── Sauna How It Works ──────────────────────────── */
+    .sauna-mechanism { padding: 7rem 2.5rem; background: var(--deep); }
+    .sauna-mechanism-inner { max-width: 1200px; margin: 0 auto; }
+    .sauna-mechanism .section-label { color: var(--ember); }
+    .sauna-mechanism .section-heading em { color: var(--ember); }
+    .sauna-mechanism-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .sauna-mechanism-body { font-size: 0.95rem; line-height: 1.8; color: var(--mist); }
+    .sauna-mechanism-body p { margin-bottom: 1.25rem; }
+    .sauna-type-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .sauna-type-card {
+      background: var(--surface); border: 1px solid var(--ember-border);
+      border-radius: 1.25rem; padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .sauna-type-card:hover { border-color: var(--ember-border-hi); }
+    .sauna-type-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--ember), transparent);
+    }
+    .sauna-type-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ember); margin-bottom: 0.75rem;
+    }
+    .sauna-type-title {
+      font-family: var(--display); font-size: 1.35rem; font-weight: 400;
+      color: var(--snow); margin-bottom: 0.5rem; line-height: 1.2;
+    }
+    .sauna-type-desc {
+      font-size: 0.87rem; line-height: 1.7; color: var(--mist);
+    }
+    .sauna-type-temp {
+      display: inline-flex; align-items: baseline; gap: 0.4rem;
+      background: var(--ember-dim); border: 1px solid var(--ember-border);
+      border-radius: 0.6rem; padding: 0.4rem 0.85rem;
+      margin-top: 0.75rem;
+    }
+    .sauna-type-temp-val {
+      font-family: var(--display); font-size: 1.2rem; font-weight: 300; color: var(--ember);
+    }
+    .sauna-type-temp-label { font-size: 0.7rem; color: var(--mist); }
+
+    /* ── Sauna Research Cards ────────────────────────── */
+    .sauna-research { padding: 7rem 2.5rem; background: var(--void); }
+    .sauna-research-inner { max-width: 1200px; margin: 0 auto; }
+    .sauna-research .section-label { color: var(--ember); }
+    .sauna-research .section-heading em { color: var(--ember); }
+    .sauna-research-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .sauna-research-card {
+      background: var(--surface); border: 1px solid var(--ember-border);
+      border-radius: 1rem; padding: 2rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .sauna-research-card:hover { border-color: var(--ember-border-hi); background: var(--elevated); }
+    .sauna-research-card .research-journal { color: var(--ember); }
+
+    /* ── Infrared Research ────────────────────────────── */
+    .infrared-research { padding: 7rem 2.5rem; background: var(--deep); }
+    .infrared-research-inner { max-width: 1200px; margin: 0 auto; }
+    .infrared-research .section-label { color: var(--ember); }
+    .infrared-research .section-heading em { color: var(--ember); }
+    .infrared-research-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+
+    /* ── NZ Research Highlight ───────────────────────── */
+    .nz-highlight { padding: 5rem 2.5rem; background: var(--void); }
+    .nz-highlight-inner { max-width: 1200px; margin: 0 auto; }
+    .nz-highlight-card {
+      background: linear-gradient(135deg, var(--surface), var(--elevated));
+      border: 1px solid var(--ember-border-hi);
+      border-radius: 1.5rem; padding: 3.5rem;
+      position: relative; overflow: hidden;
+    }
+    .nz-highlight-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 100% 0%, rgba(232,131,42,0.06), transparent 60%);
+    }
+    .nz-highlight-content { position: relative; z-index: 1; }
+    .nz-highlight-flag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ember);
+      margin-bottom: 1.5rem;
+    }
+    .nz-highlight h3 {
+      font-family: var(--display); font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 300; color: var(--snow); line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .nz-highlight h3 em { font-style: italic; color: var(--ember); }
+    .nz-highlight-body {
+      font-size: 0.95rem; line-height: 1.8; color: var(--mist);
+      max-width: 70ch;
+    }
+    .nz-highlight-body p { margin-bottom: 1rem; }
+    .nz-highlight-citation {
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--ember-border);
+      font-size: 0.78rem; color: var(--fog); font-style: italic;
+    }
+
+    /* ── Benefits Comparison ─────────────────────────── */
+    .sauna-benefits-compare { padding: 7rem 2.5rem; background: var(--deep); }
+    .sauna-benefits-compare-inner { max-width: 1200px; margin: 0 auto; }
+    .sauna-benefits-compare .section-label { color: var(--ember); }
+    .sauna-benefits-compare .section-heading em { color: var(--ember); }
+    .comparison-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; margin-top: 3.5rem;
+    }
+    .comparison-col {
+      background: var(--surface); border: 1px solid var(--ember-border);
+      border-radius: 1.25rem; padding: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .comparison-col::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--ember), transparent);
+    }
+    .comparison-col-title {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 400;
+      color: var(--snow); margin-bottom: 1.75rem; line-height: 1.2;
+    }
+    .comparison-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .comparison-list li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.88rem; line-height: 1.6; color: var(--mist);
+    }
+    .comparison-check {
+      width: 1.25rem; height: 1.25rem; border-radius: 50%;
+      background: var(--ember-dim); border: 1px solid var(--ember-border-hi);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ember); flex-shrink: 0; margin-top: 0.15rem;
+    }
+
+    /* ── Sauna Disclaimer ────────────────────────────── */
+    .sauna-disclaimer {
+      padding: 3rem 2.5rem 5rem; background: var(--void);
+    }
+    .sauna-disclaimer-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1.5rem 2rem;
+      background: var(--surface); border: 1px solid var(--ember-border);
+      border-radius: 0.75rem;
+      font-size: 0.78rem; line-height: 1.7; color: var(--fog);
+    }
+    .sauna-disclaimer-inner strong { color: var(--mist); }
+
     @media (max-width: 1100px) {
       .mechanism-layout { grid-template-columns: 1fr; }
       .benefits-grid { grid-template-columns: 1fr; }
       .protocol-layout { grid-template-columns: 1fr; }
       .protocol-card { position: static; }
       .research-grid { grid-template-columns: 1fr 1fr; }
+      .sauna-mechanism-layout { grid-template-columns: 1fr; }
+      .sauna-research-grid { grid-template-columns: 1fr 1fr; }
+      .infrared-research-grid { grid-template-columns: 1fr; }
+      .comparison-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media (max-width: 768px) {
@@ -364,6 +613,21 @@
       .research-section { padding: 5rem 1.5rem; }
       .research-grid { grid-template-columns: 1fr; }
       .research-card { padding: 1.5rem; }
+
+      .section-nav { padding: 0 1rem; }
+      .section-nav-btn { padding: 0.85rem 1.25rem; font-size: 0.68rem; }
+
+      .sauna-hero { padding: 4rem 1.5rem; }
+      .sauna-mechanism { padding: 5rem 1.5rem; }
+      .sauna-research { padding: 5rem 1.5rem; }
+      .sauna-research-grid { grid-template-columns: 1fr; }
+      .infrared-research { padding: 5rem 1.5rem; }
+      .nz-highlight { padding: 3rem 1.5rem; }
+      .nz-highlight-card { padding: 2rem 1.5rem; }
+      .sauna-benefits-compare { padding: 5rem 1.5rem; }
+      .comparison-col { padding: 1.75rem 1.5rem; }
+      .sauna-disclaimer { padding: 2rem 1.5rem 4rem; }
+      .section-divider-inner { padding: 3rem 0; }
 
       .science-cta { padding: 5rem 1.5rem; }
       .cta-actions { flex-direction: column; align-items: stretch; }
@@ -433,8 +697,22 @@
     </div>
   </section>
 
+  <!-- Section Nav -->
+  <div class="section-nav" id="sectionNav">
+    <div class="section-nav-inner">
+      <a href="#cold-therapy" class="section-nav-btn active" data-theme="cold">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:0.4rem;vertical-align:-1px"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        Cold Therapy
+      </a>
+      <a href="#sauna-science" class="section-nav-btn" data-theme="heat">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:0.4rem;vertical-align:-1px"><path d="M12 22c-4 0-8-3.58-8-8a8 8 0 0116 0c0 4.42-4 8-8 8z"/><path d="M12 2v4M8 5l1 3M16 5l-1 3"/></svg>
+        Sauna Science
+      </a>
+    </div>
+  </div>
+
   <!-- How It Works in the Body -->
-  <section class="mechanism-section">
+  <section class="mechanism-section" id="cold-therapy">
     <div class="mechanism-inner">
       <div class="mechanism-layout">
         <div class="mechanism-visual reveal">
@@ -641,11 +919,225 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- Section Divider -->
+  <div class="section-divider">
+    <div class="section-divider-inner reveal">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c-4 0-8-3.58-8-8a8 8 0 0116 0c0 4.42-4 8-8 8z"/><path d="M12 2v4M8 5l1 3M16 5l-1 3"/></svg>
+      </div>
+      <div class="section-divider-line"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SAUNA SCIENCE SECTION -->
+  <!-- ═══════════════════════════════════════════════════ -->
+
+  <!-- Sauna Hero / Intro -->
+  <section class="sauna-hero" id="sauna-science">
+    <div class="sauna-hero-atmosphere"></div>
+    <div class="sauna-hero-inner">
+      <span class="section-label reveal">The Science</span>
+      <h2 class="section-heading reveal reveal-d1" style="text-align:center">The Science of<br><em>Sauna Therapy</em></h2>
+      <p class="sauna-hero-sub reveal reveal-d2">What the research says about traditional and infrared saunas</p>
+      <p class="sauna-hero-intro reveal reveal-d3">Saunas have been used for warmth, relaxation and recovery for thousands of years. Over the past two decades, that long tradition has been met by a growing body of peer-reviewed research.</p>
+    </div>
+  </section>
+
+  <!-- How a Sauna Works -->
+  <section class="sauna-mechanism">
+    <div class="sauna-mechanism-inner">
+      <span class="section-label reveal">The Mechanism</span>
+      <h2 class="section-heading reveal reveal-d1">How a sauna<br><em>works.</em></h2>
+      <div class="sauna-mechanism-layout">
+        <div class="sauna-mechanism-body reveal">
+          <p>All saunas deliver benefits through controlled whole-body temperature rise. Heart rate climbs, blood vessels widen, circulation increases — a mild cardiovascular load compared in studies to moderate exercise.</p>
+          <p>Whether traditional or infrared, the core principle is the same: sustained heat triggers a cascade of adaptive responses — from cardiovascular conditioning to cellular repair — that compound with regular use.</p>
+        </div>
+        <div class="sauna-type-cards reveal reveal-d1">
+          <div class="sauna-type-card">
+            <p class="sauna-type-label">Traditional Sauna</p>
+            <h3 class="sauna-type-title">Heat the air, then the body</h3>
+            <p class="sauna-type-desc">Traditional saunas heat the air to 70–100°C using a heater and stones. Steam is created by pouring water over hot stones, raising humidity and intensifying the perceived heat.</p>
+            <div class="sauna-type-temp">
+              <span class="sauna-type-temp-val">70–100°C</span>
+              <span class="sauna-type-temp-label">air temperature</span>
+            </div>
+          </div>
+          <div class="sauna-type-card">
+            <p class="sauna-type-label">Infrared Sauna</p>
+            <h3 class="sauna-type-title">Warm the body directly</h3>
+            <p class="sauna-type-desc">Infrared saunas warm the body directly via infrared emitters at lower air temperatures. The heat penetrates tissue without extreme ambient temperatures, making sessions more comfortable for many users.</p>
+            <div class="sauna-type-temp">
+              <span class="sauna-type-temp-val">45–60°C</span>
+              <span class="sauna-type-temp-label">air temperature</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traditional Saunas: The Evidence -->
+  <section class="sauna-research">
+    <div class="sauna-research-inner">
+      <span class="section-label reveal">Traditional Saunas</span>
+      <h2 class="section-heading reveal reveal-d1">The evidence for<br><em>traditional sauna.</em></h2>
+      <div class="sauna-research-grid">
+        <div class="sauna-research-card reveal">
+          <p class="research-journal">JAMA Internal Medicine, 2015</p>
+          <p class="research-finding">Heart Health & Longevity</p>
+          <p class="research-detail">KIHD study: 2,315 Finnish men followed over 21 years. Those using a sauna 4–7 times per week had ~63% lower risk of sudden cardiac death and ~50% lower risk of fatal cardiovascular disease compared to once-a-week users.</p>
+          <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;font-style:italic">Laukkanen et al., 2015</p>
+        </div>
+        <div class="sauna-research-card reveal reveal-d1">
+          <p class="research-journal">Age and Ageing, 2017</p>
+          <p class="research-finding">Brain & Cognitive Health</p>
+          <p class="research-detail">Same Finnish cohort: 4–7 sauna sessions per week was associated with a 66% lower risk of dementia and 65% lower risk of Alzheimer's disease compared to those using a sauna once per week.</p>
+          <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;font-style:italic">Laukkanen et al., 2017</p>
+        </div>
+        <div class="sauna-research-card reveal reveal-d2">
+          <p class="research-journal">Zaccardi et al., 2017 / Kunutsor et al., 2018</p>
+          <p class="research-finding">Blood Pressure & Stroke</p>
+          <p class="research-detail">Frequent sauna use has been linked to nearly half the risk of developing hypertension. Separate research found substantially reduced stroke risk among regular sauna users.</p>
+          <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;font-style:italic">Zaccardi et al., 2017; Kunutsor et al., 2018</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Infrared Saunas: The Evidence -->
+  <section class="infrared-research">
+    <div class="infrared-research-inner">
+      <span class="section-label reveal">Infrared Saunas</span>
+      <h2 class="section-heading reveal reveal-d1">The evidence for<br><em>infrared sauna.</em></h2>
+      <div class="infrared-research-grid">
+        <div class="sauna-research-card reveal">
+          <p class="research-journal">Journal of Cardiology, 2008</p>
+          <p class="research-finding">Heart Failure & Circulation (Waon Therapy)</p>
+          <p class="research-detail">60°C far-infrared sauna for 15 minutes followed by 30 minutes of rest. Study of 188 patients demonstrated safe use with improved symptoms and cardiac function in heart failure patients.</p>
+          <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;font-style:italic">Miyata et al., 2008</p>
+        </div>
+        <div class="sauna-research-card reveal reveal-d1">
+          <p class="research-journal">Canadian Family Physician, 2009</p>
+          <p class="research-finding">Cardiovascular Risk Factors</p>
+          <p class="research-detail">Supportive evidence for benefits relating to blood pressure, heart failure and cardiovascular risk factors. Infrared sauna use was found to be safe and well-tolerated across patient groups.</p>
+          <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;font-style:italic">Beever, 2009</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NZ Research Highlight -->
+  <section class="nz-highlight">
+    <div class="nz-highlight-inner">
+      <div class="nz-highlight-card reveal">
+        <div class="nz-highlight-content">
+          <div class="nz-highlight-flag">
+            <svg width="16" height="12" viewBox="0 0 640 480" style="flex-shrink:0"><rect width="640" height="480" fill="#00247D"/><g fill="#fff"><path d="M0 0h32L320 240 608 0h32v24L352 248l288 224v8h-32L320 256 32 480H0v-8l288-224L0 24z"/></g><g fill="#C8102E"><path d="M0 0h16L320 232 624 0h16v12L348 244l292 228v8h-16L320 256 16 480H0v-8l292-228L0 12z"/></g><path fill="#fff" d="M0 200h280V0h80v200h280v80H360v200h-80V280H0z"/><path fill="#C8102E" d="M0 216h296V0h48v216h296v48H344v216h-48V264H0z"/></svg>
+            NZ Research Highlight
+          </div>
+          <h3>Post-training sauna for <em>endurance performance</em></h3>
+          <div class="nz-highlight-body">
+            <p>University of Otago & AUT University researchers studied the effect of post-training sauna sessions (30 minutes at ~90°C) over 3 weeks on competitive distance runners.</p>
+            <p>The results were striking: participants saw a ~32% increase in time to exhaustion and ~7% expansion of blood plasma volume — meaningful gains for any endurance athlete looking for a legal, accessible performance edge.</p>
+          </div>
+          <p class="nz-highlight-citation">Scoon et al., 2007, Journal of Science and Medicine in Sport</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits at a Glance -->
+  <section class="sauna-benefits-compare">
+    <div class="sauna-benefits-compare-inner">
+      <span class="section-label reveal">At a Glance</span>
+      <h2 class="section-heading reveal reveal-d1">Benefits of<br><em>each sauna type.</em></h2>
+      <div class="comparison-grid">
+        <div class="comparison-col reveal">
+          <h3 class="comparison-col-title">Traditional Sauna</h3>
+          <ul class="comparison-list">
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Heart and circulation
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Healthy blood pressure
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Brain and memory
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Lower stroke risk
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Recovery and endurance
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Relaxation, stress relief and sleep
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Deep, cleansing sweat
+            </li>
+          </ul>
+        </div>
+        <div class="comparison-col reveal reveal-d1">
+          <h3 class="comparison-col-title">Infrared Sauna</h3>
+          <ul class="comparison-list">
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Gentle, comfortable heat (45–60°C)
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Heart and circulation support
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Clinically studied for heart health
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Muscle relief and comfort
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Recovery after training
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Deep sweat without extreme heat
+            </li>
+            <li>
+              <span class="comparison-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 12l2 2 4-4"/></svg></span>
+              Relaxation and stress reduction
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sauna Disclaimer -->
+  <div class="sauna-disclaimer">
+    <div class="sauna-disclaimer-inner reveal">
+      <strong>Disclaimer:</strong> Our saunas are general wellness products and are not medical devices. The information on this page is provided for general education and is not intended to diagnose, treat, cure or prevent any disease, nor to replace advice from a qualified health professional.
+    </div>
+  </div>
+
   <!-- CTA -->
   <section class="science-cta">
     <div class="science-cta-inner">
       <h2>Ready to<br><em>experience it?</em></h2>
-      <p>The science is compelling. The experience is transformative. Cold therapy is one of the few practices where the research and the results align completely — every time, for almost everyone who commits to it.</p>
+      <p>The science is compelling. The experience is transformative. Whether cold therapy or sauna, these are practices where the research and the results align completely — every time, for almost everyone who commits to them.</p>
       <div class="cta-actions">
         <a href="buy-now.html" class="btn-primary">
           Shop the Collection
@@ -674,7 +1166,8 @@
           <ul>
             <li><a href="product-page/ice-bath-nz.html">Ice Bath</a></li>
             <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
-            <li><a href="product-page/outdoor-sauna.html">Sauna</a></li>
+            <li><a href="product-page/outdoor-sauna.html">Outdoor Saunas</a></li>
+            <li><a href="product-page/indoor-sauna.html">Indoor Saunas</a></li>
             <li><a href="#">Accessories</a></li>
             <li><a href="#">Bundles</a></li>
           </ul>
@@ -730,6 +1223,25 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Section nav active state on scroll
+    const coldSection = document.getElementById('cold-therapy');
+    const saunaSection = document.getElementById('sauna-science');
+    const navBtns = document.querySelectorAll('.section-nav-btn');
+    if (coldSection && saunaSection) {
+      const updateNav = () => {
+        const scrollY = window.scrollY + 120;
+        const saunaTop = saunaSection.offsetTop;
+        navBtns.forEach(b => b.classList.remove('active'));
+        if (scrollY >= saunaTop) {
+          document.querySelector('.section-nav-btn[data-theme="heat"]').classList.add('active');
+        } else {
+          document.querySelector('.section-nav-btn[data-theme="cold"]').classList.add('active');
+        }
+      };
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    }
   </script>
   <script type="module" src="/js/cart-ui.js"></script>
 </body>

@@ -445,6 +445,9 @@
     }
     .btn-card:active { transform: scale(0.97); }
 
+    /* ── Sale Price ─────────────────────────────────── */
+    .card-price .was { font-size: 0.75rem; color: var(--fog); text-decoration: line-through; margin-right: 0.4rem; }
+
     /* ── Coming Soon ─────────────────────────────────── */
     .coming-soon {
       min-height: 100vh;
@@ -648,14 +651,14 @@
       Back
     </button>
 
-    <a class="split-half split-indoor" href="#" onclick="event.preventDefault(); navigate('indoor')" aria-label="Indoor saunas — coming soon">
+    <a class="split-half split-indoor" href="#" onclick="event.preventDefault(); navigate('indoor')" aria-label="Explore indoor saunas">
       <div class="split-bg split-bg-indoor"></div>
       <div class="split-overlay split-overlay-indoor"></div>
       <div class="split-content">
-        <p class="split-label"><span class="split-badge">Coming Soon</span></p>
+        <p class="split-label">Infrared &amp; Traditional</p>
         <h2 class="split-heading">Indoor <em>Saunas</em></h2>
-        <p class="split-sub">Check back soon for premium indoor saunas here in NZ</p>
-        <span class="split-cta">Learn More</span>
+        <p class="split-sub">Infrared and traditional saunas for your home, studio or gym</p>
+        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
 
@@ -672,18 +675,147 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════
-       INDOOR — Coming Soon
+       INDOOR — Indoor Saunas
        ═══════════════════════════════════════════════════ -->
-  <section class="coming-soon" id="sectionIndoor" style="display:none">
-    <button class="back-btn" onclick="goBack()" aria-label="Go back">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back
-    </button>
-    <div class="coming-soon-inner">
-      <p class="coming-soon-label">Indoor Saunas</p>
-      <h2 class="coming-soon-heading">Coming <em>Soon</em></h2>
-      <p class="coming-soon-text">We're developing indoor sauna solutions for New Zealand homes and studios. Register your interest and we'll let you know the moment they're available.</p>
-      <a href="contact.html" class="btn-primary btn-ember">Register Interest</a>
+  <section class="products-section" id="sectionIndoor" style="display:none">
+    <div class="products-inner">
+      <div class="products-header">
+        <button class="back-btn" onclick="goBack()" aria-label="Go back">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="products-title accent-heat">Indoor <em>Saunas</em></h2>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- Aurora 2P -->
+        <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%202P/hero-photo-catalog-photo.webp" alt="Aurora 2P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 2P</h3>
+            <p class="product-tagline">Full-spectrum infrared. Canadian Hemlock. 10A plug-in.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$6,349</span> <span class="cur">NZ$</span>4,749</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Aurora 3P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%203P/hero-photo-catalog-photo.webp" alt="Aurora 3P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 3P</h3>
+            <p class="product-tagline">Full-spectrum infrared. Wi-Fi control. 15A circuit.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$7,449</span> <span class="cur">NZ$</span>5,749</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Aurora 4P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%204P/hero-photo-catalog-photo.webp" alt="Aurora 4P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 4P</h3>
+            <p class="product-tagline">Full-spectrum infrared. 1800mm cabin. Wi-Fi control.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$8,849</span> <span class="cur">NZ$</span>6,849</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Solara 2P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Solara%202P/hero-photo-catalog-photo.webp" alt="Solara 2P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Solara 2P</h3>
+            <p class="product-tagline">Low-EMF carbon infrared. Canadian Hemlock. 10A plug-in.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$5,949</span> <span class="cur">NZ$</span>4,449</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Solara 3P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Solara%203P/hero-photo-catalog-photo.webp" alt="Solara 3P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Solara 3P</h3>
+            <p class="product-tagline">Low-EMF carbon infrared. Spacious 1500mm cabin.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$7,149</span> <span class="cur">NZ$</span>5,449</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Tampere -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Tampere/hero-photo-catalog-photo.webp" alt="Tampere Traditional Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Tampere</h3>
+            <p class="product-tagline">Traditional Finnish. Canadian Hemlock. 4.5kW/6kW stove.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>8,349</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Lahti -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Lahti/hero-photo-catalog-photo.webp" alt="Lahti Traditional Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Lahti</h3>
+            <p class="product-tagline">Traditional. Japanese Cedar. Corner glass panel design.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>8,049</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+      </div>
     </div>
   </section>
 
@@ -715,7 +847,7 @@
       <div class="products-grid">
 
         <!-- Ice Bath -->
-        <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold outdoor">
+        <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section.webp" alt="Ice Bath" style="object-fit:cover;"></div>
@@ -793,7 +925,9 @@
         <a href="product-page/barrel-sauna.html" class="product-card" data-tags="heat outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Barrel%20Sauna/hero-photo-new.webp" alt="Cedar Barrel Sauna — new" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/exterior-new.webp" alt="Barrel Sauna exterior" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside" style="object-fit:cover;"></div>
             </div>
@@ -803,6 +937,8 @@
               <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
               <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
               <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,3,event)" aria-label="Image 4"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,4,event)" aria-label="Image 5"></button>
             </div>
             <span class="product-chip">Best Value</span>
           </div>
@@ -820,7 +956,10 @@
         <a href="product-page/square-sauna.html" class="product-card" data-tags="heat outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Square%20Sauna/product-card-main.webp" alt="Square Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Square%20Sauna/hero-photo-new.webp" alt="Square Sauna — new" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/product-card-main.webp" alt="Square Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/exterior-new.webp" alt="Square Sauna exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/interior-new-1.webp" alt="Square Sauna interior" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior" style="object-fit:cover;"></div>
             </div>
@@ -830,6 +969,9 @@
               <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
               <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
               <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,3,event)" aria-label="Image 4"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,4,event)" aria-label="Image 5"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,5,event)" aria-label="Image 6"></button>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -847,7 +989,10 @@
         <a href="product-page/stainless-steel-ice-bath.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/hero-photo-new.webp" alt="Stainless Steel Ice Bath — new" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-2.webp" alt="Stainless Steel Ice Bath exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-3.webp" alt="Stainless Steel Ice Bath exterior" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-gym.webp" alt="Stainless Steel Ice Bath in use" style="object-fit:cover;"></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -855,6 +1000,9 @@
             <div class="carousel-dots">
               <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
               <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,3,event)" aria-label="Image 4"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,4,event)" aria-label="Image 5"></button>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -872,7 +1020,11 @@
         <a href="product-page/all-in-one-ice-bath.html" class="product-card" data-tags="cold indoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/main-photo.webp" alt="All-in-One Ice Bath & Chiller" style="object-fit:contain; background:#0a1e35;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/hero-photo-new.webp" alt="All-in-One Ice Bath — new" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/main-photo.webp" alt="All-in-One Ice Bath & Chiller" style="object-fit:contain; background:#0a1e35;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/exterior-new-2.webp" alt="All-in-One exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/exterior-new-3.webp" alt="All-in-One exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/lifestyle-new.webp" alt="All-in-One lifestyle" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/lifestyle-1.webp" alt="All-in-One lifestyle" style="object-fit:cover;"></div>
               <div class="carousel-slide"><img src="brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/lifestyle-2.webp" alt="All-in-One in use" style="object-fit:cover;"></div>
             </div>
@@ -882,6 +1034,10 @@
               <button class="carousel-dot active" onclick="carouselDot(this,0,event)" aria-label="Image 1"></button>
               <button class="carousel-dot" onclick="carouselDot(this,1,event)" aria-label="Image 2"></button>
               <button class="carousel-dot" onclick="carouselDot(this,2,event)" aria-label="Image 3"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,3,event)" aria-label="Image 4"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,4,event)" aria-label="Image 5"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,5,event)" aria-label="Image 6"></button>
+              <button class="carousel-dot" onclick="carouselDot(this,6,event)" aria-label="Image 7"></button>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -890,6 +1046,132 @@
             <p class="product-tagline">Built-in 1HP chiller, hydrotherapy jets, Wi-Fi app control, dual filtration + ozone. No extra chiller needed — just plug, fill, and plunge.</p>
             <div class="product-footer">
               <span class="product-price"><span class="cur">NZ$</span>10,899</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Aurora 2P -->
+        <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%202P/hero-photo-catalog-photo.webp" alt="Aurora 2P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 2P</h3>
+            <p class="product-tagline">Full-spectrum infrared. Canadian Hemlock. 10A plug-in.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$6,349</span> <span class="cur">NZ$</span>4,749</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Aurora 3P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%203P/hero-photo-catalog-photo.webp" alt="Aurora 3P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 3P</h3>
+            <p class="product-tagline">Full-spectrum infrared. Wi-Fi control. 15A circuit.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$7,449</span> <span class="cur">NZ$</span>5,749</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Aurora 4P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Aurora%204P/hero-photo-catalog-photo.webp" alt="Aurora 4P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Aurora 4P</h3>
+            <p class="product-tagline">Full-spectrum infrared. 1800mm cabin. Wi-Fi control.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$8,849</span> <span class="cur">NZ$</span>6,849</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Solara 2P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Solara%202P/hero-photo-catalog-photo.webp" alt="Solara 2P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Solara 2P</h3>
+            <p class="product-tagline">Low-EMF carbon infrared. Canadian Hemlock. 10A plug-in.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$5,949</span> <span class="cur">NZ$</span>4,449</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Solara 3P -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Solara%203P/hero-photo-catalog-photo.webp" alt="Solara 3P Infrared Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Solara 3P</h3>
+            <p class="product-tagline">Low-EMF carbon infrared. Spacious 1500mm cabin.</p>
+            <div class="product-footer">
+              <span class="product-price card-price"><span class="was">$7,149</span> <span class="cur">NZ$</span>5,449</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Tampere -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Tampere/hero-photo-catalog-photo.webp" alt="Tampere Traditional Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Tampere</h3>
+            <p class="product-tagline">Traditional Finnish. Canadian Hemlock. 4.5kW/6kW stove.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>8,349</span>
+              <button class="btn-card">Buy Now</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Lahti -->
+        <a href="#" class="product-card" data-tags="heat indoor">
+          <div class="product-img-frame">
+            <div class="carousel-track" data-index="0">
+              <div class="carousel-slide active"><img src="brand%20assets/Lahti/hero-photo-catalog-photo.webp" alt="Lahti Traditional Sauna" style="object-fit:cover;"></div>
+            </div>
+            <span class="product-chip">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Lahti</h3>
+            <p class="product-tagline">Traditional. Japanese Cedar. Corner glass panel design.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>8,049</span>
               <button class="btn-card">Buy Now</button>
             </div>
           </div>
@@ -972,7 +1254,8 @@
           <ul>
             <li><a href="product-page/ice-bath-nz.html">Ice Bath</a></li>
             <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
-            <li><a href="product-page/outdoor-sauna.html">Sauna</a></li>
+            <li><a href="product-page/outdoor-sauna.html">Outdoor Saunas</a></li>
+            <li><a href="product-page/indoor-sauna.html">Indoor Saunas</a></li>
             <li><a href="#">Accessories</a></li>
             <li><a href="#">Bundles</a></li>
           </ul>
@@ -1085,7 +1368,7 @@
     }
 
     function getDisplay(state) {
-      return GRID_STATES.includes(state) ? 'block' : 'flex';
+      return (GRID_STATES.includes(state) || state === 'indoor') ? 'block' : 'flex';
     }
 
     function navigate(state) {

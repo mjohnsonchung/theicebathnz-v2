@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-06-23 (session 37)
+Last updated: 2026-07-01 (session 38)
 
 ---
 
@@ -12,12 +12,24 @@ Last updated: 2026-06-23 (session 37)
 - Renamed `science.html` → `benefits.html` to match old site's `/benefits` URL
 - All old product slugs redirect to new canonical slugs via `vercel.json` redirects
 
-### Products (3 only)
+### Products
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
 - **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs). Prices: NZ$2,399 / NZ$3,299
+- **Stainless Steel Ice Bath** → `product-page/stainless-steel-ice-bath.html` — 304/316 grade selector
+- **All-in-One Ice Bath** → `product-page/all-in-one-ice-bath.html` — single SKU NZ$10,899
 - **Barrel Sauna** → `product-page/barrel-sauna.html` — 2P/4P/6P size selector; cedar, 6kW heater; from NZ$7,500
 - **Square Sauna** → `product-page/square-sauna.html` — single SKU NZ$9,999; Thermo Hemlock, 8kW, LED, stadium seating
-- **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel + square; legacy ?variant= redirects preserved
+- **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel + square
+- **Indoor Sauna (category)** → `product-page/indoor-sauna.html` — category page linking to 7 indoor saunas
+- **Aurora 2P Infrared** → `product-page/aurora-2p-infrared-sauna.html` — single SKU ~~$6,349~~ $4,749; Canadian Hemlock, 1750W
+- **Aurora 3P Infrared** → `product-page/aurora-3p-infrared-sauna.html` — single SKU ~~$7,449~~ $5,749; Wi-Fi control, 2100W
+- **Aurora 4P Infrared** → `product-page/aurora-4p-infrared-sauna.html` — single SKU ~~$8,849~~ $6,849; Wi-Fi control, 2300W
+- **Solara 2P Infrared** → `product-page/solara-2p-infrared-sauna.html` — single SKU ~~$5,949~~ $4,449; carbon panels, 1800W
+- **Solara 3P Infrared** → `product-page/solara-3p-infrared-sauna.html` — single SKU ~~$7,149~~ $5,449; carbon panels, 2150W
+- **Tampere Traditional** → `product-page/tampere-sauna.html` — size selector: 1-2P ($8,349) / 3-4P ($9,349); Canadian Hemlock, 4.5kW/6kW
+- **Lahti Traditional** → `product-page/lahti-sauna.html` — size selector: 2P ($8,049) / 3P ($9,049); Japanese Cedar, corner glass
+- **Hose Attachment** → `product-page/hose-attachment.html` — accessory NZ$79
+- **Ice Bath Cover** → `product-page/ice-bath-cover.html` — accessory NZ$199
 
 ### Design System
 - Typography: **Cormorant Garamond** (display/serif) + **Jost** (body/sans)
@@ -66,6 +78,14 @@ Last updated: 2026-06-23 (session 37)
     ├── barrel-sauna.html   — Barrel Sauna (2P / 4P / 6P size selector)
     ├── square-sauna.html   — Square Sauna (single SKU)
     ├── outdoor-sauna.html  — Outdoor Saunas category page (links to barrel + square)
+    ├── indoor-sauna.html   — Indoor Saunas category page (links to 7 indoor saunas)
+    ├── aurora-2p-infrared-sauna.html — Aurora 2P Infrared Sauna ($4,749)
+    ├── aurora-3p-infrared-sauna.html — Aurora 3P Infrared Sauna ($5,749)
+    ├── aurora-4p-infrared-sauna.html — Aurora 4P Infrared Sauna ($6,849)
+    ├── solara-2p-infrared-sauna.html — Solara 2P Infrared Sauna ($4,449)
+    ├── solara-3p-infrared-sauna.html — Solara 3P Infrared Sauna ($5,449)
+    ├── tampere-sauna.html  — Tampere Sauna (1-2P $8,349 / 3-4P $9,349)
+    ├── lahti-sauna.html    — Lahti Sauna (2P $8,049 / 3P $9,049)
     ├── stainless-steel-ice-bath.html — Stainless Steel Ice Bath (304 / 316 selector)
     ├── all-in-one-ice-bath.html — All-in-One Ice Bath & Chiller
     ├── hose-attachment.html — Hose Attachment accessory
@@ -442,6 +462,59 @@ Last updated: 2026-06-23 (session 37)
   - Homepage feature specs: "Warranty" / "1 Year" → "Temp Rating" / "-5°C to 40°C"
 
 - [x] buy-now.html: Indoor Saunas split text updated — "Launching soon for New Zealand" → "Check back soon for premium indoor saunas here in NZ" (session 37)
+
+- [x] **Major indoor sauna expansion (session 38)**
+  - **Phase 1: Image conversion** — 63 new images converted to WebP (quality 82) via sharp batch script
+    - New brand asset folders: `Aurora 2P/`, `Aurora 3P/`, `Aurora 4P/`, `Solara 2P/`, `Solara 3P/`, `Tampere/`, `Lahti/`, `SAA/`
+    - Descriptive naming: `hero-photo-catalog-photo.webp`, `interior-control-panel.webp`, `interior-heaters.webp`, `lifestyle-photo-1.webp`, etc.
+    - Updated existing product photos: Barrel Sauna, Square Sauna, Stainless Steel Ice Bath, All-in-One Ice Bath
+    - Aurora PDF manuals copied to brand assets
+  - **Phase 1: SKUs** — 9 new products added to `js/shipping.js`:
+    - `aurora_2p` ($4,749), `aurora_3p` ($5,749), `aurora_4p` ($6,849)
+    - `solara_2p` ($4,449), `solara_3p` ($5,449)
+    - `tampere_small` ($8,349), `tampere_large` ($9,349)
+    - `lahti_2p` ($8,049), `lahti_3p` ($9,049)
+    - All tagged `['heat', 'indoor']`
+    - Ice Bath tags updated: `indoor` added to `ice_bath_4ft` and `ice_bath_5ft`
+  - **Phase 2: Existing product photo updates**
+    - `barrel-sauna.html`: hero converted to 9-slide carousel with new photos; specs expanded to 8 slides
+    - `square-sauna.html`: hero converted to 6-slide carousel; specs expanded to 8 slides
+    - `stainless-steel-ice-bath.html`: hero carousel 4 slides; specs expanded to 5 slides
+    - `all-in-one-ice-bath.html`: hero carousel 5 slides; specs expanded to 6 slides
+  - **Phase 3: 7 new indoor sauna product pages created**
+    - `product-page/aurora-2p-infrared-sauna.html` — single SKU, ~~$6,349~~ $4,749, Low EMF + SAA sections
+    - `product-page/aurora-3p-infrared-sauna.html` — single SKU, ~~$7,449~~ $5,749, Low EMF + SAA sections
+    - `product-page/aurora-4p-infrared-sauna.html` — single SKU, ~~$8,849~~ $6,849, Low EMF + SAA sections
+    - `product-page/solara-2p-infrared-sauna.html` — single SKU, ~~$5,949~~ $4,449, Low EMF + SAA sections
+    - `product-page/solara-3p-infrared-sauna.html` — single SKU, ~~$7,149~~ $5,449, Low EMF + SAA sections
+    - `product-page/tampere-sauna.html` — size selector (1-2P $8,349 / 3-4P $9,349), SAA section
+    - `product-page/lahti-sauna.html` — size selector (2P $8,049 / 3P $9,049), SAA section
+    - All pages include: hero carousel, info tabs (Highlights/Specs/Installation/What's Included), features grid, SAA certification, top 4 FAQ accordion, related products, cart integration, GA4
+    - Infrared pages include: Low EMF section with full-spectrum explanation
+  - **Phase 3: Indoor saunas category page**
+    - `product-page/indoor-sauna.html` — two sections: "Infrared Saunas" (5 cards) + "Traditional Saunas" (2 cards); strikethrough + sale prices; contrast CTA banner
+  - **Phase 4: buy-now.html updated**
+    - Coming Soon indoor section replaced with 7 indoor sauna product cards
+    - `.was` CSS class for strikethrough prices
+    - Heat split Indoor half updated (no longer "Coming Soon")
+    - 7 new cards added to main grid with `data-tags="heat indoor"`
+    - Ice Bath card `data-tags` updated to include `indoor`
+  - **Phase 5a: FAQ expansion**
+    - `faq.html` Sauna tab: expanded from 6 → 28 questions (full FAQ document)
+    - Topics: benefits, infrared vs traditional, pain relief, temperature, warm-up, running costs, shipping, installation, EMF, timber, Finnish traditions, safety certifications, WiFi
+  - **Phase 5b: Sauna Science on benefits page**
+    - `benefits.html`: sticky section nav (Cold Therapy / Sauna Science) with scroll-aware active state
+    - Added: How a Sauna Works, Traditional Evidence (Laukkanen JAMA studies), Infrared Evidence (Waon/Beever), NZ Research Highlight (Otago/AUT), Benefits at a Glance comparison, disclaimer
+    - SEO meta updated: "The Science of Cold & Heat Therapy"
+    - Ember accent tokens added to `:root`
+  - **Phase 5c: SAA + FAQ on existing sauna pages**
+    - `barrel-sauna.html` + `square-sauna.html`: SAA Certification section + top 4 FAQ accordion added before Related Products
+    - FAQ: benefits, traditional vs infrared, temperature, installation difficulty
+    - "View all Sauna FAQs →" link to /faq
+  - **Phase 6: Wiring**
+    - `vercel.json`: 8 new redirects (indoor-saunas, aurora-2p/3p/4p, solara-2p/3p, tampere, lahti)
+    - `sitemap.xml`: 8 new URLs (lastmod 2026-07-02, priority 0.9/0.8)
+    - Footer links updated across all 25 HTML pages: single "Sauna" → "Outdoor Saunas" + "Indoor Saunas"
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section

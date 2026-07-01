@@ -159,6 +159,18 @@
     .highlight-item::before { content: ''; width: 18px; height: 1px; background: var(--ember); flex-shrink: 0; }
     .product-hero-right { position: relative; z-index: 5; height: 100%; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 2rem 3rem; }
     .product-hero-img { width: 100%; max-width: 680px; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 0 80px rgba(232, 131, 42, 0.1)) drop-shadow(0 40px 100px rgba(2,11,21,0.7)); opacity: 0; transform: translateY(30px); animation: fadeUp 1s var(--ease-out) 0.4s forwards; }
+    /* ── Hero Carousel ──────────────────────────────── */
+    .hero-carousel { position: relative; width: 100%; max-width: 680px; aspect-ratio: 1 / 1; }
+    .hero-carousel .hc-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; display: flex; align-items: center; justify-content: center; }
+    .hero-carousel .hc-slide.active { opacity: 1; }
+    .hero-carousel .hc-slide img { width: 100%; height: 100%; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 0 80px rgba(232,131,42,0.1)) drop-shadow(0 40px 100px rgba(2,11,21,0.7)); }
+    .hero-carousel .hc-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(2,11,21,0.55); border: 1px solid rgba(255,255,255,0.08); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 3; backdrop-filter: blur(6px); transition: background 0.2s, transform 0.2s; }
+    .hero-carousel .hc-btn:hover { background: rgba(2,11,21,0.8); transform: translateY(-50%) scale(1.08); }
+    .hero-carousel .hc-prev { left: 0.5rem; }
+    .hero-carousel .hc-next { right: 0.5rem; }
+    .hero-carousel .hc-dots { position: absolute; bottom: 0.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 2; }
+    .hero-carousel .hc-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.25); border: none; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+    .hero-carousel .hc-dot.active { background: var(--ember); transform: scale(1.25); }
 
     /* ── Features Section ──────────────────────────────── */
     .features-section { padding: 7rem 2.5rem; background: var(--void); }
@@ -218,6 +230,43 @@
     .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .testimonial-name { font-size: 0.9rem; font-weight: 500; color: var(--snow); }
     .testimonial-role { font-size: 0.78rem; color: var(--mist); }
+
+    /* ── FAQ Accordion ────────────────────────────────── */
+    .faq-section { padding: 5rem 2.5rem; background: var(--void); }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); margin-top: 2.5rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 1.5rem 0; gap: 2rem;
+      background: none; border: none;
+      font-family: var(--body); font-size: 0.97rem; font-weight: 400;
+      color: var(--snow); text-align: left;
+      transition: color 0.2s; cursor: pointer;
+    }
+    .faq-q:hover { color: var(--ember); }
+    .faq-item.open .faq-q { color: var(--ember); }
+    .faq-chevron {
+      flex-shrink: 0; width: 1.5rem; height: 1.5rem;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mist); transition: transform 0.35s var(--ease-out), border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: var(--ember); color: var(--ember); background: rgba(232,131,42,0.08);
+    }
+    .faq-a-wrap {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s var(--ease-out);
+    }
+    .faq-item.open .faq-a-wrap { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; }
+    .faq-a {
+      padding: 0 2rem 1.75rem 0;
+      font-size: 0.92rem; line-height: 1.78; color: var(--mist);
+    }
+    .faq-a p + p { margin-top: 0.85rem; }
 
     /* ── Related Products ──────────────────────────────── */
     .related-section { padding: 7rem 2.5rem; background: var(--deep); border-top: 1px solid var(--border); }
@@ -386,9 +435,24 @@
     </div>
 
     <div class="product-hero-right">
-      <img class="product-hero-img"
-        src="../brand%20assets/Square%20Sauna/main%20hero%20no%20bg.webp"
-        alt="Square Sauna" style="object-fit:contain;">
+      <div class="hero-carousel" id="heroCarousel">
+        <div class="hc-slide active"><img src="../brand%20assets/Square%20Sauna/hero-photo-new.webp" alt="Square Sauna — new hero"></div>
+        <div class="hc-slide"><img src="../brand%20assets/Square%20Sauna/main%20hero%20no%20bg.webp" alt="Square Sauna" style="object-fit:contain;"></div>
+        <div class="hc-slide"><img src="../brand%20assets/Square%20Sauna/exterior-new.webp" alt="Square Sauna exterior"></div>
+        <div class="hc-slide"><img src="../brand%20assets/Square%20Sauna/exterior-angle-3-new.webp" alt="Square Sauna exterior angle"></div>
+        <div class="hc-slide"><img src="../brand%20assets/Square%20Sauna/interior-new-1.webp" alt="Square Sauna interior"></div>
+        <div class="hc-slide"><img src="../brand%20assets/Square%20Sauna/interior-new-2.webp" alt="Square Sauna interior"></div>
+        <button class="hc-btn hc-prev" onclick="heroNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="hc-btn hc-next" onclick="heroNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="hc-dots">
+          <button class="hc-dot active" onclick="heroGo(0)" aria-label="Slide 1"></button>
+          <button class="hc-dot" onclick="heroGo(1)" aria-label="Slide 2"></button>
+          <button class="hc-dot" onclick="heroGo(2)" aria-label="Slide 3"></button>
+          <button class="hc-dot" onclick="heroGo(3)" aria-label="Slide 4"></button>
+          <button class="hc-dot" onclick="heroGo(4)" aria-label="Slide 5"></button>
+          <button class="hc-dot" onclick="heroGo(5)" aria-label="Slide 6"></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -438,7 +502,11 @@
       <div class="specs-layout">
         <div class="specs-visual reveal">
           <div class="specs-carousel" id="specsCarousel">
-            <div class="carousel-slide active"><img src="../brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior"></div>
+            <div class="carousel-slide active"><img src="../brand%20assets/Square%20Sauna/exterior-new.webp" alt="Square Sauna exterior new"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/exterior-angle-3-new.webp" alt="Square Sauna exterior angle"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/interior-new-1.webp" alt="Square Sauna interior"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/interior-new-2.webp" alt="Square Sauna interior"></div>
+            <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior"></div>
             <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/great-pic.webp" alt="Square Sauna detail"></div>
             <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle"></div>
             <div class="carousel-slide"><img src="../brand%20assets/Square%20Sauna/lifestyle-3.webp" alt="Square Sauna lifestyle 2"></div>
@@ -449,6 +517,10 @@
               <button class="cdot" onclick="carGo(1)" aria-label="Slide 2"></button>
               <button class="cdot" onclick="carGo(2)" aria-label="Slide 3"></button>
               <button class="cdot" onclick="carGo(3)" aria-label="Slide 4"></button>
+              <button class="cdot" onclick="carGo(4)" aria-label="Slide 5"></button>
+              <button class="cdot" onclick="carGo(5)" aria-label="Slide 6"></button>
+              <button class="cdot" onclick="carGo(6)" aria-label="Slide 7"></button>
+              <button class="cdot" onclick="carGo(7)" aria-label="Slide 8"></button>
             </div>
           </div>
         </div>
@@ -585,6 +657,69 @@
     </div>
   </section>
 
+  <!-- SAA Certification -->
+  <section class="saa-section" style="padding: 4rem 2.5rem; background: var(--deep); border-top: 1px solid var(--border);">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap;">
+      <img src="../brand%20assets/SAA/saa-certification-badge.webp" alt="SAA Certified" style="width: 80px; height: 80px; object-fit: contain; flex-shrink: 0;">
+      <div>
+        <h3 style="font-family: var(--display); font-size: 1.5rem; font-weight: 300; color: var(--snow); margin-bottom: 0.5rem;">SAA <em style="color: var(--ember); font-style: italic;">Certified</em></h3>
+        <p style="font-size: 0.9rem; color: var(--mist); line-height: 1.7; max-width: 60ch;">Every sauna in our range — traditional and infrared — meets SAA electrical safety, emissions and build quality standards. Tested and certified for safe use in New Zealand and Australia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Questions -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <p style="font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ember); margin-bottom: 1.25rem;">Common Questions</p>
+      <h3 style="font-family: var(--display); font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; color: var(--snow); margin-bottom: 2rem;">Frequently <em style="color: var(--ember); font-style: italic;">Asked</em></h3>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What are the benefits of using a sauna?
+            <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+            <p>A regular sauna session loosens tight muscles, gets your circulation moving and helps you wind down at the end of the day. Plenty of people use it to recover after training, sleep better and clear their head, and some notice clearer skin and a lift in mood too.</p>
+          </div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What&rsquo;s the difference between a traditional and an infrared sauna?
+            <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+            <p>A traditional sauna heats the air with stones, creating dry heat and steam. An infrared sauna uses panels that warm your body directly while the air stays cooler. You sweat just as much at a lower temperature. It comes down to what you prefer &mdash; intense steam heat or gentle, deep warmth.</p>
+          </div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How hot does a sauna get?
+            <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+            <p>Traditional saunas usually sit between 70 and 90&deg;C, and some push past 100&deg;C. Pour water over the stones for classic steam. Infrared saunas run cooler at 50&ndash;70&deg;C but the heat travels deeper into the body.</p>
+          </div></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Is it hard to install a sauna at home?
+            <span class="faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+            <p>Our infrared saunas use a click-in-place system &mdash; no special tools, 30&ndash;60 minutes with two people. Traditional and outdoor saunas are larger and may need professional installation.</p>
+          </div></div></div>
+        </div>
+      </div>
+
+      <a href="../faq.html" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ember); margin-top: 2rem; transition: color 0.2s;">
+        View all Sauna FAQs
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
   <!-- Related Products -->
   <section class="related-section">
     <div class="related-inner">
@@ -643,7 +778,8 @@
           <ul>
             <li><a href="ice-bath-nz.html">Ice Bath</a></li>
             <li><a href="ice-bath-chiller.html">Chiller</a></li>
-            <li><a href="outdoor-sauna.html">Sauna</a></li>
+            <li><a href="outdoor-sauna.html">Outdoor Saunas</a></li>
+            <li><a href="indoor-sauna.html">Indoor Saunas</a></li>
             <li><a href="#">Accessories</a></li>
           </ul>
         </div>
@@ -711,7 +847,33 @@
       car.querySelectorAll('.carousel-slide')[n].classList.add('active');
       car.querySelectorAll('.cdot')[n].classList.add('active');
     }
-    function carNav(dir) { carGo((carIdx + dir + 4) % 4); }
+    function carNav(dir) {
+      const total = document.querySelectorAll('#specsCarousel .carousel-slide').length;
+      carGo((carIdx + dir + total) % total);
+    }
+
+    /* ── Hero Carousel ────────────────────────────────── */
+    let heroIdx = 0;
+    function heroGo(n) {
+      const wrap = document.getElementById('heroCarousel');
+      wrap.querySelectorAll('.hc-slide')[heroIdx].classList.remove('active');
+      wrap.querySelectorAll('.hc-dot')[heroIdx].classList.remove('active');
+      heroIdx = n;
+      wrap.querySelectorAll('.hc-slide')[n].classList.add('active');
+      wrap.querySelectorAll('.hc-dot')[n].classList.add('active');
+    }
+    function heroNav(dir) {
+      const total = document.querySelectorAll('#heroCarousel .hc-slide').length;
+      heroGo((heroIdx + dir + total) % total);
+    }
+
+    /* ── FAQ Accordion ────────────────────────────────── */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      btn.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
   </script>
 
   <script type="module">

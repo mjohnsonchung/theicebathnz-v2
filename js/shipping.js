@@ -71,8 +71,8 @@ export const ACCESSORY_SOLO_RATE = 20;
 // ---------------------------------------------------------------------------
 // `amount` is in NZD cents. `ship` is the freight category.
 export const PRODUCTS = {
-  ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath',  tags: ['cold', 'outdoor'] },
-  ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath',  tags: ['cold', 'outdoor'] },
+  ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
+  ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
   chiller_standard: { name: 'Ice Bath Chiller',                  amount:  239900, ship: 'chiller',   tags: ['cold', 'indoor', 'outdoor'] },
   chiller_premium:  { name: 'Premium Ice Bath Chiller',          amount:  329900, ship: 'chiller',   tags: ['cold', 'indoor', 'outdoor'] },
   sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',           amount:  750000, ship: 'sauna',     tags: ['heat', 'outdoor'] },
@@ -84,6 +84,17 @@ export const PRODUCTS = {
   allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath',  tags: ['cold', 'indoor'] },
   steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
   steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
+  // ── Indoor Saunas — Infrared ───────────────────────────────────────────
+  aurora_2p:        { name: 'Aurora 2P Infrared Sauna',          amount:  474900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  aurora_3p:        { name: 'Aurora 3P Infrared Sauna',          amount:  574900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  aurora_4p:        { name: 'Aurora 4P Infrared Sauna',          amount:  684900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  solara_2p:        { name: 'Solara 2P Infrared Sauna',          amount:  444900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  solara_3p:        { name: 'Solara 3P Infrared Sauna',          amount:  544900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  // ── Indoor Saunas — Traditional ────────────────────────────────────────
+  tampere_small:    { name: 'Tampere Sauna (1-2 Person)',        amount:  834900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  tampere_large:    { name: 'Tampere Sauna (3-4 Person)',        amount:  934900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  lahti_2p:         { name: 'Lahti Sauna (2 Person)',            amount:  804900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  lahti_3p:         { name: 'Lahti Sauna (3 Person)',            amount:  904900, ship: 'sauna',     tags: ['heat', 'indoor'] },
 };
 
 // ---------------------------------------------------------------------------
