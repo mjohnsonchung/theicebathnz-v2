@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-01 (session 38)
+Last updated: 2026-07-02 (session 39)
 
 ---
 
@@ -18,7 +18,7 @@ Last updated: 2026-07-01 (session 38)
 - **Stainless Steel Ice Bath** → `product-page/stainless-steel-ice-bath.html` — 304/316 grade selector
 - **All-in-One Ice Bath** → `product-page/all-in-one-ice-bath.html` — single SKU NZ$10,899
 - **Barrel Sauna** → `product-page/barrel-sauna.html` — 2P/4P/6P size selector; cedar, 6kW heater; from NZ$7,500
-- **Square Sauna** → `product-page/square-sauna.html` — single SKU NZ$9,999; Thermo Hemlock, 8kW, LED, stadium seating
+- **Square Sauna** → `product-page/square-sauna.html` — single SKU NZ$9,999; Thermo Hemlock, 6kW, LED, stadium seating
 - **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel + square
 - **Indoor Sauna (category)** → `product-page/indoor-sauna.html` — category page linking to 7 indoor saunas
 - **Aurora 2P Infrared** → `product-page/aurora-2p-infrared-sauna.html` — single SKU ~~$6,349~~ $4,749; Canadian Hemlock, 1750W
@@ -515,6 +515,16 @@ Last updated: 2026-07-01 (session 38)
     - `vercel.json`: 8 new redirects (indoor-saunas, aurora-2p/3p/4p, solara-2p/3p, tampere, lahti)
     - `sitemap.xml`: 8 new URLs (lastmod 2026-07-02, priority 0.9/0.8)
     - Footer links updated across all 25 HTML pages: single "Sauna" → "Outdoor Saunas" + "Indoor Saunas"
+
+- [x] **Product page consistency + catalog fixes (session 39)**
+  - **4 indoor sauna pages restructured** to match Aurora 4P template:
+    - `aurora-2p-infrared-sauna.html`, `aurora-3p-infrared-sauna.html`, `solara-2p-infrared-sauna.html`, `solara-3p-infrared-sauna.html`
+    - All now follow identical section order: Hero → Features (4-col grid) → Specs (carousel + grid) → Info Tabs (4 tabs) → Low EMF → SAA Cert → FAQ → CTA Banner → Order CTA → Related Products → Footer
+    - CSS token system, class names, and JS patterns (carousel, tabs, FAQ accordion) all match template exactly
+  - **All-in-One Ice Bath hidden from catalog** — product card commented out in `buy-now.html` (product page still exists)
+  - **Square Sauna heater wattage corrected** — 8kW → 6kW across 5 files: `square-sauna.html`, `buy-now.html`, `barrel-sauna.html`, `outdoor-sauna.html`, `index.html`
+  - **Solara 3P price corrected** — $4,449 → $5,449 in `buy-now.html` Indoor Saunas section (was accidentally changed in prior session)
+  - **All 15 product pages converted to background-image hero** — full-bleed background with `brightness(0.83) saturate(0.9)` default → `brightness(1.0) saturate(1.1)` on hover (done in prior session, verified this session)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
