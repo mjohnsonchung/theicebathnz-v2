@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-08 (session 41)
+Last updated: 2026-07-08 (session 42)
 
 ---
 
@@ -547,6 +547,15 @@ Last updated: 2026-07-08 (session 41)
   - **All-in-One product page** — hero bg → `image-2.webp`; specs carousel 5 slides; specs grid expanded 4→8 items; What's Included 4→8 items; OG/Twitter meta updated
   - **Catalog card images** — all 7 indoor sauna cards updated in `buy-now.html` and `product-page/indoor-sauna.html` with new no-background WebP images; Square Sauna + Ice Bath cards also updated
   - Note: two hero image approaches used (Aurora `<picture>` vs Solara/SS CSS `background-image`) — may harmonise in future session
+
+- [x] **Hero background alignment + Solara 3P image update (session 42)**
+  - Hero background position changed from `65% center` (right-biased) → `left center` on all 15 product pages — shows more of the left side of each image
+  - Tablet breakpoint also changed from `60% center` → `left center`
+  - Mobile breakpoint unchanged (`center 30%`)
+  - Updated both patterns: `object-position` on 12 IMG-element pages + `background-position` on 3 CSS background-image pages (Solara 2P/3P, Stainless Steel)
+  - Homepage hero left as-is (uses `object-fit: contain` product cutout, not full-bleed background)
+  - Solara 3P catalog/card image updated site-wide: `1.1-ratio-no-background.webp` → `1.1-aspect-ratio-primary-image-new.webp` (converted from new photo package)
+  - Updated in: `buy-now.html` (2 locations), `indoor-sauna.html`, `solara-2p-infrared-sauna.html` (related card), `solara-3p-infrared-sauna.html` (og:image + twitter:image)
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
