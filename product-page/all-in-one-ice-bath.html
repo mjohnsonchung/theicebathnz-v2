@@ -331,7 +331,7 @@
     .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.25rem; overflow: hidden; display: grid; grid-template-columns: 1fr 1.5fr; transition: border-color 0.3s, transform 0.3s var(--ease-spring); }
     .related-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
     .related-img { background: var(--elevated); aspect-ratio: 1; overflow: hidden; }
-    .related-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .related-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s; }
     .related-card:hover .related-img img { transform: scale(1.05); }
     .related-body { padding: 2rem 1.75rem; display: flex; flex-direction: column; justify-content: space-between; }
     .related-name { font-family: var(--display); font-size: 1.5rem; font-weight: 300; color: var(--snow); margin-bottom: 0.5rem; }

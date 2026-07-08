@@ -393,10 +393,11 @@
       flex: 0 0 100%; height: 100%; overflow: hidden;
     }
     .carousel-slide img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: contain;
       transition: transform 0.7s var(--ease-smooth);
     }
-    .product-card:hover .carousel-slide.active img { transform: scale(1.05); }
+    .carousel-slide img.img-cover { object-fit: cover; }
+    .product-card:hover .carousel-slide.active img { transform: none; }
     .carousel-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
       z-index: 5;
@@ -720,7 +721,7 @@
         <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -743,7 +744,7 @@
         <a href="product-page/aurora-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -766,7 +767,7 @@
         <a href="product-page/aurora-4p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 4p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -789,7 +790,7 @@
         <a href="product-page/solara-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -812,7 +813,7 @@
         <a href="product-page/solara-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -835,7 +836,7 @@
         <a href="product-page/tampere-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -858,7 +859,7 @@
         <a href="product-page/lahti-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -917,8 +918,8 @@
         <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/1.1-ratio-of-ice-bath.webp" alt="Ice Bath" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Ice%20Bath/for%20the%20specs%20section2.webp" alt="Ice Bath exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/1.1-ratio-of-ice-bath.webp" alt="Ice Bath" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Ice%20Bath/for%20the%20specs%20section2.webp" alt="Ice Bath exterior" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -946,8 +947,8 @@
         <a href="product-page/ice-bath-chiller.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Standard%20Chiller/img-6644.webp" alt="Chiller in use" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img class="img-cover" src="brand%20assets/Standard%20Chiller/img-6627.webp" alt="Ice Bath Chiller" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Standard%20Chiller/img-6644.webp" alt="Chiller in use" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1004,11 +1005,11 @@
         <a href="product-page/barrel-sauna.html" class="product-card" data-tags="heat outdoor traditional 2p 4p 6p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Barrel%20Sauna/hero-photo-new.webp" alt="Cedar Barrel Sauna — new" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/exterior-new.webp" alt="Barrel Sauna exterior" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img class="img-cover" src="brand%20assets/Barrel%20Sauna/hero-photo-new.webp" alt="Cedar Barrel Sauna — new" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Barrel%20Sauna/main-photo.webp" alt="Cedar Barrel Sauna" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Barrel%20Sauna/exterior-new.webp" alt="Barrel Sauna exterior" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Barrel%20Sauna/lifestyle-night.webp" alt="Barrel Sauna at night" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Barrel%20Sauna/lifestyle-pool.webp" alt="Barrel Sauna poolside" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1040,11 +1041,11 @@
         <a href="product-page/square-sauna.html" class="product-card" data-tags="heat outdoor traditional 5p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Square%20Sauna/1.1-ratio-no-background.webp" alt="Square Sauna" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/exterior-new.webp" alt="Square Sauna exterior" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/interior-new-1.webp" alt="Square Sauna interior" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Square%20Sauna/1.1-ratio-no-background.webp" alt="Square Sauna" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Square%20Sauna/exterior-new.webp" alt="Square Sauna exterior" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Square%20Sauna/interior-new-1.webp" alt="Square Sauna interior" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Square%20Sauna/lifestyle-1.webp" alt="Square Sauna lifestyle" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Square%20Sauna/lifestyle-2.webp" alt="Square Sauna exterior" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1077,11 +1078,11 @@
         <a href="product-page/stainless-steel-ice-bath.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/hero-photo-new.webp" alt="Stainless Steel Ice Bath — new" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-2.webp" alt="Stainless Steel Ice Bath exterior" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-3.webp" alt="Stainless Steel Ice Bath exterior" style="object-fit:cover;"></div>
-              <div class="carousel-slide"><img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-gym.webp" alt="Stainless Steel Ice Bath in use" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img class="img-cover" src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/hero-photo-new.webp" alt="Stainless Steel Ice Bath — new" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-2.webp" alt="Stainless Steel Ice Bath exterior" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/exterior-new-3.webp" alt="Stainless Steel Ice Bath exterior" ></div>
+              <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-gym.webp" alt="Stainless Steel Ice Bath in use" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-btn-next" onclick="carouselNext(this,event)" aria-label="Next image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M4 2l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1112,7 +1113,7 @@
         <a href="product-page/all-in-one-ice-bath.html" class="product-card" data-tags="cold indoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/All%20in%20One%20Ice%20Bath/1.1-ratio-no-background-main-image.webp" alt="All-in-One Ice Bath & Chiller" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/All%20in%20One%20Ice%20Bath/1.1-ratio-no-background-main-image.webp" alt="All-in-One Ice Bath & Chiller" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1133,7 +1134,7 @@
         <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1156,7 +1157,7 @@
         <a href="product-page/aurora-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1179,7 +1180,7 @@
         <a href="product-page/aurora-4p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 4p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1202,7 +1203,7 @@
         <a href="product-page/solara-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1225,7 +1226,7 @@
         <a href="product-page/solara-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1248,7 +1249,7 @@
         <a href="product-page/tampere-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1271,7 +1272,7 @@
         <a href="product-page/lahti-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1294,7 +1295,7 @@
         <a href="product-page/hose-attachment.html" class="product-card" data-tags="accessory cold outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Hose%20attachment/img-0597.webp" alt="Hose Attachment in use" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img class="img-cover" src="brand%20assets/Hose%20attachment/img-0597.webp" alt="Hose Attachment in use" ></div>
               <div class="carousel-slide"><img src="brand%20assets/Hose%20attachment/main-photo.webp" alt="Hose Attachment" style="object-fit:contain; background:#0a1e35;"></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1319,7 +1320,7 @@
         <a href="product-page/ice-bath-cover.html" class="product-card" data-tags="accessory cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Ice%20Bath%20Cover/ice-bath-cover-photo.webp" alt="Ice Bath Cover" style="object-fit:cover;"></div>
+              <div class="carousel-slide active"><img class="img-cover" src="brand%20assets/Ice%20Bath%20Cover/ice-bath-cover-photo.webp" alt="Ice Bath Cover" ></div>
             </div>
             <span class="product-chip">Accessory</span>
           </div>

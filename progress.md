@@ -556,6 +556,11 @@ Last updated: 2026-07-08 (session 42)
   - Homepage hero left as-is (uses `object-fit: contain` product cutout, not full-bleed background)
   - Solara 3P catalog/card image updated site-wide: `1.1-ratio-no-background.webp` → `1.1-aspect-ratio-primary-image-new.webp` (converted from new photo package)
   - Updated in: `buy-now.html` (2 locations), `indoor-sauna.html`, `solara-2p-infrared-sauna.html` (related card), `solara-3p-infrared-sauna.html` (og:image + twitter:image)
+  - **Product card images: `object-fit: contain`** — no-bg 1:1 product photos now display at natural aspect ratio without cropping
+  - `buy-now.html`: `.carousel-slide img` default changed to `contain`; new `.img-cover` utility class for lifestyle/environmental photos that need `cover`; inline `style="object-fit:cover;"` removed from all imgs; hover zoom (`scale(1.05)`) removed
+  - `index.html`: `.product-img-frame img` changed to `contain`; hover zoom removed; lifestyle photos (Square Sauna, SS Bath) get inline `style="object-fit:cover;"`
+  - `indoor-sauna.html`: hover zoom removed (already had `contain`)
+  - 13 product pages: `.related-img img` changed from `cover` to `contain`; hover zoom removed on related cards
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
