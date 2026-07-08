@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-02 (session 39)
+Last updated: 2026-07-08 (session 41)
 
 ---
 
@@ -525,6 +525,28 @@ Last updated: 2026-07-02 (session 39)
   - **Square Sauna heater wattage corrected** — 8kW → 6kW across 5 files: `square-sauna.html`, `buy-now.html`, `barrel-sauna.html`, `outdoor-sauna.html`, `index.html`
   - **Solara 3P price corrected** — $4,449 → $5,449 in `buy-now.html` Indoor Saunas section (was accidentally changed in prior session)
   - **All 15 product pages converted to background-image hero** — full-bleed background with `brightness(0.83) saturate(0.9)` default → `brightness(1.0) saturate(1.1)` on hover (done in prior session, verified this session)
+
+- [x] **Copy tweaks on infrared sauna pages (session 40)**
+  - Removed "EMF so low it's barely measurable." heading from Low EMF section on all 5 infrared pages (Aurora 2P/3P/4P, Solara 2P/3P) — rest of section (badge, 0–3 mG stat, description) remains
+  - SAA section copy: "before it leaves the factory" → "before it leaves" on all 5 infrared pages
+
+- [x] **New photo package + catalog updates (session 41)**
+  - **WebP conversion** — 79 new images converted from `Website/` folder at quality 82 via sharp; saved to `brand assets/Website/` with subfolders: Aurora 2P/3P/4P, Solara 2P/3P, Square Sauna, Tampere, Lahti, All in One Ice Bath, New Photos of Existing Ice Bath products; plus root `1.1-ratio-of-ice-bath.webp`
+  - **Catalog labels** — all "2P", "3P", "4P", "6P" labels changed to "2 Person", "3 Person", "4 Person", "6 Person" across `buy-now.html` (10 replacements in 2 sections)
+  - **All-in-One Ice Bath reactivated** in `buy-now.html` catalog (was commented out); new image + tagline
+  - **Ice Bath hero photo** — `1.1-ratio-of-ice-bath.webp` applied to `index.html` (hero bg + product card) and `product-page/ice-bath-nz.html` (hero bg)
+  - **Responsive hero images** — 3:2 ratio for desktop, 2:3 ratio for mobile across all updated product pages:
+    - Aurora 2P/3P/4P: `<picture>` element with `<source media>` swap
+    - Solara 2P/3P, Stainless Steel: CSS `background-image` with 768px breakpoint
+    - Tampere: `<picture>` element; Lahti + Square Sauna: 3:2 only (no 2:3 available)
+  - **Specs carousel updates** — new interior/lifestyle shots added:
+    - Aurora 2P: 5 slides; Aurora 3P: 5 slides; Aurora 4P: 5 slides
+    - Solara 2P: 4 slides; Solara 3P: 2 slides
+    - Tampere: 3 slides; Lahti: 8 slides; Square Sauna: 3 slides
+    - Stainless Steel: 6 slides (added 1); All-in-One: 5 slides
+  - **All-in-One product page** — hero bg → `image-2.webp`; specs carousel 5 slides; specs grid expanded 4→8 items; What's Included 4→8 items; OG/Twitter meta updated
+  - **Catalog card images** — all 7 indoor sauna cards updated in `buy-now.html` and `product-page/indoor-sauna.html` with new no-background WebP images; Square Sauna + Ice Bath cards also updated
+  - Note: two hero image approaches used (Aurora `<picture>` vs Solara/SS CSS `background-image`) — may harmonise in future session
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
