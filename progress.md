@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-08 (session 42)
+Last updated: 2026-07-10 (session 42)
 
 ---
 
@@ -70,6 +70,7 @@ Last updated: 2026-07-08 (session 42)
 ├── serve.mjs               — Local dev server (port 3000, clean URL fallback added)
 ├── screenshot.mjs          — Puppeteer screenshot tool (1440×900)
 ├── mobile-screenshot.mjs   — Puppeteer mobile screenshot (390×844, iPhone viewport)
+├── Image Reference Guide/  — Customer-facing folder with all 151 site images, labeled by location + README
 ├── brand assets/           — Logo, product images
 │   └── Ice Bath/           — Reorganised; bath tub & chiller images moved here
 └── product-page/
@@ -561,6 +562,11 @@ Last updated: 2026-07-08 (session 42)
   - `index.html`: `.product-img-frame img` changed to `contain`; hover zoom removed; lifestyle photos (Square Sauna, SS Bath) get inline `style="object-fit:cover;"`
   - `indoor-sauna.html`: hover zoom removed (already had `contain`)
   - 13 product pages: `.related-img img` changed from `cover` to `contain`; hover zoom removed on related cards
+- [x] **Image Reference Guide folder created** — customer-facing reference of all 151 images used across the site (session 42)
+  - Organized into labeled folders/subfolders by product and page location (Homepage, Buy Now Page, Ice Bath, Barrel Sauna, Aurora 2/3/4P, Solara 2/3P, Tampere, Lahti, Accessories, Shared Assets, etc.)
+  - Each image copied with descriptive filename (e.g. `hero-image.webp`, `carousel-control-panel.webp`, `catalog-card-no-bg.webp`)
+  - README.md included with: folder structure map, image replacement workflow (add "NEW" suffix), size/format guidelines
+  - Purpose: customer can add replacement photos with same filename + "NEW" and they can be easily swapped in
 
 ### Pending
 - [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
