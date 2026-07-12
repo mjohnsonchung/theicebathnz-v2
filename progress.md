@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-10 (session 42)
+Last updated: 2026-07-12 (session 43)
 
 ---
 
@@ -14,7 +14,8 @@ Last updated: 2026-07-10 (session 42)
 
 ### Products
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
-- **Ice Bath Chiller / Premium Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — model selector; toggling Premium switches full page content (name, tagline, price, highlights, features, specs). Prices: NZ$2,399 / NZ$3,299
+- **Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — standard chiller only, NZ$2,399 (variant toggle removed session 43)
+- **Premium Ice Bath Chiller** → `product-page/premium-chiller.html` — standalone premium page, NZ$3,299, WiFi + 7" LCD (split from chiller page session 43)
 - **Stainless Steel Ice Bath** → `product-page/stainless-steel-ice-bath.html` — 304/316 grade selector
 - **All-in-One Ice Bath** → `product-page/all-in-one-ice-bath.html` — single SKU NZ$10,899
 - **Barrel Sauna** → `product-page/barrel-sauna.html` — 2P/4P/6P size selector; cedar, 6kW heater; from NZ$7,500
@@ -75,7 +76,8 @@ Last updated: 2026-07-10 (session 42)
 │   └── Ice Bath/           — Reorganised; bath tub & chiller images moved here
 └── product-page/
     ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
-    ├── ice-bath-chiller.html — Chiller / Premium Chiller model selector
+    ├── ice-bath-chiller.html — Standard Chiller (NZ$2,399, no variant toggle)
+    ├── premium-chiller.html — Premium Chiller (NZ$3,299, WiFi + 7" LCD)
     ├── barrel-sauna.html   — Barrel Sauna (2P / 4P / 6P size selector)
     ├── square-sauna.html   — Square Sauna (single SKU)
     ├── outdoor-sauna.html  — Outdoor Saunas category page (links to barrel + square)
@@ -568,8 +570,17 @@ Last updated: 2026-07-10 (session 42)
   - README.md included with: folder structure map, image replacement workflow (add "NEW" suffix), size/format guidelines
   - Purpose: customer can add replacement photos with same filename + "NEW" and they can be easily swapped in
 
+- [x] **Buy-now cold therapy flow simplified (session 43)** — removed indoor/outdoor split screen for cold therapy; clicking "Cold Therapy" goes straight to product grid. Indoor/Outdoor filters only appear for Heat Therapy, styled with orange active-heat buttons.
+- [x] **Chiller page split into two standalone pages (session 43)** — `ice-bath-chiller.html` is now standard-only (NZ$2,399), new `premium-chiller.html` for premium (NZ$3,299). Variant toggles removed from both. Add-on selectors (ice bath, accessories) retained.
+- [x] **New catalog card images (session 43)** — 8 new product photos converted to WebP and applied to buy-now and indoor-sauna catalog cards (Aurora 2P/3P/4P, Solara 2P/3P, Tampere, Lahti, Galvanised Ice Bath)
+- [x] **Homepage CTAs updated (session 43)** — all `#products` links now point to `/buy-now` (hero CTA, nav Products, Shop Now button, bottom CTA)
+- [x] **Mobile carousel height increased (session 43)** — specs image carousel 40% taller on mobile (`aspect-ratio: 4/4.2`) across all 14 product pages
+- [x] **Footer cleanup (session 43)** — removed all dead `#` links (Accessories, Bundles, Blog, Ambassadors, Careers, Shipping & Returns, Warranty), removed TikTok icon, added real Instagram (`theicebath_nz`) and Facebook URLs across all 26 pages
+- [x] **Sitemap updated (session 43)** — all 24 URLs including new `premium-chiller`, all lastmod set to 2026-07-12
+- [x] **Vercel redirect added (session 43)** — `ice-bath-chiller-premium` → `premium-chiller`
+
 ### Pending
-- [ ] Footer "Accessories" link (currently `href="#"`) — wire to hose-attachment or ice-bath-cover page, or add dedicated accessories section
+- [ ] (none)
 
 ---
 
