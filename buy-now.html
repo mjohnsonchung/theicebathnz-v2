@@ -294,7 +294,6 @@
       display: flex; gap: 0.5rem;
       flex-wrap: wrap;
     }
-    .filter-tabs-sub { margin-top: 0.5rem; }
     .filter-tab {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -551,7 +550,6 @@
       .product-body { padding: 1.5rem; }
       .product-name { font-size: 1.5rem; }
       .filter-tabs { flex-wrap: wrap; }
-      .filter-tabs-sub { flex-wrap: wrap; }
 
       .coming-soon { padding: 6rem 1.5rem; }
       .coming-soon .back-btn { top: 5.5rem; left: 1.5rem; }
@@ -603,7 +601,7 @@
        HOME — Cold / Heat split
        ═══════════════════════════════════════════════════ -->
   <section class="split-screen" id="splitHome">
-    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-split')" aria-label="Explore cold therapy products">
+    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold')" aria-label="Explore cold therapy products">
       <div class="split-bg" style="background-image:url('brand%20assets/Homepage/engineered-for-serious-cold.webp')"></div>
       <div class="split-overlay split-overlay-cold"></div>
       <div class="split-content">
@@ -631,37 +629,6 @@
     </button>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       COLD — Indoor / Outdoor sub-split
-       ═══════════════════════════════════════════════════ -->
-  <section class="split-screen" id="splitCold" style="display:none">
-    <button class="split-back-btn" onclick="goBack()" aria-label="Go back">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back
-    </button>
-
-    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-indoor')" aria-label="Indoor cold therapy products">
-      <div class="split-bg" style="background-image:url('brand%20assets/All%20in%20one%20Ice%20Bath%20(New)/lifestyle-1.webp')"></div>
-      <div class="split-overlay split-overlay-cold"></div>
-      <div class="split-content">
-        <p class="split-label">Premium</p>
-        <h2 class="split-heading">Indoor <em>Baths</em></h2>
-        <p class="split-sub">Ice baths &amp; chillers for indoor spaces</p>
-        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </div>
-    </a>
-
-    <a class="split-half split-cold" href="#" onclick="event.preventDefault(); navigate('cold-outdoor')" aria-label="Outdoor cold therapy products">
-      <div class="split-bg" style="background-image:url('brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/lifestyle-4.webp')"></div>
-      <div class="split-overlay split-overlay-cold"></div>
-      <div class="split-content">
-        <p class="split-label">NZ weather tested</p>
-        <h2 class="split-heading">Outdoor <em>Baths</em></h2>
-        <p class="split-sub">Ice baths &amp; chillers for the backyard</p>
-        <span class="split-cta">Explore <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </div>
-    </a>
-  </section>
 
   <!-- ═══════════════════════════════════════════════════
        HEAT — Indoor / Outdoor sub-split
@@ -721,7 +688,7 @@
         <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%202%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -744,7 +711,7 @@
         <a href="product-page/aurora-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%203%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -767,7 +734,7 @@
         <a href="product-page/aurora-4p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 4p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%204%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 4P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -790,7 +757,7 @@
         <a href="product-page/solara-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/SOLARA%202%20PERSON%20NO%20BG%20CATALOG.webp" alt="Solara 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -813,7 +780,7 @@
         <a href="product-page/solara-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/SOLARA%203%20PERSON%20NO%20BG%20CATALOG.webp" alt="Solara 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -836,7 +803,7 @@
         <a href="product-page/tampere-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/TAMPERE%20NO%20BG%20CATALOG.webp" alt="Tampere Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -859,7 +826,7 @@
         <a href="product-page/lahti-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/LAHTI%20NO%20BG%20CATALOG.webp" alt="Lahti Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -899,15 +866,15 @@
             <button class="filter-tab" data-filter="cold" onclick="setCategoryFilter('cold',this)">Cold Therapy</button>
             <button class="filter-tab" data-filter="heat" onclick="setCategoryFilter('heat',this)">Heat Therapy</button>
           </div>
-          <div class="filter-tabs filter-tabs-sub" id="filterTabsSub">
-            <button class="filter-tab active" data-filter="all" onclick="setLocationFilter('all',this)">All</button>
-            <button class="filter-tab" data-filter="indoor" onclick="setLocationFilter('indoor',this)">Indoor</button>
-            <button class="filter-tab" data-filter="outdoor" onclick="setLocationFilter('outdoor',this)">Outdoor</button>
-          </div>
           <div class="filter-tabs filter-tabs-heat" id="filterTabsHeat">
             <button class="filter-tab active-heat" data-filter="all" onclick="setHeatTypeFilter('all',this)">All Types</button>
             <button class="filter-tab" data-filter="infrared" onclick="setHeatTypeFilter('infrared',this)">Infrared</button>
             <button class="filter-tab" data-filter="traditional" onclick="setHeatTypeFilter('traditional',this)">Traditional</button>
+          </div>
+          <div class="filter-tabs filter-tabs-heat" id="filterTabsLocation">
+            <button class="filter-tab active-heat" data-filter="all" onclick="setLocationFilter('all',this)">All</button>
+            <button class="filter-tab" data-filter="indoor" onclick="setLocationFilter('indoor',this)">Indoor</button>
+            <button class="filter-tab" data-filter="outdoor" onclick="setLocationFilter('outdoor',this)">Outdoor</button>
           </div>
         </div>
       </div>
@@ -918,7 +885,7 @@
         <a href="product-page/ice-bath-nz.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/1.1-ratio-of-ice-bath.webp" alt="Ice Bath" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/GALV%20ICE%20BATH%20NO%20BG%20CATALOG.webp" alt="Ice Bath" ></div>
               <div class="carousel-slide"><img class="img-cover" src="brand%20assets/Ice%20Bath/for%20the%20specs%20section2.webp" alt="Ice Bath exterior" ></div>
             </div>
             <button class="carousel-btn carousel-btn-prev" onclick="carouselPrev(this,event)" aria-label="Previous image"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M6 2L3 5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -973,7 +940,7 @@
         </a>
 
         <!-- Premium Chiller -->
-        <a href="product-page/ice-bath-chiller.html?variant=premium" class="product-card" data-tags="cold indoor outdoor">
+        <a href="product-page/premium-chiller.html" class="product-card" data-tags="cold indoor outdoor">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
               <div class="carousel-slide active"><img src="brand%20assets/Premium%20Chiller/main-photo.webp" alt="Premium Ice Bath Chiller" style="object-fit:contain; background:#0a1e35;"></div>
@@ -1134,7 +1101,7 @@
         <a href="product-page/aurora-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%282%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Aurora 2P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%202%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1157,7 +1124,7 @@
         <a href="product-page/aurora-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%283%20person%20Low%20EMF%20Infarred%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 3P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%203%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1180,7 +1147,7 @@
         <a href="product-page/aurora-4p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 4p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Aurora%20%284%20person%20Low%20EMF%20Infrared%20Sauna%29/1.1-ratio-no-background-primary-with-logo-catalog-image.webp" alt="Aurora 4P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/AURORA%204%20PERSON%20NO%20BG%20CATALOG.webp" alt="Aurora 4P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1203,7 +1170,7 @@
         <a href="product-page/solara-2p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 2p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%282%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-no-background-primary-catalog-image.webp" alt="Solara 2P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/SOLARA%202%20PERSON%20NO%20BG%20CATALOG.webp" alt="Solara 2P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1226,7 +1193,7 @@
         <a href="product-page/solara-3p-infrared-sauna.html" class="product-card" data-tags="heat indoor infrared 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Solara%20%283%20person%20Infrared%20Sauna%29/1.1-aspect-ratio-primary-image-new.webp" alt="Solara 3P Infrared Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/SOLARA%203%20PERSON%20NO%20BG%20CATALOG.webp" alt="Solara 3P Infrared Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1249,7 +1216,7 @@
         <a href="product-page/tampere-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Tampere%20Sauna%20%28Traditional%201-2%20person%29/1.1-ratio-no-background-primary-catalog-image.webp" alt="Tampere Traditional Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/TAMPERE%20NO%20BG%20CATALOG.webp" alt="Tampere Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1272,7 +1239,7 @@
         <a href="product-page/lahti-sauna.html" class="product-card" data-tags="heat indoor traditional 2p 3p">
           <div class="product-img-frame">
             <div class="carousel-track" data-index="0">
-              <div class="carousel-slide active"><img src="brand%20assets/Website/Lahti%20Sauna%20%28Traditional%202%20%26%203%20person%20options%20Corner%20Glass%20Panel%29/11-ratio-no-background-primary-image.webp" alt="Lahti Traditional Sauna" ></div>
+              <div class="carousel-slide active"><img src="brand%20assets/NEW%20IMAGES/LAHTI%20NO%20BG%20CATALOG.webp" alt="Lahti Traditional Sauna" ></div>
             </div>
             <span class="product-chip">New</span>
           </div>
@@ -1346,13 +1313,10 @@
           <a href="index.html" class="nav-logo">The Ice Bath<sup>NZ</sup></a>
           <p>Premium cold therapy equipment for New Zealand's athletes, coaches, and high-performance humans. Based in Auckland.</p>
           <div class="footer-social">
-            <a href="#" class="social-btn" aria-label="Instagram">
+            <a href="https://www.instagram.com/theicebath_nz/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
-            <a href="#" class="social-btn" aria-label="TikTok">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
-            </a>
-            <a href="#" class="social-btn" aria-label="Facebook">
+            <a href="https://www.facebook.com/p/The-Ice-Bath-NZ-61551386936799/" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             </a>
           </div>
@@ -1364,8 +1328,6 @@
             <li><a href="product-page/ice-bath-chiller.html">Chiller</a></li>
             <li><a href="product-page/outdoor-sauna.html">Outdoor Saunas</a></li>
             <li><a href="product-page/indoor-sauna.html">Indoor Saunas</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">Bundles</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1373,18 +1335,13 @@
           <ul>
             <li><a href="about-us.html">About Us</a></li>
             <li><a href="benefits.html">The Science</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Ambassadors</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <ul>
-            <li><a href="contact.html">Contact Us</a></li>
             <li><a href="faq.html">FAQ</a></li>
-            <li><a href="#">Shipping & Returns</a></li>
-            <li><a href="#">Warranty</a></li>
             <li><a href="mailto:info@theicebathnz.co.nz">info@theicebathnz.co.nz</a></li>
           </ul>
         </div>
@@ -1458,7 +1415,7 @@
 
     /* ── State Machine ───────────────────────────────── */
     const TRANSITION_MS = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
-    const GRID_STATES = ['cold', 'cold-indoor', 'cold-outdoor', 'outdoor', 'all'];
+    const GRID_STATES = ['cold', 'outdoor', 'all'];
 
     let currentState = 'home';
     let stateHistory = [];
@@ -1469,7 +1426,6 @@
     function getSection(state) {
       switch (state) {
         case 'home':       return document.getElementById('splitHome');
-        case 'cold-split': return document.getElementById('splitCold');
         case 'heat':       return document.getElementById('splitHeat');
         case 'indoor':     return document.getElementById('sectionIndoor');
         default:           return document.getElementById('productsSection');
@@ -1545,10 +1501,6 @@
       // Set filter state based on navigation source
       if (state === 'cold') {
         activeCategory = 'cold'; activeLocation = 'all';
-      } else if (state === 'cold-indoor') {
-        activeCategory = 'cold'; activeLocation = 'indoor';
-      } else if (state === 'cold-outdoor') {
-        activeCategory = 'cold'; activeLocation = 'outdoor';
       } else if (state === 'outdoor') {
         activeCategory = 'heat'; activeLocation = 'outdoor';
       } else {
@@ -1577,16 +1529,22 @@
       document.querySelectorAll('#filterTabs .filter-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.filter === activeCategory);
       });
-      document.querySelectorAll('#filterTabsSub .filter-tab').forEach(t => {
-        t.classList.toggle('active', t.dataset.filter === activeLocation);
-      });
-      // Show/hide heat type filter row
+      // Show/hide heat type + location filter rows (heat only)
       const heatRow = document.getElementById('filterTabsHeat');
+      const locRow = document.getElementById('filterTabsLocation');
+      const isHeat = activeCategory === 'heat';
       if (heatRow) {
-        heatRow.classList.toggle('visible', activeCategory === 'heat');
+        heatRow.classList.toggle('visible', isHeat);
         document.querySelectorAll('#filterTabsHeat .filter-tab').forEach(t => {
           t.classList.remove('active', 'active-heat');
           if (t.dataset.filter === activeHeatType) t.classList.add('active-heat');
+        });
+      }
+      if (locRow) {
+        locRow.classList.toggle('visible', isHeat);
+        document.querySelectorAll('#filterTabsLocation .filter-tab').forEach(t => {
+          t.classList.remove('active', 'active-heat');
+          if (t.dataset.filter === activeLocation) t.classList.add('active-heat');
         });
       }
     }
@@ -1611,7 +1569,7 @@
       applyFilters();
     }
 
-    function setLocationFilter(loc) {
+    function setLocationFilter(loc, btn) {
       activeLocation = loc;
       updateFilterUI();
       applyFilters();
