@@ -579,6 +579,9 @@ Last updated: 2026-07-12 (session 43)
 - [x] **Sitemap updated (session 43)** — all 24 URLs including new `premium-chiller`, all lastmod set to 2026-07-12
 - [x] **Vercel redirect added (session 43)** — `ice-bath-chiller-premium` → `premium-chiller`
 
+- [x] **Product photos folder created (session 44)** — `product-photos/` with 16 subfolders (one per product), 93 clearly named images. Naming convention: `CATALOG` (buy-now card), `HERO` (product page hero), `HERO MOBILE` (mobile-specific hero), `CAROUSEL PIC1/2/3…` (specs carousel). Purpose: client uploads replacement photo with same name to swap images easily.
+- [x] **Tampere Sauna photos updated (session 44)** — 6 new images (hero, hero mobile, 3 carousel replacements, 1 new carousel pic 4) converted from PNG to WebP (quality 82); brand assets overwritten; carousel expanded from 3 → 4 slides on `tampere-sauna.html`
+
 ### Pending
 - [ ] (none)
 
