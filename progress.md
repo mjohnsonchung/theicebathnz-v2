@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-17 (session 44)
+Last updated: 2026-07-18 (session 45)
 
 ---
 
@@ -606,6 +606,7 @@ Aurora 2P, Aurora 3P, Aurora 4P, Solara 2P, Solara 3P, Tampere Sauna — these h
 
 - [x] **Product photos folder created (session 44)** — `product-photos/` with 16 subfolders (one per product), 93 clearly named images. Naming convention: `CATALOG` (buy-now card), `HERO` (product page hero), `HERO MOBILE` (mobile-specific hero), `CAROUSEL PIC1/2/3…` (specs carousel). Purpose: client uploads replacement photo with same name to swap images easily.
 - [x] **Tampere Sauna photos updated (session 44)** — 6 new images (hero, hero mobile, 3 carousel replacements, 1 new carousel pic 4) converted from PNG to WebP (quality 82); brand assets overwritten; carousel expanded from 3 → 4 slides on `tampere-sauna.html`
+- [x] **Specs section image enlarged (session 45)** — specs carousel/image box made larger across all 15 product pages: column ratio widened (1fr → 1.4fr), extended 8vw closer to left page edge via negative margin, aspect ratio changed from 4/3 to 3/2.8 for more vertical space. Responsive breakpoint resets margin at ≤1100px.
 
 ### Pending
 - [ ] (none)
