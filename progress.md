@@ -1,6 +1,31 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-12 (session 43)
+Last updated: 2026-07-17 (session 44)
+
+---
+
+## Product Photos Workflow (`product-photos/`)
+
+The `product-photos/` folder is the **single source of truth** for which images are currently live on the site. It has 16 subfolders (one per product) with clearly named files.
+
+### Naming Convention
+- `PRODUCT NAME CATALOG.webp` — buy-now / category page card image
+- `PRODUCT NAME HERO.webp` — product page hero background (desktop)
+- `PRODUCT NAME HERO MOBILE.webp` — product page hero background (mobile, if separate)
+- `PRODUCT NAME CAROUSEL PIC1.webp`, `PIC2`, `PIC3`… — specs carousel images in order
+
+### How to Update Photos
+1. **Client uploads** new photo(s) to the relevant subfolder with `NEW` suffix (e.g. `TAMPERE SAUNA HERO NEW.png`)
+2. **Claude session** picks up the new files and:
+   - Converts to WebP (quality 82 via sharp)
+   - Overwrites the corresponding file in `brand assets/` (the actual path the HTML references)
+   - Updates the product page HTML if needed (e.g. adding a new carousel slide)
+   - Replaces the old photo in `product-photos/` with the new WebP (same clean name, no "NEW" suffix)
+   - Deletes the source PNG from `product-photos/`
+3. **Rule: `product-photos/` only contains current, live images.** Old/replaced photos are deleted, not kept. No "NEW", "old", "v2" suffixes should remain after processing.
+
+### Products with Mobile Hero Images
+Aurora 2P, Aurora 3P, Aurora 4P, Solara 2P, Solara 3P, Tampere Sauna — these have separate `HERO MOBILE` files. Other products use CSS `object-position` adjustments on mobile (no separate image).
 
 ---
 
