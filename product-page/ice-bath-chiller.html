@@ -512,7 +512,10 @@
   <!-- Product Hero -->
   <section class="product-hero">
     <div class="product-hero-bg">
-      <img src="../brand%20assets/Standard%20Chiller/main-photo.webp" alt="Ice Bath Chiller">
+      <picture>
+        <source media="(max-width: 768px)" srcset="../product-photos/Standard%20Chiller/STANDARD%20CHILLER%20HERO%20MOBILE.webp">
+        <img src="../product-photos/Standard%20Chiller/STANDARD%20CHILLER%20HERO.webp" alt="ice bath chiller">
+      </picture>
     </div>
     <div class="product-hero-overlay"></div>
     <div class="product-hero-atmosphere"></div>
@@ -637,10 +640,16 @@
         <div class="specs-visual reveal">
           <!-- Standard Chiller carousel -->
           <div class="specs-carousel" id="standardSpecsCarousel">
-            <div class="carousel-slide active"><img src="../brand%20assets/Standard%20Chiller/img-6627.webp" alt="Standard Chiller detail"></div>
-            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6644.webp" alt="Standard Chiller detail 2"></div>
-            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6645.webp" alt="Standard Chiller detail 3"></div>
-            <div class="carousel-slide"><img src="../brand%20assets/Standard%20Chiller/img-6652-rotated.webp" alt="Standard Chiller detail 4"></div>
+            <div class="carousel-slide active">
+              <img src="../product-photos/Standard%20Chiller/STANDARD%20CHILLER%20CAROUSEL%20PIC1.webp" alt="Standard Chiller detail">
+            </div>
+            <div class="carousel-slide">
+              <img src="../product-photos/Standard%20Chiller/STANDARD%20CHILLER%20CAROUSEL%20PIC2.webp" alt="Standard Chiller detail 2">
+            </div>
+            <div class="carousel-slide">
+              <img src="../product-photos/Standard%20Chiller/STANDARD%20CHILLER%20CAROUSEL%20PIC3.webp" alt="Standard Chiller detail 3">
+            </div>
+
             <button class="carousel-btn carousel-prev" onclick="stdCarNav(-1)" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="carousel-btn carousel-next" onclick="stdCarNav(1)" aria-label="Next"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <div class="carousel-dots">

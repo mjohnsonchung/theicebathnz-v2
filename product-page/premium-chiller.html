@@ -208,6 +208,14 @@
     .specs-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; margin-left: -8vw; }
     .specs-visual { position: relative; aspect-ratio: 3/2.8; background: var(--surface); border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--border); }
     .specs-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .specs-carousel { position: relative; width: 100%; height: 100%; }
+    .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .carousel-btn:hover { background: rgba(0,0,0,0.75); transform: translateY(-50%) scale(1.08); }
+    .carousel-prev { left: 0.75rem; }
+    .carousel-next { right: 0.75rem; }
     .specs-content { padding-top: 0.5rem; }
     .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 1rem; overflow: hidden; margin-top: 2.5rem; }
     .spec-item { background: var(--surface); padding: 1.75rem 1.5rem; transition: background 0.2s; }
@@ -442,7 +450,10 @@
   <!-- Product Hero -->
   <section class="product-hero">
     <div class="product-hero-bg">
-      <img src="../brand%20assets/Premium%20Chiller/main-photo.webp" alt="Premium Ice Bath Chiller">
+      <picture>
+        <source media="(max-width: 768px)" srcset="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20HERO%20MOBILE.webp">
+        <img src="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20HERO.webp" alt="premium chiller">
+      </picture>
     </div>
     <div class="product-hero-overlay"></div>
     <div class="product-hero-atmosphere"></div>
@@ -566,7 +577,26 @@
     <div class="specs-inner">
       <div class="specs-layout">
         <div class="specs-visual reveal">
-          <img src="../brand%20assets/Premium%20Chiller/chiller-side.webp" alt="Premium Chiller side view">
+          <div class="specs-carousel" id="specsCarousel">
+            <div class="carousel-slide active">
+              <img src="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20CAROUSEL%20PIC1.webp" alt="Premium Chiller detail">
+            </div>
+            <div class="carousel-slide">
+              <img src="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20CAROUSEL%20PIC2.webp" alt="Premium Chiller detail 2">
+            </div>
+            <div class="carousel-slide">
+              <img src="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20CAROUSEL%20PIC3.webp" alt="Premium Chiller detail 3">
+            </div>
+            <div class="carousel-slide">
+              <img src="../product-photos/Premium%20Chiller/PREMIUM%20CHILLER%20CAROUSEL%20PIC4.webp" alt="Premium Chiller detail 4">
+            </div>
+            <button class="carousel-btn carousel-prev" onclick="specsCarouselNav(-1)" aria-label="Previous image">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="carousel-btn carousel-next" onclick="specsCarouselNav(1)" aria-label="Next image">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
         </div>
         <div class="specs-content">
           <p class="section-label reveal">Technical Specifications</p>
@@ -775,6 +805,15 @@
   </footer>
 
   <script>
+    // Specs carousel
+    let specsIdx = 0;
+    function specsCarouselNav(dir) {
+      const slides = document.querySelectorAll('#specsCarousel .carousel-slide');
+      slides[specsIdx].classList.remove('active');
+      specsIdx = (specsIdx + dir + slides.length) % slides.length;
+      slides[specsIdx].classList.add('active');
+    }
+
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
     const hamburger = document.getElementById('hamburger');

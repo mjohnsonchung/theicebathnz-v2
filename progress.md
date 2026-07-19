@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-18 (session 45)
+Last updated: 2026-07-19 (session 46)
 
 ---
 
@@ -18,14 +18,16 @@ The `product-photos/` folder is the **single source of truth** for which images 
 1. **Client uploads** new photo(s) to the relevant subfolder with `NEW` suffix (e.g. `TAMPERE SAUNA HERO NEW.png`)
 2. **Claude session** picks up the new files and:
    - Converts to WebP (quality 82 via sharp)
-   - Overwrites the corresponding file in `brand assets/` (the actual path the HTML references)
-   - Updates the product page HTML if needed (e.g. adding a new carousel slide)
+   - Updates the product page HTML `src` paths if needed (e.g. adding/removing carousel slides)
    - Replaces the old photo in `product-photos/` with the new WebP (same clean name, no "NEW" suffix)
    - Deletes the source PNG from `product-photos/`
 3. **Rule: `product-photos/` only contains current, live images.** Old/replaced photos are deleted, not kept. No "NEW", "old", "v2" suffixes should remain after processing.
 
 ### Products with Mobile Hero Images
-Aurora 2P, Aurora 3P, Aurora 4P, Solara 2P, Solara 3P, Tampere Sauna — these have separate `HERO MOBILE` files. Other products use CSS `object-position` adjustments on mobile (no separate image).
+All products now have separate `HERO MOBILE` files in `product-photos/`. HTML product pages use `<picture>` elements with `<source media="(max-width: 768px)">` for mobile heroes, or CSS `background-image` media queries for Solara 2P/3P and Stainless Steel.
+
+### Image Path Convention (as of session 46)
+All product page HTML files now reference images via `../product-photos/[Folder]/[FILENAME].webp` — the old scattered `brand assets/` paths have been fully migrated.
 
 ---
 
@@ -607,6 +609,13 @@ Aurora 2P, Aurora 3P, Aurora 4P, Solara 2P, Solara 3P, Tampere Sauna — these h
 - [x] **Product photos folder created (session 44)** — `product-photos/` with 16 subfolders (one per product), 93 clearly named images. Naming convention: `CATALOG` (buy-now card), `HERO` (product page hero), `HERO MOBILE` (mobile-specific hero), `CAROUSEL PIC1/2/3…` (specs carousel). Purpose: client uploads replacement photo with same name to swap images easily.
 - [x] **Tampere Sauna photos updated (session 44)** — 6 new images (hero, hero mobile, 3 carousel replacements, 1 new carousel pic 4) converted from PNG to WebP (quality 82); brand assets overwritten; carousel expanded from 3 → 4 slides on `tampere-sauna.html`
 - [x] **Specs section image enlarged (session 45)** — specs carousel/image box made larger across all 15 product pages: column ratio widened (1fr → 1.4fr), extended 8vw closer to left page edge via negative margin, aspect ratio changed from 4/3 to 3/2.8 for more vertical space. Responsive breakpoint resets margin at ≤1100px.
+
+- [x] **Bulk product photo refresh (session 46)** — 73 NEW/V2 images across all 16 products converted to WebP (quality 82) and swapped in:
+  - All hero (desktop + mobile) and carousel images replaced with new client-provided photos
+  - Carousel slides removed per client request: Aurora 2P PIC5, Aurora 3P PIC5, Lahti PIC6-8, Barrel Sauna PIC5-9, Square Sauna PIC4-7, Stainless Steel PIC5-6
+  - Premium Chiller: new 4-slide specs carousel added (was single image)
+  - All 14 product page HTML files migrated from scattered `brand assets/` paths → unified `../product-photos/` paths
+  - `product-photos/` folder synced as single source of truth (no NEW/V2 suffixes remain)
 
 ### Pending
 - [ ] (none)
