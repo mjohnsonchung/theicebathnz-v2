@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-19 (session 46)
+Last updated: 2026-07-19 (session 47)
 
 ---
 
@@ -616,6 +616,8 @@ All product page HTML files now reference images via `../product-photos/[Folder]
   - Premium Chiller: new 4-slide specs carousel added (was single image)
   - All 14 product page HTML files migrated from scattered `brand assets/` paths → unified `../product-photos/` paths
   - `product-photos/` folder synced as single source of truth (no NEW/V2 suffixes remain)
+  - **Bug fix**: carousel dot indicators synced with slide counts on 11 pages — dots were left unchanged when slides were added/removed, causing blank slots and frozen carousels when navigating past the last valid slide
+- [x] **Product card links open in new tab (session 47)** — all product card `<a>` tags on `buy-now.html` now use `target="_blank" rel="noopener"` so users can browse products without losing the catalog page
 
 ### Pending
 - [ ] (none)
