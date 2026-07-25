@@ -1,12 +1,12 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-19 (session 47)
+Last updated: 2026-07-26 (session 48)
 
 ---
 
 ## Product Photos Workflow (`product-photos/`)
 
-The `product-photos/` folder is the **single source of truth** for which images are currently live on the site. It has 16 subfolders (one per product) with clearly named files.
+The `product-photos/` folder is the **single source of truth** for which images are currently live on the site. It has 18 subfolders (one per product) with clearly named files.
 
 ### Naming Convention
 - `PRODUCT NAME CATALOG.webp` — buy-now / category page card image
@@ -47,7 +47,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - **All-in-One Ice Bath** → `product-page/all-in-one-ice-bath.html` — single SKU NZ$10,899
 - **Barrel Sauna** → `product-page/barrel-sauna.html` — 2P/4P/6P size selector; cedar, 6kW heater; from NZ$7,500
 - **Square Sauna** → `product-page/square-sauna.html` — single SKU NZ$9,999; Thermo Hemlock, 6kW, LED, stadium seating
-- **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel + square
+- **Outdoor Sauna (category)** → `product-page/outdoor-sauna.html` — lightweight category page linking to barrel, square, vesta 2P + 4P
 - **Indoor Sauna (category)** → `product-page/indoor-sauna.html` — category page linking to 7 indoor saunas
 - **Aurora 2P Infrared** → `product-page/aurora-2p-infrared-sauna.html` — single SKU ~~$6,349~~ $4,749; Canadian Hemlock, 1750W
 - **Aurora 3P Infrared** → `product-page/aurora-3p-infrared-sauna.html` — single SKU ~~$7,449~~ $5,749; Wi-Fi control, 2100W
@@ -58,6 +58,9 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - **Lahti Traditional** → `product-page/lahti-sauna.html` — size selector: 2P ($8,049) / 3P ($9,049); Japanese Cedar, corner glass
 - **Hose Attachment** → `product-page/hose-attachment.html` — accessory NZ$79
 - **Ice Bath Cover** → `product-page/ice-bath-cover.html` — accessory NZ$199
+- **Vesta 2P Outdoor Infrared** → `product-page/vesta-2p-outdoor-sauna.html` — single SKU ~~$11,349~~ $8,439; aluminium exterior, full-spectrum heaters, optional Low EMF upgrade (+$649)
+- **Vesta 4P Outdoor Infrared** → `product-page/vesta-4p-outdoor-sauna.html` — single SKU ~~$12,849~~ $9,539; aluminium exterior, full-spectrum heaters, optional Low EMF upgrade (+$649)
+- **Warranty** → `warranty.html` — warranty terms for saunas (2-year structural, 1-year electrical) and ice baths (1-year), styled as legal page
 
 ### Design System
 - Typography: **Cormorant Garamond** (display/serif) + **Jost** (body/sans)
@@ -92,6 +95,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 ├── about-us.html
 ├── contact.html
 ├── faq.html
+├── warranty.html            — Warranty page (sauna 2yr structural/1yr electrical, ice bath 1yr)
 ├── vercel.json             — Redirects + clean URLs
 ├── sitemap.xml             — XML sitemap (all 9 pages, domain: theicebathnz.co.nz)
 ├── .gitignore
@@ -119,7 +123,9 @@ All product page HTML files now reference images via `../product-photos/[Folder]
     ├── stainless-steel-ice-bath.html — Stainless Steel Ice Bath (304 / 316 selector)
     ├── all-in-one-ice-bath.html — All-in-One Ice Bath & Chiller
     ├── hose-attachment.html — Hose Attachment accessory
-    └── ice-bath-cover.html — Ice Bath Cover accessory
+    ├── ice-bath-cover.html — Ice Bath Cover accessory
+    ├── vesta-2p-outdoor-sauna.html — Vesta 2P Outdoor Infrared Sauna ($8,439)
+    └── vesta-4p-outdoor-sauna.html — Vesta 4P Outdoor Infrared Sauna ($9,539)
 ```
 
 ---
@@ -618,6 +624,24 @@ All product page HTML files now reference images via `../product-photos/[Folder]
   - `product-photos/` folder synced as single source of truth (no NEW/V2 suffixes remain)
   - **Bug fix**: carousel dot indicators synced with slide counts on 11 pages — dots were left unchanged when slides were added/removed, causing blank slots and frozen carousels when navigating past the last valid slide
 - [x] **Product card links open in new tab (session 47)** — all product card `<a>` tags on `buy-now.html` now use `target="_blank" rel="noopener"` so users can browse products without losing the catalog page
+
+- [x] **Vesta 2P + 4P outdoor infrared sauna pages (session 48)**
+  - `product-page/vesta-2p-outdoor-sauna.html` — ~~$11,349~~ $8,439, aluminium + Canadian Hemlock, 2,400W/15A, 9 heaters, 9-slide carousel
+  - `product-page/vesta-4p-outdoor-sauna.html` — ~~$12,849~~ $9,539, aluminium + Canadian Hemlock, 3,500W/20A, 14 heaters, 6-slide carousel
+  - Both pages: hero carousel, features grid, specs carousel + grid, info tabs, optional upgrades section, Low EMF section, SAA certification, FAQ accordion, CTA banner, related products
+  - `js/shipping.js`: 3 new SKUs — `vesta_2p` (843900¢), `vesta_4p` (953900¢), `low_emf_upgrade` (64900¢ accessory)
+  - **Low EMF upgrade toggle** — checkbox UI between price and Add to Cart button on both Vesta pages; when checked, adds `low_emf_upgrade` SKU alongside sauna to cart; keyboard-accessible (Space/Enter), `aria-checked` state
+- [x] **Vesta product photos converted** — 12 WebP files (Vesta 2P) + 10 WebP files (Vesta 4P) + 2 split selector photos converted from source images at quality 82; folders renamed to remove "(NEW PRODUCT)" suffix
+- [x] **Buy-now.html updates (session 48)**
+  - Vesta 2P + 4P product cards added with "New" badge, sale prices, `data-tags="heat outdoor infrared"`
+  - Heat therapy split photo replaced with new `hot-cold-options.webp`
+  - Outdoor option split photo replaced with new `indoor-outdoor-option.webp`
+- [x] **Outdoor sauna category updated (session 48)** — Vesta 2P + 4P cards added to `outdoor-sauna.html` grid; SEO meta description updated
+- [x] **Homepage SEO updated (session 48)** — title → "Ice Bath Tubs and Saunas: NZ's Home for Temp Therapy"; meta description updated with NZ-wide delivery messaging; OG + Twitter tags synced
+- [x] **Warranty page created (session 48)** — `warranty.html` with 8 sections: Looking After Your Product, Limitation of Liability, Warranty Limits, Sauna Warranty (styled table), Ice Bath Warranty, What We Ask of You, Conditions & Exclusions, Support & Repairs; styled like privacy-policy.html
+- [x] **Warranty footer link added (session 48)** — added to all 30 HTML files (root + product-page)
+- [x] **Vercel redirects (session 48)** — `/product-page/vesta-2p` → `vesta-2p-outdoor-sauna`, `/product-page/vesta-4p` → `vesta-4p-outdoor-sauna`
+- [x] **Sitemap updated (session 48)** — 3 new URLs: vesta-2p-outdoor-sauna, vesta-4p-outdoor-sauna, warranty (lastmod 2026-07-26)
 
 ### Pending
 - [ ] (none)

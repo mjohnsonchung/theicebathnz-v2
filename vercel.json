@@ -26,6 +26,8 @@
     { "source": "/product-page/solara-3p", "destination": "/product-page/solara-3p-infrared-sauna", "permanent": true },
     { "source": "/product-page/tampere", "destination": "/product-page/tampere-sauna", "permanent": true },
     { "source": "/product-page/lahti", "destination": "/product-page/lahti-sauna", "permanent": true },
-    { "source": "/product-page/ice-bath-chiller-premium", "destination": "/product-page/premium-chiller", "permanent": true }
+    { "source": "/product-page/ice-bath-chiller-premium", "destination": "/product-page/premium-chiller", "permanent": true },
+    { "source": "/product-page/vesta-2p", "destination": "/product-page/vesta-2p-outdoor-sauna", "permanent": true },
+    { "source": "/product-page/vesta-4p", "destination": "/product-page/vesta-4p-outdoor-sauna", "permanent": true }
   ]
 }

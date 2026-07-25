@@ -90,6 +90,9 @@ export const PRODUCTS = {
   aurora_4p:        { name: 'Aurora 4P Infrared Sauna',          amount:  684900, ship: 'sauna',     tags: ['heat', 'indoor'] },
   solara_2p:        { name: 'Solara 2P Infrared Sauna',          amount:  444900, ship: 'sauna',     tags: ['heat', 'indoor'] },
   solara_3p:        { name: 'Solara 3P Infrared Sauna',          amount:  544900, ship: 'sauna',     tags: ['heat', 'indoor'] },
+  vesta_2p:         { name: 'Vesta 2P Outdoor Infrared Sauna',   amount:  843900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  vesta_4p:         { name: 'Vesta 4P Outdoor Infrared Sauna',   amount:  953900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
+  low_emf_upgrade:  { name: 'Low EMF Heater Upgrade',            amount:   64900, ship: 'accessory', tags: ['addon'] },
   // ── Indoor Saunas — Traditional ────────────────────────────────────────
   tampere_small:    { name: 'Tampere Sauna (1-2 Person)',        amount:  834900, ship: 'sauna',     tags: ['heat', 'indoor'] },
   tampere_large:    { name: 'Tampere Sauna (3-4 Person)',        amount:  934900, ship: 'sauna',     tags: ['heat', 'indoor'] },
