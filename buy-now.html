@@ -538,17 +538,21 @@
       .nav.scrolled { padding: 0.85rem 1.25rem; }
 
       .split-screen { flex-direction: column; padding-top: 3.5rem; }
-      .split-half { min-height: 45vh; flex: none; }
+      .split-half { min-height: 44vh; flex: none; }
       .split-half + .split-half { border-top: none; }
       .split-heading { font-size: clamp(2.2rem, 8vw, 3.2rem); }
-      .view-all-btn { font-size: 0.65rem; padding: 0.55rem 1.25rem; left: 0; right: 0; margin: 0 auto; width: fit-content; transform: translateY(-50%); }
+      .split-cold { order: 1; }
+      .view-all-btn { order: 2; position: relative; top: auto; left: auto; transform: none; font-size: 0.65rem; padding: 0.55rem 1.25rem; margin: -1rem auto; width: fit-content; z-index: 10; }
+      .split-heat { order: 3; }
 
-      /* Cold: content at bottom, Heat: content at top — equal spacing around View All */
-      .split-cold { align-items: center; justify-content: flex-end; padding-bottom: 3.5rem; }
-      .split-heat { align-items: center; justify-content: flex-start; padding-top: 3.5rem; }
-      .split-heat .split-content { display: flex; flex-direction: column; }
-      .split-heat .split-cta { order: -1; margin-bottom: 1.25rem; }
+      /* Cold: push content toward bottom so Explore is near View All */
+      .split-cold { align-items: flex-end; justify-content: center; padding-bottom: 2.25rem; }
+      /* Heat: move Explore above SAUNAS heading, content toward top */
+      .split-heat { align-items: flex-start; justify-content: center; padding-top: 2.25rem; }
+      .split-heat .split-content { display: flex; flex-direction: column; align-items: center; }
+      .split-heat .split-cta { order: -1; margin-bottom: 1.75rem; width: fit-content; }
       .split-heat .split-sub { margin-bottom: 0; }
+
       .split-back-btn { top: 4.5rem; left: 1.25rem; }
       .back-btn { font-size: 0.78rem; padding: 0.5rem 1.1rem; }
 

@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-26 (session 49)
+Last updated: 2026-07-26 (session 50)
 
 ---
 
@@ -660,6 +660,11 @@ All product page HTML files now reference images via `../product-photos/[Folder]
   - Heat Therapy "Explore" button reordered above "SAUNAS" label on mobile via flexbox order, creating equal spacing between all three CTAs
   - Cold half pushed to flex-end, Heat half to flex-start for balanced layout
 - [x] **Sauna hero images anchored right (session 49)** — all 11 sauna product pages changed from `object-position: left center` → `right center` (desktop/tablet) and `center 30%` → `right 30%` (mobile); shows more of the product on the right side
+
+- [x] **Vesta Low EMF section expanded (session 50)** — replaced single-paragraph Low EMF section on both Vesta 2P/4P pages with full explainer: side-by-side comparison cards (Standard Full-Spectrum vs Low EMF heaters with specs/bullets), "EMF in everyday context" grid (hair dryer, microwave, mobile phone vs upgrade), "What changes with the upgrade?" section with detailed breakdown
+- [x] **Vesta FAQ expanded to 11 questions (session 50)** — both Vesta 2P/4P pages expanded from 4 FAQs to 11: added spectrum info, max temp, power requirements, maintenance, placement surface, warranty, assembly time
+- [x] **Main FAQ page updated (session 50)** — 9 Vesta-specific FAQs added to Sauna tab on `faq.html` (Vesta vs Aurora, year-round outdoor, low EMF upgrade, spectrum, max temp, power circuit, maintenance, placement, assembly)
+- [x] **Buy-now split page mobile fix (session 50)** — View All Products button changed from absolute positioning to flexbox `order` in document flow (no more drift on different screen sizes); Cold content pushed to bottom, Heat content to top with Explore button reordered above SAUNAS heading; equal spacing between all three buttons at junction
 
 ### Pending
 - [ ] (none)
