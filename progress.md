@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-26 (session 48)
+Last updated: 2026-07-26 (session 49)
 
 ---
 
@@ -642,6 +642,24 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Warranty footer link added (session 48)** — added to all 30 HTML files (root + product-page)
 - [x] **Vercel redirects (session 48)** — `/product-page/vesta-2p` → `vesta-2p-outdoor-sauna`, `/product-page/vesta-4p` → `vesta-4p-outdoor-sauna`
 - [x] **Sitemap updated (session 48)** — 3 new URLs: vesta-2p-outdoor-sauna, vesta-4p-outdoor-sauna, warranty (lastmod 2026-07-26)
+
+- [x] **Mobile responsive overhaul (session 49)** — comprehensive mobile spacing/layout pass across all 30+ pages
+  - **Homepage**: stats section → 2×2 grid (was 1-col), process steps → 2×2 grid, all section padding reduced (5–7rem → 3–3.5rem), products grid gap tightened
+  - **Buy-now**: product grid padding reduced, filter tabs scaled for mobile, split sections tightened
+  - **18 product pages**: features grid → 2×2 (was 1-col), specs/includes/testimonial/related/CTA section padding all reduced; feature cards compacted (padding 2.75rem → 1.5rem)
+  - **Sauna pages**: FAQ, SAA certification, contrast-banner, Low EMF, info-tabs, upgrades sections all tightened for mobile
+  - **Category pages** (outdoor-sauna, indoor-sauna): hero padding reduced (8rem → 6rem top)
+  - **Accessory pages** (hose-attachment, ice-bath-cover): specs, CTA, related sections padding reduced
+  - **Info pages**: about-us (hero, values, story rows, CTA reduced; story grid → 1-col), benefits (all 12+ sections 5rem → 3rem), FAQ (hero, content, CTA reduced), contact (hero + form area reduced)
+  - **Legal pages** (warranty, privacy, terms, cookie): hero 8rem → 5.5rem, body 4rem → 2.5rem
+- [x] **Vesta strikethrough prices removed (session 49)** — removed "NZ$11,349" and "NZ$12,849" was-prices from Vesta 2P/4P cards on `buy-now.html` and `outdoor-sauna.html`; cards now show current price only
+- [x] **Buy-now split page improvements (session 49)**
+  - Split screen starts below header on mobile (3.5rem top padding added)
+  - "View All Products" button repositioned to center junction between Cold/Heat halves (top: 50%; left: 50%; transform: translate(-50%, -50%))
+  - Mobile: button properly centered with margin-based centering; reveal animation removed to prevent fly-in glitch
+  - Heat Therapy "Explore" button reordered above "SAUNAS" label on mobile via flexbox order, creating equal spacing between all three CTAs
+  - Cold half pushed to flex-end, Heat half to flex-start for balanced layout
+- [x] **Sauna hero images anchored right (session 49)** — all 11 sauna product pages changed from `object-position: left center` → `right center` (desktop/tablet) and `center 30%` → `right 30%` (mobile); shows more of the product on the right side
 
 ### Pending
 - [ ] (none)

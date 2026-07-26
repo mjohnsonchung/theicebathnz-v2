@@ -211,10 +211,10 @@
 
     /* (split-page-title removed — redundant with View All Products button) */
 
-    /* View All Products button */
+    /* View All Products button — centered between split halves */
     .view-all-btn {
-      position: absolute; bottom: 2.5rem; left: 0; right: 0;
-      margin: 0 auto; width: fit-content; z-index: 10;
+      position: absolute; top: 50%; left: 50%; z-index: 10;
+      transform: translate(-50%, -50%);
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: var(--body);
       font-size: 0.7rem; font-weight: 500;
@@ -230,9 +230,9 @@
     .view-all-btn:hover {
       background: rgba(2,11,21,0.75);
       border-color: rgba(255,255,255,0.35);
-      transform: translateY(-2px);
+      transform: translate(-50%, -50%) translateY(-2px);
     }
-    .view-all-btn:active { transform: translateY(0); }
+    .view-all-btn:active { transform: translate(-50%, -50%); }
     .view-all-btn:focus-visible { outline: 2px solid var(--snow); outline-offset: 3px; }
 
     /* Back button (floating on split screens) */
@@ -537,19 +537,29 @@
       .nav { padding: 1rem 1.25rem; }
       .nav.scrolled { padding: 0.85rem 1.25rem; }
 
-      .split-screen { flex-direction: column; }
-      .split-half { min-height: 50vh; flex: none; }
-      .split-half + .split-half { border-top: 1px solid rgba(255,255,255,0.06); }
+      .split-screen { flex-direction: column; padding-top: 3.5rem; }
+      .split-half { min-height: 45vh; flex: none; }
+      .split-half + .split-half { border-top: none; }
       .split-heading { font-size: clamp(2.2rem, 8vw, 3.2rem); }
-      .view-all-btn { bottom: 1.5rem; font-size: 0.65rem; padding: 0.55rem 1.25rem; }
+      .view-all-btn { font-size: 0.65rem; padding: 0.55rem 1.25rem; left: 0; right: 0; margin: 0 auto; width: fit-content; transform: translateY(-50%); }
+
+      /* Cold: content at bottom, Heat: content at top — equal spacing around View All */
+      .split-cold { align-items: center; justify-content: flex-end; padding-bottom: 3.5rem; }
+      .split-heat { align-items: center; justify-content: flex-start; padding-top: 3.5rem; }
+      .split-heat .split-content { display: flex; flex-direction: column; }
+      .split-heat .split-cta { order: -1; margin-bottom: 1.25rem; }
+      .split-heat .split-sub { margin-bottom: 0; }
       .split-back-btn { top: 4.5rem; left: 1.25rem; }
       .back-btn { font-size: 0.78rem; padding: 0.5rem 1.1rem; }
 
-      .products-section { padding: 6rem 1.5rem 4rem; }
-      .products-grid { grid-template-columns: 1fr; }
-      .product-body { padding: 1.5rem; }
-      .product-name { font-size: 1.5rem; }
-      .filter-tabs { flex-wrap: wrap; }
+      .products-section { padding: 4rem 1.25rem 3rem; }
+      .products-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .products-header { margin-bottom: 1.5rem; }
+      .product-body { padding: 1.25rem; }
+      .product-name { font-size: 1.35rem; }
+      .product-tagline { font-size: 0.8rem; }
+      .filter-tabs { flex-wrap: wrap; gap: 0.4rem; }
+      .filter-tab { font-size: 0.62rem; padding: 0.4rem 0.9rem; }
 
       .coming-soon { padding: 6rem 1.5rem; }
       .coming-soon .back-btn { top: 5.5rem; left: 1.5rem; }
@@ -623,7 +633,7 @@
       </div>
     </a>
 
-    <button class="view-all-btn reveal reveal-d4" onclick="navigate('all')">
+    <button class="view-all-btn" onclick="navigate('all')">
       View All Products
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -1067,7 +1077,7 @@
             <h3 class="product-name">Vesta 2 Person</h3>
             <p class="product-tagline">Aluminium exterior, full-spectrum infrared, chromotherapy lighting, and Bluetooth audio. Built for year-round outdoor use.</p>
             <div class="product-footer">
-              <span class="product-price"><span class="was">NZ$11,349</span> <span class="cur">NZ$</span>8,439</span>
+              <span class="product-price"><span class="cur">NZ$</span>8,439</span>
               <button class="btn-card">Buy Now</button>
             </div>
           </div>
@@ -1099,7 +1109,7 @@
             <h3 class="product-name">Vesta 4 Person</h3>
             <p class="product-tagline">14 full-spectrum heaters in an aluminium cabin. Chromotherapy, Bluetooth audio, and toughened glass — designed for permanent outdoor placement.</p>
             <div class="product-footer">
-              <span class="product-price"><span class="was">NZ$12,849</span> <span class="cur">NZ$</span>9,539</span>
+              <span class="product-price"><span class="cur">NZ$</span>9,539</span>
               <button class="btn-card">Buy Now</button>
             </div>
           </div>

@@ -268,7 +268,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: left center;
+      object-position: right center;
       filter: brightness(0.83) saturate(0.9);
       transform: scale(1.02);
       transition:
@@ -854,7 +854,7 @@
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .product-hero-left { padding: 7rem 3rem 3rem; max-width: 550px; }
-      .product-hero-bg img { object-position: left center; }
+      .product-hero-bg img { object-position: right center; }
       .features-grid { grid-template-columns: 1fr 1fr; }
       .specs-layout { grid-template-columns: 1fr; margin-left: 0; }
       .specs-visual { max-width: 500px; }
@@ -868,7 +868,7 @@
       .nav { padding: 1rem 1.25rem; }
       .nav.scrolled { padding: 0.85rem 1.25rem; }
       .product-hero { min-height: auto; flex-direction: column; }
-      .product-hero-bg img { object-position: center 30%; }
+      .product-hero-bg img { object-position: right 30%; }
       .product-hero-overlay {
         background:
           linear-gradient(180deg,
@@ -881,10 +881,30 @@
       }
       .product-hero-left { padding: 55vw 1.5rem 3rem; max-width: 100%; }
       .product-hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
-      .features-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .features-section { padding: 3.5rem 1.25rem; }
+      .features-header { margin-bottom: 2rem; }
+      .feature-card { padding: 1.5rem 1.25rem; }
+      .feature-icon { width: 2.5rem; height: 2.5rem; margin-bottom: 0.75rem; }
+      .feature-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+      .feature-desc { font-size: 0.8rem; }
+      .specs-section { padding: 3.5rem 1.25rem; }
+      .specs-header { margin-bottom: 2rem; }
+      .spec-cell { padding: 1.25rem; }
+      .includes-section { padding: 3.5rem 1.25rem; }
+      .includes-grid { gap: 1rem; margin-top: 2rem; }
+      .include-card { padding: 1.5rem 1.25rem; }
+      .include-num { font-size: 1.8rem; }
+      .testimonial-section { padding: 3.5rem 1.25rem; }
+      .related-section { padding: 3.5rem 1.25rem; }
+
       .specs-visual { aspect-ratio: 4/4.2; }
       .includes-grid { grid-template-columns: 1fr; }
       .related-card { grid-template-columns: 1fr; }
+      .faq-section { padding: 3rem 1.25rem; }
+      .faq-header { margin-bottom: 1.5rem; }
+      .contrast-banner { padding: 2.5rem 1.25rem; }
+      .saa-section { padding: 3rem 1.25rem !important; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; }
