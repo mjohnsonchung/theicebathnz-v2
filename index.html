@@ -225,29 +225,6 @@
         radial-gradient(ellipse 100% 100% at 50% 100%, rgba(7, 21, 37, 0.9) 0%, transparent 55%),
         linear-gradient(165deg, #071525 0%, #020B15 40%, #030F1E 100%);
     }
-    /* Water ripple rings */
-    .ripple-container {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    .ring {
-      position: absolute;
-      top: 50%; left: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(91, 200, 245, 0.12);
-      animation: ripple 5s ease-out infinite;
-    }
-    .ring:nth-child(1) { width: 22vw; height: 22vw; animation-delay: 0s; }
-    .ring:nth-child(2) { width: 38vw; height: 38vw; animation-delay: 1s; }
-    .ring:nth-child(3) { width: 54vw; height: 54vw; animation-delay: 2s; }
-    .ring:nth-child(4) { width: 70vw; height: 70vw; animation-delay: 3s; }
-    .ring:nth-child(5) { width: 86vw; height: 86vw; animation-delay: 4s; }
-    .ring:nth-child(6) { width: 102vw; height: 102vw; animation-delay: 4.8s; }
-    @keyframes ripple {
-      0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(0.85); }
-      100% { opacity: 0;   transform: translate(-50%, -50%) scale(1.15); }
-    }
     /* Shimmer line across hero */
     .hero-shimmer {
       position: absolute; inset: 0; overflow: hidden;
@@ -400,27 +377,6 @@
       50%       { opacity: 1;   transform: scaleY(0.75); }
     }
 
-    /* ── Ticker ────────────────────────────────────────── */
-    .ticker-bar {
-      background: var(--ice); overflow: hidden;
-      padding: 0.8rem 0;
-    }
-    .ticker-track {
-      display: flex; white-space: nowrap;
-      animation: ticker 25s linear infinite;
-    }
-    .ticker-track:hover { animation-play-state: paused; }
-    .tick {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--void);
-      padding: 0 2.5rem; flex-shrink: 0;
-    }
-    .tick-dot { opacity: 0.35; margin-left: 2.5rem; }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
 
     /* ── Section shared ────────────────────────────────── */
     .section-wrap { max-width: 1440px; margin: 0 auto; padding: 0 2.5rem; }
@@ -1008,15 +964,6 @@
   <section class="hero">
     <div class="hero-atmosphere"></div>
 
-    <div class="ripple-container" id="rippleContainer" aria-hidden="true">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-    </div>
-
     <div class="hero-shimmer" aria-hidden="true"></div>
 
     <div class="hero-img-wrap" aria-hidden="true">
@@ -1037,7 +984,7 @@
 
       <div class="hero-actions">
         <a href="buy-now.html" class="btn-primary">
-          Shop the Collection
+          View Products
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="benefits.html" class="btn-ghost">The Science</a>
@@ -1050,22 +997,6 @@
     </div>
   </section>
 
-  <!-- ─── Ticker ────────────────────────────────────── -->
-  <div class="ticker-bar" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="tick">Cold Therapy</span><span class="tick tick-dot">·</span>
-      <span class="tick">New Zealand</span><span class="tick tick-dot">·</span>
-      <span class="tick">Premium Grade</span><span class="tick tick-dot">·</span>
-      <span class="tick">Athlete Tested</span><span class="tick tick-dot">·</span>
-      <span class="tick">Delivery Nation Wide</span><span class="tick tick-dot">·</span>
-      <!-- Duplicate for seamless loop -->
-      <span class="tick">Cold Therapy</span><span class="tick tick-dot">·</span>
-      <span class="tick">New Zealand</span><span class="tick tick-dot">·</span>
-      <span class="tick">Premium Grade</span><span class="tick tick-dot">·</span>
-      <span class="tick">Athlete Tested</span><span class="tick tick-dot">·</span>
-      <span class="tick">Delivery Nation Wide</span><span class="tick tick-dot">·</span>
-    </div>
-  </div>
 
   <!-- ─── Products ─────────────────────────────────── -->
   <section class="products-bg" id="products">

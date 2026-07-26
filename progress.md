@@ -665,6 +665,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Vesta FAQ expanded to 11 questions (session 50)** — both Vesta 2P/4P pages expanded from 4 FAQs to 11: added spectrum info, max temp, power requirements, maintenance, placement surface, warranty, assembly time
 - [x] **Main FAQ page updated (session 50)** — 9 Vesta-specific FAQs added to Sauna tab on `faq.html` (Vesta vs Aurora, year-round outdoor, low EMF upgrade, spectrum, max temp, power circuit, maintenance, placement, assembly)
 - [x] **Buy-now split page mobile fix (session 50)** — View All Products button changed from absolute positioning to flexbox `order` in document flow (no more drift on different screen sizes); Cold content pushed to bottom, Heat content to top with Explore button reordered above SAUNAS heading; equal spacing between all three buttons at junction
+- [x] **Homepage hero cleanup (session 50)** — removed water ripple ring animation, removed ticker/marquee banner, changed hero CTA from "Shop the Collection" to "View Products"
 
 ### Pending
 - [ ] (none)
