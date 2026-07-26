@@ -246,13 +246,36 @@
 
     /* ── Low EMF Section ──────────────────────────────── */
     .low-emf-section { padding: 6rem 2.5rem; background: var(--deep); border-top: 1px solid var(--border); }
-    .low-emf-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .low-emf-inner { max-width: 960px; margin: 0 auto; text-align: center; }
     .low-emf-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); border: 1px solid var(--ember-dim); padding: 0.4rem 1.25rem; border-radius: 999px; margin-bottom: 2rem; }
     .low-emf-heading { font-family: var(--display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--snow); margin-bottom: 1rem; line-height: 1.1; }
     .low-emf-heading em { font-style: italic; color: var(--ember); }
     .low-emf-stat { font-family: var(--display); font-size: clamp(3.5rem, 6vw, 5rem); font-weight: 300; color: var(--ember); letter-spacing: -0.03em; margin-bottom: 0.5rem; }
     .low-emf-stat-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog); margin-bottom: 2rem; }
     .low-emf-text { font-size: 0.95rem; line-height: 1.8; color: var(--mist); max-width: 60ch; margin: 0 auto; }
+    .low-emf-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; text-align: left; }
+    .low-emf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; }
+    .low-emf-card.upgraded { border-color: var(--ember-dim); }
+    .low-emf-card-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); margin-bottom: 0.75rem; }
+    .low-emf-card.upgraded .low-emf-card-label { color: var(--ember); }
+    .low-emf-card-title { font-family: var(--display); font-size: 1.35rem; font-weight: 400; color: var(--snow); margin-bottom: 0.5rem; }
+    .low-emf-card-range { font-family: var(--display); font-size: 1.75rem; font-weight: 300; color: var(--ember); margin-bottom: 1rem; }
+    .low-emf-card ul { list-style: none; padding: 0; margin: 0; }
+    .low-emf-card li { font-size: 0.85rem; line-height: 1.7; color: var(--mist); padding: 0.35rem 0; padding-left: 1.25rem; position: relative; }
+    .low-emf-card li::before { content: ''; position: absolute; left: 0; top: 0.7rem; width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+    .low-emf-card.upgraded li::before { background: var(--ember-dim); }
+    .low-emf-context { margin-top: 3rem; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem 2.5rem; text-align: left; }
+    .low-emf-context-title { font-family: var(--display); font-size: 1.1rem; font-weight: 400; color: var(--snow); margin-bottom: 1rem; }
+    .low-emf-context-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .low-emf-context-item { text-align: center; }
+    .low-emf-context-val { font-family: var(--display); font-size: 1.1rem; font-weight: 400; color: var(--snow); margin-bottom: 0.25rem; }
+    .low-emf-context-name { font-size: 0.72rem; color: var(--fog); letter-spacing: 0.05em; }
+    .low-emf-what { margin-top: 3rem; text-align: left; }
+    .low-emf-what-title { font-family: var(--display); font-size: 1.35rem; font-weight: 400; color: var(--snow); margin-bottom: 1rem; }
+    .low-emf-what-text { font-size: 0.9rem; line-height: 1.8; color: var(--mist); margin-bottom: 1rem; }
+    .low-emf-what-list { list-style: none; padding: 0; margin: 0 0 1.5rem 0; }
+    .low-emf-what-list li { font-size: 0.88rem; line-height: 1.7; color: var(--mist); padding: 0.3rem 0 0.3rem 1.5rem; position: relative; }
+    .low-emf-what-list li::before { content: ''; position: absolute; left: 0; top: 0.65rem; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ember); }
 
     /* ── SAA Certification ─────────────────────────────── */
     .saa-section { padding: 5rem 2.5rem; background: var(--void); border-top: 1px solid var(--border); }
@@ -388,6 +411,10 @@
       .contrast-banner { padding: 2.5rem 1.25rem; }
       .info-tabs-section { padding: 3.5rem 1.25rem; }
       .low-emf-section { padding: 3rem 1.25rem; }
+      .low-emf-compare { grid-template-columns: 1fr; gap: 1rem; }
+      .low-emf-context { padding: 1.5rem; }
+      .low-emf-context-grid { grid-template-columns: repeat(2, 1fr); }
+      .low-emf-what { margin-top: 2rem; }
       .saa-section { padding: 3rem 1.25rem; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
@@ -734,9 +761,73 @@
         Optional Upgrade
       </span>
 
-      <p class="low-emf-stat">0–3 mG</p>
-      <p class="low-emf-stat-label">Milligauss — well below safety thresholds</p>
-      <p class="low-emf-text">The Vesta can be upgraded with low EMF heaters that measure between 0 and 3 milligauss — lower than most household appliances. This optional package (+$649) replaces the standard heaters with ultra-low EMF versions for those who want the lowest possible electromagnetic exposure during their sessions.</p>
+      <h2 class="low-emf-heading">Standard vs <em>Low EMF</em> Heaters</h2>
+      <p class="low-emf-text">The Vesta ships with full-spectrum infrared heaters as standard. For those who prefer minimal electromagnetic exposure, an optional Low EMF heater upgrade is available for +$649.</p>
+
+      <!-- Comparison Cards -->
+      <div class="low-emf-compare">
+        <div class="low-emf-card">
+          <p class="low-emf-card-label">Included as standard</p>
+          <p class="low-emf-card-title">Full-Spectrum Heaters</p>
+          <p class="low-emf-card-range">20–100+ mG</p>
+          <ul>
+            <li>Near, mid, and far infrared wavelengths</li>
+            <li>Deeper tissue penetration and more intense heat</li>
+            <li>Higher peak temperatures — more vigorous sweat</li>
+            <li>Best for recovery, detox, and athletic use</li>
+            <li>Standard across most infrared saunas on the market</li>
+          </ul>
+        </div>
+        <div class="low-emf-card upgraded">
+          <p class="low-emf-card-label">Optional upgrade +$649</p>
+          <p class="low-emf-card-title">Low EMF Heaters</p>
+          <p class="low-emf-card-range">0–3 mG</p>
+          <ul>
+            <li>Far infrared wavelength — gentle, even heat</li>
+            <li>Ultra-low electromagnetic output (0–3 milligauss)</li>
+            <li>Lower than most household appliances</li>
+            <li>Soothing, calm sessions — ideal for longer sits</li>
+            <li>Preferred by wellness-focused and EMF-conscious users</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EMF Context -->
+      <div class="low-emf-context">
+        <p class="low-emf-context-title">EMF in everyday context</p>
+        <div class="low-emf-context-grid">
+          <div class="low-emf-context-item">
+            <p class="low-emf-context-val">60–200 mG</p>
+            <p class="low-emf-context-name">Hair dryer</p>
+          </div>
+          <div class="low-emf-context-item">
+            <p class="low-emf-context-val">100–200 mG</p>
+            <p class="low-emf-context-name">Microwave</p>
+          </div>
+          <div class="low-emf-context-item">
+            <p class="low-emf-context-val">2–5 mG</p>
+            <p class="low-emf-context-name">Mobile phone</p>
+          </div>
+          <div class="low-emf-context-item">
+            <p class="low-emf-context-val">0–3 mG</p>
+            <p class="low-emf-context-name">Low EMF upgrade</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What changes -->
+      <div class="low-emf-what">
+        <h3 class="low-emf-what-title">What changes with the upgrade?</h3>
+        <p class="low-emf-what-text">The Low EMF upgrade replaces the standard heater panels with far-infrared-only panels that produce between 0 and 3 milligauss — measured within an inch of the heater surface. The wiring is also shielded to minimise electromagnetic leakage.</p>
+        <ul class="low-emf-what-list">
+          <li>Heater panels are swapped — standard full-spectrum panels replaced with far-infrared low EMF panels</li>
+          <li>Wiring is shielded for minimal electromagnetic leakage</li>
+          <li>Same cabin, same controls, same warranty — only the heaters change</li>
+          <li>Heat character shifts from intense and invigorating to gentle and soothing</li>
+          <li>Ideal for those who want to minimise EMF exposure without compromising on the sauna experience</li>
+        </ul>
+        <p class="low-emf-what-text">Both heater types are safe and well within international guidelines. The choice comes down to personal preference — whether you want the deeper, more intense heat of full-spectrum, or the calmer, lower-EMF experience of far infrared.</p>
+      </div>
     </div>
   </section>
 
@@ -765,7 +856,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">Aurora is indoor, Vesta is outdoor with aluminium exterior. Both use full-spectrum infrared. Vesta goes up to 75°C vs Aurora 70°C.</div>
+          <div class="faq-answer-inner">The Aurora is designed for indoor use, while the Vesta is built for permanent outdoor placement with an aluminium exterior frame and sealed roof panel. Both use full-spectrum infrared heaters and deliver near, mid, and far infrared. The Vesta reaches up to 75°C compared to the Aurora's 70°C maximum. The Vesta also features a thicker wall construction and weatherproof materials throughout.</div>
         </div>
       </div>
 
@@ -775,7 +866,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">Yes, the aluminium exterior frame and sealed roof panel are designed for permanent outdoor placement. No maintenance or cover required.</div>
+          <div class="faq-answer-inner">Yes. The aluminium exterior frame and sealed roof panel are designed for permanent outdoor placement. The Vesta is built to withstand rain, wind, UV, and temperature swings year-round. No cover, no seasonal teardown — just leave it where it sits.</div>
         </div>
       </div>
 
@@ -785,7 +876,77 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">The optional low EMF heater package replaces standard heaters with ultra-low EMF versions measuring 0–3 milligauss. Available for +$649.</div>
+          <div class="faq-answer-inner">The optional low EMF heater package (+$649) replaces the standard full-spectrum heaters with far-infrared-only panels that measure between 0 and 3 milligauss — lower than most household appliances. The wiring is also shielded to minimise electromagnetic leakage. Same cabin, same controls, same warranty — only the heaters and heat character change. The experience shifts from intense, invigorating heat to a gentler, more soothing session.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What spectrum does the Vesta use?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The Vesta ships with full-spectrum infrared heaters as standard, delivering near, mid, and far infrared wavelengths. Near infrared targets the skin's surface and supports cell renewal, mid infrared reaches deeper into soft tissue for pain relief and circulation, and far infrared penetrates deepest for detoxification and relaxation. If you upgrade to the low EMF heater package, the spectrum changes to far infrared only — a gentler, calmer heat with ultra-low electromagnetic output.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How hot does the Vesta get?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The Vesta reaches up to 75°C. Actual temperature depends on ambient conditions — infrared saunas heat your body directly rather than just the air, so you'll get a deep sweat even before the cabin hits peak temperature. Most users start feeling the benefit from around 45–50°C.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Does the Vesta need a dedicated power circuit?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The Vesta plugs into a standard NZ household power outlet — no electrician or dedicated circuit required. Just run an outdoor-rated extension lead or have a weatherproof socket installed near the sauna location. Make sure nothing else heavy is running on the same circuit while the sauna is in use.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What maintenance does the Vesta need?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Very little. Wipe the interior down after sessions if needed, and keep the glass door clean. The aluminium exterior doesn't need painting, sealing, or treating. There's no timber cladding to weather or stain. The sealed roof panel prevents water ingress, so you won't need to worry about mould or rot.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can the Vesta be placed on grass or decking?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We recommend placing the Vesta on a flat, solid surface — concrete, pavers, or sturdy decking. Grass is not ideal as it can be uneven and may retain moisture underneath the unit. If decking is your only option, make sure it can support the weight and is level. A simple concrete pad or paver base is the easiest long-term solution.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is the Vesta covered by warranty?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. The Vesta is covered by our standard sauna warranty from the date of purchase. This covers manufacturing defects in the cabin, heaters, controls, and electrical components. Normal wear and cosmetic changes to timber over time are not covered. See our <a href="../warranty.html" style="color:var(--ember);text-decoration:underline;">warranty page</a> for full details.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How long does assembly take?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The Vesta arrives as a kitset and takes approximately 45–90 minutes to assemble with two people. No specialist tools or trade skills are required. Step-by-step instructions are included, and our NZ-based team is available if you need a hand during setup.</div>
         </div>
       </div>
 
@@ -795,7 +956,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">13–15 weeks from order confirmation. Manufacturing ~9 weeks, international sea freight 4–6 weeks, then customs clearance and local delivery.</div>
+          <div class="faq-answer-inner">Delivery takes approximately 13–15 weeks from order confirmation. Manufacturing takes around 9 weeks, followed by 4–6 weeks of international sea freight, then customs clearance and local delivery to your address.</div>
         </div>
       </div>
 
