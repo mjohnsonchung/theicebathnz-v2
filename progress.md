@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-26 (session 50)
+Last updated: 2026-07-28 (session 51)
 
 ---
 
@@ -666,6 +666,19 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Main FAQ page updated (session 50)** — 9 Vesta-specific FAQs added to Sauna tab on `faq.html` (Vesta vs Aurora, year-round outdoor, low EMF upgrade, spectrum, max temp, power circuit, maintenance, placement, assembly)
 - [x] **Buy-now split page mobile fix (session 50)** — View All Products button changed from absolute positioning to flexbox `order` in document flow (no more drift on different screen sizes); Cold content pushed to bottom, Heat content to top with Explore button reordered above SAUNAS heading; equal spacing between all three buttons at junction
 - [x] **Homepage hero cleanup (session 50)** — removed water ripple ring animation, removed ticker/marquee banner, changed hero CTA from "Shop the Collection" to "View Products"
+
+- [x] **Ice Bath Chiller carousel bug fixed (session 51)** — carousel JS used `% 4` modulo but only 3 slides existed; clicking "next" on slide 3 navigated to a non-existent 4th slide (blank). Changed to `% 3`.
+- [x] **All-in-One Ice Bath page rebuilt from scratch (session 51)** — old page had broken auto-advance carousel (wrong slide count, off-center photos) and inconsistent design. Completely rewritten using Vesta 4P template:
+  - Same design tokens, CSS structure, nav, footer, grain overlay as all other product pages
+  - Manual carousel (no auto-advance) — consistent with all other pages
+  - Opacity-fade carousel (absolute positioned slides) instead of translateX — properly centered
+  - 4 carousel slides using existing `product-photos/All-in-One Ice Bath/` images
+  - Ice-blue accent (`--ice`) throughout (cold product)
+  - All product info from docx: features grid (Integrated Chiller, Filtration & Ozone, Hydrotherapy Jets, Wi-Fi App Control), full specs grid (8 items), info tabs (Specifications, What's Included, Setup & Use, Manual), 6 FAQs
+  - **User manual PDF download link** added in Manual tab — links to `brand assets/All in one Ice Bath (New)/User manual -All in one bathtub.pdf`
+  - Cart integration with existing `allinone_bath` SKU
+  - Contrast CTA banner links to saunas
+  - Related products: Ice Bath + Ice Bath Chiller
 
 ### Pending
 - [ ] (none)
