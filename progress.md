@@ -679,6 +679,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
   - Cart integration with existing `allinone_bath` SKU
   - Contrast CTA banner links to saunas
   - Related products: Ice Bath + Ice Bath Chiller
+- [x] **Aurora 2P hero mobile photo updated (session 51)** — converted new `AURORA_2_HERO_MOBILE_4K (NEW).png` to WebP (quality 82, 326KB) using sharp, renamed to `AURORA 2P HERO MOBILE.webp` matching naming convention. Source PNG deleted. Product page already references this filename.
 
 ### Pending
 - [ ] (none)
