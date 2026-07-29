@@ -297,6 +297,10 @@
       .nav.scrolled { padding: 0.85rem 1.25rem; }
 
       .product-hero { min-height: auto; flex-direction: column; }
+      /* Mobile: use brighter hero (hover state) by default */
+      .product-hero-bg img { filter: brightness(1.0) saturate(1.1); transform: scale(1.0); }
+      .product-hero-overlay { opacity: 0.85; }
+      .product-hero-atmosphere { opacity: 0.6; }
       .product-hero-bg img { object-position: center 30%; }
       .product-hero-overlay {
         background:
