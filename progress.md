@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-08-14 (session 54)
+Last updated: 2026-08-14 (session 55)
 
 ---
 
@@ -683,6 +683,8 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Mobile hero brightness (session 52)** — On desktop, hovering the hero area brightens the photo (brightness 1.0, saturate 1.1, overlay opacity 0.85, atmosphere opacity 0.6). On mobile there's no hover, so the brighter state is now the default for `max-width: 768px` across all 18 product pages. Desktop hover behavior unchanged. Three CSS-background pages (Solara 2P, Solara 3P, Stainless Steel) target `.product-hero-bg`; the other 15 target `.product-hero-bg img`.
 - [x] **Aurora 2P hero mobile image fix (session 53)** — Product page was referencing `AURORA 2 PERSON HERO MOBILE.webp` instead of `AURORA 2P HERO MOBILE.webp`. Updated `<source>` srcset in `aurora-2p-infrared-sauna.html`. Deleted the old incorrect file from `product-photos/Aurora 2 Person/`.
 - [x] **Bulk mobile hero photo refresh (session 54)** — 14 new mobile hero images converted from PNG to WebP (quality 82) and replaced in `product-photos/`: All-in-One (44KB), Aurora 3P (230KB), Aurora 4P (241KB), Ice Bath (23KB), Barrel Sauna (271KB), Lahti (54KB), Solara 2P (293KB), Solara 3P (48KB), Square Sauna (247KB), Stainless Steel (157KB), Standard Chiller (13KB), Tampere (142KB), Vesta 2P (151KB), Vesta 4P (142KB). Source PNGs deleted. No HTML changes needed — filenames unchanged. Premium Chiller not included (no new image provided).
+
+- [x] **Homepage redesign (session 55)** — Full homepage redesign with SEO focus. Removed 4 filler sections (stats rail, numbered benefits, featured product detail, "How It Works" steps, newsletter). New structure: full-bleed hero with SEO H1 ("Ice Baths & Saunas for New Zealand"), trust bar (NZ-Wide Delivery / 1–2 Year Warranty / NZ-Based Support / 30-Day Returns), 6 product cards split into Cold Therapy (Ice Bath, Stainless Steel, Chiller) and Heat Therapy (Barrel Sauna, Square Sauna, Indoor Saunas), editorial SEO content section with natural keyword placement ("ice bath nz", "cold plunge tub", "stainless steel ice bath", "ice bath chiller"), testimonials (3 real reviews), CTA. Product images now use `product-photos/` CATALOG images. Meta tags preserved. All existing nav, footer, design tokens unchanged.
 
 ### Pending
 - [ ] (none)

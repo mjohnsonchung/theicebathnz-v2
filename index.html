@@ -45,6 +45,9 @@
       --frost:     #B8E8FF;
       --arctic:    #E4F4FF;
 
+      --ember:     #E8832A;
+      --ember-dim: rgba(232, 131, 42, 0.12);
+
       --snow:      #EEF5FA;
       --mist:      #7A9BB5;
       --fog:       #3A5A7A;
@@ -106,56 +109,30 @@
     }
     .nav-logo {
       font-family: var(--display);
-      font-size: 1.15rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 1.15rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--snow);
       display: flex; align-items: baseline; gap: 0.2rem;
     }
     .nav-logo sup {
       font-family: var(--body);
-      font-size: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      color: var(--ice);
+      font-size: 0.5rem; font-weight: 600;
+      letter-spacing: 0.25em; color: var(--ice);
       vertical-align: super;
     }
-    .nav-links {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-    }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--mist);
       transition: color 0.2s var(--ease-smooth);
     }
     .nav-links a:hover { color: var(--snow); }
     .nav-right { display: flex; align-items: center; gap: 1.25rem; }
-    .nav-cart {
-      position: relative;
-      background: none; border: none;
-      color: var(--mist);
-      transition: color 0.2s var(--ease-smooth);
-      padding: 0.4rem;
-    }
-    .nav-cart:hover { color: var(--snow); }
-    .cart-badge {
-      position: absolute; top: 0; right: 0;
-      width: 1rem; height: 1rem;
-      background: var(--ice); color: var(--void);
-      border-radius: 50%;
-      font-size: 0.55rem; font-weight: 600;
-      display: flex; align-items: center; justify-content: center;
-    }
     .btn-shop {
       font-size: 0.72rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--void);
-      background: var(--ice);
-      padding: 0.6rem 1.5rem;
-      border-radius: 999px; border: none;
+      color: var(--void); background: var(--ice);
+      padding: 0.6rem 1.5rem; border-radius: 999px; border: none;
       transition:
         background 0.2s var(--ease-smooth),
         transform 0.25s var(--ease-spring),
@@ -167,6 +144,7 @@
       box-shadow: 0 8px 28px rgba(91, 200, 245, 0.3);
     }
     .btn-shop:active { transform: translateY(0); }
+    .btn-shop:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
     .nav-hamburger {
       display: none; flex-direction: column; gap: 5px;
       background: none; border: none; padding: 0.4rem; cursor: pointer;
@@ -179,14 +157,11 @@
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* Mobile menu */
     .mobile-menu {
       display: none; position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(2, 11, 21, 0.97);
-      backdrop-filter: blur(20px);
-      z-index: 90;
+      backdrop-filter: blur(20px); z-index: 90;
       flex-direction: column; align-items: center; justify-content: center;
       gap: 0.25rem;
       opacity: 0; pointer-events: none;
@@ -197,133 +172,89 @@
       font-family: var(--body);
       font-size: 0.8rem; font-weight: 400;
       letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--mist);
-      padding: 0.9rem 2rem;
+      color: var(--mist); padding: 0.9rem 2rem;
       transition: color 0.2s var(--ease-smooth);
     }
     .mobile-menu a:hover { color: var(--snow); }
-    .mobile-menu .btn-primary {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      padding: 0.85rem 2.25rem;
-    }
+    .mobile-menu .btn-primary { margin-top: 1.5rem; font-size: 0.75rem; padding: 0.85rem 2.25rem; }
 
     /* ── Hero ──────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
       position: relative;
-      display: flex; align-items: flex-end;
+      display: flex; align-items: center;
       overflow: hidden;
-      background: var(--void);
     }
-    /* Layered atmospheric background */
-    .hero-atmosphere {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(91, 200, 245, 0.05) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 80% at 15% 70%, rgba(18, 60, 120, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(7, 21, 37, 0.9) 0%, transparent 55%),
-        linear-gradient(165deg, #071525 0%, #020B15 40%, #030F1E 100%);
-    }
-    /* Shimmer line across hero */
-    .hero-shimmer {
-      position: absolute; inset: 0; overflow: hidden;
-    }
-    .hero-shimmer::after {
-      content: '';
-      position: absolute;
-      top: 38%;
-      left: -100%; right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(91, 200, 245, 0.15), transparent);
-      animation: shimmer-line 8s linear infinite;
-    }
-    @keyframes shimmer-line {
-      0%   { left: -100%; right: 200%; }
-      100% { left: 100%;  right: -200%; }
-    }
-    /* Hero image inset */
-    .hero-img-wrap {
-      position: absolute; inset: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-    .hero-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      object-position: bottom right;
-      opacity: 0.88;
-      transform: scale(0.75) translateY(80px);
-      transform-origin: bottom right;
-      filter:
-        drop-shadow(0 0 60px rgba(91,200,245,0.09))
-        drop-shadow(0 30px 80px rgba(2,11,21,0.65));
-    }
-    /* Full-width dark overlay: solid left → fades as it approaches the product */
-    .hero-img-wrap::before {
-      content: '';
+    .hero-bg {
       position: absolute; inset: 0; z-index: 1;
-      background:
-        linear-gradient(to right,
-          var(--void) 0%,
-          var(--void) 18%,
-          rgba(2,11,21,0.82) 36%,
-          rgba(2,11,21,0.38) 54%,
-          rgba(2,11,21,0.08) 66%,
-          transparent 76%),
-        linear-gradient(to bottom, transparent 62%, var(--void) 100%);
-      pointer-events: none;
     }
-    /* Hero content */
+    .hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%;
+      filter: brightness(0.65) saturate(0.9);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(90deg,
+          rgba(2,11,21,0.88) 0%,
+          rgba(2,11,21,0.7) 35%,
+          rgba(2,11,21,0.4) 60%,
+          rgba(2,11,21,0.2) 100%),
+        linear-gradient(180deg,
+          rgba(2,11,21,0.4) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(2,11,21,0.7) 100%);
+    }
     .hero-content {
       position: relative; z-index: 10;
-      padding: 0 2.5rem 7rem;
+      padding: 0 2.5rem;
       max-width: 1440px; margin: 0 auto; width: 100%;
     }
     .hero-eyebrow {
       font-size: 0.68rem; font-weight: 500;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--ice);
-      margin-bottom: 2rem;
+      color: var(--ice); margin-bottom: 1.75rem;
       opacity: 0; transform: translateY(16px);
       animation: fadeUp 0.7s var(--ease-out) 0.3s forwards;
     }
     .hero-h1 {
       font-family: var(--display);
-      font-size: clamp(4rem, 10.5vw, 9.5rem);
-      font-weight: 300;
-      line-height: 0.88;
-      letter-spacing: -0.025em;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 300; line-height: 0.92;
+      letter-spacing: -0.03em;
       color: var(--snow);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+    .hero-h1 .line {
+      display: block; overflow: hidden; padding-bottom: 0.1em;
     }
     .hero-h1 .word {
       display: inline-block;
       opacity: 0; transform: translateY(105%);
       animation: wordUp 0.9s var(--ease-out) forwards;
     }
-    .hero-h1 .line { display: block; overflow: hidden; padding-bottom: 0.08em; }
     .hero-h1 em { font-style: italic; color: var(--ice); }
     .hero-sub {
-      font-size: 0.95rem; line-height: 1.75;
-      color: var(--mist); max-width: 42ch;
-      margin-bottom: 3rem;
+      font-size: 1rem; line-height: 1.75;
+      color: var(--mist); max-width: 48ch;
+      margin-bottom: 2.5rem;
       opacity: 0; transform: translateY(16px);
-      animation: fadeUp 0.7s var(--ease-out) 1.3s forwards;
+      animation: fadeUp 0.7s var(--ease-out) 1.1s forwards;
     }
     .hero-actions {
       display: flex; align-items: center; flex-wrap: wrap; gap: 1rem;
       opacity: 0; transform: translateY(16px);
-      animation: fadeUp 0.7s var(--ease-out) 1.55s forwards;
+      animation: fadeUp 0.7s var(--ease-out) 1.3s forwards;
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-size: 0.78rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--void);
-      background: var(--ice);
-      padding: 1rem 2.5rem;
-      border-radius: 999px; border: none;
+      color: var(--void); background: var(--ice);
+      padding: 1rem 2.5rem; border-radius: 999px; border: none;
       transition:
         background 0.2s var(--ease-smooth),
         transform 0.3s var(--ease-spring),
@@ -335,48 +266,56 @@
       box-shadow: 0 14px 40px rgba(91, 200, 245, 0.35);
     }
     .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-size: 0.78rem; font-weight: 400;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--mist);
-      background: transparent;
-      border: 1px solid var(--border);
-      padding: 1rem 2.5rem;
-      border-radius: 999px;
+      color: var(--mist); background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 1rem 2.5rem; border-radius: 999px;
       transition:
         color 0.2s var(--ease-smooth),
         border-color 0.2s var(--ease-smooth),
         transform 0.3s var(--ease-spring);
     }
     .btn-ghost:hover {
-      color: var(--snow); border-color: var(--border-hi);
+      color: var(--snow); border-color: rgba(255,255,255,0.35);
       transform: translateY(-2px);
     }
     .btn-ghost:active { transform: translateY(0); }
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute; left: 50%; bottom: 3rem; z-index: 10;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-      opacity: 0;
-      animation: fadeIn 1s var(--ease-out) 2.5s forwards;
+    .btn-ghost:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
+    .btn-ember {
+      background: var(--ember);
     }
-    .scroll-line {
-      width: 1px; height: 64px;
-      background: linear-gradient(to bottom, var(--ice), transparent);
-      transform-origin: top;
-      animation: scrollDrop 2.2s ease-in-out infinite;
-    }
-    .scroll-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--fog); writing-mode: vertical-rl;
-    }
-    @keyframes scrollDrop {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50%       { opacity: 1;   transform: scaleY(0.75); }
+    .btn-ember:hover {
+      background: #f09540;
+      box-shadow: 0 14px 40px rgba(232, 131, 42, 0.35);
     }
 
+    /* ── Trust Bar ────────────────────────────────────── */
+    .trust-bar {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2.5rem;
+    }
+    .trust-bar-inner {
+      max-width: 1440px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--mist);
+    }
+    .trust-icon {
+      width: 1.5rem; height: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ice); font-size: 0.85rem;
+    }
 
     /* ── Section shared ────────────────────────────────── */
     .section-wrap { max-width: 1440px; margin: 0 auto; padding: 0 2.5rem; }
@@ -385,6 +324,7 @@
       letter-spacing: 0.28em; text-transform: uppercase;
       color: var(--ice); margin-bottom: 1.25rem;
     }
+    .section-label.ember { color: var(--ember); }
     .section-heading {
       font-family: var(--display);
       font-size: clamp(2.4rem, 5vw, 4.5rem);
@@ -392,15 +332,19 @@
       letter-spacing: -0.015em; color: var(--snow);
     }
     .section-heading em { font-style: italic; color: var(--ice); }
+    .section-heading .ember-em { font-style: italic; color: var(--ember); }
 
     /* ── Products ──────────────────────────────────────── */
-    .products-bg {
-      background: var(--deep);
-      padding: 8rem 0 5rem;
+    .products-section {
+      padding: 6rem 0 3rem;
+      background: var(--void);
+    }
+    .products-section + .products-section {
+      padding-top: 0;
     }
     .products-header {
       display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem;
+      margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
     }
     .products-grid {
       display: grid;
@@ -424,17 +368,27 @@
       transition: opacity 0.4s var(--ease-smooth);
       pointer-events: none; z-index: 1;
     }
+    .product-card.card-heat::after {
+      background: radial-gradient(ellipse at 50% -10%, rgba(232, 131, 42, 0.1) 0%, transparent 65%);
+    }
     .product-card:hover {
       transform: translateY(-8px);
       border-color: rgba(91, 200, 245, 0.22);
       box-shadow:
         0 4px 16px rgba(0,0,0,0.35),
         0 24px 64px rgba(0,0,0,0.45),
-        0 0 0 1px rgba(91, 200, 245, 0.1),
         0 0 80px rgba(91, 200, 245, 0.04);
+    }
+    .product-card.card-heat:hover {
+      border-color: rgba(232, 131, 42, 0.22);
+      box-shadow:
+        0 4px 16px rgba(0,0,0,0.35),
+        0 24px 64px rgba(0,0,0,0.45),
+        0 0 80px rgba(232, 131, 42, 0.04);
     }
     .product-card:hover::after { opacity: 1; }
     .product-card:active { transform: translateY(-4px); }
+    .product-card:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
     .product-img-frame {
       position: relative; aspect-ratio: 4/3; overflow: hidden;
       background: var(--elevated);
@@ -443,7 +397,7 @@
       width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.7s var(--ease-smooth);
     }
-    .product-card:hover .product-img-frame img { transform: none; }
+    .product-card:hover .product-img-frame img { transform: scale(1.04); }
     .product-img-frame::after {
       content: '';
       position: absolute; inset: 0;
@@ -453,10 +407,10 @@
       position: absolute; top: 1rem; left: 1rem; z-index: 2;
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--void);
-      background: var(--ice);
+      color: var(--void); background: var(--ice);
       padding: 0.28rem 0.75rem; border-radius: 999px;
     }
+    .product-chip.chip-ember { background: var(--ember); }
     .product-body { padding: 1.75rem 1.75rem 1.5rem; position: relative; z-index: 2; }
     .product-name {
       font-family: var(--display);
@@ -494,189 +448,71 @@
       transform: scale(1.03);
     }
     .btn-card:active { transform: scale(0.97); }
+    .btn-card.card-ember {
+      color: var(--ember);
+      border-color: rgba(232, 131, 42, 0.3);
+    }
+    .btn-card.card-ember:hover {
+      color: var(--void); background: var(--ember); border-color: var(--ember);
+    }
 
-    /* ── Stats ─────────────────────────────────────────── */
-    .stats-section { padding: 4rem 2.5rem; background: var(--void); }
-    .stats-rail {
-      max-width: 1440px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--border);
-      border-radius: 1.25rem; overflow: hidden;
-      background: linear-gradient(135deg, var(--deep) 0%, var(--surface) 100%);
-    }
-    .stat-cell {
-      background: transparent;
-      padding: 3rem 2.5rem;
-      border-right: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .stat-cell:last-child { border-right: none; }
-    .stat-cell::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(to right, transparent, var(--ice), transparent);
-      opacity: 0;
-      transition: opacity 0.4s var(--ease-smooth);
-    }
-    .stat-cell:hover::before { opacity: 1; }
-    .stat-num {
-      font-family: var(--display);
-      font-size: clamp(3rem, 4.5vw, 4.75rem);
-      font-weight: 300; line-height: 1;
-      letter-spacing: -0.02em; color: var(--snow);
-      margin-bottom: 0.6rem;
-    }
-    .stat-num .accent { color: var(--ice); }
-    .stat-desc { font-size: 0.82rem; line-height: 1.6; color: var(--mist); }
-
-    /* ── Section divider ──────────────────────────────── */
+    /* ── Divider ──────────────────────────────────────── */
     .divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--border), transparent);
       max-width: 1440px; margin: 0 auto;
     }
 
-    /* ── Benefits / Science ────────────────────────────── */
-    .benefits-section { padding: 8rem 0; }
-    .benefits-inner {
-      max-width: 1440px; margin: 0 auto; padding: 0 2.5rem;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-    }
-    .benefits-visual { position: relative; }
-    .bv-main {
-      width: 100%; aspect-ratio: 3/4;
-      border-radius: 1.5rem; overflow: hidden; object-fit: cover;
-      display: block;
-    }
-    .benefits-list { display: flex; flex-direction: column; gap: 0; }
-    .benefit {
-      display: flex; gap: 1.5rem; align-items: flex-start;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .benefit:first-child { padding-top: 0; }
-    .benefit:last-child { border-bottom: none; padding-bottom: 0; }
-    .benefit-n {
-      font-family: var(--display);
-      font-size: 0.95rem; font-weight: 400; color: var(--ice);
-      flex-shrink: 0; min-width: 1.8rem; padding-top: 0.2rem;
-    }
-    .benefit h3 {
-      font-family: var(--display);
-      font-size: 1.45rem; font-weight: 400; color: var(--snow);
-      margin-bottom: 0.4rem; letter-spacing: -0.01em;
-    }
-    .benefit p { font-size: 0.87rem; line-height: 1.72; color: var(--mist); }
-
-    /* ── Full-bleed product feature ────────────────────── */
-    .feature-section {
-      position: relative; overflow: hidden;
+    /* ── Editorial / SEO Section ──────────────────────── */
+    .editorial-section {
+      padding: 7rem 0;
       background: var(--deep);
     }
-    .feature-inner {
-      max-width: 1440px; margin: 0 auto; padding: 8rem 2.5rem;
+    .editorial-inner {
+      max-width: 1440px; margin: 0 auto; padding: 0 2.5rem;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 5rem; align-items: center;
     }
-    .feature-img-wrap {
-      position: relative; aspect-ratio: 1; border-radius: 1.5rem; overflow: hidden;
+    .editorial-img {
+      position: relative; aspect-ratio: 3/4;
+      border-radius: 1.25rem; overflow: hidden;
     }
-    .feature-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .feature-img-wrap::after {
+    .editorial-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .editorial-img::after {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(91, 200, 245, 0.12) 0%, transparent 60%);
+      background:
+        linear-gradient(to bottom, transparent 60%, rgba(7,21,37,0.5) 100%),
+        linear-gradient(135deg, rgba(91,200,245,0.06) 0%, transparent 50%);
+      mix-blend-mode: multiply;
     }
-    .feature-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ice);
-      border: 1px solid var(--border-hi);
-      padding: 0.4rem 1rem; border-radius: 999px;
-      margin-bottom: 1.75rem;
-    }
-    .feature-badge .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--ice);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.75); }
-    }
-    .feature-heading {
+    .editorial-heading {
       font-family: var(--display);
-      font-size: clamp(2.2rem, 4vw, 3.75rem);
-      font-weight: 300; line-height: 1.05;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300; line-height: 1.1;
       letter-spacing: -0.015em; color: var(--snow);
-      margin-bottom: 1.5rem;
-    }
-    .feature-heading em { font-style: italic; color: var(--ice); }
-    .feature-body {
-      font-size: 0.92rem; line-height: 1.78; color: var(--mist);
-      margin-bottom: 2rem;
-    }
-    .feature-specs {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1rem; margin-bottom: 2.5rem;
-    }
-    .spec {
-      padding: 1rem 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-    }
-    .spec-key { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mist); margin-bottom: 0.3rem; }
-    .spec-val {
-      font-family: var(--display);
-      font-size: 1.3rem; font-weight: 400; color: var(--snow);
-    }
-
-    /* ── Process ───────────────────────────────────────── */
-    .process-section {
-      padding: 8rem 2.5rem;
-      background: var(--void);
-    }
-    .process-inner { max-width: 1440px; margin: 0 auto; }
-    .process-header { margin-bottom: 5rem; }
-    .process-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .process-grid::before {
-      content: '';
-      position: absolute;
-      top: 2.25rem; left: 6rem; right: 6rem; height: 1px;
-      background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
-    }
-    .process-step { padding: 0 1.5rem 0 0; }
-    .step-circle {
-      width: 4.5rem; height: 4.5rem; border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--display); font-size: 1.1rem; color: var(--ice);
       margin-bottom: 1.75rem;
-      position: relative; z-index: 1;
-      transition: background 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth);
     }
-    .process-step:hover .step-circle {
-      background: var(--elevated); border-color: var(--border-hi);
+    .editorial-heading em { font-style: italic; color: var(--ice); }
+    .editorial-body {
+      font-size: 0.92rem; line-height: 1.8; color: var(--mist);
     }
-    .step-title {
-      font-family: var(--display);
-      font-size: 1.4rem; font-weight: 400;
-      color: var(--snow); margin-bottom: 0.6rem;
+    .editorial-body p + p { margin-top: 1.25rem; }
+    .editorial-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ice); margin-top: 2rem;
+      transition: color 0.2s var(--ease-smooth);
     }
-    .step-desc { font-size: 0.85rem; line-height: 1.7; color: var(--mist); }
+    .editorial-link:hover { color: var(--frost); }
 
     /* ── Testimonials ──────────────────────────────────── */
-    .testimonials-section { padding: 8rem 2.5rem; background: var(--deep); }
+    .testimonials-section { padding: 6rem 2.5rem; background: var(--void); }
     .testimonials-inner { max-width: 1440px; margin: 0 auto; }
-    .testimonials-header { margin-bottom: 4rem; }
+    .testimonials-header { margin-bottom: 3.5rem; }
     .testimonials-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
@@ -712,51 +548,17 @@
     .t-name { font-size: 0.85rem; font-weight: 500; color: var(--snow); }
     .t-role { font-size: 0.75rem; color: var(--mist); }
 
-    /* ── Newsletter ────────────────────────────────────── */
-    .nl-section {
-      padding: 6rem 2.5rem;
-      background: var(--void);
-      border-top: 1px solid var(--border);
-    }
-    .nl-inner {
-      max-width: 1440px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-    }
-    .nl-heading {
-      font-family: var(--display);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 300; line-height: 1.05;
-      letter-spacing: -0.015em; color: var(--snow);
-    }
-    .nl-heading em { font-style: italic; color: var(--ice); }
-    .nl-sub { font-size: 0.87rem; line-height: 1.7; color: var(--mist); margin-top: 1rem; }
-    .nl-form { display: flex; gap: 0.75rem; }
-    .nl-input {
-      flex: 1;
-      font-family: var(--body); font-size: 0.88rem;
-      color: var(--snow);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 0.9rem 1.5rem;
-      border-radius: 999px;
-      outline: none;
-      transition: border-color 0.2s var(--ease-smooth);
-    }
-    .nl-input::placeholder { color: var(--fog); }
-    .nl-input:focus { border-color: var(--border-hi); }
-
     /* ── CTA ───────────────────────────────────────────── */
     .cta-section {
       position: relative; overflow: hidden;
-      padding: 12rem 2.5rem; text-align: center;
+      padding: 10rem 2.5rem; text-align: center;
     }
     .cta-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 100% 80% at 50% 50%, rgba(91, 200, 245, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 80% at 50% 50%, rgba(91, 200, 245, 0.06) 0%, transparent 60%),
         radial-gradient(ellipse 80% 100% at 20% 30%, rgba(18, 38, 69, 0.8) 0%, transparent 55%),
-        linear-gradient(180deg, var(--deep) 0%, var(--void) 100%);
+        linear-gradient(180deg, var(--void) 0%, var(--deep) 50%, var(--void) 100%);
     }
     .cta-rings {
       position: absolute; inset: 0;
@@ -764,32 +566,22 @@
     }
     .cta-ring {
       position: absolute; border-radius: 50%;
-      border: 1px solid rgba(91, 200, 245, 0.07);
+      border: 1px solid rgba(91, 200, 245, 0.06);
     }
     .cta-ring:nth-child(1) { width: 30vw; height: 30vw; }
     .cta-ring:nth-child(2) { width: 50vw; height: 50vw; }
     .cta-ring:nth-child(3) { width: 70vw; height: 70vw; }
-    .cta-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
     .cta-heading {
       font-family: var(--display);
-      font-size: clamp(2.5rem, 6vw, 5.5rem);
-      font-weight: 300; line-height: 1.02;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300; line-height: 1.05;
       letter-spacing: -0.02em; color: var(--snow);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
     .cta-heading em { font-style: italic; color: var(--ice); }
-    .cta-sub { font-size: 0.95rem; line-height: 1.75; color: var(--mist); margin-bottom: 3rem; }
+    .cta-sub { font-size: 0.95rem; line-height: 1.75; color: var(--mist); margin-bottom: 2.5rem; }
     .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .trust-row {
-      display: flex; align-items: center; justify-content: center;
-      flex-wrap: wrap; gap: 2rem; margin-top: 4rem;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--fog);
-    }
-    .trust-icon { color: var(--ice); font-size: 1rem; }
 
     /* ── Footer ────────────────────────────────────────── */
     footer {
@@ -819,6 +611,7 @@
         border-color 0.2s var(--ease-smooth);
     }
     .social-btn:hover { color: var(--snow); background: var(--elevated); border-color: var(--border-hi); }
+    .social-btn:focus-visible { outline: 2px solid var(--ice); outline-offset: 2px; }
     .footer-col h4 {
       font-size: 0.68rem; font-weight: 600;
       letter-spacing: 0.22em; text-transform: uppercase;
@@ -858,16 +651,9 @@
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1100px) {
       .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-rail { grid-template-columns: repeat(2, 1fr); }
-      .stats-rail .stat-cell:nth-child(2) { border-right: none; }
-      .stats-rail .stat-cell:nth-child(3) { border-top: 1px solid var(--border); }
-      .benefits-inner { grid-template-columns: 1fr; gap: 4rem; }
-      .benefits-visual { display: none; }
-      .feature-inner { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-      .process-grid::before { display: none; }
+      .editorial-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .editorial-img { max-height: 400px; aspect-ratio: 16/9; }
       .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .nl-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media (max-width: 768px) {
@@ -876,54 +662,49 @@
       .nav { padding: 1rem 1.25rem; }
       .nav.scrolled { padding: 0.85rem 1.25rem; }
 
-      .hero { align-items: flex-start; min-height: 100svh; }
-      .hero-content { padding: 7rem 1.5rem 3rem; }
-      .hero-img-wrap { opacity: 0.5; top: 40%; }
-      .hero-img-wrap img { object-position: center bottom; transform: translateY(0); }
-      .hero-img-wrap::before { background: none; }
-      .hero-scroll { display: none; }
+      .hero { min-height: 100svh; align-items: flex-end; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .hero-bg img { filter: brightness(0.75) saturate(0.9); }
+      .hero-overlay {
+        background:
+          linear-gradient(180deg,
+            rgba(2,11,21,0.15) 0%,
+            rgba(2,11,21,0.35) 35%,
+            rgba(2,11,21,0.75) 70%,
+            rgba(2,11,21,0.95) 100%);
+      }
 
-      .products-header { flex-direction: column; align-items: flex-start; }
-      .products-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .products-section { padding: 3.5rem 1.5rem 4rem; }
+      .trust-bar { padding: 1rem 1.25rem; }
+      .trust-bar-inner { gap: 1.25rem; justify-content: flex-start; }
+      .trust-item { font-size: 0.62rem; gap: 0.4rem; }
+      .trust-icon { width: 1.2rem; height: 1.2rem; font-size: 0.7rem; }
+
+      .products-section { padding: 3.5rem 0 2rem; }
+      .section-wrap { padding: 0 1.5rem; }
+      .products-header { margin-bottom: 2rem; flex-direction: column; align-items: flex-start; }
+      .products-grid { grid-template-columns: 1fr; gap: 1.25rem; }
       .product-body { padding: 1.25rem; }
+      .product-name { font-size: 1.35rem; }
 
-      .stats-section { padding: 2.5rem 1.5rem; }
-      .stats-rail { grid-template-columns: repeat(2, 1fr); }
-      .stats-rail .stat-cell { border-right: none; border-bottom: 1px solid var(--border); padding: 1.75rem 1.25rem; }
-      .stats-rail .stat-cell:nth-child(odd) { border-right: 1px solid var(--border); }
-      .stats-rail .stat-cell:nth-child(n+3) { border-bottom: none; }
-      .stats-rail .stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
-      .stat-num { font-size: 2.5rem; }
-      .stat-label { font-size: 0.78rem; }
-
-      .benefits-section { padding: 3.5rem 0; }
-      .benefits-inner { padding: 0 1.5rem; gap: 2.5rem; }
-      .benefit { padding: 1.25rem 0; }
-      .benefit h3 { font-size: 1.2rem; }
-
-      .feature-inner { padding: 3.5rem 1.5rem; }
-      .feature-specs { gap: 0.75rem; }
-
-      .process-section { padding: 3.5rem 1.5rem; }
-      .process-header { margin-bottom: 2.5rem; }
-      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-      .step-circle { width: 3.5rem; height: 3.5rem; font-size: 0.95rem; margin-bottom: 1rem; }
-      .step-title { font-size: 1.15rem; margin-bottom: 0.4rem; }
-      .step-desc { font-size: 0.8rem; }
+      .editorial-section { padding: 4rem 0; }
+      .editorial-inner { padding: 0 1.5rem; gap: 2.5rem; }
+      .editorial-img { max-height: 300px; aspect-ratio: 4/3; }
 
       .testimonials-section { padding: 3.5rem 1.5rem; }
-      .testimonials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 1.25rem; }
 
-      .nl-section { padding: 3rem 1.5rem; }
-      .nl-form { flex-direction: column; }
-      .nl-form .btn-primary { width: 100%; justify-content: center; }
-
-      .cta-section { padding: 4rem 1.5rem; }
+      .cta-section { padding: 5rem 1.5rem; }
 
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-legal { flex-wrap: wrap; gap: 0.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -962,98 +743,117 @@
 
   <!-- ─── Hero ─────────────────────────────────────── -->
   <section class="hero">
-    <div class="hero-atmosphere"></div>
-
-    <div class="hero-shimmer" aria-hidden="true"></div>
-
-    <div class="hero-img-wrap" aria-hidden="true">
-      <img src="brand%20assets/Website/1.1-ratio-of-ice-bath.webp" alt="">
+    <div class="hero-bg">
+      <img src="brand%20assets/Homepage/engineered-for-serious-cold.webp" alt="Ice bath setup outdoors in New Zealand">
     </div>
+    <div class="hero-overlay"></div>
 
     <div class="hero-content">
-      <p class="hero-eyebrow">Cold Therapy · New Zealand</p>
+      <p class="hero-eyebrow">New Zealand's Cold & Heat Therapy Specialists</p>
 
       <h1 class="hero-h1">
-        <span class="line"><span class="word" style="animation-delay:0.4s">Embrace</span></span>
-        <span class="line"><span class="word" style="animation-delay:0.55s"><em>the cold,</em></span></span>
-        <span class="line"><span class="word" style="animation-delay:0.72s">master</span></span>
-        <span class="line"><span class="word" style="animation-delay:0.88s">yourself.</span></span>
+        <span class="line"><span class="word" style="animation-delay:0.4s">Ice Baths</span></span>
+        <span class="line"><span class="word" style="animation-delay:0.55s"><em>& Saunas</em></span></span>
+        <span class="line" style="font-size:0.55em;letter-spacing:0.01em;line-height:1.4;margin-top:0.3em"><span class="word" style="animation-delay:0.72s">for New Zealand.</span></span>
       </h1>
 
-      <p class="hero-sub">Premium cold therapy equipment built for New Zealand's athletes, coaches, and high-performance humans. Engineered for the daily plunge.</p>
+      <p class="hero-sub">Galvanised steel ice bath tubs, precision chillers, and infrared saunas — built for NZ conditions, delivered to your door.</p>
 
       <div class="hero-actions">
         <a href="buy-now.html" class="btn-primary">
-          View Products
+          Shop All Products
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="benefits.html" class="btn-ghost">The Science</a>
       </div>
     </div>
-
-    <div class="hero-scroll" aria-hidden="true">
-      <div class="scroll-line"></div>
-      <span class="scroll-label">Scroll</span>
-    </div>
   </section>
 
+  <!-- ─── Trust Bar ──────────────────────────────────── -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+        </span>
+        NZ-Wide Delivery
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        1–2 Year Warranty
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </span>
+        NZ-Based Support
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+        </span>
+        30-Day Returns
+      </div>
+    </div>
+  </div>
 
-  <!-- ─── Products ─────────────────────────────────── -->
-  <section class="products-bg" id="products">
+  <!-- ─── Cold Therapy Products ──────────────────────── -->
+  <section class="products-section" id="products">
     <div class="section-wrap">
       <div class="products-header">
         <div>
-          <p class="section-label reveal">The Collection</p>
-          <h2 class="section-heading reveal reveal-d1">Built for the <em>brave.</em></h2>
+          <p class="section-label reveal">Ice Baths & Chillers</p>
+          <h2 class="section-heading reveal reveal-d1">Cold <em>therapy.</em></h2>
         </div>
-        <a href="buy-now.html" class="btn-ghost reveal reveal-d2">View All Products</a>
+        <a href="buy-now.html" class="btn-ghost reveal reveal-d2" style="font-size:0.72rem;padding:0.7rem 1.75rem;">View All</a>
       </div>
 
       <div class="products-grid">
         <!-- Ice Bath -->
         <a href="product-page/ice-bath-nz.html" class="product-card reveal">
           <div class="product-img-frame">
-            <img src="brand%20assets/Website/1.1-ratio-of-ice-bath.webp" alt="Ice Bath">
+            <img src="product-photos/Ice%20Bath/ICE%20BATH%20CATALOG.webp" alt="Ice Bath tub — galvanised steel cold plunge tub NZ">
             <span class="product-chip">Bestseller</span>
           </div>
           <div class="product-body">
             <h3 class="product-name">Ice Bath</h3>
-            <p class="product-tagline">G90 galvanised steel freestanding tub in 4ft or 5ft. Cools to 3°C with the chiller. Built for NZ's outdoor conditions.</p>
+            <p class="product-tagline">G90 galvanised steel freestanding tub. Available in 4ft or 5ft — built for NZ outdoor conditions.</p>
             <div class="product-footer">
               <span class="product-price">from <span class="cur">NZ$</span>784</span>
-              <button class="btn-card">Buy Now</button>
-            </div>
-          </div>
-        </a>
-
-        <!-- Square Sauna -->
-        <a href="product-page/square-sauna.html" class="product-card reveal reveal-d1">
-          <div class="product-img-frame">
-            <img src="brand%20assets/Square%20Sauna/product-card-main.webp" alt="Square Sauna" style="object-fit:cover;">
-            <span class="product-chip">New</span>
-          </div>
-          <div class="product-body">
-            <h3 class="product-name">Square Sauna</h3>
-            <p class="product-tagline">Two-tier stadium seating for up to 5. Premium Thermo Hemlock, 6kW heater, built-in LED lighting, and a bitumen roof for NZ conditions.</p>
-            <div class="product-footer">
-              <span class="product-price"><span class="cur">NZ$</span>9,999</span>
-              <button class="btn-card">Buy Now</button>
+              <span class="btn-card">View</span>
             </div>
           </div>
         </a>
 
         <!-- Stainless Steel Ice Bath -->
-        <a href="product-page/stainless-steel-ice-bath.html" class="product-card reveal reveal-d2">
+        <a href="product-page/stainless-steel-ice-bath.html" class="product-card reveal reveal-d1">
           <div class="product-img-frame">
-            <img src="brand%20assets/Stainless%20Steel%20Ice%20Bath%20(NEW)/stainless-steel-main.webp" alt="Stainless Steel Ice Bath" style="object-fit:cover;">
+            <img src="product-photos/Stainless%20Steel%20Ice%20Bath/STAINLESS%20STEEL%20CATALOG.webp" alt="Stainless steel ice bath tub NZ">
             <span class="product-chip">New</span>
           </div>
           <div class="product-body">
             <h3 class="product-name">Stainless Steel Ice Bath</h3>
-            <p class="product-tagline">Food-grade 304 or 316 stainless steel. Rust-proof, easy-drain, lifetime durability — the professional's choice for cold therapy.</p>
+            <p class="product-tagline">Food-grade 304 or 316 stainless steel. Rust-proof, easy-drain, lifetime durability.</p>
             <div class="product-footer">
               <span class="product-price">from <span class="cur">NZ$</span>3,849</span>
-              <button class="btn-card">Buy Now</button>
+              <span class="btn-card">View</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Ice Bath Chiller -->
+        <a href="product-page/ice-bath-chiller.html" class="product-card reveal reveal-d2">
+          <div class="product-img-frame">
+            <img src="product-photos/Standard%20Chiller/STANDARD%20CHILLER%20CATALOG.webp" alt="Ice bath chiller unit NZ">
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Ice Bath Chiller</h3>
+            <p class="product-tagline">Precision cooling down to 3°C. 1HP compressor, UV filtration, outdoor rated to -10°C.</p>
+            <div class="product-footer">
+              <span class="product-price"><span class="cur">NZ$</span>2,399</span>
+              <span class="btn-card">View</span>
             </div>
           </div>
         </a>
@@ -1061,158 +861,101 @@
     </div>
   </section>
 
-  <!-- ─── Stats ─────────────────────────────────────── -->
-  <div class="divider"></div>
-  <div class="stats-section">
-    <div class="stats-rail">
-      <div class="stat-cell reveal">
-        <div class="stat-num">4<span class="accent">°C</span></div>
-        <p class="stat-desc">Optimal cold therapy temperature for peak physiological response</p>
-      </div>
-      <div class="stat-cell reveal reveal-d1">
-        <div class="stat-num">11<span class="accent">min</span></div>
-        <p class="stat-desc">Minimum weekly immersion shown to produce measurable health benefits</p>
-      </div>
-      <div class="stat-cell reveal reveal-d2">
-        <div class="stat-num">300<span class="accent">%</span></div>
-        <p class="stat-desc">Increase in norepinephrine levels after cold water immersion</p>
-      </div>
-      <div class="stat-cell reveal reveal-d3">
-        <div class="stat-num">2.5k<span class="accent">+</span></div>
-        <p class="stat-desc">New Zealanders who've made cold therapy part of their daily ritual</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─── Benefits / Science ───────────────────────── -->
-  <div class="divider"></div>
-  <section class="benefits-section" id="science">
-    <div class="benefits-inner">
-
-      <div class="benefits-visual reveal">
-        <img class="bv-main" src="brand%20assets/Homepage/why-cold-changes-v2.webp" alt="Cold immersion therapy" style="object-fit:cover;">
-      </div>
-
-      <div>
-        <p class="section-label reveal">The Science</p>
-        <h2 class="section-heading reveal reveal-d1" style="margin-bottom:3rem">Why cold <em>changes everything.</em></h2>
-
-        <div class="benefits-list">
-          <div class="benefit reveal">
-            <span class="benefit-n">01</span>
-            <div>
-              <h3>Accelerated Recovery</h3>
-              <p>Cold immersion reduces muscle inflammation and soreness significantly. Elite athletes use ice baths to cut recovery time by up to 50%, returning to peak output faster.</p>
-            </div>
-          </div>
-          <div class="benefit reveal reveal-d1">
-            <span class="benefit-n">02</span>
-            <div>
-              <h3>Mental Resilience</h3>
-              <p>Regular cold exposure builds extraordinary mental fortitude. Deliberate discomfort trains your nervous system to process stress with clarity, control, and calm.</p>
-            </div>
-          </div>
-          <div class="benefit reveal reveal-d2">
-            <span class="benefit-n">03</span>
-            <div>
-              <h3>Mood & Sustained Energy</h3>
-              <p>Cold triggers a massive norepinephrine and endorphin surge — up to 300% above baseline. The result: elevated mood, sharper focus, and sustained energy all day.</p>
-            </div>
-          </div>
-          <div class="benefit reveal reveal-d3">
-            <span class="benefit-n">04</span>
-            <div>
-              <h3>Metabolic Activation</h3>
-              <p>Cold exposure activates brown adipose tissue, increases metabolic rate, and supports long-term healthy weight management and metabolic resilience.</p>
-            </div>
-          </div>
+  <!-- ─── Heat Therapy Products ──────────────────────── -->
+  <section class="products-section">
+    <div class="section-wrap">
+      <div class="products-header">
+        <div>
+          <p class="section-label ember reveal">Saunas</p>
+          <h2 class="section-heading reveal reveal-d1">Heat <span class="ember-em">therapy.</span></h2>
         </div>
+        <a href="buy-now.html" class="btn-ghost reveal reveal-d2" style="font-size:0.72rem;padding:0.7rem 1.75rem;">View All</a>
       </div>
 
+      <div class="products-grid">
+        <!-- Barrel Sauna -->
+        <a href="product-page/barrel-sauna.html" class="product-card card-heat reveal">
+          <div class="product-img-frame">
+            <img src="product-photos/Barrel%20Sauna/BARREL%20SAUNA%20CATALOG.webp" alt="Outdoor barrel sauna NZ — cedar wood">
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Barrel Sauna</h3>
+            <p class="product-tagline">Canadian Western Red Cedar. 2P, 4P and 6P options with 6kW heater — designed for NZ backyards.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>7,500</span>
+              <span class="btn-card card-ember">View</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Square Sauna -->
+        <a href="product-page/square-sauna.html" class="product-card card-heat reveal reveal-d1">
+          <div class="product-img-frame">
+            <img src="product-photos/Square%20Sauna/SQUARE%20SAUNA%20CATALOG.webp" alt="Outdoor square sauna NZ — Thermo Hemlock">
+            <span class="product-chip chip-ember">New</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Square Sauna</h3>
+            <p class="product-tagline">Two-tier stadium seating for up to 5. Thermo Hemlock, 6kW heater, LED lighting.</p>
+            <div class="product-footer">
+              <span class="product-price"><span class="cur">NZ$</span>9,999</span>
+              <span class="btn-card card-ember">View</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Indoor Saunas -->
+        <a href="product-page/indoor-sauna.html" class="product-card card-heat reveal reveal-d2">
+          <div class="product-img-frame">
+            <img src="product-photos/Aurora%202%20Person/AURORA%202%20PERSON%20CATALOG.webp" alt="Indoor infrared sauna NZ — Aurora">
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Indoor Saunas</h3>
+            <p class="product-tagline">Infrared and traditional saunas for your home, studio or gym. 7 models from 2 to 4 person.</p>
+            <div class="product-footer">
+              <span class="product-price">from <span class="cur">NZ$</span>4,449</span>
+              <span class="btn-card card-ember">View</span>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ─── Featured Product ─────────────────────────── -->
-  <section class="feature-section">
-    <div class="feature-inner">
+  <!-- ─── Editorial / SEO Content ────────────────────── -->
+  <div class="divider"></div>
+  <section class="editorial-section" id="about">
+    <div class="editorial-inner">
 
-      <div class="feature-img-wrap reveal">
-        <img src="brand%20assets/Homepage/img-4712.webp" alt="Ice Bath NZ detail" style="object-fit:cover;">
+      <div class="editorial-img reveal">
+        <img src="brand%20assets/Homepage/why-cold-changes-v2.webp" alt="Person using an ice bath outdoors in New Zealand">
       </div>
 
       <div>
-        <h2 class="feature-heading reveal reveal-d1">The Ice Bath — engineered for <em>serious cold</em>.</h2>
-        <p class="feature-body reveal reveal-d2">Formed from G90 galvanised steel — built for New Zealand's outdoor conditions — the Ice Bath is engineered to last. Available in 4ft (350L) or 5ft (500L), it installs in minutes with a 20mm drain plug and no plumbing required. Paired with the Chiller, it holds your target temperature down to 3°C without ice runs, without guesswork, and without fail. This isn't equipment — it's infrastructure for your ritual.</p>
+        <p class="section-label reveal">Why Cold Therapy</p>
+        <h2 class="editorial-heading reveal reveal-d1">Why New Zealand <em>chooses cold.</em></h2>
 
-        <div class="feature-specs reveal reveal-d1">
-          <div class="spec">
-            <div class="spec-key">Steel Grade</div>
-            <div class="spec-val">G90 Galv.</div>
-          </div>
-          <div class="spec">
-            <div class="spec-key">Coating</div>
-            <div class="spec-val">Hot-Dipped</div>
-          </div>
-          <div class="spec">
-            <div class="spec-key">Tried and Tested in</div>
-            <div class="spec-val">The NZ Outdoors</div>
-          </div>
-          <div class="spec">
-            <div class="spec-key">Temp Rating</div>
-            <div class="spec-val">-5°C to 40°C</div>
-          </div>
+        <div class="editorial-body reveal reveal-d2">
+          <p>Cold water immersion triggers a surge in norepinephrine — up to 300% above baseline — delivering sharper focus, elevated mood, and faster recovery that lasts all day. Elite athletes use ice baths to cut recovery time in half. Everyday users report better sleep, reduced inflammation, and a notable shift in mental resilience within two weeks.</p>
+          <p>Our ice bath tubs are engineered for New Zealand conditions: G90 galvanised steel that handles frost, rain, and UV without corroding. Paired with a precision chiller that holds your target temperature down to 3°C — no ice runs, no guesswork. Whether you're after a cold plunge tub for home use or a stainless steel ice bath for your gym, we deliver nationwide with a 1–2 year warranty.</p>
         </div>
 
-        <div class="hero-actions reveal reveal-d2">
-          <a href="buy-now.html" class="btn-primary">
-            Shop Ice Baths
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
+        <a href="benefits.html" class="editorial-link reveal reveal-d3">
+          Read the science
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ─── Process ──────────────────────────────────── -->
-  <section class="process-section" id="about">
-    <div class="process-inner">
-      <div class="process-header">
-        <p class="section-label reveal">How It Works</p>
-        <h2 class="section-heading reveal reveal-d1">Simple. <em>Powerful.</em> Proven.</h2>
-      </div>
-
-      <div class="process-grid">
-        <div class="process-step reveal">
-          <div class="step-circle">01</div>
-          <h3 class="step-title">Choose Your Setup</h3>
-          <p class="step-desc">Pick the configuration that fits your space and goals — from entry-level setups to premium permanent installations.</p>
-        </div>
-        <div class="process-step reveal reveal-d1">
-          <div class="step-circle">02</div>
-          <h3 class="step-title">Fill & Chill</h3>
-          <p class="step-desc">Our precision chillers reach your target temperature automatically. No ice runs, no guesswork. Just fill and set.</p>
-        </div>
-        <div class="process-step reveal reveal-d2">
-          <div class="step-circle">03</div>
-          <h3 class="step-title">Immerse Daily</h3>
-          <p class="step-desc">Start with 2–3 minutes and build up gradually. Focus on your breathing and use proven protocols to make each session more effective.</p>
-        </div>
-        <div class="process-step reveal reveal-d3">
-          <div class="step-circle">04</div>
-          <h3 class="step-title">Feel the Shift</h3>
-          <p class="step-desc">Within two weeks most users report better sleep, faster recovery, and a notable shift in mental clarity and mood.</p>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- ─── Testimonials ─────────────────────────────── -->
+  <div class="divider"></div>
   <section class="testimonials-section">
     <div class="testimonials-inner">
       <div class="testimonials-header">
-        <p class="section-label reveal">Testimonials</p>
-        <h2 class="section-heading reveal reveal-d1">Trusted by those who <em>push limits.</em></h2>
+        <p class="section-label reveal">Reviews</p>
+        <h2 class="section-heading reveal reveal-d1">What our customers <em>say.</em></h2>
       </div>
 
       <div class="testimonials-grid">
@@ -1222,7 +965,7 @@
           </div>
           <p class="t-quote">"Having a daily ice bath has cut down my recovery time from a couple days to less than half of that. Seriously recommend."</p>
           <div class="t-author">
-            <div class="t-avatar"><img src="Customer Photos/James K.avif" alt="James K"></div>
+            <div class="t-avatar"><img src="Customer%20Photos/James%20K.avif" alt="James K"></div>
             <div>
               <div class="t-name">James K.</div>
               <div class="t-role">Professional Rugby Player, Christchurch</div>
@@ -1236,7 +979,7 @@
           </div>
           <p class="t-quote">"Thank you for your great service in getting my ice bath to us. I absolutely love it, looks great and works even better. Would recommend to anyone."</p>
           <div class="t-author">
-            <div class="t-avatar"><img src="Customer Photos/Tom S.avif" alt="Tom S"></div>
+            <div class="t-avatar"><img src="Customer%20Photos/Tom%20S.avif" alt="Tom S"></div>
             <div>
               <div class="t-name">Tom S.</div>
               <div class="t-role">New Zealand</div>
@@ -1248,32 +991,15 @@
           <div class="t-stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
           </div>
-          <p class="t-quote">"I could not be happier. I'm under 6ft and this 4ft bath is perfect for full body submersion. I have Fibromyalgia — the ice bath helps me manage pain and depression more effectively than any other treatment I've tried."</p>
+          <p class="t-quote">"I could not be happier. I'm under 6ft and this 4ft bath is perfect for full body submersion. The ice bath helps me manage pain and depression more effectively than any other treatment I've tried."</p>
           <div class="t-author">
-            <div class="t-avatar"><img src="Customer Photos/Gem R.avif" alt="Gem R"></div>
+            <div class="t-avatar"><img src="Customer%20Photos/Gem%20R.avif" alt="Gem R"></div>
             <div>
               <div class="t-name">Gem R.</div>
               <div class="t-role">Auckland</div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Newsletter ────────────────────────────────── -->
-  <section class="nl-section">
-    <div class="nl-inner">
-      <div>
-        <h2 class="nl-heading reveal">Stay cold. <em>Stay sharp.</em></h2>
-        <p class="nl-sub reveal reveal-d1">Science, protocols, and exclusive offers — delivered to your inbox. No noise. Just signal.</p>
-      </div>
-      <div class="reveal reveal-d1">
-        <div class="nl-form">
-          <input class="nl-input" type="email" placeholder="Your email address">
-          <button class="btn-primary" type="submit">Subscribe</button>
-        </div>
-        <p style="font-size:0.72rem;color:var(--fog);margin-top:0.75rem;">No spam, ever. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
@@ -1287,33 +1013,14 @@
       <div class="cta-ring"></div>
     </div>
     <div class="cta-content">
-      <p class="section-label reveal">Take the Plunge</p>
-      <h2 class="cta-heading reveal reveal-d1">Ready to <em>embrace</em><br>the cold?</h2>
-      <p class="cta-sub reveal reveal-d2">Join thousands of New Zealanders who've made cold therapy a cornerstone of their wellness practice. New Zealand nationwide delivery.</p>
+      <h2 class="cta-heading reveal">Ready to <em>take</em><br>the plunge?</h2>
+      <p class="cta-sub reveal reveal-d1">Join thousands of New Zealanders who've made cold therapy part of their daily ritual. Delivered nationwide.</p>
       <div class="cta-actions reveal reveal-d2">
         <a href="buy-now.html" class="btn-primary">
           Shop Now
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#science" class="btn-ghost">Learn More</a>
-      </div>
-      <div class="trust-row reveal reveal-d3">
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          Delivery Nation Wide
-        </div>
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          Warranty
-        </div>
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          30-Day Returns
-        </div>
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          NZ-Based Support
-        </div>
+        <a href="contact.html" class="btn-ghost">Contact Us</a>
       </div>
     </div>
   </section>
@@ -1402,9 +1109,7 @@
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
   </script>
   <script type="module" src="/js/cart-ui.js"></script>
 </body>
