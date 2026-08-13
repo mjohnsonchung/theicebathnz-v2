@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-07-31 (session 53)
+Last updated: 2026-08-14 (session 54)
 
 ---
 
@@ -682,6 +682,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Aurora 2P hero mobile photo updated (session 51)** — converted new `AURORA_2_HERO_MOBILE_4K (NEW).png` to WebP (quality 82, 326KB) using sharp, renamed to `AURORA 2P HERO MOBILE.webp` matching naming convention. Source PNG deleted. Product page already references this filename.
 - [x] **Mobile hero brightness (session 52)** — On desktop, hovering the hero area brightens the photo (brightness 1.0, saturate 1.1, overlay opacity 0.85, atmosphere opacity 0.6). On mobile there's no hover, so the brighter state is now the default for `max-width: 768px` across all 18 product pages. Desktop hover behavior unchanged. Three CSS-background pages (Solara 2P, Solara 3P, Stainless Steel) target `.product-hero-bg`; the other 15 target `.product-hero-bg img`.
 - [x] **Aurora 2P hero mobile image fix (session 53)** — Product page was referencing `AURORA 2 PERSON HERO MOBILE.webp` instead of `AURORA 2P HERO MOBILE.webp`. Updated `<source>` srcset in `aurora-2p-infrared-sauna.html`. Deleted the old incorrect file from `product-photos/Aurora 2 Person/`.
+- [x] **Bulk mobile hero photo refresh (session 54)** — 14 new mobile hero images converted from PNG to WebP (quality 82) and replaced in `product-photos/`: All-in-One (44KB), Aurora 3P (230KB), Aurora 4P (241KB), Ice Bath (23KB), Barrel Sauna (271KB), Lahti (54KB), Solara 2P (293KB), Solara 3P (48KB), Square Sauna (247KB), Stainless Steel (157KB), Standard Chiller (13KB), Tampere (142KB), Vesta 2P (151KB), Vesta 4P (142KB). Source PNGs deleted. No HTML changes needed — filenames unchanged. Premium Chiller not included (no new image provided).
 
 ### Pending
 - [ ] (none)
