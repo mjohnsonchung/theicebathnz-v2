@@ -70,10 +70,11 @@ export const ACCESSORY_SOLO_RATE = 20;
 // PRODUCT CATALOG
 // ---------------------------------------------------------------------------
 // `amount` is in NZD cents. `ship` is the freight category.
+// `ship_surcharge` (optional, NZD) is added per-unit on top of the category rate.
 export const PRODUCTS = {
   ice_bath_4ft:     { name: 'Ice Bath 4ft',                      amount:   78400, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
   ice_bath_5ft:     { name: 'Ice Bath 5ft',                      amount:   88800, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
-  chiller_standard: { name: 'Ice Bath Chiller',                  amount:  239900, ship: 'chiller',   tags: ['cold', 'indoor', 'outdoor'] },
+  chiller_standard: { name: 'Ice Bath Chiller',                  amount:  259900, ship: 'chiller',   tags: ['cold', 'indoor', 'outdoor'] },
   chiller_premium:  { name: 'Premium Ice Bath Chiller',          amount:  329900, ship: 'chiller',   tags: ['cold', 'indoor', 'outdoor'] },
   sauna_barrel_2p:  { name: 'Barrel Sauna (2 Person)',           amount:  750000, ship: 'sauna',     tags: ['heat', 'outdoor'] },
   sauna_barrel:     { name: 'Barrel Sauna (4 Person)',           amount:  989900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
@@ -81,9 +82,9 @@ export const PRODUCTS = {
   sauna_square:     { name: 'Square Sauna',                      amount:  999900, ship: 'sauna',     tags: ['heat', 'outdoor'] },
   ice_bath_cover:   { name: 'Ice Bath Cover',                    amount:   19900, ship: 'accessory', tags: ['accessory', 'cold', 'indoor', 'outdoor'] },
   hose_attachment:  { name: 'Hose Attachment',                   amount:    7900, ship: 'accessory', tags: ['accessory', 'cold', 'outdoor'] },
-  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath',  tags: ['cold', 'indoor'] },
-  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
-  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath',  tags: ['cold', 'indoor', 'outdoor'] },
+  allinone_bath:    { name: 'All-in-One Ice Bath & Chiller',     amount: 1089900, ship: 'ice_bath',  ship_surcharge: 150, tags: ['cold', 'indoor'] },
+  steel_bath_304:   { name: 'Stainless Steel Ice Bath (304)',    amount:  384900, ship: 'ice_bath',  ship_surcharge: 100, tags: ['cold', 'indoor', 'outdoor'] },
+  steel_bath_316:   { name: 'Stainless Steel Ice Bath (316)',    amount:  439900, ship: 'ice_bath',  ship_surcharge: 100, tags: ['cold', 'indoor', 'outdoor'] },
   // ── Indoor Saunas — Infrared ───────────────────────────────────────────
   aurora_2p:        { name: 'Aurora 2P Infrared Sauna',          amount:  474900, ship: 'sauna',     tags: ['heat', 'indoor'] },
   aurora_3p:        { name: 'Aurora 3P Infrared Sauna',          amount:  574900, ship: 'sauna',     tags: ['heat', 'indoor'] },
@@ -163,6 +164,11 @@ export function calculateShipping(productIds, region) {
     total += unitsFreight(baths,  rates.ice_bath, FREIGHT_FACTOR.ice_bath);
     total += unitsFreight(saunas, rates.sauna,    FREIGHT_FACTOR.sauna);
     total += Math.max(0, chillers - baths) * rates.chiller;
+
+    // Per-product shipping surcharges (heavier/bulkier items).
+    for (const id of productIds) {
+      if (PRODUCTS[id].ship_surcharge) total += PRODUCTS[id].ship_surcharge;
+    }
   }
 
   // Accessories: free alongside any bath/chiller, else $20 each. (Unchanged.)

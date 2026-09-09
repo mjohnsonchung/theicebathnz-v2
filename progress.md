@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-08-14 (session 55)
+Last updated: 2026-09-09 (session 56)
 
 ---
 
@@ -41,7 +41,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 
 ### Products
 - **Ice Bath** → `product-page/ice-bath-nz.html` — 4ft ($784) and 5ft ($888) on one page with JS size selector (product renamed from "Ice Bath NZ" to "Ice Bath")
-- **Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — standard chiller only, NZ$2,399 (variant toggle removed session 43)
+- **Ice Bath Chiller** → `product-page/ice-bath-chiller.html` — standard chiller only, NZ$2,599 (variant toggle removed session 43)
 - **Premium Ice Bath Chiller** → `product-page/premium-chiller.html` — standalone premium page, NZ$3,299, WiFi + 7" LCD (split from chiller page session 43)
 - **Stainless Steel Ice Bath** → `product-page/stainless-steel-ice-bath.html` — 304/316 grade selector
 - **All-in-One Ice Bath** → `product-page/all-in-one-ice-bath.html` — single SKU NZ$10,899
@@ -107,7 +107,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 │   └── Ice Bath/           — Reorganised; bath tub & chiller images moved here
 └── product-page/
     ├── ice-bath-nz.html    — Ice Bath (4ft / 5ft size selector)
-    ├── ice-bath-chiller.html — Standard Chiller (NZ$2,399, no variant toggle)
+    ├── ice-bath-chiller.html — Standard Chiller (NZ$2,599, no variant toggle)
     ├── premium-chiller.html — Premium Chiller (NZ$3,299, WiFi + 7" LCD)
     ├── barrel-sauna.html   — Barrel Sauna (2P / 4P / 6P size selector)
     ├── square-sauna.html   — Square Sauna (single SKU)
@@ -685,6 +685,11 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 - [x] **Bulk mobile hero photo refresh (session 54)** — 14 new mobile hero images converted from PNG to WebP (quality 82) and replaced in `product-photos/`: All-in-One (44KB), Aurora 3P (230KB), Aurora 4P (241KB), Ice Bath (23KB), Barrel Sauna (271KB), Lahti (54KB), Solara 2P (293KB), Solara 3P (48KB), Square Sauna (247KB), Stainless Steel (157KB), Standard Chiller (13KB), Tampere (142KB), Vesta 2P (151KB), Vesta 4P (142KB). Source PNGs deleted. No HTML changes needed — filenames unchanged. Premium Chiller not included (no new image provided).
 
 - [x] **Homepage redesign (session 55)** — Full homepage redesign with SEO focus. Removed 4 filler sections (stats rail, numbered benefits, featured product detail, "How It Works" steps, newsletter). New structure: full-bleed hero with SEO H1 ("Ice Baths & Saunas for New Zealand"), trust bar (NZ-Wide Delivery / 1–2 Year Warranty / NZ-Based Support / 30-Day Returns), 6 product cards split into Cold Therapy (Ice Bath, Stainless Steel, Chiller) and Heat Therapy (Barrel Sauna, Square Sauna, Indoor Saunas), editorial SEO content section with natural keyword placement ("ice bath nz", "cold plunge tub", "stainless steel ice bath", "ice bath chiller"), testimonials (3 real reviews), CTA. Product images now use `product-photos/` CATALOG images. Meta tags preserved. All existing nav, footer, design tokens unchanged.
+
+- [x] **Price & shipping updates (session 56)**
+  - Standard Chiller price increased NZ$2,399 → NZ$2,599 across all files: `shipping.js` (source of truth, 239900→259900), `ice-bath-chiller.html` (meta tags, hero price, CTA price), `ice-bath-nz.html` (chiller toggle hint, related card, priceMatrix bundle totals 3183→3383 / 3287→3487), `stainless-steel-ice-bath.html` (chiller toggle hint, related card, chillerPrices JS), `all-in-one-ice-bath.html` (related card), `buy-now.html` (meta descriptions, product card price), `index.html` (product card price)
+  - Stainless Steel Ice Bath shipping +$100/unit surcharge: `ship_surcharge: 100` added to `steel_bath_304` and `steel_bath_316` in `shipping.js`; `calculateShipping()` updated to apply per-product surcharges on top of base `ice_bath` rate
+  - All-in-One Ice Bath shipping +$150/unit surcharge: `ship_surcharge: 150` added to `allinone_bath` in `shipping.js`
 
 ### Pending
 - [ ] (none)
