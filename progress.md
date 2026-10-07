@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-09-09 (session 56)
+Last updated: 2026-10-07 (session 57)
 
 ---
 
@@ -691,8 +691,13 @@ All product page HTML files now reference images via `../product-photos/[Folder]
   - Stainless Steel Ice Bath shipping +$100/unit surcharge: `ship_surcharge: 100` added to `steel_bath_304` and `steel_bath_316` in `shipping.js`; `calculateShipping()` updated to apply per-product surcharges on top of base `ice_bath` rate
   - All-in-One Ice Bath shipping +$150/unit surcharge: `ship_surcharge: 150` added to `allinone_bath` in `shipping.js`
 
+- [x] **Google Tag Manager installed (session 57)** — GTM container `GTM-KTHPQC9D` added to all 30 production HTML pages. Old inline GA4 snippet (`G-MF5374TSTP`) removed from all pages — GA4 will now be managed through GTM. Two snippets per page: `<script>` in `<head>` (as high as possible), `<noscript>` immediately after `<body>`.
+
 ### Pending
-- [ ] (none)
+- [ ] Configure GA4 tag inside GTM (Measurement ID `G-MF5374TSTP`, timezone Auckland, currency NZD)
+- [ ] Add Meta Pixel tag inside GTM (client to provide Pixel ID from their Business Manager)
+- [ ] Publish GTM container and verify tags fire (Tag Assistant, GA4 Realtime, Meta Pixel Helper)
+- [ ] Verify sitemap.xml is submitted in Search Console
 
 ---
 
