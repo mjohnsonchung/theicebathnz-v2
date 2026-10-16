@@ -1,0 +1,6 @@
+# Files Vercel leaves out of every deployment, so they are never public on the site.
+# Notes for Claude sessions and the client's build history
+*.md
+# Local dev and screenshot scripts
+*.mjs
+temporary screenshots/
