@@ -1,7 +1,16 @@
 # CLAUDE.md — Frontend Website Rules
 
 ## Always Do First
-- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions. If the skill isn't available (it isn't in cloud sessions), follow the guardrails in this file instead.
+
+## Going Live
+- Vercel publishes `master` straight to the live site, theicebathnz.co.nz. Never push to `master` directly.
+- Work on a branch. Vercel builds every pushed branch as its own preview link. Matt checks the preview, then merges to `master`.
+- Never complete a checkout on a preview: depending on the Stripe key Vercel gives previews, it could take a real payment or simply fail.
+
+## Notes Files
+- `progress.md` holds current state only. When a task is done, add it under "Completed" in `progress.md`; when that list gets long, move older items to `progress-archive.md`.
+- `.vercelignore` keeps `*.md` and `*.mjs` files off the live site. Any new notes file or dev script must use one of those extensions or be added to `.vercelignore`, or it becomes public.
 
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
@@ -15,6 +24,7 @@
 - If the server is already running, do not start a second instance.
 
 ## Screenshot Workflow
+- The paths below are on Matt's Windows PC. In a cloud session they don't exist and `screenshot.mjs` won't run: start `node serve.mjs`, then screenshot `http://localhost:3000` with Playwright, whose Chromium is at `/opt/pw-browsers`. Save screenshots to the same `temporary screenshots/` folder.
 - Puppeteer is installed at `C:\Users\Matthew\node_modules\puppeteer`. Chrome cache is at `C:\Users\Matthew\.cache\puppeteer\`.
 - **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
 - Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
@@ -31,7 +41,7 @@
 - Mobile-first responsive
 
 ## Brand Assets
-- Always check the `brand_assets/` folder before designing. It may contain logos, color guides, style guides, or images.
+- Always check the `brand assets/` folder (and `product-photos/` for product images) before designing. It may contain logos, color guides, style guides, or images.
 - If assets exist there, use them. Do not use placeholders where real assets are available.
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
 
