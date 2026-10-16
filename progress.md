@@ -1,6 +1,6 @@
 # Project Progress — The Ice Bath NZ (v2)
 
-Last updated: 2026-10-16 (session 58)
+Last updated: 2026-10-16 (session 59)
 
 ---
 
@@ -98,6 +98,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 ├── product-photos/         — live product images, one folder per product (see Product Photos Workflow)
 ├── Customer Photos/        — customer photos used on the homepage
 ├── brand assets/           — logo, favicon, homepage and older product images
+│   └── Client Logos/       — white "Trusted by" logos on the homepage (session 59)
 ├── package.json            — stripe dependency, ESM module type (needed by the api/ function)
 ├── vercel.json             — redirects + clean URLs
 ├── .vercelignore           — keeps *.md and *.mjs off the live site
@@ -119,6 +120,8 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 Finished work from sessions 1–57 is in [progress-archive.md](progress-archive.md). Read it only when you need the history of a change.
 
 - [x] **Session 58 (2026-10-16): notes cleanup.** Moved the finished-work list to `progress-archive.md`. Added `.vercelignore` so notes (`*.md`) and dev scripts (`*.mjs`) are no longer published on the live site; before this, `/progress.md`, `/CLAUDE.md`, `/STRIPE_SETUP.md` and `/CLAUDE_CODE_BRIEF.md` were publicly readable. Refreshed the file map. Added cloud-session notes to `CLAUDE.md`.
+
+- [x] **Session 59 (2026-10-16): "Trusted by" logo band on the homepage.** The client's ask, via Matt: logos of commercial brands the client has sold to, shown in one tone (grey, white or black) rather than their own colours. Eight logos (Blues, Sports Physio Lab, M2 Training Club, BFT, Sauna Collective, O-Studio, The Wellness Club, WI) were converted from the client's JPEGs to white-on-transparent WebPs in `brand assets/Client Logos/`, and sit in a new band under the trust bar at 66% opacity. Each logo's display width is set by eye with an inline `--w` so they carry similar visual weight; 8 per row on desktop, 4 under 1100px, 3 under 768px. WI's full name isn't known, so its alt text is "WI".
 
 ### Pending
 - [ ] Configure GA4 tag inside GTM (Measurement ID `G-MF5374TSTP`, timezone Auckland, currency NZD)
