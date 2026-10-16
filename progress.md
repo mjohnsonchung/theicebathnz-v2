@@ -72,7 +72,7 @@ All product page HTML files now reference images via `../product-photos/[Folder]
 ### Git / Deployment
 - GitHub repo: `mjohnsonchung/theicebathnz-v2`
 - Vercel connected and deployed ✓
-- Vercel publishes `master` straight to the live site (theicebathnz.co.nz). Every other pushed branch gets its own preview link, so changes go on a branch, Matt checks the preview, then merges (from session 58)
+- Vercel publishes `master` straight to the live site (theicebathnz.co.nz). Every other pushed branch gets its own preview link. Since 2026-10-16 Claude sessions push to `master` themselves when a change is ready (Matt), using a branch preview for bigger changes
 - `.vercelignore` keeps `*.md` notes and `*.mjs` dev scripts off the live site (session 58)
 - `.gitignore` excludes: `temporary screenshots/`, `*.psd`, `node_modules/`, `.DS_Store`, `Thumbs.db`
 

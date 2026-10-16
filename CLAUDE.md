@@ -4,9 +4,9 @@
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions. If the skill isn't available (it isn't in cloud sessions), follow the guardrails in this file instead.
 
 ## Going Live
-- Vercel publishes `master` straight to the live site, theicebathnz.co.nz. Never push to `master` directly.
-- Work on a branch. Vercel builds every pushed branch as its own preview link. Matt checks the preview, then merges to `master`.
-- Never complete a checkout on a preview: depending on the Stripe key Vercel gives previews, it could take a real payment or simply fail.
+- Vercel publishes `master` straight to the live site, theicebathnz.co.nz, a minute or two after a push.
+- Push to `master` yourself when a change is ready; git history is the safeguard (Matt, 2026-10-16). Check the change locally with screenshots first. For a bigger or riskier change, push a branch first: Vercel builds every pushed branch as its own preview link.
+- Never complete a checkout on a preview or the live site: it could take a real payment.
 
 ## Notes Files
 - `progress.md` holds current state only. When a task is done, add it under "Completed" in `progress.md`; when that list gets long, move older items to `progress-archive.md`.
