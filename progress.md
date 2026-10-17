@@ -123,6 +123,8 @@ Finished work from sessions 1–57 is in [progress-archive.md](progress-archive.
 
 - [x] **Session 59 (2026-10-16): "Trusted by" logo band on the homepage.** The client's ask, via Matt: logos of commercial brands the client has sold to, shown in one tone (grey, white or black) rather than their own colours. Eight logos (Blues, Sports Physio Lab, M2 Training Club, BFT, Sauna Collective, O-Studio, The Wellness Club, WI) were converted from the client's JPEGs to white-on-transparent WebPs in `brand assets/Client Logos/`, and sit in a new band under the trust bar at 66% opacity. Each logo's display width is set by eye with an inline `--w` so they carry similar visual weight; 8 per row on desktop, 4 under 1100px, 3 under 768px. WI's full name isn't known, so its alt text is "WI".
 
+- [x] **Session 60 (2026-10-17): homepage copy, reviews and CTA (Matt's asks).** About paragraph: dropped "no ice runs, no guesswork" and changed the warranty to "12-month" (the ice bath product pages already say 1-year; the trust bar's "1–2 Year Warranty" stays because it covers the saunas' 2 years too). Reviews redesigned: each card leads with the customer's real photo (`Customer Photos/`, 279×190 AVIFs) with their name and place on it, then stars and the quote in Jost 400 at 17px instead of thin Cormorant italic. Three columns on desktop, one column of photo-left rows under 1100px, stacked under 768px. CTA heading "Ready to take the plunge?" is now all one style (no blue italic "take").
+
 ### Pending
 - [ ] Configure GA4 tag inside GTM (Measurement ID `G-MF5374TSTP`, timezone Auckland, currency NZD)
 - [ ] Add Meta Pixel tag inside GTM (client to provide Pixel ID from their Business Manager)

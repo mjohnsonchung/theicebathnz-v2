@@ -542,35 +542,44 @@
       gap: 1.5rem;
     }
     .t-card {
-      background: var(--surface);
+      display: flex; flex-direction: column;
+      padding: 0.625rem;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--deep) 100%);
       border: 1px solid var(--border);
-      border-radius: 1.25rem; padding: 2rem;
-      transition:
-        transform 0.35s var(--ease-spring),
-        border-color 0.3s var(--ease-smooth),
-        box-shadow 0.3s var(--ease-smooth);
+      border-radius: 1.5rem;
+      box-shadow:
+        inset 0 1px 0 rgba(184, 232, 255, 0.05),
+        0 2px 6px rgba(2, 11, 21, 0.4),
+        0 28px 56px -32px rgba(91, 200, 245, 0.14);
     }
-    .t-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-hi);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    .t-photo {
+      position: relative; overflow: hidden; flex-shrink: 0;
+      aspect-ratio: 3 / 2; border-radius: 1.0625rem;
+      background: var(--elevated);
     }
-    .t-stars { display: flex; gap: 0.2rem; margin-bottom: 1.1rem; }
-    .star { color: var(--ice); font-size: 0.8rem; }
+    .t-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .t-photo::before,
+    .t-photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
+    .t-photo::before { background: rgba(18, 38, 69, 0.16); mix-blend-mode: multiply; }
+    .t-photo::after { background: linear-gradient(to top, rgba(2, 11, 21, 0.72) 0%, rgba(2, 11, 21, 0.25) 32%, transparent 55%); }
+    .t-author {
+      position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1rem; z-index: 1;
+    }
+    .t-name {
+      display: block;
+      font-size: 0.95rem; font-weight: 500; letter-spacing: 0.01em;
+      color: #fff;
+    }
+    .t-role { display: block; margin-top: 0.15rem; font-size: 0.78rem; color: var(--frost); opacity: 0.9; }
+    .t-body { display: flex; flex-direction: column; flex: 1; padding: 1.5rem 1.125rem 1.25rem; }
+    .t-stars { display: flex; gap: 0.25rem; margin-bottom: 1rem; color: var(--ice); }
+    .t-stars svg { width: 0.875rem; height: 0.875rem; }
     .t-quote {
-      font-family: var(--display);
-      font-size: 1.15rem; font-weight: 300; font-style: italic;
-      line-height: 1.65; color: var(--snow);
-      margin-bottom: 1.75rem;
+      font-family: var(--body);
+      font-size: 1.0625rem; font-weight: 400;
+      line-height: 1.7; color: var(--arctic);
+      text-wrap: pretty;
     }
-    .t-author { display: flex; align-items: center; gap: 0.85rem; }
-    .t-avatar {
-      width: 2.75rem; height: 2.75rem; border-radius: 50%; overflow: hidden;
-      border: 2px solid var(--border-hi); flex-shrink: 0;
-    }
-    .t-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .t-name { font-size: 0.85rem; font-weight: 500; color: var(--snow); }
-    .t-role { font-size: 0.75rem; color: var(--mist); }
 
     /* ── CTA ───────────────────────────────────────────── */
     .cta-section {
@@ -603,7 +612,6 @@
       letter-spacing: -0.02em; color: var(--snow);
       margin-bottom: 1.25rem;
     }
-    .cta-heading em { font-style: italic; color: var(--ice); }
     .cta-sub { font-size: 0.95rem; line-height: 1.75; color: var(--mist); margin-bottom: 2.5rem; }
     .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
@@ -679,7 +687,10 @@
       .trusted-logos li { flex-basis: 25%; }
       .editorial-inner { grid-template-columns: 1fr; gap: 3rem; }
       .editorial-img { max-height: 400px; aspect-ratio: 16/9; }
-      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; max-width: 860px; }
+      .t-card { flex-direction: row; }
+      .t-photo { width: 42%; aspect-ratio: auto; min-height: 15rem; }
+      .t-body { justify-content: center; padding: 1.75rem 1.75rem 1.75rem 2rem; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media (max-width: 768px) {
@@ -722,7 +733,11 @@
       .editorial-img { max-height: 300px; aspect-ratio: 4/3; }
 
       .testimonials-section { padding: 3.5rem 1.5rem; }
-      .testimonials-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .testimonials-grid { gap: 1.25rem; }
+      .t-card { flex-direction: column; }
+      .t-photo { width: auto; aspect-ratio: 16 / 10; min-height: 0; }
+      .t-body { padding: 1.375rem 1rem 1.125rem; }
+      .t-quote { font-size: 1rem; }
 
       .cta-section { padding: 5rem 1.5rem; }
 
@@ -989,7 +1004,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="editorial-body reveal reveal-d2">
           <p>Cold water immersion triggers a surge in norepinephrine — up to 300% above baseline — delivering sharper focus, elevated mood, and faster recovery that lasts all day. Elite athletes use ice baths to cut recovery time in half. Everyday users report better sleep, reduced inflammation, and a notable shift in mental resilience within two weeks.</p>
-          <p>Our ice bath tubs are engineered for New Zealand conditions: G90 galvanised steel that handles frost, rain, and UV without corroding. Paired with a precision chiller that holds your target temperature down to 3°C — no ice runs, no guesswork. Whether you're after a cold plunge tub for home use or a stainless steel ice bath for your gym, we deliver nationwide with a 1–2 year warranty.</p>
+          <p>Our ice bath tubs are engineered for New Zealand conditions: G90 galvanised steel that handles frost, rain, and UV without corroding. Paired with a precision chiller that holds your target temperature down to 3°C. Whether you're after a cold plunge tub for home use or a stainless steel ice bath for your gym, we deliver nationwide with a 12-month warranty.</p>
         </div>
 
         <a href="benefits.html" class="editorial-link reveal reveal-d3">
@@ -1011,47 +1026,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="testimonials-grid">
-        <div class="t-card reveal">
-          <div class="t-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <article class="t-card reveal">
+          <div class="t-photo">
+            <img src="Customer%20Photos/James%20K.avif" alt="James K. using an ice bath" width="279" height="190" loading="lazy" decoding="async">
+            <p class="t-author"><span class="t-name">James K.</span><span class="t-role">Professional Rugby Player, Christchurch</span></p>
           </div>
-          <p class="t-quote">"Having a daily ice bath has cut down my recovery time from a couple days to less than half of that. Seriously recommend."</p>
-          <div class="t-author">
-            <div class="t-avatar"><img src="Customer%20Photos/James%20K.avif" alt="James K"></div>
-            <div>
-              <div class="t-name">James K.</div>
-              <div class="t-role">Professional Rugby Player, Christchurch</div>
-            </div>
+          <div class="t-body">
+            <div class="t-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg></div>
+            <blockquote class="t-quote"><p>&ldquo;Having a daily ice bath has cut down my recovery time from a couple days to less than half of that. Seriously recommend.&rdquo;</p></blockquote>
           </div>
-        </div>
+        </article>
 
-        <div class="t-card reveal reveal-d1">
-          <div class="t-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <article class="t-card reveal reveal-d1">
+          <div class="t-photo">
+            <img src="Customer%20Photos/Tom%20S.avif" alt="Tom S. using an ice bath" width="279" height="190" loading="lazy" decoding="async">
+            <p class="t-author"><span class="t-name">Tom S.</span><span class="t-role">New Zealand</span></p>
           </div>
-          <p class="t-quote">"Thank you for your great service in getting my ice bath to us. I absolutely love it, looks great and works even better. Would recommend to anyone."</p>
-          <div class="t-author">
-            <div class="t-avatar"><img src="Customer%20Photos/Tom%20S.avif" alt="Tom S"></div>
-            <div>
-              <div class="t-name">Tom S.</div>
-              <div class="t-role">New Zealand</div>
-            </div>
+          <div class="t-body">
+            <div class="t-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg></div>
+            <blockquote class="t-quote"><p>&ldquo;Thank you for your great service in getting my ice bath to us. I absolutely love it, looks great and works even better. Would recommend to anyone.&rdquo;</p></blockquote>
           </div>
-        </div>
+        </article>
 
-        <div class="t-card reveal reveal-d2">
-          <div class="t-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <article class="t-card reveal reveal-d2">
+          <div class="t-photo">
+            <img src="Customer%20Photos/Gem%20R.avif" alt="Gem R. using an ice bath" width="279" height="190" loading="lazy" decoding="async">
+            <p class="t-author"><span class="t-name">Gem R.</span><span class="t-role">Auckland</span></p>
           </div>
-          <p class="t-quote">"I could not be happier. I'm under 6ft and this 4ft bath is perfect for full body submersion. The ice bath helps me manage pain and depression more effectively than any other treatment I've tried."</p>
-          <div class="t-author">
-            <div class="t-avatar"><img src="Customer%20Photos/Gem%20R.avif" alt="Gem R"></div>
-            <div>
-              <div class="t-name">Gem R.</div>
-              <div class="t-role">Auckland</div>
-            </div>
+          <div class="t-body">
+            <div class="t-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.55 5.2 5.75.83-4.16 4.05.98 5.72L10 14.7l-5.12 2.7.98-5.72L1.7 7.63l5.75-.83z"/></svg></div>
+            <blockquote class="t-quote"><p>&ldquo;I could not be happier. I&rsquo;m under 6ft and this 4ft bath is perfect for full body submersion. The ice bath helps me manage pain and depression more effectively than any other treatment I&rsquo;ve tried.&rdquo;</p></blockquote>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1065,7 +1071,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="cta-ring"></div>
     </div>
     <div class="cta-content">
-      <h2 class="cta-heading reveal">Ready to <em>take</em><br>the plunge?</h2>
+      <h2 class="cta-heading reveal">Ready to take<br>the plunge?</h2>
       <p class="cta-sub reveal reveal-d1">Join thousands of New Zealanders who've made cold therapy part of their daily ritual. Delivered nationwide.</p>
       <div class="cta-actions reveal reveal-d2">
         <a href="buy-now.html" class="btn-primary">
